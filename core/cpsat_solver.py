@@ -117,7 +117,13 @@ def baseline(jobs, n_machines):
 def solve(env, time_limit=10.0, seed=0):
     if not math.isfinite(time_limit) or time_limit <= 0:
         raise ValueError("time_limit must be finite and positive")
-    model, variables = fjsp_cp_sat_model(env)
+    is_workshop = hasattr(env, "workshop_scenario")
+    if is_workshop:
+        from core.workshop_model import workshop_cp_sat_model
+
+        model, variables = workshop_cp_sat_model(env)
+    else:
+        model, variables = fjsp_cp_sat_model(env)
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit
     solver.parameters.random_seed = seed
@@ -141,7 +147,33 @@ def solve(env, time_limit=10.0, seed=0):
                                 end=start + duration,
                             )
                         )
+    extra = {}
+    if is_workshop:
+        from core.validation import validate_workshop
+
+        violations = validate_workshop(env.workshop_scenario, rows) if rows else None
+        if violations:
+            raise RuntimeError(f"Invalid workshop schedule: {violations}")
+        extra = {
+            "violations": violations,
+            "time_unit": "minutes",
+            "objective": "makespan_under_hard_deadlines",
+            "scenario_type": "retrospective"
+            if any(
+                j.route_source == "retrospective" for j in env.workshop_scenario.jobs
+            )
+            else "workshop",
+            "source_machine_ids": env.source_machine_ids,
+            "source_job_ids": env.source_job_ids,
+        }
+        for row in rows:
+            row["source_job_id"] = env.source_job_ids[row["job"]]
+            row["source_operation_id"] = env.source_operation_ids[
+                row["job"], row["operation"]
+            ]
+            row["source_machine_id"] = env.source_machine_ids[row["machine"]]
     return {
+        **extra,
         "status": solver.StatusName(status),
         "makespan": int(solver.ObjectiveValue()) if rows else None,
         "best_bound": solver.BestObjectiveBound(),

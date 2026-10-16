@@ -1,3 +1,8 @@
+> Entegrasyon güncellemesi (16 Ekim 2026): Yunus kaynak geçmişini ana repoya
+> birleştirdi; kökteki kaynak dosyalar korunuyor. Aşağıdaki ayrı checkout kararı
+> benchmark adaptörünün çalışma biçimini anlatır. Kaynağın ana repoda bulunmadığına
+> ilişkin ifadeler ilk kurulum kararına aittir.
+
 # 001 — Sabit kaynak checkout ve küçük FJSP adaptörü
 
 Tarih: 2026-10-16

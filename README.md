@@ -1,107 +1,104 @@
-<<<<<<< HEAD
-=======
+# Türkçe atölye planlama prototipi
 
->>>>>>> 8c836c7a527194b639192603f1094a058432359a
-![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
-[![License: GPLv3](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ai-for-decision-making-tue/Job_Shop_Scheduling_Benchmark_Environments_and_Instances/blob/main/LICENSE)
+Ürün adı henüz kesinleşmedi. Mevcut çalışan dilim Atakan'ın WP-1A görevi:
+Brandimarte Mk01–Mk10 girdilerini kaynak parser ile okumak, kaynak CP-SAT
+modeliyle çözmek ve bağımsız doğrulamak.
 
-## Job Shop Scheduling Benchmark: Environments and Instances for Learning and Non-learning Methods
+## Kurulum ve tekrar çalıştırma
 
-### 📖 Overview:
-This repository provides a comprehensive benchmarking environment for a variety of machine scheduling problems, including Job Shop Scheduling (JSP), Flow Shop Scheduling (FSP), Flexible Job Shop Scheduling (FJSP), FJSP with Assembly constraints (FAJSP), FJSP with Sequence-Dependent Setup Times (FJSP-SDST), and the online FJSP (with online job arrivals). It aims to be a centralized hub for researchers, practitioners, and enthusiasts interested in tackling machine scheduling challenges.
+Python 3.11 kullanıldı. Proje kökünde:
 
-### 🛠 Solution Methods:
-The repository includes exact, heuristic and learning based solution methods, each compatible with one or more machine scheduline problem variants:
-
-| Solution methods | Type | JSP | FSP | FJSP | SDST | AJSP | Dynamic JSP |
-| :----: | :---:| :---:| :---: | :---: | :---: | :---: | :---: |
-| MILP | Exact | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ | 
-| CP-SAT | Exact | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Dispatching Rules | Heuristic | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Genetic Algorithm | Heuristic |✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
-| L2D | DRL |✓ | ✓ | ✗ | ✗ | ✗ | |
-| FJSP-DRL | DRL | ✓ | ✓ | ✓ | ✗ | ✗ | ✓ |
-| DANIEL | DRL | ✓ | ✓ | ✓ | ✗ | ✗ | |  
-
-### 🚀 How to use:
-
-Here we provide some short examples on how to use the solution methods in this repository. For more detailed information and more examples, please refer to the tutorials [here][2] and [here][3].
-
-1. **Dispatching Rules:**
-
-  ```python
-
-from solution_methods.L2D import run_dispatching_rules
-from solution_methods.helper_functions import load_job_shop_env, load_parameters
-
-parameters = load_parameters("configs/dispatching_rules.toml")
-jobShopEnv = load_job_shop_env(parameters['instance'].get('problem_instance'))
-
-makespan, jobShopEnv = run_dispatching_rules(jobShopEnv, **parameters)
-  ```
-
-2. **Genetic Algorithm:**  
-  ```python
-  from solution_methods.helper_functions import load_job_shop_env, load_parameters
-  from solution_methods.GA.run_GA import run_GA
-  from solution_methods.GA.src.initialization import initialize_run
-  
-  parameters = load_parameters("configs/genetic_algorithm.toml")
-  jobShopEnv = load_job_shop_env(parameters['instance'].get('problem_instance'))
-
-  population, toolbox, stats, hof = initialize_run(jobShopEnv, **parameters)
-  makespan, jobShopEnv = run_GA(jobShopEnv, population, toolbox, stats, hof, **parameters)  
+```sh
+sh scripts/fetch_upstream.sh
+uv venv --python 3.11 .venv
+uv pip install --python .venv/bin/python -r requirements-lock.txt
+.venv/bin/python -m pytest -q tests
+.venv/bin/ruff check core benchmarks tests
+.venv/bin/python -m benchmarks.brandimarte_runner --time-limit 10
 ```
 
-3. **L2D (DRL-based):**
-  ```python
-  from solution_methods.L2D.src.run_L2D import run_L2D
-  from solution_methods.helper_functions import load_job_shop_env, load_parameters
-   
-  parameters = load_parameters("configs/L2D.toml")
-  jobShopEnv = load_job_shop_env(parameters['instance'].get('problem_instance'))
-  makespan, jobShopEnv = run_L2D(jobShopEnv, **parameters)
-  ```
+Tek örnek: `.venv/bin/python -m benchmarks.brandimarte_runner --instances Mk01 --time-limit 10 --output results/mk01`.
+Her çalıştırma seçilen çıktı klasöründeki aynı adlı raporları yeniler; eski deneyi
+korumak için farklı `--output` verin. Süre sınırı örnek başına çözücü aramasına
+uygulanır; parser, model kurma ve grafik süresi buna dahil değildir.
 
-### 🖼️ Plotting:
-We provide plotting functions to draw both the precedence relations  between operationsand the Gantt chart for the job shop scheduling problems:
+## Çıktılar
 
+- `results/brandimarte/summary.csv`: her problem/yöntem için boyutlar, durum,
+  makespan, varsa alt sınır, çalışma süresi, ihlal sayısı.
+- `results/brandimarte/Mk01.json` … `Mk10.json`: tam çizelgeler, dosya SHA256,
+  kaynak commit, Python/OR-Tools/platform, seed ve worker ayarları.
+- `results/brandimarte/Mk01_cp_sat.html`: internet gerektirmeyen etkileşimli Gantt.
+- `results/brandimarte/Mk01_job_order_eft.html`: referans yöntemin Gantt'ı.
 
-| ![Precedence Constraints](assets/images/precedence_constraints.PNG) | ![Gantt Chart](assets/images/gantt_chart.PNG) |
-|---------------------------------------------------------------------|------------------------------------------------|
+Süreler **benchmark zaman birimi**; dakika veya gerçek teslim tarihi değildir.
+`FEASIBLE` geçerli bulunan planı, `OPTIMAL` bu model için optimum kanıtını belirtir.
+`UNKNOWN` süre içinde çözüm/kanıt elde edilememesidir, imkânsızlık değildir.
+`INFEASIBLE` modellenen kısıtların uygulanamazlığını, `MODEL_INVALID` model hatasını
+belirtir. Çözüm yoksa makespan ve ihlal sayısı boş bırakılır; doğrulandı sayılmaz.
+Runner doğrulanmamış veya geçersiz herhangi bir sonuçta hata koduyla çıkar.
 
+## Kaynak ve katkı ayrımı
 
-### 🏗️ Repository Structure
-The repository is structured to provide ease of use and flexibility:
-- **Configs**: Contains the configuration files for the solution methods.
-- **Data**: Contains the problem instances for benchmarking for different problem variants and data parsers for configuring the benchmarking instances in the scheduling environment.
-- **Visualization**: Contains the plotting functions for visualizing the results.
-- **Scheduling Environment**: Defines the core environment components (`job`, `operation`, `machine`, and `jobShop`). Also contains the `simulationEnv` for dynamic scheduling problems with online job arrivals.
-- **Solution Methods**: Contains the solution methods, including exact, heuristic, and learning-based approaches.
+[Kaynak depo](https://github.com/ai-for-decision-making-tue/Job_Shop_Scheduling_Benchmark_Environments_and_Instances)
+commit: `d088a26582f5cb79c6b4f2ad94f68ac7c50878cb`.
 
+Kaynak `external/job_shop_benchmark` altında ayrı Git checkout olarak tutulur;
+Yunus kaynak geçmişini ayrıca ana repoya birleştirmiştir; kökteki kaynak dosyalar korunur.
+Benchmark adaptörü sabit external checkout üzerinden çalışır. `origin` ekip reposudur. Checkout
+`.gitignore` içindedir, ekip arkadaşları fetch scriptiyle aynı sürümü getirir.
+Kaynağın MIT lisansı ve atıfları kendi klasöründe korunur. Benchmark dosyalarının
+kökeni kaynak deponun `data/fjsp/brandimarte` dizinidir; dış benchmark haklarının
+ayrı ticari kullanım incelemesi bu test kapsamında yapılmadı.
 
-### 📄 Reference
-For more detailed information, please refer to our paper. If you use this repository in your research, please consider citing the following paper:
+Kaynak katkısı: Brandimarte girdileri, parser, Job/Operation/Machine/JobShop ve
+FJSP CP-SAT modeli (kaynak dosyada OR-Tools örneğine atıf bulunur).
+Bizim katkımız: sıkı girdi denetimi, küçük adaptör, deterministik job-order/EFT
+referansı, bağımsız doğrulayıcı, testler, raporlar ve Plotly Gantt çıktısı.
+Bu referans yöntem kaynak deponun FIFO/SPT uygulaması değildir.
 
-Reijnen, R., Smit, I. G., Zhang, H., Wu, Y., Bukhsh, Z., & Zhang, Y. (2026). Job shop scheduling benchmark: Environments and instances for learning and non-learning methods. Annals of Mathematics and Artificial Intelligence, 1-31. https://doi.org/10.1007/s10472-026-10007-3
+Kaynak runner'daki import/sonuç raporlama sorunları nedeniyle doğrudan model
+fonksiyonu çağrılır; kaynak kod değiştirilmez. Ayrıntı: [ADR](docs/decisions/001-upstream-adapter.md).
+Tüm kaynak algoritmalarının çalıştığı iddia edilmez; bu test yalnızca FJSP CP-SAT hattını kapsar.
 
-Or, using the following BibTeX entry:
-```bibtex
-@article{reijnen2026job,
-  title={Job shop scheduling benchmark: Environments and instances for learning and non-learning methods},
-  author={Reijnen, Robbert and Smit, Igor G and Zhang, Hongxiang and Wu, Yaoxin and Bukhsh, Zaharah and Zhang, Yingqian},
-  journal={Annals of Mathematics and Artificial Intelligence},
-  pages={1--31},
-  year={2026},
-  publisher={Springer}
-}
+## Öğrenme ve kapsam
+
+[Adım adım depo rehberi](docs/repo-walkthrough-tr.md).
+
+Atölye katmanı, sert termin, hazır olma zamanı, sabit tamamlanmış/devam eden
+operasyonlar ve makine duruşlarını destekler. Tüm gerçek senaryo süreleri
+integer dakikadır. Benchmark birimleri bundan ayrıdır. SQLite, yeni siparişin
+önce/sonra karşılaştırma servisi, Streamlit, Gemma ve süre tahmini henüz yoktur.
+
+## Atölye modeli (WP-2A)
+
+```python
+from core.cpsat_solver import solve
+from core.workshop_fjsp_builder import build_env, demo_scenario
+
+env, jobs, n_machines = build_env(demo_scenario())
+result = solve(env, time_limit=10)
+print(result["status"], result["makespan"], result["violations"])
 ```
-A preprint of this paper is available or [arXiv][1].
 
-[1]: https://arxiv.org/abs/2308.12794
-[2]: https://github.com/ai-for-decision-making-tue/Job_Shop_Scheduling_Benchmark_Environments_and_Instances/blob/main/tutorial_benchmark_environment.ipynb
-[3]: https://github.com/ai-for-decision-making-tue/Job_Shop_Scheduling_Benchmark_Environments_and_Instances/blob/main/tutorial_custom_problem_instance.ipynb
-=======
-# PickWise
+`current_time` yeniden planlama anı; `release_time` en erken iş başlangıcıdır.
+`deadline` sert termindir. Tamamlanmış işlemlerde `fixed_machine_id`,
+`fixed_start`, `fixed_end`; devam eden işlemlerde gerçek makine, başlangıç ve
+`remaining_duration` zorunludur. Başlamamış işler geçmişe yerleştirilmez.
+Duruşlar `unavailable_intervals=[(başlangıç, bitiş)]` ile verilir. Operasyonlar
+bölünemez; duruşla çelişen sabit işlem uygulanamaz senaryo üretir.
 
-Personalized product recommendations powered by Gemma, EmbeddingGemma 2, and TabPFN — matching new arrivals with the customers most likely to love them.
+Sonuçtaki `source_*_id` alanları kaynak kimliklerini korur; `job`, `operation`,
+`machine` alanları iç indislerdir. Uygulanabilir sonuçlar bağımsız atölye
+doğrulayıcısından geçer. Demo rotaları/süreleri sentetik varsayım olarak etiketlidir.
+Retrospektif rota varsayılan olarak engellenir; açık retrospektif simülasyon
+`approved_only=False` ile mümkündür ve sonuçta etiketlenir.
+
+Karar ve sınırlar: [Atölye ADR](docs/decisions/002-workshop-constraints.md).
+
+## Entegrasyon ve bağımlılıklar
+
+Kaynak README ve bilimsel atıflar [ayrı belgede](docs/upstream-README.md) korunur.
+Kökteki `requirements.txt` kaynak deponun listesidir. Bizim doğrudan
+bağımlılıklarımız `requirements-benchmark.txt`, tam kilidimiz
+`requirements-lock.txt` içindedir. Pydantic 2.14.1 sabitlenmiştir.
