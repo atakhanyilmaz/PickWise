@@ -1,0 +1,3568 @@
+{
+  "contract_version": 1,
+  "datasets": {
+    "production_analysis": {
+      "dataset": "production_analysis",
+      "path": "data/dataforNewVersion/production_analysis.csv",
+      "source_url": "https://figshare.com/articles/dataset/Production_Analysis_with_Process_Mining_Technology/12697997",
+      "source_version": "2014 dataset record; local CSV checksum tracked in reports",
+      "source_license": "4TU General Terms of Use; review before redistribution",
+      "bytes": 633912,
+      "sha256": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6",
+      "rows": 4543,
+      "columns": 14,
+      "time_range": {
+        "valid": 4543,
+        "invalid": 0,
+        "min": "2012-01-02 00:00:00",
+        "max": "2012-03-30 23:43:00"
+      },
+      "sample_records": [
+        {
+          "Case ID": "Case 1",
+          "Activity": "Turning & Milling - Machine 4",
+          "Resource": "Machine 4 - Turning & Milling",
+          "Start Timestamp": "2012/01/29 23:24:00.000",
+          "Complete Timestamp": "2012/01/30 05:43:00.000",
+          "Span": "006:19",
+          "Work Order  Qty": 10,
+          "Part Desc.": "Cable Head",
+          "Worker ID": "ID4932",
+          "Report Type": "S",
+          "Qty Completed": 1,
+          "Qty Rejected": 0,
+          "Qty for MRB": 0,
+          "Rework": null
+        },
+        {
+          "Case ID": "Case 1",
+          "Activity": "Turning & Milling - Machine 4",
+          "Resource": "Machine 4 - Turning & Milling",
+          "Start Timestamp": "2012/01/30 05:44:00.000",
+          "Complete Timestamp": "2012/01/30 06:42:00.000",
+          "Span": "000:58",
+          "Work Order  Qty": 10,
+          "Part Desc.": "Cable Head",
+          "Worker ID": "ID4932",
+          "Report Type": "D",
+          "Qty Completed": 1,
+          "Qty Rejected": 0,
+          "Qty for MRB": 0,
+          "Rework": null
+        },
+        {
+          "Case ID": "Case 1",
+          "Activity": "Turning & Milling - Machine 4",
+          "Resource": "Machine 4 - Turning & Milling",
+          "Start Timestamp": "2012/01/30 06:59:00.000",
+          "Complete Timestamp": "2012/01/30 07:21:00.000",
+          "Span": "000:22",
+          "Work Order  Qty": 10,
+          "Part Desc.": "Cable Head",
+          "Worker ID": "ID4167",
+          "Report Type": "S",
+          "Qty Completed": 0,
+          "Qty Rejected": 0,
+          "Qty for MRB": 0,
+          "Rework": null
+        }
+      ],
+      "column_profiles": [
+        {
+          "name": "Case ID",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 225,
+          "sample_values": [
+            "Case 1",
+            "Case 10",
+            "Case 100",
+            "Case 101",
+            "Case 102"
+          ]
+        },
+        {
+          "name": "Activity",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 55,
+          "sample_values": [
+            "Turning & Milling - Machine 4",
+            "Turning & Milling Q.C.",
+            "Laser Marking - Machine 7",
+            "Lapping - Machine 1",
+            "Round Grinding - Machine 3"
+          ]
+        },
+        {
+          "name": "Resource",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 31,
+          "sample_values": [
+            "Machine 4 - Turning & Milling",
+            "Quality Check 1",
+            "Machine 7- Laser Marking",
+            "Machine 1 - Lapping",
+            "Machine 3 - Round Grinding"
+          ]
+        },
+        {
+          "name": "Start Timestamp",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3743,
+          "sample_values": [
+            "2012/01/29 23:24:00.000",
+            "2012/01/30 05:44:00.000",
+            "2012/01/30 06:59:00.000",
+            "2012/01/30 07:21:00.000",
+            "2012/01/31 13:20:00.000"
+          ]
+        },
+        {
+          "name": "Complete Timestamp",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3842,
+          "sample_values": [
+            "2012/01/30 05:43:00.000",
+            "2012/01/30 06:42:00.000",
+            "2012/01/30 07:21:00.000",
+            "2012/01/30 10:58:00.000",
+            "2012/01/31 14:50:00.000"
+          ]
+        },
+        {
+          "name": "Span",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 662,
+          "sample_values": [
+            "006:19",
+            "000:58",
+            "000:22",
+            "003:37",
+            "001:30"
+          ]
+        },
+        {
+          "name": "Work Order  Qty",
+          "dtype": "int64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 94,
+          "sample_values": [
+            "10",
+            "251",
+            "18",
+            "27",
+            "24"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 720.0
+        },
+        {
+          "name": "Part Desc.",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 43,
+          "sample_values": [
+            "Cable Head",
+            "Spur Gear",
+            "Ballnut",
+            "Housing",
+            "Adjusting Nut"
+          ]
+        },
+        {
+          "name": "Worker ID",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 49,
+          "sample_values": [
+            "ID4932",
+            "ID4167",
+            "ID4163",
+            "ID0998",
+            "ID4882"
+          ]
+        },
+        {
+          "name": "Report Type",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "S",
+            "D",
+            "B"
+          ]
+        },
+        {
+          "name": "Qty Completed",
+          "dtype": "int64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 175,
+          "sample_values": [
+            "1",
+            "0",
+            "8",
+            "9",
+            "17"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 473.0
+        },
+        {
+          "name": "Qty Rejected",
+          "dtype": "int64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 15,
+          "sample_values": [
+            "0",
+            "1",
+            "2",
+            "4",
+            "3"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 28.0
+        },
+        {
+          "name": "Qty for MRB",
+          "dtype": "int64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "0",
+            "76",
+            "5",
+            "1",
+            "9"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 76.0
+        },
+        {
+          "name": "Rework",
+          "dtype": "object",
+          "missing_count": 4511,
+          "missing_fraction": 0.9929561963460268,
+          "distinct_non_null": 1,
+          "sample_values": [
+            "Y"
+          ]
+        }
+      ]
+    },
+    "cnc_changeovers": {
+      "dataset": "cnc_changeovers",
+      "path": "data/dataforNewVersion/cnc_changeove.csv",
+      "source_url": "https://zenodo.org/records/15735480",
+      "source_version": "1.0.1",
+      "source_license": "review record before redistribution",
+      "bytes": 78734331,
+      "sha256": "d7227badb6ae1a27339622b337207cc342f75acc5baa18538352228fd52be580",
+      "rows": 52026,
+      "columns": 182,
+      "time_range": {
+        "valid": 52026,
+        "invalid": 0,
+        "min": "2024-03-12 08:16:30",
+        "max": "2024-03-22 11:23:43"
+      },
+      "sample_records": [
+        {
+          "source_row_index": 0,
+          "time": "2024-03-12 08:16:30",
+          "Rapid_traverse_button": 26.0,
+          "Door_open": false,
+          "LED_Chip_flushing": false,
+          "LED_Coolant": false,
+          "LED_Spindle_flushing": false,
+          "Program_Idle": false,
+          "Rapid_traverse_button_Spindle": false,
+          "Chip_flushing_button": false,
+          "Spindle_flushing_button": false,
+          "Door_status_locked": true,
+          "X-axis_feed": 0.0,
+          "X-axis_position_MCS": -361.553,
+          "X-axis_position_WCS": -361.553,
+          "X-axis_position_error": -1e-05,
+          "Y-axis_feed": 0.0,
+          "Y-axis_position_MCS": -80.773,
+          "Y-axis_position_WCS": -80.773,
+          "Y-axis_position_error": -0.0,
+          "Z-axis_feed": 0.0,
+          "Z-axis_position_MCS": 605.907,
+          "Z-axis_position_WCS": 605.907,
+          "Z-axis_position_error": 1e-05,
+          "B-axis_feed": 0.0,
+          "B-axis_position_MCS": -0.0004,
+          "B-axis_position_WCS": -0.0004,
+          "B-axis_position_error": 0.0,
+          "Spindle_angular_velocity": 0.0,
+          "Spindle_position_MCS": 0.0,
+          "Spindle_position_WCS": 0.0,
+          "Spindle_position_error": -0.00055,
+          "C-axis_feed": 0.0,
+          "C-axis_position_MCS": 5e-05,
+          "C-axis_position_WCS": 5e-05,
+          "C-axis_position_error": -1e-05,
+          "Tool_magazine_feed": 0.0,
+          "Tool_magazine_position_MCS": 280.0,
+          "Tool_magazine_position_WCS": 280.0,
+          "Tool_magazine_position_error": -0.0,
+          "Operation_mode": 0.0,
+          "Cycle_time_program": 5.84,
+          "Total_running_time_NC_program": 4904.52799993932,
+          "Net_running_time_program": 5.856,
+          "Program_status": 5.0,
+          "Line_Content": null,
+          "Program_line_number": 0.0,
+          "Program_path": "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_1_MPF",
+          "Tool_ID": null,
+          "Feed_override": 100.0,
+          "Spindle_speed": 0.0,
+          "Spindle_smoothed_current": 0.004992227,
+          "Spindle_smoothed_torque": -0.05182542,
+          "Spindle_smoothed_modulation_depth": 3.079951,
+          "Spindle_motor_temperature": 35.80001,
+          "Spindle_smoothed_active_power": 1.125033e-07,
+          "Spindle_smoothed_intermediate_circuit_voltage": 598.117,
+          "Spindle_smoothed_speed": -0.01691985,
+          "X_Axis_smoothed_current": -0.3753598,
+          "X_Axis_smoothed_torque": -0.8369801,
+          "X_Axis_smoothed_modulation_depth": 0.9956482,
+          "X_Axis_motor_temperature": 22.3,
+          "X_Axis_smoothed_active_power": -9.556009e-06,
+          "X_Axis_smoothed_intermediate_circuit_voltage": 599.6172,
+          "X_Axis_smoothed_speed": -0.1759694,
+          "Z_Axis_smoothed_current": -6.797982,
+          "Z_Axis_smoothed_torque": -9.753261,
+          "Z_Axis_smoothed_modulation_depth": 2.153343,
+          "Z_Axis_Motor_temperature": 41.09999,
+          "Z_Axis_smoothed_active_power": 1.229687e-06,
+          "Z_Axis_smoothed_intermediate_circuit_voltage": 599.637,
+          "Z_Axis_smoothed_speed": 0.007182855,
+          "Y_Axis_smoothed_current": -0.2253341,
+          "Y_Axis_smoothed_torque": -0.3499061,
+          "Y_Axis_smoothed_modulation_depth": 0.4172498,
+          "Y_Axis_Motor_temperature": 26.69995,
+          "Y_Axis_smoothed_active_power": 7.544822e-08,
+          "Y_Axis_smoothed_intermediate_circuit_voltage": 599.2325,
+          "Y_Axis_smoothed_speed": -0.007380074,
+          "ToolChange_smoothed_current_value": -0.9519813,
+          "ToolChange_smoothed_torque": -1.306466,
+          "ToolChange_smoothed_modulation_depth": 2.017777,
+          "ToolChange_Motor_temperature": 29.59999,
+          "ToolChange_smoothed_active_power": -1.012187e-06,
+          "ToolChange_smoothed_intermediate_circuit_voltage": 599.2896,
+          "ToolChange_smoothed_speed_value": -0.00299488,
+          "B_Axis_smoothed_current": -0.183657,
+          "B_Axis_smoothed_torque": -14.35882,
+          "B_Axis_smoothed_modulation_depth": 0.4978412,
+          "B_Axis_Motor_temperature": 39.19998,
+          "B_Axis_smoothed_active_power_value": 1.308756e-07,
+          "B_Axis_smoothed_intermediate_circuit_voltage": 599.2794,
+          "B_Axis_smoothed_speed": -0.0003259026,
+          "C_Axis_smoothed_current": -0.1330802,
+          "C_Axis_smoothed_torque_value": -3.157038,
+          "C_Axis_smoothed_modulation_depth": 0.4442665,
+          "C_Axis_Motor_temperature": 27.59999,
+          "C_Axis_smoothed_active_power": 2.946769e-08,
+          "C_Axis_smoothed_intermediate_circuit_voltage": 599.5725,
+          "C_Axis_smoothed_speed": -0.0008776425,
+          "Magazine_number_Place_13": 1.0,
+          "Magazine_position_Place_13": 13.0,
+          "Tool_ID_Magazine_Place_13": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_13": 0.0,
+          "Magazine_number_Place_15": 9998.0,
+          "Magazine_position_Place_15": 3.0,
+          "Tool_ID_Magazine_Place_15": "PLAN_D50_N_AP4",
+          "Tool_number_Magazine_Place_15": 0.0,
+          "Magazine_number_Place_17": 1.0,
+          "Magazine_position_Place_17": 17.0,
+          "Tool_ID_Magazine_Place_17": "SCHAFT_D12_N_AP30",
+          "Tool_number_Magazine_Place_17": 0.0,
+          "Magazine_number_Place_2": 1.0,
+          "Magazine_position_Place_2": 2.0,
+          "Tool_ID_Magazine_Place_2": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_2": 0.0,
+          "Magazine_number_Place_4": 1.0,
+          "Magazine_position_Place_4": 4.0,
+          "Tool_ID_Magazine_Place_4": "3D-TASTER",
+          "Tool_number_Magazine_Place_4": 92.0,
+          "Magazine_number_Place_43": 1.0,
+          "Magazine_position_Place_43": 43.0,
+          "Tool_ID_Magazine_Place_43": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_43": 109.0,
+          "Tool_ID_Magazine_Place_49": null,
+          "Tool_number_Magazine_Place_49": 0.0,
+          "Magazine_number_Place_5": 1.0,
+          "Magazine_position_Place_5": 5.0,
+          "Tool_ID_Magazine_Place_5": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_5": 0.0,
+          "Magazine_number_Place_52": 1.0,
+          "Magazine_position_Place_52": 52.0,
+          "Tool_ID_Magazine_Place_52": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_52": 0.0,
+          "Magazine_number_Place_8": 1.0,
+          "Magazine_position_Place_8": 8.0,
+          "Tool_ID_Magazine_Place_8": "SCHAFT_D4_N_AP20",
+          "Tool_number_Magazine_Place_8": 0.0,
+          "Magazine_number_Place_9": 1.0,
+          "Magazine_position_Place_9": 9.0,
+          "Tool_ID_Magazine_Place_9": "BOHRER_D3.3_VHM",
+          "Tool_number_Magazine_Place_9": 124.0,
+          "Magazine_9998_status": 21.0,
+          "Magazine_9998_number_Place_1": 9998.0,
+          "Magazine_9998_position_Place_1": 2.0,
+          "Tool_ID_Magazine_9998_Place_1": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_1": 0.0,
+          "Magazine_9998_number_Place_2": 9998.0,
+          "Magazine_9998_position_Place_2": 2.0,
+          "Tool_ID_Magazine_9998_Place_2": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_2": 0.0,
+          "Magazine_9998_position_Place_3": 3.0,
+          "Tool_ID_Magazine_9998_Place_3": "SCHAFT_D6_N_AP15",
+          "Tool_number_Magazine_9998_Place_3": 0.0,
+          "Magazine_9999_status": 21.0,
+          "Magazine_9999_number_Place_1": null,
+          "Magazine_9999_position_Place_1": null,
+          "Tool_ID_Magazine_9999_Place_1": null,
+          "Tool_number_Magazine_9999_Place_1": 0.0,
+          "General_temperature": 46.0,
+          "Magazine_status_1": 17.0,
+          "Tool_ID_Magazine_Place_7": "BOHRER_D6.8_VHM",
+          "Program_Start": false,
+          "Number_of_tools": 94.0,
+          "Magazine_number_Place_6": 1.0,
+          "Magazine_position_Place_6": 6.0,
+          "Tool_number_Magazine_Place_7": 126.0,
+          "Tool_number_Magazine_Place_6": 130.0,
+          "Magazine_position_Place_7": 7.0,
+          "Magazine_number_Place_7": 1.0,
+          "Program_Stop": false,
+          "Tool_ID_Magazine_Place_6": "SCHAFT_D8_N_AP40",
+          "Label_01": 2.0,
+          "Label_02": 2.0,
+          "Label_03": 0.0,
+          "Label_04": 1.0,
+          "Label_05": 20.0,
+          "Label_06": 10.0,
+          "Label_07": 0.0,
+          "Label_08": 5.0,
+          "Label_09": 2.0,
+          "Label_10": 2.0
+        },
+        {
+          "source_row_index": 1,
+          "time": "2024-03-12 08:16:31",
+          "Rapid_traverse_button": 26.0,
+          "Door_open": false,
+          "LED_Chip_flushing": false,
+          "LED_Coolant": false,
+          "LED_Spindle_flushing": false,
+          "Program_Idle": false,
+          "Rapid_traverse_button_Spindle": false,
+          "Chip_flushing_button": false,
+          "Spindle_flushing_button": false,
+          "Door_status_locked": true,
+          "X-axis_feed": 0.0,
+          "X-axis_position_MCS": -361.553,
+          "X-axis_position_WCS": -361.553,
+          "X-axis_position_error": -1e-05,
+          "Y-axis_feed": 0.0,
+          "Y-axis_position_MCS": -80.773,
+          "Y-axis_position_WCS": -80.773,
+          "Y-axis_position_error": -0.0,
+          "Z-axis_feed": 0.0,
+          "Z-axis_position_MCS": 605.907,
+          "Z-axis_position_WCS": 605.907,
+          "Z-axis_position_error": -0.0,
+          "B-axis_feed": 0.0,
+          "B-axis_position_MCS": -0.0004,
+          "B-axis_position_WCS": -0.0004,
+          "B-axis_position_error": 0.0,
+          "Spindle_angular_velocity": 0.0,
+          "Spindle_position_MCS": 0.0,
+          "Spindle_position_WCS": 0.0,
+          "Spindle_position_error": -0.00055,
+          "C-axis_feed": 0.0,
+          "C-axis_position_MCS": 5e-05,
+          "C-axis_position_WCS": 5e-05,
+          "C-axis_position_error": 1e-05,
+          "Tool_magazine_feed": 0.0,
+          "Tool_magazine_position_MCS": 280.0,
+          "Tool_magazine_position_WCS": 280.0,
+          "Tool_magazine_position_error": -0.0,
+          "Operation_mode": 0.0,
+          "Cycle_time_program": 5.84,
+          "Total_running_time_NC_program": 4904.52799993932,
+          "Net_running_time_program": 5.856,
+          "Program_status": 5.0,
+          "Line_Content": null,
+          "Program_line_number": 0.0,
+          "Program_path": "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_1_MPF",
+          "Tool_ID": null,
+          "Feed_override": 100.0,
+          "Spindle_speed": 0.0,
+          "Spindle_smoothed_current": -0.03921537,
+          "Spindle_smoothed_torque": 0.006386804,
+          "Spindle_smoothed_modulation_depth": 3.082686,
+          "Spindle_motor_temperature": 35.80001,
+          "Spindle_smoothed_active_power": 6.598675e-08,
+          "Spindle_smoothed_intermediate_circuit_voltage": 597.8638,
+          "Spindle_smoothed_speed": -0.01127869,
+          "X_Axis_smoothed_current": -0.354368,
+          "X_Axis_smoothed_torque": -0.8783402,
+          "X_Axis_smoothed_modulation_depth": 0.5545812,
+          "X_Axis_motor_temperature": 22.3,
+          "X_Axis_smoothed_active_power": 1.329937e-05,
+          "X_Axis_smoothed_intermediate_circuit_voltage": 599.5837,
+          "X_Axis_smoothed_speed": 0.086321,
+          "Z_Axis_smoothed_current": -6.79043,
+          "Z_Axis_smoothed_torque": -9.748842,
+          "Z_Axis_smoothed_modulation_depth": 2.176397,
+          "Z_Axis_Motor_temperature": 41.00002,
+          "Z_Axis_smoothed_active_power": 1.797572e-05,
+          "Z_Axis_smoothed_intermediate_circuit_voltage": 599.5628,
+          "Z_Axis_smoothed_speed": 0.007036771,
+          "Y_Axis_smoothed_current": -0.2253341,
+          "Y_Axis_smoothed_torque": -0.3499061,
+          "Y_Axis_smoothed_modulation_depth": 0.4779128,
+          "Y_Axis_Motor_temperature": 26.6,
+          "Y_Axis_smoothed_active_power": -5.405519e-07,
+          "Y_Axis_smoothed_intermediate_circuit_voltage": 599.1946,
+          "Y_Axis_smoothed_speed": 0.002961254,
+          "ToolChange_smoothed_current_value": -0.9527274,
+          "ToolChange_smoothed_torque": -1.303959,
+          "ToolChange_smoothed_modulation_depth": 2.031077,
+          "ToolChange_Motor_temperature": 29.4,
+          "ToolChange_smoothed_active_power": 5.067064e-07,
+          "ToolChange_smoothed_intermediate_circuit_voltage": 599.2595,
+          "ToolChange_smoothed_speed_value": 0.003162392,
+          "B_Axis_smoothed_current": -0.1837152,
+          "B_Axis_smoothed_torque": -14.30534,
+          "B_Axis_smoothed_modulation_depth": 0.5194919,
+          "B_Axis_Motor_temperature": 38.90005,
+          "B_Axis_smoothed_active_power_value": -4.321998e-07,
+          "B_Axis_smoothed_intermediate_circuit_voltage": 599.2288,
+          "B_Axis_smoothed_speed": -0.0001378338,
+          "C_Axis_smoothed_current": -0.134514,
+          "C_Axis_smoothed_torque_value": -3.194507,
+          "C_Axis_smoothed_modulation_depth": 0.4196331,
+          "C_Axis_Motor_temperature": 27.30212,
+          "C_Axis_smoothed_active_power": 1.374803e-07,
+          "C_Axis_smoothed_intermediate_circuit_voltage": 599.4741,
+          "C_Axis_smoothed_speed": -0.000783208,
+          "Magazine_number_Place_13": 1.0,
+          "Magazine_position_Place_13": 13.0,
+          "Tool_ID_Magazine_Place_13": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_13": 0.0,
+          "Magazine_number_Place_15": 9998.0,
+          "Magazine_position_Place_15": 3.0,
+          "Tool_ID_Magazine_Place_15": "PLAN_D50_N_AP4",
+          "Tool_number_Magazine_Place_15": 0.0,
+          "Magazine_number_Place_17": 1.0,
+          "Magazine_position_Place_17": 17.0,
+          "Tool_ID_Magazine_Place_17": "SCHAFT_D12_N_AP30",
+          "Tool_number_Magazine_Place_17": 0.0,
+          "Magazine_number_Place_2": 1.0,
+          "Magazine_position_Place_2": 2.0,
+          "Tool_ID_Magazine_Place_2": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_2": 0.0,
+          "Magazine_number_Place_4": 1.0,
+          "Magazine_position_Place_4": 4.0,
+          "Tool_ID_Magazine_Place_4": "3D-TASTER",
+          "Tool_number_Magazine_Place_4": 92.0,
+          "Magazine_number_Place_43": 1.0,
+          "Magazine_position_Place_43": 43.0,
+          "Tool_ID_Magazine_Place_43": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_43": 109.0,
+          "Tool_ID_Magazine_Place_49": null,
+          "Tool_number_Magazine_Place_49": 0.0,
+          "Magazine_number_Place_5": 1.0,
+          "Magazine_position_Place_5": 5.0,
+          "Tool_ID_Magazine_Place_5": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_5": 0.0,
+          "Magazine_number_Place_52": 1.0,
+          "Magazine_position_Place_52": 52.0,
+          "Tool_ID_Magazine_Place_52": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_52": 0.0,
+          "Magazine_number_Place_8": 1.0,
+          "Magazine_position_Place_8": 8.0,
+          "Tool_ID_Magazine_Place_8": "SCHAFT_D4_N_AP20",
+          "Tool_number_Magazine_Place_8": 0.0,
+          "Magazine_number_Place_9": 1.0,
+          "Magazine_position_Place_9": 9.0,
+          "Tool_ID_Magazine_Place_9": "BOHRER_D3.3_VHM",
+          "Tool_number_Magazine_Place_9": 124.0,
+          "Magazine_9998_status": 21.0,
+          "Magazine_9998_number_Place_1": 9998.0,
+          "Magazine_9998_position_Place_1": 2.0,
+          "Tool_ID_Magazine_9998_Place_1": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_1": 0.0,
+          "Magazine_9998_number_Place_2": 9998.0,
+          "Magazine_9998_position_Place_2": 2.0,
+          "Tool_ID_Magazine_9998_Place_2": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_2": 0.0,
+          "Magazine_9998_position_Place_3": 3.0,
+          "Tool_ID_Magazine_9998_Place_3": "SCHAFT_D6_N_AP15",
+          "Tool_number_Magazine_9998_Place_3": 0.0,
+          "Magazine_9999_status": 21.0,
+          "Magazine_9999_number_Place_1": null,
+          "Magazine_9999_position_Place_1": null,
+          "Tool_ID_Magazine_9999_Place_1": null,
+          "Tool_number_Magazine_9999_Place_1": 0.0,
+          "General_temperature": 46.0,
+          "Magazine_status_1": 17.0,
+          "Tool_ID_Magazine_Place_7": "BOHRER_D6.8_VHM",
+          "Program_Start": false,
+          "Number_of_tools": 94.0,
+          "Magazine_number_Place_6": 1.0,
+          "Magazine_position_Place_6": 6.0,
+          "Tool_number_Magazine_Place_7": 126.0,
+          "Tool_number_Magazine_Place_6": 130.0,
+          "Magazine_position_Place_7": 7.0,
+          "Magazine_number_Place_7": 1.0,
+          "Program_Stop": false,
+          "Tool_ID_Magazine_Place_6": "SCHAFT_D8_N_AP40",
+          "Label_01": 2.0,
+          "Label_02": 2.0,
+          "Label_03": 0.0,
+          "Label_04": 1.0,
+          "Label_05": 20.0,
+          "Label_06": 10.0,
+          "Label_07": 0.0,
+          "Label_08": 5.0,
+          "Label_09": 2.0,
+          "Label_10": 2.0
+        },
+        {
+          "source_row_index": 2,
+          "time": "2024-03-12 08:16:32",
+          "Rapid_traverse_button": 26.0,
+          "Door_open": false,
+          "LED_Chip_flushing": false,
+          "LED_Coolant": false,
+          "LED_Spindle_flushing": false,
+          "Program_Idle": false,
+          "Rapid_traverse_button_Spindle": false,
+          "Chip_flushing_button": false,
+          "Spindle_flushing_button": false,
+          "Door_status_locked": true,
+          "X-axis_feed": 0.0,
+          "X-axis_position_MCS": -361.553,
+          "X-axis_position_WCS": -361.553,
+          "X-axis_position_error": 1e-05,
+          "Y-axis_feed": 0.0,
+          "Y-axis_position_MCS": -80.773,
+          "Y-axis_position_WCS": -80.773,
+          "Y-axis_position_error": 1e-05,
+          "Z-axis_feed": 0.0,
+          "Z-axis_position_MCS": 605.907,
+          "Z-axis_position_WCS": 605.907,
+          "Z-axis_position_error": -0.0,
+          "B-axis_feed": 0.0,
+          "B-axis_position_MCS": -0.0004,
+          "B-axis_position_WCS": -0.0004,
+          "B-axis_position_error": 0.0,
+          "Spindle_angular_velocity": 0.0,
+          "Spindle_position_MCS": 0.0,
+          "Spindle_position_WCS": 0.0,
+          "Spindle_position_error": -0.00055,
+          "C-axis_feed": 0.0,
+          "C-axis_position_MCS": 5e-05,
+          "C-axis_position_WCS": 5e-05,
+          "C-axis_position_error": -0.0,
+          "Tool_magazine_feed": 0.0,
+          "Tool_magazine_position_MCS": 280.0,
+          "Tool_magazine_position_WCS": 280.0,
+          "Tool_magazine_position_error": -0.0,
+          "Operation_mode": 0.0,
+          "Cycle_time_program": 5.84,
+          "Total_running_time_NC_program": 4904.52799993932,
+          "Net_running_time_program": 5.856,
+          "Program_status": 5.0,
+          "Line_Content": null,
+          "Program_line_number": 0.0,
+          "Program_path": "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_1_MPF",
+          "Tool_ID": null,
+          "Feed_override": 100.0,
+          "Spindle_speed": 0.0,
+          "Spindle_smoothed_current": 0.000650952,
+          "Spindle_smoothed_torque": -0.04501279,
+          "Spindle_smoothed_modulation_depth": 3.080817,
+          "Spindle_motor_temperature": 35.80001,
+          "Spindle_smoothed_active_power": -1.087925e-06,
+          "Spindle_smoothed_intermediate_circuit_voltage": 597.7574,
+          "Spindle_smoothed_speed": 0.01997805,
+          "X_Axis_smoothed_current": -0.3603859,
+          "X_Axis_smoothed_torque": -0.8480278,
+          "X_Axis_smoothed_modulation_depth": 1.091779,
+          "X_Axis_motor_temperature": 22.3,
+          "X_Axis_smoothed_active_power": -2.028601e-06,
+          "X_Axis_smoothed_intermediate_circuit_voltage": 599.7449,
+          "X_Axis_smoothed_speed": 0.02962047,
+          "Z_Axis_smoothed_current": -6.79506,
+          "Z_Axis_smoothed_torque": -9.750983,
+          "Z_Axis_smoothed_modulation_depth": 2.159189,
+          "Z_Axis_Motor_temperature": 40.90002,
+          "Z_Axis_smoothed_active_power": 2.077459e-06,
+          "Z_Axis_smoothed_intermediate_circuit_voltage": 599.671,
+          "Z_Axis_smoothed_speed": -0.0009420543,
+          "Y_Axis_smoothed_current": -0.224197,
+          "Y_Axis_smoothed_torque": -0.3478496,
+          "Y_Axis_smoothed_modulation_depth": 0.4901271,
+          "Y_Axis_Motor_temperature": 26.4,
+          "Y_Axis_smoothed_active_power": -5.369358e-07,
+          "Y_Axis_smoothed_intermediate_circuit_voltage": 599.2256,
+          "Y_Axis_smoothed_speed": -0.01009459,
+          "ToolChange_smoothed_current_value": -0.9515142,
+          "ToolChange_smoothed_torque": -1.301583,
+          "ToolChange_smoothed_modulation_depth": 2.006914,
+          "ToolChange_Motor_temperature": 29.3,
+          "ToolChange_smoothed_active_power": 6.334166e-07,
+          "ToolChange_smoothed_intermediate_circuit_voltage": 599.0841,
+          "ToolChange_smoothed_speed_value": -0.02178001,
+          "B_Axis_smoothed_current": -0.1837561,
+          "B_Axis_smoothed_torque": -14.22207,
+          "B_Axis_smoothed_modulation_depth": 0.5639205,
+          "B_Axis_Motor_temperature": 38.90002,
+          "B_Axis_smoothed_active_power_value": -1.607368e-07,
+          "B_Axis_smoothed_intermediate_circuit_voltage": 599.2285,
+          "B_Axis_smoothed_speed": -0.0002233992,
+          "C_Axis_smoothed_current": -0.1362276,
+          "C_Axis_smoothed_torque_value": -3.213146,
+          "C_Axis_smoothed_modulation_depth": 0.4884074,
+          "C_Axis_Motor_temperature": 27.30001,
+          "C_Axis_smoothed_active_power": 1.744858e-07,
+          "C_Axis_smoothed_intermediate_circuit_voltage": 599.5228,
+          "C_Axis_smoothed_speed": 0.0001333208,
+          "Magazine_number_Place_13": 1.0,
+          "Magazine_position_Place_13": 13.0,
+          "Tool_ID_Magazine_Place_13": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_13": 0.0,
+          "Magazine_number_Place_15": 9998.0,
+          "Magazine_position_Place_15": 3.0,
+          "Tool_ID_Magazine_Place_15": "PLAN_D50_N_AP4",
+          "Tool_number_Magazine_Place_15": 0.0,
+          "Magazine_number_Place_17": 1.0,
+          "Magazine_position_Place_17": 17.0,
+          "Tool_ID_Magazine_Place_17": "SCHAFT_D12_N_AP30",
+          "Tool_number_Magazine_Place_17": 0.0,
+          "Magazine_number_Place_2": 1.0,
+          "Magazine_position_Place_2": 2.0,
+          "Tool_ID_Magazine_Place_2": "SCHAFT_D8_N_AP20",
+          "Tool_number_Magazine_Place_2": 0.0,
+          "Magazine_number_Place_4": 1.0,
+          "Magazine_position_Place_4": 4.0,
+          "Tool_ID_Magazine_Place_4": "3D-TASTER",
+          "Tool_number_Magazine_Place_4": 92.0,
+          "Magazine_number_Place_43": 1.0,
+          "Magazine_position_Place_43": 43.0,
+          "Tool_ID_Magazine_Place_43": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_43": 109.0,
+          "Tool_ID_Magazine_Place_49": null,
+          "Tool_number_Magazine_Place_49": 0.0,
+          "Magazine_number_Place_5": 1.0,
+          "Magazine_position_Place_5": 5.0,
+          "Tool_ID_Magazine_Place_5": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_5": 0.0,
+          "Magazine_number_Place_52": 1.0,
+          "Magazine_position_Place_52": 52.0,
+          "Tool_ID_Magazine_Place_52": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_Place_52": 0.0,
+          "Magazine_number_Place_8": 1.0,
+          "Magazine_position_Place_8": 8.0,
+          "Tool_ID_Magazine_Place_8": "SCHAFT_D4_N_AP20",
+          "Tool_number_Magazine_Place_8": 0.0,
+          "Magazine_number_Place_9": 1.0,
+          "Magazine_position_Place_9": 9.0,
+          "Tool_ID_Magazine_Place_9": "BOHRER_D3.3_VHM",
+          "Tool_number_Magazine_Place_9": 124.0,
+          "Magazine_9998_status": 21.0,
+          "Magazine_9998_number_Place_1": 9998.0,
+          "Magazine_9998_position_Place_1": 2.0,
+          "Tool_ID_Magazine_9998_Place_1": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_1": 0.0,
+          "Magazine_9998_number_Place_2": 9998.0,
+          "Magazine_9998_position_Place_2": 2.0,
+          "Tool_ID_Magazine_9998_Place_2": "ENTFRAESER_D8_N_90GRAD",
+          "Tool_number_Magazine_9998_Place_2": 0.0,
+          "Magazine_9998_position_Place_3": 3.0,
+          "Tool_ID_Magazine_9998_Place_3": "SCHAFT_D6_N_AP15",
+          "Tool_number_Magazine_9998_Place_3": 0.0,
+          "Magazine_9999_status": 21.0,
+          "Magazine_9999_number_Place_1": null,
+          "Magazine_9999_position_Place_1": null,
+          "Tool_ID_Magazine_9999_Place_1": null,
+          "Tool_number_Magazine_9999_Place_1": 0.0,
+          "General_temperature": 46.0,
+          "Magazine_status_1": 17.0,
+          "Tool_ID_Magazine_Place_7": "BOHRER_D6.8_VHM",
+          "Program_Start": false,
+          "Number_of_tools": 94.0,
+          "Magazine_number_Place_6": 1.0,
+          "Magazine_position_Place_6": 6.0,
+          "Tool_number_Magazine_Place_7": 126.0,
+          "Tool_number_Magazine_Place_6": 130.0,
+          "Magazine_position_Place_7": 7.0,
+          "Magazine_number_Place_7": 1.0,
+          "Program_Stop": false,
+          "Tool_ID_Magazine_Place_6": "SCHAFT_D8_N_AP40",
+          "Label_01": 2.0,
+          "Label_02": 2.0,
+          "Label_03": 0.0,
+          "Label_04": 1.0,
+          "Label_05": 20.0,
+          "Label_06": 10.0,
+          "Label_07": 0.0,
+          "Label_08": 5.0,
+          "Label_09": 2.0,
+          "Label_10": 2.0
+        }
+      ],
+      "column_profiles": [
+        {
+          "name": "source_row_index",
+          "dtype": "int64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 23832,
+          "sample_values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 23831.0
+        },
+        {
+          "name": "time",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 52026,
+          "sample_values": [
+            "2024-03-12 08:16:30",
+            "2024-03-12 08:16:31",
+            "2024-03-12 08:16:32",
+            "2024-03-12 08:16:33",
+            "2024-03-12 08:16:34"
+          ]
+        },
+        {
+          "name": "Rapid_traverse_button",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 23,
+          "sample_values": [
+            "26.0",
+            "12.0",
+            "24.0",
+            "15.0",
+            "8.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 31.0
+        },
+        {
+          "name": "Door_open",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "LED_Chip_flushing",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "LED_Coolant",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "LED_Spindle_flushing",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Program_Idle",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Rapid_traverse_button_Spindle",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Chip_flushing_button",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Spindle_flushing_button",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Door_status_locked",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "True",
+            "False"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "X-axis_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 15716,
+          "sample_values": [
+            "0.0",
+            "10000.0",
+            "8.1375",
+            "-2000.0",
+            "300.0"
+          ],
+          "numeric_min": -47999.2517549823,
+          "numeric_max": 47999.2514032103
+        },
+        {
+          "name": "X-axis_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19588,
+          "sample_values": [
+            "-361.553",
+            "-325.05265",
+            "-124.76712",
+            "-140.76862",
+            "-140.76682"
+          ],
+          "numeric_min": -365.0,
+          "numeric_max": 90.13839
+        },
+        {
+          "name": "X-axis_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 18934,
+          "sample_values": [
+            "-361.553",
+            "-325.05265",
+            "-124.76712",
+            "-140.76862",
+            "-140.76682"
+          ],
+          "numeric_min": -436.1882,
+          "numeric_max": 415.49326
+        },
+        {
+          "name": "X-axis_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10562,
+          "sample_values": [
+            "-1e-05",
+            "1e-05",
+            "-0.0",
+            "2e-05",
+            "-2e-05"
+          ],
+          "numeric_min": -3.04175,
+          "numeric_max": 3.04133
+        },
+        {
+          "name": "Y-axis_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 16875,
+          "sample_values": [
+            "0.0",
+            "2000.82783785983",
+            "2000.0",
+            "-2000.0",
+            "800.000011920929"
+          ],
+          "numeric_min": -47999.0035085284,
+          "numeric_max": 49422.8219880567
+        },
+        {
+          "name": "Y-axis_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19897,
+          "sample_values": [
+            "-80.773",
+            "-78.52941",
+            "-45.72922",
+            "-27.9715",
+            "-27.97804"
+          ],
+          "numeric_min": -200.0,
+          "numeric_max": 224.0
+        },
+        {
+          "name": "Y-axis_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19124,
+          "sample_values": [
+            "-80.773",
+            "-78.52941",
+            "-45.72922",
+            "-27.9715",
+            "-27.97804"
+          ],
+          "numeric_min": -466.83411,
+          "numeric_max": 423.87191
+        },
+        {
+          "name": "Y-axis_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 11136,
+          "sample_values": [
+            "-0.0",
+            "1e-05",
+            "-1e-05",
+            "-2e-05",
+            "2e-05"
+          ],
+          "numeric_min": -3.03841,
+          "numeric_max": 3.04097
+        },
+        {
+          "name": "Z-axis_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8615,
+          "sample_values": [
+            "0.0",
+            "-10000.0",
+            "-2000.0",
+            "-400.000005960464",
+            "-300.0"
+          ],
+          "numeric_min": -47999.251762785,
+          "numeric_max": 47999.25
+        },
+        {
+          "name": "Z-axis_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8716,
+          "sample_values": [
+            "605.907",
+            "559.00665",
+            "439.66307",
+            "405.52974",
+            "385.63868"
+          ],
+          "numeric_min": 152.63641,
+          "numeric_max": 610.0
+        },
+        {
+          "name": "Z-axis_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10810,
+          "sample_values": [
+            "605.907",
+            "559.00665",
+            "439.66307",
+            "405.52974",
+            "385.63868"
+          ],
+          "numeric_min": 250.81445,
+          "numeric_max": 610.0
+        },
+        {
+          "name": "Z-axis_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6533,
+          "sample_values": [
+            "1e-05",
+            "-0.0",
+            "2e-05",
+            "3e-05",
+            "-1e-05"
+          ],
+          "numeric_min": -3.03522,
+          "numeric_max": 3.03793
+        },
+        {
+          "name": "B-axis_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 79,
+          "sample_values": [
+            "0.0",
+            "1439.99996781349",
+            "359.999991953373",
+            "7200.00010728836",
+            "-995.328"
+          ],
+          "numeric_min": -16425.5274161714,
+          "numeric_max": 17998.8747899026
+        },
+        {
+          "name": "B-axis_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 129,
+          "sample_values": [
+            "-0.0004",
+            "0.0",
+            "85.17196",
+            "89.57563",
+            "90.0"
+          ],
+          "numeric_min": -91.0,
+          "numeric_max": 90.0
+        },
+        {
+          "name": "B-axis_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 129,
+          "sample_values": [
+            "-0.0004",
+            "0.0",
+            "85.17196",
+            "89.57563",
+            "90.0"
+          ],
+          "numeric_min": -91.0,
+          "numeric_max": 90.0
+        },
+        {
+          "name": "B-axis_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 777,
+          "sample_values": [
+            "0.0",
+            "1e-05",
+            "-1e-05",
+            "-3e-05",
+            "0.00013"
+          ],
+          "numeric_min": -3.80191,
+          "numeric_max": 4.16327
+        },
+        {
+          "name": "Spindle_angular_velocity",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2970,
+          "sample_values": [
+            "0.0",
+            "2345009.765625",
+            "4941767.578125",
+            "6354799.8046875",
+            "7179096.6796875"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 7215249.0234375
+        },
+        {
+          "name": "Spindle_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 24852,
+          "sample_values": [
+            "0.0",
+            "174.23102",
+            "103.57721",
+            "240.97125",
+            "61.46197"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 359.99713
+        },
+        {
+          "name": "Spindle_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 24851,
+          "sample_values": [
+            "0.0",
+            "174.23102",
+            "103.57721",
+            "240.97125",
+            "61.46197"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 359.99713
+        },
+        {
+          "name": "Spindle_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 25280,
+          "sample_values": [
+            "-0.00055",
+            "-0.00104",
+            "-6e-05",
+            "-0.00152",
+            "-0.00201"
+          ],
+          "numeric_min": -118903.69801,
+          "numeric_max": 140438.11969
+        },
+        {
+          "name": "C-axis_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 132,
+          "sample_values": [
+            "0.0",
+            "16326.5819000643",
+            "-10800.0001609325",
+            "10490.8742590573",
+            "995.328"
+          ],
+          "numeric_min": -20508.4769012835,
+          "numeric_max": 24023.1657684416
+        },
+        {
+          "name": "C-axis_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 182,
+          "sample_values": [
+            "5e-05",
+            "0.0",
+            "90.0",
+            "180.0",
+            "231.3444"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 359.99955
+        },
+        {
+          "name": "C-axis_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 184,
+          "sample_values": [
+            "5e-05",
+            "0.0",
+            "90.0",
+            "180.0",
+            "231.3444"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 359.99955
+        },
+        {
+          "name": "C-axis_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 269,
+          "sample_values": [
+            "-1e-05",
+            "1e-05",
+            "-0.0",
+            "2e-05",
+            "3e-05"
+          ],
+          "numeric_min": -1.82011,
+          "numeric_max": 2.09836
+        },
+        {
+          "name": "Tool_magazine_feed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 205,
+          "sample_values": [
+            "0.0",
+            "-1762.56",
+            "-423.357245214195",
+            "259.2",
+            "708.515178660929"
+          ],
+          "numeric_min": -2662.875,
+          "numeric_max": 2662.875
+        },
+        {
+          "name": "Tool_magazine_position_MCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 399,
+          "sample_values": [
+            "280.0",
+            "53.33333",
+            "46.66667",
+            "42.43307",
+            "26.66667"
+          ],
+          "numeric_min": 0.42903,
+          "numeric_max": 356.44384
+        },
+        {
+          "name": "Tool_magazine_position_WCS",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 399,
+          "sample_values": [
+            "280.0",
+            "53.33333",
+            "46.66667",
+            "42.43307",
+            "26.66667"
+          ],
+          "numeric_min": 0.42903,
+          "numeric_max": 356.44384
+        },
+        {
+          "name": "Tool_magazine_position_error",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 558,
+          "sample_values": [
+            "-0.0",
+            "2e-05",
+            "1e-05",
+            "0.02993",
+            "-3e-05"
+          ],
+          "numeric_min": -2.66336,
+          "numeric_max": 2.66298
+        },
+        {
+          "name": "Operation_mode",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "0.0",
+            "2.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 2.0
+        },
+        {
+          "name": "Cycle_time_program",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 22296,
+          "sample_values": [
+            "5.84",
+            "1.288",
+            "2.264",
+            "3.024",
+            "4.72"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1194.67200000279
+        },
+        {
+          "name": "Total_running_time_NC_program",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 26172,
+          "sample_values": [
+            "4904.52799993932",
+            "4934.27199993862",
+            "4935.24799993859",
+            "4936.00799993857",
+            "4937.70399993853"
+          ],
+          "numeric_min": 4904.52799993932,
+          "numeric_max": 39508.5040043789
+        },
+        {
+          "name": "Net_running_time_program",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 22235,
+          "sample_values": [
+            "5.856",
+            "1.296",
+            "2.272",
+            "3.032",
+            "4.064"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1194.016
+        },
+        {
+          "name": "Program_status",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 4,
+          "sample_values": [
+            "5.0",
+            "3.0",
+            "2.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 5.0
+        },
+        {
+          "name": "Line_Content",
+          "dtype": "object",
+          "missing_count": 51603,
+          "missing_fraction": 0.9918694498904393,
+          "distinct_non_null": 12,
+          "sample_values": [
+            "M130",
+            "E_MS_CAN(0,3,0,1,0.000000,0,0,0,,,0,0,0,0,0,1,0,100)",
+            "E_MS_CAN(0,1,0,1,0.000000,0,0,0,,,0,0,0,0,0,1,0,100)",
+            "E_MS_CAN(0,2,0,1,0.000000,0,0,0,,,0,0,0,0,0,1,0,100)",
+            "E_MS_CAN(0,1,1,1,0.000000,0,0,0,,,0,0,0,0,0,1,0,100)"
+          ]
+        },
+        {
+          "name": "Program_line_number",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2459,
+          "sample_values": [
+            "0.0",
+            "-2.0",
+            "5.0",
+            "18.0",
+            "26.0"
+          ],
+          "numeric_min": -2.0,
+          "numeric_max": 3073.0
+        },
+        {
+          "name": "Program_path",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_1_MPF",
+            "/_N_WKS_DIR/_N_TEMP_WPD/_N_MA_JOG_STEP1_MPF",
+            "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_CAM_OEFFNER_MPF",
+            "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_KOORDI_JEAN_CAM3_MPF",
+            "/_N_EXT_DIR/_N_EXTMOD_DIR/_N_CHAN1_DIR/_N_SCHLUESSEL_LOGO_MPF"
+          ]
+        },
+        {
+          "name": "Tool_ID",
+          "dtype": "object",
+          "missing_count": 11255,
+          "missing_fraction": 0.21633414062199668,
+          "distinct_non_null": 11,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "BOHRER_D3.3_VHM",
+            "SCHAFT_D8_N_AP20",
+            "SCHAFT_D4_N_AP20",
+            "ENTFRAESER_D8_90GRAD"
+          ]
+        },
+        {
+          "name": "Feed_override",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 23,
+          "sample_values": [
+            "100.0",
+            "30.0000019073486",
+            "20.0",
+            "90.0",
+            "75.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 120.000007629395
+        },
+        {
+          "name": "Spindle_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2968,
+          "sample_values": [
+            "0.0",
+            "6513.916015625",
+            "13727.1321614583",
+            "17652.2216796875",
+            "19941.9352213542"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 20042.3583984375
+        },
+        {
+          "name": "Spindle_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46490,
+          "sample_values": [
+            "0.004992227",
+            "-0.03921537",
+            "0.000650952",
+            "0.05828903",
+            "-0.02719918"
+          ],
+          "numeric_min": -56.53089,
+          "numeric_max": 61.0255
+        },
+        {
+          "name": "Spindle_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46472,
+          "sample_values": [
+            "-0.05182542",
+            "0.006386804",
+            "-0.04501279",
+            "0.05772837",
+            "-0.001828923"
+          ],
+          "numeric_min": -58.78514,
+          "numeric_max": 52.46396
+        },
+        {
+          "name": "Spindle_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 44843,
+          "sample_values": [
+            "3.079951",
+            "3.082686",
+            "3.080817",
+            "3.07523",
+            "3.085903"
+          ],
+          "numeric_min": 3.950716e-36,
+          "numeric_max": 203.6624
+        },
+        {
+          "name": "Spindle_motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6365,
+          "sample_values": [
+            "35.80001",
+            "37.60001",
+            "37.69829",
+            "37.601",
+            "37.69967"
+          ],
+          "numeric_min": 33.60001,
+          "numeric_max": 51.19999
+        },
+        {
+          "name": "Spindle_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 41870,
+          "sample_values": [
+            "1.125033e-07",
+            "6.598675e-08",
+            "-1.087925e-06",
+            "-1.408227e-07",
+            "1.939282e-07"
+          ],
+          "numeric_min": -31.46663,
+          "numeric_max": 30.6499
+        },
+        {
+          "name": "Spindle_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 21349,
+          "sample_values": [
+            "598.117",
+            "597.8638",
+            "597.7574",
+            "598.017",
+            "598.0027"
+          ],
+          "numeric_min": 556.8352,
+          "numeric_max": 618.2048
+        },
+        {
+          "name": "Spindle_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 25945,
+          "sample_values": [
+            "-0.01691985",
+            "-0.01127869",
+            "0.01997805",
+            "-0.0008945499",
+            "0.01724877"
+          ],
+          "numeric_min": -20023.51,
+          "numeric_max": 164.3846
+        },
+        {
+          "name": "X_Axis_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46412,
+          "sample_values": [
+            "-0.3753598",
+            "-0.354368",
+            "-0.3603859",
+            "-0.3528068",
+            "-0.3549788"
+          ],
+          "numeric_min": -15.45389,
+          "numeric_max": 15.79369
+        },
+        {
+          "name": "X_Axis_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46385,
+          "sample_values": [
+            "-0.8369801",
+            "-0.8783402",
+            "-0.8480278",
+            "-0.8490246",
+            "-0.8204947"
+          ],
+          "numeric_min": -36.83864,
+          "numeric_max": 39.42388
+        },
+        {
+          "name": "X_Axis_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46185,
+          "sample_values": [
+            "0.9956482",
+            "0.5545812",
+            "1.091779",
+            "0.5367742",
+            "0.7025052"
+          ],
+          "numeric_min": 3.794371e-36,
+          "numeric_max": 100.4888
+        },
+        {
+          "name": "X_Axis_motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 1861,
+          "sample_values": [
+            "22.3",
+            "22.4",
+            "22.39995",
+            "22.30005",
+            "22.39901"
+          ],
+          "numeric_min": 22.3,
+          "numeric_max": 27.4
+        },
+        {
+          "name": "X_Axis_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 43273,
+          "sample_values": [
+            "-9.556009e-06",
+            "1.329937e-05",
+            "-2.028601e-06",
+            "-1.398879e-05",
+            "-4.943542e-06"
+          ],
+          "numeric_min": -4.834259,
+          "numeric_max": 6.964911
+        },
+        {
+          "name": "X_Axis_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19240,
+          "sample_values": [
+            "599.6172",
+            "599.5837",
+            "599.7449",
+            "599.5726",
+            "599.3522"
+          ],
+          "numeric_min": 558.2506,
+          "numeric_max": 619.4639
+        },
+        {
+          "name": "X_Axis_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46443,
+          "sample_values": [
+            "-0.1759694",
+            "0.086321",
+            "0.02962047",
+            "0.09044848",
+            "-0.2735483"
+          ],
+          "numeric_min": -2990.715,
+          "numeric_max": 2998.074
+        },
+        {
+          "name": "Z_Axis_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 45945,
+          "sample_values": [
+            "-6.797982",
+            "-6.79043",
+            "-6.79506",
+            "-6.798454",
+            "-6.795497"
+          ],
+          "numeric_min": -22.20282,
+          "numeric_max": 8.034239
+        },
+        {
+          "name": "Z_Axis_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46005,
+          "sample_values": [
+            "-9.753261",
+            "-9.748842",
+            "-9.750983",
+            "-9.756337",
+            "-9.751714"
+          ],
+          "numeric_min": -31.82631,
+          "numeric_max": 11.39759
+        },
+        {
+          "name": "Z_Axis_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 44615,
+          "sample_values": [
+            "2.153343",
+            "2.176397",
+            "2.159189",
+            "2.158073",
+            "2.164509"
+          ],
+          "numeric_min": 3.9350879999999996e-36,
+          "numeric_max": 64.9501
+        },
+        {
+          "name": "Z_Axis_Motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8137,
+          "sample_values": [
+            "41.09999",
+            "41.00002",
+            "40.90002",
+            "40.95813",
+            "40.98503"
+          ],
+          "numeric_min": 31.7,
+          "numeric_max": 51.09999
+        },
+        {
+          "name": "Z_Axis_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 51992,
+          "sample_values": [
+            "1.229687e-06",
+            "1.797572e-05",
+            "2.077459e-06",
+            "-1.605281e-05",
+            "2.423423e-06"
+          ],
+          "numeric_min": -4.677067,
+          "numeric_max": 6.744508
+        },
+        {
+          "name": "Z_Axis_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19063,
+          "sample_values": [
+            "599.637",
+            "599.5628",
+            "599.671",
+            "599.5873",
+            "599.624"
+          ],
+          "numeric_min": 558.2244,
+          "numeric_max": 619.3839
+        },
+        {
+          "name": "Z_Axis_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46439,
+          "sample_values": [
+            "0.007182855",
+            "0.007036771",
+            "-0.0009420543",
+            "-0.0095555",
+            "-0.01036099"
+          ],
+          "numeric_min": -2925.12,
+          "numeric_max": 2902.682
+        },
+        {
+          "name": "Y_Axis_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46335,
+          "sample_values": [
+            "-0.2253341",
+            "-0.224197",
+            "-0.2228456",
+            "-0.2186783",
+            "-0.2200622"
+          ],
+          "numeric_min": -15.46869,
+          "numeric_max": 13.68822
+        },
+        {
+          "name": "Y_Axis_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46382,
+          "sample_values": [
+            "-0.3499061",
+            "-0.3478496",
+            "-0.3423783",
+            "-0.3502879",
+            "-0.3374418"
+          ],
+          "numeric_min": -23.33191,
+          "numeric_max": 21.29401
+        },
+        {
+          "name": "Y_Axis_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46175,
+          "sample_values": [
+            "0.4172498",
+            "0.4779128",
+            "0.4901271",
+            "0.4811527",
+            "0.4287804"
+          ],
+          "numeric_min": 3.976685e-36,
+          "numeric_max": 70.14021
+        },
+        {
+          "name": "Y_Axis_Motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8615,
+          "sample_values": [
+            "26.69995",
+            "26.6",
+            "26.4",
+            "26.7",
+            "26.62282"
+          ],
+          "numeric_min": 26.4,
+          "numeric_max": 34.39999
+        },
+        {
+          "name": "Y_Axis_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 51991,
+          "sample_values": [
+            "7.544822e-08",
+            "-5.405519e-07",
+            "-5.369358e-07",
+            "-4.493665e-07",
+            "-1.799497e-07"
+          ],
+          "numeric_min": -2.669976,
+          "numeric_max": 4.706339
+        },
+        {
+          "name": "Y_Axis_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 19549,
+          "sample_values": [
+            "599.2325",
+            "599.1946",
+            "599.2256",
+            "599.4688",
+            "599.3933"
+          ],
+          "numeric_min": 557.6666,
+          "numeric_max": 619.1877
+        },
+        {
+          "name": "Y_Axis_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46438,
+          "sample_values": [
+            "-0.007380074",
+            "0.002961254",
+            "-0.01009459",
+            "-0.01726745",
+            "-0.008972929"
+          ],
+          "numeric_min": -2939.427,
+          "numeric_max": 2862.235
+        },
+        {
+          "name": "ToolChange_smoothed_current_value",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46186,
+          "sample_values": [
+            "-0.9519813",
+            "-0.9527274",
+            "-0.9515142",
+            "-0.9504699",
+            "-0.9486724"
+          ],
+          "numeric_min": -6.361757,
+          "numeric_max": 6.268737
+        },
+        {
+          "name": "ToolChange_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46073,
+          "sample_values": [
+            "-1.306466",
+            "-1.303959",
+            "-1.301583",
+            "-1.302102",
+            "-1.301456"
+          ],
+          "numeric_min": -9.093678,
+          "numeric_max": 8.691236
+        },
+        {
+          "name": "ToolChange_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 45606,
+          "sample_values": [
+            "2.017777",
+            "2.031077",
+            "2.006914",
+            "2.020697",
+            "2.041591"
+          ],
+          "numeric_min": 3.773188e-36,
+          "numeric_max": 66.51585
+        },
+        {
+          "name": "ToolChange_Motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8092,
+          "sample_values": [
+            "29.59999",
+            "29.4",
+            "29.3",
+            "29.52376",
+            "29.40342"
+          ],
+          "numeric_min": 26.8,
+          "numeric_max": 33.59999
+        },
+        {
+          "name": "ToolChange_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 47726,
+          "sample_values": [
+            "-1.012187e-06",
+            "5.067064e-07",
+            "6.334166e-07",
+            "-2.445589e-06",
+            "1.102943e-06"
+          ],
+          "numeric_min": -4.36167e-05,
+          "numeric_max": 2.208246
+        },
+        {
+          "name": "ToolChange_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 21013,
+          "sample_values": [
+            "599.2896",
+            "599.2595",
+            "599.0841",
+            "599.1019",
+            "599.1842"
+          ],
+          "numeric_min": 557.6602,
+          "numeric_max": 619.3574
+        },
+        {
+          "name": "ToolChange_smoothed_speed_value",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46463,
+          "sample_values": [
+            "-0.00299488",
+            "0.003162392",
+            "-0.02178001",
+            "-0.006355283",
+            "0.001707654"
+          ],
+          "numeric_min": -2998.079,
+          "numeric_max": 2996.735
+        },
+        {
+          "name": "B_Axis_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 42772,
+          "sample_values": [
+            "-0.183657",
+            "-0.1837152",
+            "-0.1837561",
+            "-0.1837622",
+            "-0.1836854"
+          ],
+          "numeric_min": -11.87695,
+          "numeric_max": 15.59893
+        },
+        {
+          "name": "B_Axis_smoothed_torque",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 45719,
+          "sample_values": [
+            "-14.35882",
+            "-14.30534",
+            "-14.22207",
+            "-14.22049",
+            "-14.16122"
+          ],
+          "numeric_min": -921.7626,
+          "numeric_max": 1168.669
+        },
+        {
+          "name": "B_Axis_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 45363,
+          "sample_values": [
+            "0.4978412",
+            "0.5194919",
+            "0.5639205",
+            "0.5607411",
+            "0.5374309"
+          ],
+          "numeric_min": 1.3815599999999999e-35,
+          "numeric_max": 73.96642
+        },
+        {
+          "name": "B_Axis_Motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8982,
+          "sample_values": [
+            "39.19998",
+            "38.90005",
+            "38.90002",
+            "39.09998",
+            "39.00002"
+          ],
+          "numeric_min": 38.80002,
+          "numeric_max": 51.8808
+        },
+        {
+          "name": "B_Axis_smoothed_active_power_value",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 48226,
+          "sample_values": [
+            "1.308756e-07",
+            "-4.321998e-07",
+            "-1.607368e-07",
+            "-8.281335e-09",
+            "-1.444393e-09"
+          ],
+          "numeric_min": -3.176888,
+          "numeric_max": 4.505477
+        },
+        {
+          "name": "B_Axis_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 17521,
+          "sample_values": [
+            "599.2794",
+            "599.2288",
+            "599.2285",
+            "599.2941",
+            "599.1931"
+          ],
+          "numeric_min": 557.9294,
+          "numeric_max": 619.1977
+        },
+        {
+          "name": "B_Axis_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46413,
+          "sample_values": [
+            "-0.0003259026",
+            "-0.0001378338",
+            "-0.0002233992",
+            "8.489662e-05",
+            "-7.662175e-05"
+          ],
+          "numeric_min": -40.73625,
+          "numeric_max": 48.95375
+        },
+        {
+          "name": "C_Axis_smoothed_current",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46343,
+          "sample_values": [
+            "-0.1330802",
+            "-0.134514",
+            "-0.1362276",
+            "-0.136391",
+            "-0.1348381"
+          ],
+          "numeric_min": -5.813124,
+          "numeric_max": 5.600147
+        },
+        {
+          "name": "C_Axis_smoothed_torque_value",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46315,
+          "sample_values": [
+            "-3.157038",
+            "-3.194507",
+            "-3.213146",
+            "-3.209396",
+            "-3.233729"
+          ],
+          "numeric_min": -141.9565,
+          "numeric_max": 133.8388
+        },
+        {
+          "name": "C_Axis_smoothed_modulation_depth",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46090,
+          "sample_values": [
+            "0.4442665",
+            "0.4196331",
+            "0.4884074",
+            "0.4873807",
+            "0.4349118"
+          ],
+          "numeric_min": 1.368432e-35,
+          "numeric_max": 23.47377
+        },
+        {
+          "name": "C_Axis_Motor_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 4409,
+          "sample_values": [
+            "27.59999",
+            "27.30212",
+            "27.30001",
+            "27.39999",
+            "27.27808"
+          ],
+          "numeric_min": 26.20003,
+          "numeric_max": 28.59999
+        },
+        {
+          "name": "C_Axis_smoothed_active_power",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 42490,
+          "sample_values": [
+            "2.946769e-08",
+            "1.374803e-07",
+            "1.744858e-07",
+            "-7.399622e-08",
+            "-1.602487e-07"
+          ],
+          "numeric_min": -0.3432664,
+          "numeric_max": 0.7793834
+        },
+        {
+          "name": "C_Axis_smoothed_intermediate_circuit_voltage",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 14326,
+          "sample_values": [
+            "599.5725",
+            "599.4741",
+            "599.5228",
+            "599.546",
+            "599.5427"
+          ],
+          "numeric_min": 558.1977,
+          "numeric_max": 619.5756
+        },
+        {
+          "name": "C_Axis_smoothed_speed",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 46390,
+          "sample_values": [
+            "-0.0008776425",
+            "-0.000783208",
+            "0.0001333208",
+            "-0.0007258138",
+            "0.0001172411"
+          ],
+          "numeric_min": -64.39045,
+          "numeric_max": 53.84033
+        },
+        {
+          "name": "Magazine_number_Place_13",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_13",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "13.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 13.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_13",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "SCHAFT_D8_N_AP20",
+            "SCHAFT_D4_N_AP20",
+            "SCHAFT_D12_N_AP30",
+            "SCHAFT_D6_N_AP15",
+            "PLAN_D50_N_AP4"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_13",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "0.0",
+            "190.0",
+            "117.0",
+            "195.0",
+            "198.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_number_Place_15",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "9998.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_15",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "3.0",
+            "15.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 15.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_15",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 4,
+          "sample_values": [
+            "PLAN_D50_N_AP4",
+            "SCHAFT_D12_N_AP30",
+            "SCHAFT_D6_N_AP15",
+            "ENTFRAESER_D8_N_90GRAD"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_15",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 5,
+          "sample_values": [
+            "0.0",
+            "195.0",
+            "132.0",
+            "116.0",
+            "109.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 195.0
+        },
+        {
+          "name": "Magazine_number_Place_17",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_17",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "17.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 17.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_17",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 5,
+          "sample_values": [
+            "SCHAFT_D12_N_AP30",
+            "SCHAFT_D6_N_AP15",
+            "PLAN_D50_N_AP4",
+            "BOHRER_D3.3_VHM",
+            "ENTFRAESER_D8_N_90GRAD"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_17",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "0.0",
+            "198.0",
+            "195.0",
+            "132.0",
+            "124.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_number_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "2.0",
+            "3.0"
+          ],
+          "numeric_min": 2.0,
+          "numeric_max": 3.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_2",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "SCHAFT_D8_N_AP20",
+            "ENTFRAESER_D8_90GRAD",
+            "SCHAFT_D4_N_AP20",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D12_N_AP30"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "0.0",
+            "185.0",
+            "190.0",
+            "116.0",
+            "195.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_number_Place_4",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_4",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "4.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 4.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_4",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "3D-TASTER",
+            "SCHAFT_D4_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_4",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "92.0",
+            "0.0",
+            "190.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 190.0
+        },
+        {
+          "name": "Magazine_number_Place_43",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_43",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "43.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 43.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_43",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 5,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D12_N_AP30",
+            "PLAN_D50_N_AP4",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D8_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_43",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "109.0",
+            "195.0",
+            "0.0",
+            "132.0",
+            "116.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 195.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_49",
+          "dtype": "object",
+          "missing_count": 1694,
+          "missing_fraction": 0.03256064275554531,
+          "distinct_non_null": 5,
+          "sample_values": [
+            "PLAN_D50_N_AP4",
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D4_N_AP20",
+            "SCHAFT_D8_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_49",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "0.0",
+            "132.0",
+            "109.0",
+            "116.0",
+            "190.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 190.0
+        },
+        {
+          "name": "Magazine_number_Place_5",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_5",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "5.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 5.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_5",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 9,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "ENTFRAESER_D8_90GRAD",
+            "SCHAFT_D4_N_AP20",
+            "SCHAFT_D8_N_AP20",
+            "SCHAFT_D12_N_AP30"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_5",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "0.0",
+            "185.0",
+            "190.0",
+            "117.0",
+            "109.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_number_Place_52",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_52",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "52.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 52.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_52",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "ENTFRAESER_D8_90GRAD",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D12_N_AP30",
+            "SCHAFT_D4_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_52",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 7,
+          "sample_values": [
+            "0.0",
+            "185.0",
+            "109.0",
+            "116.0",
+            "195.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 195.0
+        },
+        {
+          "name": "Magazine_number_Place_8",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_8",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "8.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 8.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_8",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "SCHAFT_D4_N_AP20",
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D8_N_AP20",
+            "BOHRER_D3.3_VHM",
+            "PLAN_D50_N_AP4"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_8",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 9,
+          "sample_values": [
+            "0.0",
+            "190.0",
+            "117.0",
+            "124.0",
+            "109.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_number_Place_9",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_9",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "9.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 9.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_9",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "BOHRER_D3.3_VHM",
+            "SCHAFT_D8_N_AP20",
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D12_N_AP30"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_Place_9",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "124.0",
+            "0.0",
+            "117.0",
+            "109.0",
+            "198.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_9998_status",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "21.0",
+            "25.0"
+          ],
+          "numeric_min": 21.0,
+          "numeric_max": 25.0
+        },
+        {
+          "name": "Magazine_9998_number_Place_1",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "9998.0",
+            "0.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_9998_position_Place_1",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "2.0",
+            "1.0",
+            "0.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 2.0
+        },
+        {
+          "name": "Tool_ID_Magazine_9998_Place_1",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 12,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "BOHRER_D3.3_VHM",
+            "SCHAFT_D8_N_AP20",
+            "SCHAFT_D4_N_AP20",
+            "ENTFRAESER_D8_90GRAD"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_9998_Place_1",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 13,
+          "sample_values": [
+            "0.0",
+            "109.0",
+            "124.0",
+            "117.0",
+            "190.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_9998_number_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "9998.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_9998_position_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 12,
+          "sample_values": [
+            "2.0",
+            "5.0",
+            "52.0",
+            "49.0",
+            "4.0"
+          ],
+          "numeric_min": 2.0,
+          "numeric_max": 52.0
+        },
+        {
+          "name": "Tool_ID_Magazine_9998_Place_2",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 13,
+          "sample_values": [
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D8_N_AP20",
+            "ENTFRAESER_D8_90GRAD",
+            "3D-TASTER",
+            "SCHAFT_D4_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_9998_Place_2",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 13,
+          "sample_values": [
+            "0.0",
+            "117.0",
+            "190.0",
+            "185.0",
+            "92.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_9998_position_Place_3",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "3.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 3.0
+        },
+        {
+          "name": "Tool_ID_Magazine_9998_Place_3",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 13,
+          "sample_values": [
+            "SCHAFT_D6_N_AP15",
+            "ENTFRAESER_D8_N_90GRAD",
+            "BOHRER_D3.3_VHM",
+            "3D-TASTER",
+            "SCHAFT_D8_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_9998_Place_3",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 13,
+          "sample_values": [
+            "0.0",
+            "109.0",
+            "124.0",
+            "92.0",
+            "117.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_9999_status",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "21.0",
+            "25.0"
+          ],
+          "numeric_min": 21.0,
+          "numeric_max": 25.0
+        },
+        {
+          "name": "Magazine_9999_number_Place_1",
+          "dtype": "float64",
+          "missing_count": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "9998.0",
+            "9999.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9999.0
+        },
+        {
+          "name": "Magazine_9999_position_Place_1",
+          "dtype": "float64",
+          "missing_count": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "1.0",
+            "9.0",
+            "13.0",
+            "6.0",
+            "17.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 17.0
+        },
+        {
+          "name": "Tool_ID_Magazine_9999_Place_1",
+          "dtype": "object",
+          "missing_count": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "distinct_non_null": 8,
+          "sample_values": [
+            "SCHAFT_D4_N_AP20",
+            "ENTFRAESER_D8_90GRAD",
+            "PLAN_D50_N_AP4",
+            "SCHAFT_D12_N_AP30",
+            "SCHAFT_D8_N_AP20"
+          ]
+        },
+        {
+          "name": "Tool_number_Magazine_9999_Place_1",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "0.0",
+            "109.0",
+            "132.0",
+            "124.0",
+            "190.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "General_temperature",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 7,
+          "sample_values": [
+            "46.0",
+            "47.0",
+            "46.5",
+            "47.5",
+            "48.0"
+          ],
+          "numeric_min": 45.0,
+          "numeric_max": 48.0
+        },
+        {
+          "name": "Magazine_status_1",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "17.0",
+            "21.0",
+            "25.0"
+          ],
+          "numeric_min": 17.0,
+          "numeric_max": 25.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_7",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 9,
+          "sample_values": [
+            "BOHRER_D6.8_VHM",
+            "ENTFRAESER_D8_N_90GRAD",
+            "BOHRER_D3.3_VHM",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D12_N_AP30"
+          ]
+        },
+        {
+          "name": "Program_Start",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Number_of_tools",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "94.0",
+            "93.0",
+            "92.0"
+          ],
+          "numeric_min": 92.0,
+          "numeric_max": 94.0
+        },
+        {
+          "name": "Magazine_number_Place_6",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Magazine_position_Place_6",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "6.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 6.0
+        },
+        {
+          "name": "Tool_number_Magazine_Place_7",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 10,
+          "sample_values": [
+            "126.0",
+            "0.0",
+            "109.0",
+            "124.0",
+            "116.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 195.0
+        },
+        {
+          "name": "Tool_number_Magazine_Place_6",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 11,
+          "sample_values": [
+            "130.0",
+            "0.0",
+            "132.0",
+            "109.0",
+            "198.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 198.0
+        },
+        {
+          "name": "Magazine_position_Place_7",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "7.0",
+            "3.0"
+          ],
+          "numeric_min": 3.0,
+          "numeric_max": 7.0
+        },
+        {
+          "name": "Magazine_number_Place_7",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "1.0",
+            "9998.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 9998.0
+        },
+        {
+          "name": "Program_Stop",
+          "dtype": "bool",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "False",
+            "True"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Tool_ID_Magazine_Place_6",
+          "dtype": "object",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 9,
+          "sample_values": [
+            "SCHAFT_D8_N_AP40",
+            "PLAN_D50_N_AP4",
+            "ENTFRAESER_D8_N_90GRAD",
+            "SCHAFT_D6_N_AP15",
+            "SCHAFT_D12_N_AP30"
+          ]
+        },
+        {
+          "name": "Label_01",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 57,
+          "sample_values": [
+            "2.0",
+            "3.0",
+            "4.0",
+            "5.0",
+            "6.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 73.0
+        },
+        {
+          "name": "Label_02",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "2.0",
+            "3.0",
+            "1.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 3.0
+        },
+        {
+          "name": "Label_03",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 2,
+          "sample_values": [
+            "0.0",
+            "1.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 1.0
+        },
+        {
+          "name": "Label_04",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 4,
+          "sample_values": [
+            "1.0",
+            "2.0",
+            "3.0",
+            "4.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 4.0
+        },
+        {
+          "name": "Label_05",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 6,
+          "sample_values": [
+            "20.0",
+            "21.0",
+            "30.0",
+            "31.0",
+            "10.0"
+          ],
+          "numeric_min": 10.0,
+          "numeric_max": 31.0
+        },
+        {
+          "name": "Label_06",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 4,
+          "sample_values": [
+            "10.0",
+            "11.0",
+            "20.0",
+            "21.0"
+          ],
+          "numeric_min": 10.0,
+          "numeric_max": 21.0
+        },
+        {
+          "name": "Label_07",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 3,
+          "sample_values": [
+            "0.0",
+            "2.0",
+            "1.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 2.0
+        },
+        {
+          "name": "Label_08",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 12,
+          "sample_values": [
+            "5.0",
+            "6.0",
+            "11.0",
+            "12.0",
+            "7.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 12.0
+        },
+        {
+          "name": "Label_09",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 7,
+          "sample_values": [
+            "2.0",
+            "6.0",
+            "5.0",
+            "3.0",
+            "0.0"
+          ],
+          "numeric_min": 0.0,
+          "numeric_max": 6.0
+        },
+        {
+          "name": "Label_10",
+          "dtype": "float64",
+          "missing_count": 0,
+          "missing_fraction": 0.0,
+          "distinct_non_null": 30,
+          "sample_values": [
+            "2.0",
+            "3.0",
+            "4.0",
+            "5.0",
+            "6.0"
+          ],
+          "numeric_min": 1.0,
+          "numeric_max": 43.0
+        }
+      ]
+    }
+  }
+}

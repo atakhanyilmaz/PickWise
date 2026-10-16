@@ -1,0 +1,70 @@
+version = 1
+
+[production_analysis]
+path = "data/dataforNewVersion/production_analysis.csv"
+source_kind = "retrospective_event_log"
+source_url = "https://figshare.com/articles/dataset/Production_Analysis_with_Process_Mining_Technology/12697997"
+source_version = "2014 dataset record; local CSV checksum tracked in reports"
+source_license = "4TU General Terms of Use; review before redistribution"
+prediction_unit = "unresolved_report_row_or_operation_aggregate"
+target = "recorded_duration_min"
+target_status = "provisional_until_report_type_semantics_are_verified"
+group_key = "Case ID"
+time_key = "Start Timestamp"
+end_time_key = "Complete Timestamp"
+duration_unit = "minute"
+unresolved_semantics = ["Report Type S/D/B", "report-row versus operation aggregation", "whether timestamps represent machine runtime"]
+
+[production_analysis.tabpfn]
+purpose = "regress verified operation duration; compare with a train-only median baseline"
+prediction_unit = "verified operation after report semantics and aggregation are approved"
+target = "recorded_duration_min"
+target_status = "provisional_until_report_type_semantics_are_verified"
+group_key = "Case ID"
+time_key = "Start Timestamp"
+allowed_features = ["Part Desc.", "Work Order  Qty", "Activity"]
+conditional_features = ["Resource; usable only when machine assignment is known before prediction"]
+forbidden_features = ["Complete Timestamp", "Span", "Qty Completed", "Qty Rejected", "Qty for MRB", "Rework", "Worker ID"]
+
+[production_analysis.embeddinggemma]
+purpose = "retrieve similar historical work orders for a new order"
+prediction_unit = "new-order text query and historical work-order summary"
+target = "none; retrieval is not supervised prediction"
+group_key = "Case ID"
+time_key = "Start Timestamp"
+allowed_features = ["Part Desc.", "Work Order  Qty", "verified historical Activity sequence"]
+conditional_features = ["Resource; only if verified as a known route or assigned resource at query time"]
+forbidden_features = ["future or held-out work orders", "unverified route inference", "completion outcomes"]
+
+[cnc_changeovers]
+path = "data/dataforNewVersion/cnc_changeove.csv"
+source_kind = "one_second_sensor_stream"
+source_url = "https://zenodo.org/records/15735480"
+source_doi = "10.5281/zenodo.15735480"
+source_version = "1.0.1"
+source_license = "review record before redistribution"
+prediction_unit = "sensor_row for descriptive setup and production phase analysis"
+target = "none_for_current_product_plan"
+segmentation_marker = "Label_03; descriptive phase segmentation only"
+secondary_marker = "Label_10; detailed descriptive phase analysis only"
+group_key = "derived_cycle_id"
+time_key = "time"
+duration_unit = "second sampling interval"
+primary_model = "none; optional supervised phase classification is a separate future experiment"
+allowed_features = ["sensor columns for descriptive analysis; not a production model feature list"]
+conditional_features = ["Program_status", "Program_line_number", "Program_path", "Tool_ID", "Operation_mode; verify each is available before the prediction timestamp and does not encode the phase label"]
+forbidden_features = ["all Label_* columns", "local row index as a unique key", "future rows", "features derived from future timestamps", "Program_Stop", "Total_running_time_NC_program", "Net_running_time_program", "Cycle_time_program"]
+session_grouping = "contiguous Label_03 runs paired in source order; six cycles per matrix"
+
+[brandimarte]
+purpose = "scheduling solver and schedule validation benchmark"
+target = "none"
+
+[gemma]
+purpose = "Turkish request structuring and explanation of computed outputs"
+training_data = "none of the two CSV datasets"
+prediction_unit = "user request or solver/model result to be summarized"
+target = "none; structured tool selection and grounded explanation"
+allowed_inputs = ["user text", "validated tool schemas", "computed solver and evaluation outputs"]
+forbidden_inputs = ["invented durations", "invented machine eligibility", "invented schedule metrics", "unverified raw CSV semantics"]
+
