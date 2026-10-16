@@ -1,1 +1,7 @@
-.venv
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+external/
+.DS_Store
+*.local_backup
