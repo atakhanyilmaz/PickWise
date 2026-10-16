@@ -16,6 +16,7 @@ class Contract(BaseModel):
 class RouteSource(str, Enum):
     RETROSPECTIVE = "retrospective"
     USER_APPROVED = "user_approved"
+    USER_PROPOSED = "user_proposed"
     DEMO_ASSUMPTION = "demo_assumption"
 
 
@@ -174,4 +175,9 @@ class WorkshopScenario(Contract):
         return len(self.jobs)
 
     def jobs_for_solver(self):
-        return [j for j in self.jobs if j.route_source != RouteSource.RETROSPECTIVE]
+        return [
+            j
+            for j in self.jobs
+            if j.route_source
+            in (RouteSource.USER_APPROVED, RouteSource.DEMO_ASSUMPTION)
+        ]

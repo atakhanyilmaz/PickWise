@@ -129,3 +129,42 @@ gecikme minimizasyonu değildir. `completion_limits`, müşteri termininden ayr�
 mevcut bitiş koruma kısıtıdır. Ayrıntı: [Sipariş ADR](docs/decisions/003-order-simulation.md).
 
 SQLite'ya onaylı plan sürümü kaydetme, Streamlit ve Gemma entegrasyonu henüz yoktur.
+
+## UI'den bağımsız yerel Gemma servisi (deneysel)
+
+Ollama'da hazır `gemma4:e2b` kullanılır; otomatik model indirilmez.
+
+```sh
+ollama serve
+.venv/bin/python -m benchmarks.gemma_order_cli \
+  --baseline results/workshop_order/baseline.json \
+  --text 'Yeni sipariş: tornalama, Torna 1 üzerinde 10 dakika. Sert termin t=20 dakika.'
+```
+
+Taslak önce gösterilir; CLI `evet` onayı olmadan simülasyon çalıştırmaz.
+Eksik bilgi, desteklenmeyen kısıt veya geçersiz model çıktısı soruyla/mesajla döner.
+`USER_PROPOSED` rota çözücüye doğrudan sokulamaz. Model yokken insan onaylı JSON
+sipariş `--order-json PATH` ile çalıştırılabilir; sayısal açıklama computed_fallback
+olarak etiketlenir. Model varken de açıklamanın bütün sayıları hesaplanan bulgulardan
+gelir; Gemma bu bulguları seçer. `core/llm/` UI'nin bağlanacağı servisleri içerir.
+
+Gerçek model smoke testi: `.venv/bin/python -m benchmarks.gemma_evaluation`.
+İstem v2, beş geliştirme örneğinde 3/5 beklenen akışı geçti; tam sipariş doğru
+çıkarıldı. Belirsiz makine/tarih hataları reddedildi. Bu sonuç, üretim kalitesi
+veya ağ kapalı çevrimdışı çalışma kanıtı değildir. Yerel talep/model kayıtları
+`results/gemma*/` altında Git'ten hariç tutulur. SQLite ve UI bağlanmadı.
+
+## Süre tahmini hazırlığı
+
+```sh
+.venv/bin/python -m ml_experiments.duration_evaluation \
+  --dataset data/examples/duration_experiment_synthetic.json
+```
+
+Bu komut yalnız sentetik veride medyan referansını hesaplar. Gerçek veri veya
+TabPFN deneyi yapılmadı. Veri sözleşmesi, iş emri/zaman sızıntısı kontrolleri,
+medyan fallback, izinli özellikler ve MAE/RMSE raporlaması hazırdır.
+[Yunus veri teslim sözleşmesi](docs/duration-data-handoff.md).
+[Gemma ve deney kararı](docs/decisions/004-local-gemma-and-duration-evaluation.md).
+
+Genişletilmiş kontrol: `.venv/bin/ruff check core tests benchmarks ml_experiments`.

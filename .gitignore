@@ -5,3 +5,6 @@ __pycache__/
 external/
 .DS_Store
 *.local_backup
+# Local natural-language requests and model traces may contain user data.
+results/gemma*/
+results/duration_experiment.json

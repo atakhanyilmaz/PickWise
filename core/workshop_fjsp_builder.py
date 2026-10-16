@@ -24,6 +24,8 @@ def build_env(scenario: WorkshopScenario, *, approved_only: bool = True):
         raise ValueError(
             "RETROSPECTIVE routes require user approval; use approved_only=False only for retrospective simulation"
         )
+    if any(j.route_source == RouteSource.USER_PROPOSED for j in scenario.jobs):
+        raise ValueError("USER_PROPOSED routes require human approval before solving")
     env = JobShop()
     env.set_instance_name(scenario.scenario_id)
     env.set_nr_of_jobs(scenario.n_jobs)
