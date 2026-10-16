@@ -101,8 +101,9 @@ class JobModel(Contract):
     name: str
     operations: list[OperationModel] = Field(min_length=1)
     route_source: RouteSource = RouteSource.DEMO_ASSUMPTION
-    # Hard deadline. Soft due dates are not implemented by this contract.
+    # Hard deadline constrains the solver; due_date is a soft reporting target.
     deadline: Nonnegative | None = None
+    due_date: Nonnegative | None = None
     release_time: Nonnegative = 0
 
     @model_validator(mode="after")
@@ -127,6 +128,7 @@ class WorkshopScenario(Contract):
     machines: list[MachineModel] = Field(min_length=1)
     jobs: list[JobModel] = Field(min_length=1)
     current_time: Nonnegative = 0
+    completion_limits: dict[int, Nonnegative] = Field(default_factory=dict)
     time_unit: Literal["minutes"] = "minutes"
     time_unit_note: str = ""
 
@@ -136,6 +138,8 @@ class WorkshopScenario(Contract):
             ids = [getattr(v, f"{label}_id") for v in values]
             if len(ids) != len(set(ids)):
                 raise ValueError(f"{label}_id values must be unique")
+        if not set(self.completion_limits) <= {j.job_id for j in self.jobs}:
+            raise ValueError("Completion limit references unknown job_id")
         declared = {m.machine_id for m in self.machines}
         for job in self.jobs:
             previous_end = job.release_time

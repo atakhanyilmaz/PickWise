@@ -1,3 +1,6 @@
+> Güncelleme: yumuşak termin raporlaması ve yeni sipariş simülasyonu ADR 003
+> ile eklenmiştir. Aşağıdaki kapsam ilk WP-2A düzeltmesini anlatır.
+
 # 002 — Atölye kısıtlarını gerçekten uygulama
 
 Tarih: 16 Ekim 2026. Kapsam: WP-2A incelemesindeki dört eksik.

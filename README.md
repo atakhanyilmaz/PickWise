@@ -67,8 +67,8 @@ Tüm kaynak algoritmalarının çalıştığı iddia edilmez; bu test yalnızca 
 
 Atölye katmanı, sert termin, hazır olma zamanı, sabit tamamlanmış/devam eden
 operasyonlar ve makine duruşlarını destekler. Tüm gerçek senaryo süreleri
-integer dakikadır. Benchmark birimleri bundan ayrıdır. SQLite, yeni siparişin
-önce/sonra karşılaştırma servisi, Streamlit, Gemma ve süre tahmini henüz yoktur.
+integer dakikadır. Benchmark birimleri bundan ayrıdır. Yeni sipariş ve önce/sonra karşılaştırma servisi aşağıdaki demo ile çalışır.
+SQLite, Streamlit, Gemma ve süre tahmini henüz yoktur.
 
 ## Atölye modeli (WP-2A)
 
@@ -102,3 +102,30 @@ Kaynak README ve bilimsel atıflar [ayrı belgede](docs/upstream-README.md) koru
 Kökteki `requirements.txt` kaynak deponun listesidir. Bizim doğrudan
 bağımlılıklarımız `requirements-benchmark.txt`, tam kilidimiz
 `requirements-lock.txt` içindedir. Pydantic 2.14.1 sabitlenmiştir.
+
+## Yeni sipariş ve önce/sonra demo
+
+```sh
+.venv/bin/python -m benchmarks.workshop_order_demo
+```
+
+Girdi: `data/examples/order_demo.json` (tamamen sentetik). Çıktı:
+`results/workshop_order/comparison.html`, başlangıç snapshot JSON'u, üç
+simülasyon JSON'u ve `summary.csv`. Farklı deney için `--input`, `--output` ve
+`--time-limit` seçenekleri vardır; aynı çıktı klasörü yeniden kullanılırsa
+raporlar yenilenir.
+
+Mevcut plan 15 dakikada biter. Yeni sipariş yalnız Torna 1'e verilirse makespan
+25 dakika, mevcut bir işin termin gecikmesi 5 dakikadır. Doğrulanmış demo
+alternatifi Torna 2 ile makespan 17, mevcut işlerde gecikme 0'dır. Yalnız Torna 1
+kullanılırken mevcut bitişleri korumak zorunluysa senaryo INFEASIBLE'dır.
+Bu sayılar gerçek işletme ölçümü değildir.
+
+`core/scenarios.py`: tipli snapshot, sipariş isteği, simülasyon ve karşılaştırma
+sonuçları. `simulate_order` başlangıç planını değiştirmez; uygulanamaz veya
+UNKNOWN sonuçta önce/sonra metriği uydurmaz. `deadline` sert sınırdır;
+`due_date` raporlanan yumuşak termindir. Hedef makespan azaltmadır, yumuşak
+gecikme minimizasyonu değildir. `completion_limits`, müşteri termininden ayrı
+mevcut bitiş koruma kısıtıdır. Ayrıntı: [Sipariş ADR](docs/decisions/003-order-simulation.md).
+
+SQLite'ya onaylı plan sürümü kaydetme, Streamlit ve Gemma entegrasyonu henüz yoktur.

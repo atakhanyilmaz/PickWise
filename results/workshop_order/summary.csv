@@ -1,0 +1,4 @@
+scenario,status,makespan,runtime_seconds,violation_count,delayed_existing_jobs,late_jobs,total_tardiness,new_order_completion
+Tek makine,OPTIMAL,25,0.00016,0,1,1,5,20
+Alternatif makine,OPTIMAL,17,0.0005110000000000001,0,0,0,0,17
+Mevcut bitişleri koru,INFEASIBLE,,8.6e-05,,,,,

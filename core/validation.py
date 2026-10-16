@@ -95,6 +95,13 @@ def validate_workshop(scenario, rows):
                 and row["end"] > job.deadline
             ):
                 errors.append(f"Hard deadline: {j}")
+            limit = scenario.completion_limits.get(job.job_id)
+            if (
+                o == len(job.operations) - 1
+                and limit is not None
+                and row["end"] > limit
+            ):
+                errors.append(f"Completion limit: {j}")
             if 0 <= row["machine"] < len(scenario.machines):
                 for start, end in scenario.machines[
                     row["machine"]

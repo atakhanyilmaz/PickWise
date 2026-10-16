@@ -49,6 +49,9 @@ def workshop_cp_sat_model(env):
             previous_end = end
         if scenario.jobs[j].deadline is not None:
             model.Add(previous_end <= scenario.jobs[j].deadline)
+        limit = scenario.completion_limits.get(scenario.jobs[j].job_id)
+        if limit is not None:
+            model.Add(previous_end <= limit)
         last_ends.append(previous_end)
     for m, machine in enumerate(scenario.machines):
         for a, (start, end) in enumerate(machine.unavailable_intervals):

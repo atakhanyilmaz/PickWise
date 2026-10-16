@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "scenario_id": "workshop_demo_base",
+    "description": "Sentetik atölye örneği; bütün süreler ve terminler demo varsayımıdır. Sürekli çalışma kabul edilir.",
+    "current_time": 5,
+    "machines": [
+      {"machine_id": 100, "name": "Torna 1"},
+      {"machine_id": 200, "name": "Torna 2"}
+    ],
+    "jobs": [
+      {
+        "job_id": 10, "name": "Devam eden iş", "route_source": "demo_assumption",
+        "due_date": 10,
+        "operations": [
+          {"operation_id": 1, "name": "Tamamlanmış işlem", "processing_times": {"100": 3},
+           "status": "completed", "fixed_machine_id": 100, "fixed_start": 0, "fixed_end": 3},
+          {"operation_id": 2, "name": "Devam eden işlem", "processing_times": {"100": 7},
+           "status": "in_progress", "fixed_machine_id": 100, "fixed_start": 3, "remaining_duration": 5}
+        ]
+      },
+      {
+        "job_id": 20, "name": "Bekleyen mevcut iş", "route_source": "demo_assumption",
+        "release_time": 10, "due_date": 20,
+        "operations": [
+          {"operation_id": 1, "name": "Tornalama", "processing_times": {"100": 5}}
+        ]
+      }
+    ],
+    "time_unit": "minutes", "time_unit_note": "Tüm süreler t=0 referansından dakika; sentetik demo."
+  },
+  "new_order": {
+    "job_id": 30, "name": "Yeni sipariş", "route_source": "demo_assumption",
+    "deadline": 20, "due_date": 20,
+    "operations": [
+      {"operation_id": 1, "name": "Tornalama", "processing_times": {"100": 10}}
+    ]
+  },
+  "alternative_order": {
+    "job_id": 30, "name": "Yeni sipariş", "route_source": "demo_assumption",
+    "deadline": 20, "due_date": 20,
+    "operations": [
+      {"operation_id": 1, "name": "Tornalama", "processing_times": {"100": 10, "200": 12}}
+    ]
+  }
+}
