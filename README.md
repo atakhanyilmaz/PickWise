@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
 [![License: GPLv3](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ai-for-decision-making-tue/Job_Shop_Scheduling_Benchmark_Environments_and_Instances/blob/main/LICENSE)
 
@@ -101,4 +101,3 @@ A preprint of this paper is available or [arXiv][1].
 =======
 # PickWise
 Personalized product recommendations powered by Gemma, EmbeddingGemma 2, and TabPFN — matching new arrivals with the customers most likely to love them.
->>>>>>> aff2cb1f1e22b0580a456afc34aec90d1f084f7e
