@@ -200,6 +200,20 @@ tek mesajlı eski API'ye aittir. [Karar ve kapsam](docs/decisions/005-gemma-conv
 Yunus'un gerçek veri hazırlığı bu çalışmanın girdisi değildir; TabPFN deneyi
 onaylı hedef ve veri kümesini bekler.
 
+## Arayüz (WP-1N)
+
+```sh
+.venv/bin/streamlit run ui/app.py
+```
+
+Plan, Benchmark ve Hakkında sayfaları. `ui/components.py` tekrar kullanılan
+bileşenleri (metrik satırı, Altair Gantt, tablo), `ui/pages.py` sayfaları içerir;
+hesaplama mevcut `core` servislerinden gelir. Plan sayfası
+`database/local/workshop.sqlite3` içinde `synthetic-workshop` için onaylı sürüm
+varsa onu, yoksa kaydedilmemiş demo planı gösterir. Benchmark sayfası
+`results/brandimarte/` sonuçlarını okur ve seçilen örneği yeniden çözebilir.
+Sipariş girişi, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
+
 ## Plan kayıt sözleşmesi
 
 [Yunus için Pydantic kayıt/yükleme sözleşmesi](docs/plan-data-contract.md),
