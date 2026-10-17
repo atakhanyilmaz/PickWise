@@ -394,6 +394,12 @@ tablosunda ve onay ekranında aynı renkli rozetlerle gösterilir. Geçmiş veri
 otomatik rota önerisi henüz yok (WP-2A); retrospektif taslak gelirse uyarıyla
 gösterilir. Simülasyon, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
 
+Süre tahmini sayfası (WP-3N) `experiments/tabpfn/results/regressor_comparison/`
+altındaki doğrulama raporunu ve tahmin CSV'lerini okur: iki görev (toplam iş
+süresi, makineler arası bekleme) için model başına MAE grafiği, seçilen modelde
+gerçek ve tahmin noktaları, bütün metrikler. Hiçbir model medyanı güvenilir
+biçimde geçmediği için planlamadaki süre kaynağı kullanıcı süresi olarak kalır.
+
 ## Planlama hattı
 
 `core/pipeline.py` mevcut servisleri tek girişte sıralar: plan → tek değişiklik
