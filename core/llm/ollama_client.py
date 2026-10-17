@@ -1,5 +1,6 @@
 """Small loopback-only Ollama client. No downloads or generated-code execution."""
 
+import hashlib
 import json
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
@@ -95,21 +96,27 @@ class OllamaClient:
         self, schema: type[BaseModel], system: str, data: dict, prompt_version: str
     ):
         metadata = self.metadata()
+        output_schema = schema.model_json_schema()
         metadata["prompt_version"] = prompt_version
-        metadata["output_mode"] = "json_with_pydantic_validation"
+        metadata["output_mode"] = "json_schema_with_pydantic_validation"
+        metadata["client_version"] = "schema-constrained-v1"
+        metadata["schema_sha256"] = hashlib.sha256(
+            json.dumps(output_schema, sort_keys=True).encode()
+        ).hexdigest()
+        metadata["num_predict"] = 1400
         response = self._request(
             "/api/chat",
             {
                 "model": self.model,
                 "stream": False,
                 "think": False,
-                "format": "json",
+                "format": output_schema,
                 "messages": [
                     {
                         "role": "system",
                         "content": system
                         + "\nYanıt JSON şeması:\n"
-                        + json.dumps(schema.model_json_schema(), ensure_ascii=False),
+                        + json.dumps(output_schema, ensure_ascii=False),
                     },
                     {"role": "user", "content": json.dumps(data, ensure_ascii=False)},
                 ],

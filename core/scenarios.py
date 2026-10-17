@@ -231,6 +231,11 @@ def compare_scenarios(
         or scenario.machines != baseline.scenario.machines
     ):
         raise ValueError("Comparison requires the same time reference and machines")
+    return _compare_unchanged_jobs(baseline, scenario, result)
+
+
+def _compare_unchanged_jobs(baseline, scenario, result):
+    """Shared impact calculation; callers validate the permitted scenario change."""
     for job_id, limit in baseline.scenario.completion_limits.items():
         new_limit = scenario.completion_limits.get(job_id)
         if new_limit is None or new_limit > limit:

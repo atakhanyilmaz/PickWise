@@ -1,6 +1,7 @@
 """Real-model evaluation with separate development and heldout fixtures."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from time import perf_counter
@@ -24,6 +25,7 @@ class Case(Contract):
     deadline: int | None
     due_date: int | None
     preserve_existing_completions: bool = False
+    initial_pending_kind: str | None = None
 
 
 class Fixture(Contract):
@@ -58,11 +60,18 @@ def evaluate_case(case, baseline, client):
         and applied == len(case.answers)
         and fields_correct is not False
     )
+    pending_correct = None
+    if case.initial_pending_kind is not None:
+        pending_correct = bool(
+            initial.pending and initial.pending[0].kind == case.initial_pending_kind
+        )
+        passed = passed and pending_correct
     model_stages = [
         s
         for s in session.audit
         if "metadata" in s
-        and s.get("stage") in ("intent", "fields", "operations_followup")
+        and s.get("stage")
+        in ("intent", "fields", "operations_followup", "field_answer")
     ]
     return {
         "id": case.id,
@@ -72,6 +81,7 @@ def evaluate_case(case, baseline, client):
         "final_state_correct": session.result.state == case.final_state,
         "tool_correct": session.result.tool == case.tool,
         "fields_correct": fields_correct,
+        "clarification_field_correct": pending_correct,
         "answers_applied": applied,
         "validated_model_stage_count": len(model_stages),
         "initial": initial.model_dump(mode="json"),
@@ -86,6 +96,11 @@ def main():
     )
     parser.add_argument("--model", default="gemma4:e2b")
     parser.add_argument(
+        "--fixture",
+        type=Path,
+        help="Separate synthetic fixture; never overwrites development/heldout inputs.",
+    )
+    parser.add_argument(
         "--baseline", type=Path, default=Path("results/workshop_order/baseline.json")
     )
     parser.add_argument(
@@ -93,8 +108,12 @@ def main():
     )
     args = parser.parse_args()
     baseline = PlanSnapshot.model_validate_json(args.baseline.read_text())
-    raw = json.loads(Path(f"data/examples/gemma/{args.split}.json").read_text())
+    fixture_path = args.fixture or Path(f"data/examples/gemma/{args.split}.json")
+    fixture_bytes = fixture_path.read_bytes()
+    raw = json.loads(fixture_bytes)
     cases = Fixture.model_validate({"cases": raw}).cases
+    if len({case.id for case in cases}) != len(cases):
+        raise ValueError("Fixture case IDs must be unique")
     client = OllamaClient(args.model, timeout=45)
     folder = args.output / args.split
     folder.mkdir(parents=True, exist_ok=True)
@@ -114,8 +133,13 @@ def main():
             flush=True,
         )
     field_records = [r for r in records if r["fields_correct"] is not None]
+    clarification_records = [
+        r for r in records if r["clarification_field_correct"] is not None
+    ]
     summary = {
         "split": args.split,
+        "fixture": str(fixture_path),
+        "fixture_sha256": hashlib.sha256(fixture_bytes).hexdigest(),
         "cases": len(records),
         "passed": sum(r["passed"] for r in records),
         "initial_state_accuracy": sum(r["initial_state_correct"] for r in records)
@@ -130,6 +154,19 @@ def main():
         "validated_model_stage_count": sum(
             r["validated_model_stage_count"] for r in records
         ),
+        "clarification_field_accuracy": sum(
+            r["clarification_field_correct"] for r in clarification_records
+        )
+        / len(clarification_records)
+        if clarification_records
+        else None,
+        "invalid_model_output_count": sum(
+            r["final"]["result"]["state"] == "invalid_model_output" for r in records
+        ),
+        "model_unavailable_count": sum(
+            r["final"]["result"]["state"] == "model_unavailable" for r in records
+        ),
+        "total_seconds": sum(r["seconds"] for r in records),
         "scope": "Small synthetic fixture; service includes code guards and scripted user answers. Not raw-model accuracy or real-workshop validation.",
     }
     (folder / "summary.json").write_text(

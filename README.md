@@ -360,6 +360,7 @@ Atölye modeli şunları destekler:
 .\.venv\Scripts\python.exe -m benchmarks.brandimarte_runner --time-limit 10
 ```
 
+
 Tek örnek:
 
 ```powershell
@@ -372,6 +373,12 @@ Başlıca çıktılar:
 - `Mk*.json`: tam çizelge, kaynak hash/commit ve çözücü ayarları.
 - `*_cp_sat.html`: internet gerektirmeyen Plotly Gantt çıktısı.
 - `*_job_order_eft.html`: deterministik job-order/EFT referansı.
+=======
+CLI süreyi sorar; ardından tamamlanmış taslağı gösterip ayrıca onay ister.
+Gerçek tarih dönüşümü yoktur: göreli termin için kullanıcıdan `t=40 dakika`
+gibi açık sınır istenir. Duruş doğal dil aracı sonraki aşamadadır;
+manuel planlı duruş servisi aşağıdaki bölümde açıklanır.
+
 
 Benchmark süreleri gerçek dakika değildir; yalnız benchmark zaman birimidir.
 
@@ -393,6 +400,53 @@ indirilmez. Taslak ayrı insan onayı olmadan simüle edilmez. Bu deneysel akı�
 ## Süre tahmini deneyleri
 
 Medyan referansı ve veri sızıntısı kontrolleri:
+=======
+## Arayüz (WP-1N, WP-2N)
+
+```sh
+.venv/bin/streamlit run ui/app.py
+```
+
+Plan, Rota onayı, Benchmark ve Hakkında sayfaları. `ui/components.py` tekrar
+kullanılan bileşenleri (metrik satırı, Altair Gantt, tablo, kaynak rozetleri,
+rota düzenleyici), `ui/pages.py` sayfaları içerir. Gündüz ve gece temaları
+`.streamlit/config.toml` içindedir; kullanıcı sağ üstteki ⋮ menüsünden Light,
+Dark veya System seçer;
+hesaplama mevcut `core` servislerinden gelir. Plan sayfası
+`database/local/workshop.sqlite3` içinde `synthetic-workshop` için onaylı sürüm
+varsa onu, yoksa kaydedilmemiş demo planı gösterir. Benchmark sayfası
+`results/brandimarte/` sonuçlarını okur ve seçilen örneği yeniden çözebilir.
+
+Rota onayı sayfası bir sipariş taslağının işlem sırasını, uygun tezgâhlarını ve
+dakika sürelerini düzenletir. Düzenlenen süre `user_input`, düzenlenen rota
+`user_proposed` olur; rota yalnız açık onay kutusu ve düğmesiyle
+`user_approved` olur ve oturumda saklanır. Rota ve süre kaynakları Plan
+tablosunda ve onay ekranında aynı renkli rozetlerle gösterilir. Geçmiş veriden
+otomatik rota önerisi henüz yok (WP-2A); retrospektif taslak gelirse uyarıyla
+gösterilir. Simülasyon, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
+
+## Planlama hattı
+
+`core/pipeline.py` mevcut servisleri tek girişte sıralar: plan → tek değişiklik
+(yeni sipariş `simulate_order` veya duruş `simulate_downtime`) → çözüm ve
+doğrulama → `dispatch`. `dispatch`, seçilen dakikada her tezgâhın işlediği
+operasyonu (`[başlangıç, bitiş)`) ve sıradakini verir; Plan sayfasındaki
+"Şu an tezgâhlarda" kartları bunu gösterir. Başlangıç planı değişmez; değişiklik
+uygulanamazsa görünüm başlangıç planına döner. Plan yükleme ve onaylı kayıt
+çağıranda kalır. Gemma için LangGraph katmanı bu hattı araç olarak kullanacak
+şekilde planlandı, henüz eklenmedi.
+
+## Otomatik kontroller (CI)
+
+`.github/workflows/ci.yml` her PR'da ve `main`'e push'ta Python 3.11 ile kaynak
+depoyu sabit commit'ten getirir, `requirements-lock.txt` ve Streamlit'i kurar,
+`ruff check core benchmarks tests ui`, `pytest tests` ve `tutorials/`
+notebook'larını çalıştırır. Streamlit 1.66 `pillow<13` istediği için kurulumda
+kilitteki pillow 13 düşürülür. `ml_experiments` biçim uyarıları düzelince
+ruff kapsamına eklenmeli.
+
+## Plan kayıt sözleşmesi
+
 
 ```powershell
 .\.venv\Scripts\python.exe -m ml_experiments.duration_evaluation --dataset data/examples/duration_experiment_synthetic.json
@@ -459,3 +513,34 @@ Başlangıç noktaları:
 - [Sipariş simülasyonu kararı](docs/decisions/003-order-simulation.md)
 - [SQLite kararı](docs/decisions/007-sqlite-plan-repository.md)
 - [Git seed paylaşım kararı](docs/decisions/008-git-plan-seed-exchange.md)
+=======
+[CNC hedef tablosunun kontrol raporu](docs/cnc-data-audit.md):
+`ml_experiments.cnc_audit` belirtilen Git commit'indeki ham ve hedef CSV'leri
+değiştirmeden karşılaştırır. Oturum/bölme, süre hesabı, sensörlerin korunması
+ve eksik veri bayrakları kontrol edilir. Bu kalan süre deneyi;
+planlamaya bağlı toplam hazırlık tahmini veya fiziksel anlam onayı değildir.
+
+## Ayrı TabPFN deneyleri
+
+İki regresyonun kodu, raporları, sonuçları, testleri ve bağımlılık kilidi
+[experiments/tabpfn](experiments/tabpfn/README.md) altında tutulur.
+Uygulamanın planlama, Gemma ve SQLite akışı bu paketi import etmez.
+İki gerçek v2 doğrulama deneyinde global medyan geçilemedi; ürün akışına
+bağlanmadı.
+
+
+## Planlı makine duruşu
+
+`core.downtime.simulate_downtime` mevcut planı değiştirmeden makine duruşu
+ekler, uygun alternatifleri çözer ve mevcut işlerin bitiş/termin etkisini
+hesaplar. Başlamış operasyonu kesme/devam ettirme desteklenmez; açıkça
+reddedilir. Kaydetme ayrı insan seçimi ve SQLite sürüm kaydı gerektirir.
+[Servis sözleşmesi ve sınırlar](docs/downtime-simulation.md).
+
+```sh
+.venv/bin/python -m benchmarks.workshop_downtime_demo
+```
+
+JSON ve önce/sonra Gantt çıktıları `results/workshop_downtime/` altında.
+Gemma doğal dil duruş aracı ve UI bağlantısı henüz yoktur.
+
