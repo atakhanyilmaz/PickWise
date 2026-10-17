@@ -28,6 +28,7 @@ CREATE TABLE plan_versions (
     snapshot_json TEXT NOT NULL
         CHECK (json_valid(snapshot_json))
         CHECK (json_type(snapshot_json) = 'object')
+        CHECK (json_type(snapshot_json, '$.version_id') IS 'text')
         CHECK (json_extract(snapshot_json, '$.version_id') = version_id),
     is_complete INTEGER NOT NULL DEFAULT 0 CHECK (is_complete IN (0, 1)),
     PRIMARY KEY (plan_id, version_id),

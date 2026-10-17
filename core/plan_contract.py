@@ -1,4 +1,4 @@
-"""Plan persistence boundary; SQLite storage is implemented separately."""
+"""Plan persistence boundary; implementation lives in core.sqlite_repository."""
 
 from typing import Annotated, Literal, Protocol
 

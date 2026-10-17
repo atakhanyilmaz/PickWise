@@ -8,3 +8,6 @@ external/
 # Local natural-language requests and model traces may contain user data.
 results/gemma*/
 results/duration_experiment.json
+# Local plans and SQLite journal files can contain private workshop data.
+database/local/*.sqlite3*
+database/local/*.db*

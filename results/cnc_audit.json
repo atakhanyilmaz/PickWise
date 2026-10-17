@@ -1,0 +1,533 @@
+{
+  "errors": [],
+  "warnings": [
+    "The target is online remaining time, not pre-start total setup duration.",
+    "Label_03=0 is the supplied phase convention; physical meaning and product mappings are not independently certified here.",
+    "Zero target refers to the last changeover sample, not necessarily the next production boundary.",
+    "Missing sentinels are encoding choices, not proof of physical absence of a tool or program line.",
+    "Timestamp timezone is unspecified; no timezone was inferred.",
+    "Rows within sessions are dependent; split and evaluate by session, never random sensor rows.",
+    "Do not use remaining target, split, session ID, raw labels or absolute time as model features; review online availability of every sensor.",
+    "No imputation-generation code or physical-boundary validation is established by this numeric audit."
+  ],
+  "sessions": [
+    {
+      "session_id": "1",
+      "split": "train",
+      "from": "A",
+      "to": "B",
+      "rows": 994,
+      "start": "2024-03-12 08:16:30",
+      "last_changeover_sample": "2024-03-12 08:33:03",
+      "sample_span_minutes": 16.55,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "2",
+      "split": "train",
+      "from": "B",
+      "to": "C",
+      "rows": 4011,
+      "start": "2024-03-12 08:37:09",
+      "last_changeover_sample": "2024-03-12 09:43:59",
+      "sample_span_minutes": 66.83333333333333,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "3",
+      "split": "train",
+      "from": "C",
+      "to": "B",
+      "rows": 1386,
+      "start": "2024-03-12 10:10:41",
+      "last_changeover_sample": "2024-03-12 10:33:46",
+      "sample_span_minutes": 23.083333333333332,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "4",
+      "split": "train",
+      "from": "B",
+      "to": "A",
+      "rows": 1462,
+      "start": "2024-03-12 10:37:43",
+      "last_changeover_sample": "2024-03-12 11:02:04",
+      "sample_span_minutes": 24.35,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "5",
+      "split": "train",
+      "from": "A",
+      "to": "C",
+      "rows": 2313,
+      "start": "2024-03-12 12:39:20",
+      "last_changeover_sample": "2024-03-12 13:17:52",
+      "sample_span_minutes": 38.53333333333333,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "6",
+      "split": "train",
+      "from": "C",
+      "to": "A",
+      "rows": 779,
+      "start": "2024-03-12 13:36:53",
+      "last_changeover_sample": "2024-03-12 13:49:51",
+      "sample_span_minutes": 12.966666666666667,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "7",
+      "split": "train",
+      "from": "A",
+      "to": "B",
+      "rows": 1060,
+      "start": "2024-03-20 06:43:14",
+      "last_changeover_sample": "2024-03-20 07:00:53",
+      "sample_span_minutes": 17.65,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "8",
+      "split": "train",
+      "from": "B",
+      "to": "C",
+      "rows": 1850,
+      "start": "2024-03-20 07:04:45",
+      "last_changeover_sample": "2024-03-20 07:35:34",
+      "sample_span_minutes": 30.816666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "9",
+      "split": "train",
+      "from": "C",
+      "to": "B",
+      "rows": 940,
+      "start": "2024-03-20 07:54:26",
+      "last_changeover_sample": "2024-03-20 08:10:05",
+      "sample_span_minutes": 15.65,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "10",
+      "split": "train",
+      "from": "B",
+      "to": "A",
+      "rows": 806,
+      "start": "2024-03-20 08:14:10",
+      "last_changeover_sample": "2024-03-20 08:27:35",
+      "sample_span_minutes": 13.416666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "11",
+      "split": "train",
+      "from": "A",
+      "to": "C",
+      "rows": 1643,
+      "start": "2024-03-20 08:28:51",
+      "last_changeover_sample": "2024-03-20 08:56:13",
+      "sample_span_minutes": 27.366666666666667,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "12",
+      "split": "train",
+      "from": "C",
+      "to": "A",
+      "rows": 708,
+      "start": "2024-03-20 09:14:59",
+      "last_changeover_sample": "2024-03-20 09:26:46",
+      "sample_span_minutes": 11.783333333333333,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "13",
+      "split": "train",
+      "from": "A",
+      "to": "B",
+      "rows": 756,
+      "start": "2024-03-20 09:28:56",
+      "last_changeover_sample": "2024-03-20 09:41:31",
+      "sample_span_minutes": 12.583333333333334,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "14",
+      "split": "train",
+      "from": "B",
+      "to": "C",
+      "rows": 1713,
+      "start": "2024-03-20 09:45:30",
+      "last_changeover_sample": "2024-03-20 10:14:02",
+      "sample_span_minutes": 28.533333333333335,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "15",
+      "split": "train",
+      "from": "C",
+      "to": "B",
+      "rows": 1008,
+      "start": "2024-03-20 10:32:47",
+      "last_changeover_sample": "2024-03-20 10:49:34",
+      "sample_span_minutes": 16.783333333333335,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "16",
+      "split": "train",
+      "from": "B",
+      "to": "A",
+      "rows": 671,
+      "start": "2024-03-20 10:53:29",
+      "last_changeover_sample": "2024-03-20 11:04:39",
+      "sample_span_minutes": 11.166666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "17",
+      "split": "train",
+      "from": "A",
+      "to": "C",
+      "rows": 1627,
+      "start": "2024-03-20 11:05:51",
+      "last_changeover_sample": "2024-03-20 11:32:57",
+      "sample_span_minutes": 27.1,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "18",
+      "split": "train",
+      "from": "C",
+      "to": "A",
+      "rows": 582,
+      "start": "2024-03-20 11:51:42",
+      "last_changeover_sample": "2024-03-20 12:01:23",
+      "sample_span_minutes": 9.683333333333334,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "19",
+      "split": "validation",
+      "from": "A",
+      "to": "B",
+      "rows": 671,
+      "start": "2024-03-20 12:02:56",
+      "last_changeover_sample": "2024-03-20 12:14:06",
+      "sample_span_minutes": 11.166666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "20",
+      "split": "validation",
+      "from": "B",
+      "to": "C",
+      "rows": 1622,
+      "start": "2024-03-20 12:18:06",
+      "last_changeover_sample": "2024-03-20 12:45:07",
+      "sample_span_minutes": 27.016666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "21",
+      "split": "validation",
+      "from": "C",
+      "to": "B",
+      "rows": 826,
+      "start": "2024-03-20 14:04:02",
+      "last_changeover_sample": "2024-03-20 14:17:47",
+      "sample_span_minutes": 13.75,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "22",
+      "split": "validation",
+      "from": "B",
+      "to": "A",
+      "rows": 532,
+      "start": "2024-03-22 07:32:42",
+      "last_changeover_sample": "2024-03-22 07:41:33",
+      "sample_span_minutes": 8.85,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "23",
+      "split": "validation",
+      "from": "A",
+      "to": "C",
+      "rows": 1573,
+      "start": "2024-03-22 07:42:50",
+      "last_changeover_sample": "2024-03-22 08:09:02",
+      "sample_span_minutes": 26.2,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "24",
+      "split": "validation",
+      "from": "C",
+      "to": "A",
+      "rows": 691,
+      "start": "2024-03-22 08:33:08",
+      "last_changeover_sample": "2024-03-22 08:44:38",
+      "sample_span_minutes": 11.5,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "25",
+      "split": "test",
+      "from": "A",
+      "to": "B",
+      "rows": 755,
+      "start": "2024-03-22 08:45:57",
+      "last_changeover_sample": "2024-03-22 08:58:31",
+      "sample_span_minutes": 12.566666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "26",
+      "split": "test",
+      "from": "B",
+      "to": "C",
+      "rows": 1669,
+      "start": "2024-03-22 09:02:30",
+      "last_changeover_sample": "2024-03-22 09:30:18",
+      "sample_span_minutes": 27.8,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "27",
+      "split": "test",
+      "from": "C",
+      "to": "B",
+      "rows": 918,
+      "start": "2024-03-22 09:53:20",
+      "last_changeover_sample": "2024-03-22 10:08:37",
+      "sample_span_minutes": 15.283333333333333,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "28",
+      "split": "test",
+      "from": "B",
+      "to": "A",
+      "rows": 611,
+      "start": "2024-03-22 10:12:37",
+      "last_changeover_sample": "2024-03-22 10:22:47",
+      "sample_span_minutes": 10.166666666666666,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "29",
+      "split": "test",
+      "from": "A",
+      "to": "C",
+      "rows": 1533,
+      "start": "2024-03-22 10:24:06",
+      "last_changeover_sample": "2024-03-22 10:49:38",
+      "sample_span_minutes": 25.533333333333335,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    },
+    {
+      "session_id": "30",
+      "split": "test",
+      "from": "C",
+      "to": "A",
+      "rows": 646,
+      "start": "2024-03-22 11:10:38",
+      "last_changeover_sample": "2024-03-22 11:21:23",
+      "sample_span_minutes": 10.75,
+      "non_1s_steps": 0,
+      "next_sample_gap_seconds": 1.0,
+      "next_label03": 1.0
+    }
+  ],
+  "numeric_checks_passed": true,
+  "operational_use_approved": false,
+  "missing_value_changes": [
+    {
+      "column": "Line_Content",
+      "count": 35945,
+      "fill_values": {
+        "__NO_NC_LINE__": 35945
+      }
+    },
+    {
+      "column": "Tool_ID",
+      "count": 10251,
+      "fill_values": {
+        "__NO_TOOL_IN_SPINDLE__": 10251
+      }
+    },
+    {
+      "column": "Tool_ID_Magazine_Place_49",
+      "count": 1449,
+      "fill_values": {
+        "__NOT_REPORTED__": 1449
+      }
+    },
+    {
+      "column": "Magazine_9999_number_Place_1",
+      "count": 5709,
+      "fill_values": {
+        "-1.0": 5709
+      }
+    },
+    {
+      "column": "Magazine_9999_position_Place_1",
+      "count": 5709,
+      "fill_values": {
+        "-1.0": 5709
+      }
+    },
+    {
+      "column": "Tool_ID_Magazine_9999_Place_1",
+      "count": 5709,
+      "fill_values": {
+        "__NOT_REPORTED__": 5709
+      }
+    }
+  ],
+  "raw_rows": 52026,
+  "target_rows": 36356,
+  "session_count": 30,
+  "split_session_counts": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "split_row_counts": {
+    "train": 24309,
+    "test": 6132,
+    "validation": 5915
+  },
+  "split_time_ranges": {
+    "train": {
+      "start": "2024-03-12 08:16:30",
+      "end": "2024-03-20 12:01:23"
+    },
+    "validation": {
+      "start": "2024-03-20 12:02:56",
+      "end": "2024-03-22 08:44:38"
+    },
+    "test": {
+      "start": "2024-03-22 08:45:57",
+      "end": "2024-03-22 11:21:23"
+    }
+  },
+  "transition_session_counts": {
+    "A->B": 5,
+    "B->C": 5,
+    "C->B": 5,
+    "B->A": 5,
+    "A->C": 5,
+    "C->A": 5
+  },
+  "removed_raw_columns": [
+    "Cycle_time_program",
+    "Label_01",
+    "Label_02",
+    "Label_03",
+    "Label_04",
+    "Label_05",
+    "Label_06",
+    "Label_07",
+    "Label_08",
+    "Label_09",
+    "Label_10",
+    "Net_running_time_program",
+    "Program_Stop",
+    "Total_running_time_NC_program",
+    "Unnamed: 0"
+  ],
+  "added_columns": [
+    "Line_Content__was_missing",
+    "Magazine_9999_number_Place_1__was_missing",
+    "Magazine_9999_position_Place_1__was_missing",
+    "Tool_ID_Magazine_9999_Place_1__was_missing",
+    "Tool_ID_Magazine_Place_49__was_missing",
+    "Tool_ID__was_missing",
+    "changeover_session_id",
+    "elapsed_changeover_time_min",
+    "eligible_for_30s_window",
+    "eligible_for_60s_window",
+    "history_seconds_available",
+    "remaining_changeover_time_min",
+    "split",
+    "transition_from_product",
+    "transition_to_product"
+  ],
+  "raw_non_1s_steps": 6,
+  "within_changeover_non_1s_steps": 0,
+  "source_commit": "3abae7380c7d724d47dd0335330de74a104f4b98",
+  "sources": {
+    "raw": {
+      "path": "data/dataforNewVersion/cnc_changeover.csv",
+      "sha256": "d7227badb6ae1a27339622b337207cc342f75acc5baa18538352228fd52be580"
+    },
+    "target": {
+      "path": "data/dataforNewVersion/cnc_changeover_remaining_time_target.csv",
+      "sha256": "fba32636cda7c2d9770a249b91981daa512f37b91888c24882d354e4799660e1"
+    }
+  }
+}
