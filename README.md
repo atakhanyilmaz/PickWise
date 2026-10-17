@@ -201,19 +201,29 @@ tek mesajlı eski API'ye aittir. [Karar ve kapsam](docs/decisions/005-gemma-conv
 Yunus'un gerçek veri hazırlığı bu çalışmanın girdisi değildir; TabPFN deneyi
 onaylı hedef ve veri kümesini bekler.
 
-## Arayüz (WP-1N)
+## Arayüz (WP-1N, WP-2N)
 
 ```sh
 .venv/bin/streamlit run ui/app.py
 ```
 
-Plan, Benchmark ve Hakkında sayfaları. `ui/components.py` tekrar kullanılan
-bileşenleri (metrik satırı, Altair Gantt, tablo), `ui/pages.py` sayfaları içerir;
+Plan, Rota onayı, Benchmark ve Hakkında sayfaları. `ui/components.py` tekrar
+kullanılan bileşenleri (metrik satırı, Altair Gantt, tablo, kaynak rozetleri,
+rota düzenleyici), `ui/pages.py` sayfaları içerir. Gündüz ve gece temaları
+`.streamlit/config.toml` içindedir; kullanıcı sağ üstteki ⋮ menüsünden Light,
+Dark veya System seçer;
 hesaplama mevcut `core` servislerinden gelir. Plan sayfası
 `database/local/workshop.sqlite3` içinde `synthetic-workshop` için onaylı sürüm
 varsa onu, yoksa kaydedilmemiş demo planı gösterir. Benchmark sayfası
 `results/brandimarte/` sonuçlarını okur ve seçilen örneği yeniden çözebilir.
-Sipariş girişi, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
+
+Rota onayı sayfası bir sipariş taslağının işlem sırasını, uygun tezgâhlarını ve
+dakika sürelerini düzenletir. Düzenlenen süre `user_input`, düzenlenen rota
+`user_proposed` olur; rota yalnız açık onay kutusu ve düğmesiyle
+`user_approved` olur ve oturumda saklanır. Rota ve süre kaynakları Plan
+tablosunda ve onay ekranında aynı renkli rozetlerle gösterilir. Geçmiş veriden
+otomatik rota önerisi henüz yok (WP-2A); retrospektif taslak gelirse uyarıyla
+gösterilir. Simülasyon, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
 
 ## Plan kayıt sözleşmesi
 

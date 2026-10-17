@@ -1,4 +1,4 @@
-"""WP-1N pages. Each page only loads data through existing services and composes ui.components."""
+"""Streamlit pages (WP-1N, WP-2N). Each page only loads data through existing services and composes ui.components."""
 
 import json
 import sqlite3
@@ -32,17 +32,15 @@ def demo_snapshot():
 
 
 def current_plan():
-    """Latest approved plan from SQLite if one exists; otherwise the unsaved demo baseline."""
+    """(snapshot, label, saved): latest approved plan from SQLite, else the unsaved demo baseline."""
     if DB.exists():
         try:
             record = SQLitePlanRepository(DB).load_current(PLAN_ID)
-            return (
-                record.snapshot,
-                f"{record.snapshot.version_id} (kayıtlı, onaylayan {record.approved_by})",
-            )
+            label = f"{record.snapshot.version_id} · onaylayan {record.approved_by}"
+            return record.snapshot, label, True
         except (KeyError, PlanStorageError, sqlite3.Error):
             pass
-    return demo_snapshot(), "demo planı (kaydedilmemiş)"
+    return demo_snapshot(), "Demo planı · kaydedilmemiş", False
 
 
 def utilization(rows, machines, makespan):
@@ -55,7 +53,7 @@ def utilization(rows, machines, makespan):
 
 
 def plan_page():
-    snapshot, source = current_plan()
+    snapshot, source, _ = current_plan()
     scenario, result = snapshot.scenario, snapshot.result
     metrics = plan_metrics(scenario, result)
     rows = [row.model_dump() for row in result.schedule]
@@ -113,10 +111,114 @@ def plan_page():
                 "Bitiş": ui.clock(by_job[job.job_id].completion),
                 "Termin": ui.clock(job.due_date),
                 "Gecikme (dk)": by_job[job.job_id].tardiness,
+                "Rota kaynağı": [ui.SOURCE_LABELS[job.route_source]],
+                "Süre kaynağı": sorted(
+                    {ui.SOURCE_LABELS[op.duration_source] for op in job.operations}
+                ),
             }
             for j, job in enumerate(scenario.jobs)
-        ]
+        ],
+        column_config={
+            "Rota": st.column_config.TextColumn(width="medium"),
+            **{
+                column: st.column_config.TextColumn(width="small")
+                for column in ("Başlangıç", "Bitiş", "Termin")
+            },
+            "Gecikme (dk)": st.column_config.NumberColumn(width="small"),
+            "Rota kaynağı": ui.source_column("Rota kaynağı"),
+            "Süre kaynağı": ui.source_column("Süre kaynağı"),
+        },
     )
+
+
+@st.cache_resource
+def demo_drafts():
+    demo = DemoInput.model_validate_json(
+        (ROOT / "data/examples/order_demo.json").read_text(encoding="utf-8")
+    )
+    return {
+        "Demo sipariş": demo.new_order,
+        "Alternatif tezgâhlı demo": demo.alternative_order,
+        "Boş rota": None,
+    }
+
+
+def route_page():
+    snapshot, _, _ = current_plan()
+    machines = snapshot.scenario.machines
+    drafts = demo_drafts()
+
+    st.title("Rota onayı")
+    st.caption(
+        "Siparişin işlem sırasını, uygun tezgâhları ve sürelerini kontrol edin. "
+        "Onaylanmamış rota çözücüye girmez."
+    )
+
+    choice = st.segmented_control(
+        "Taslak", list(drafts), default="Demo sipariş", required=True
+    )
+    base = drafts[choice]
+    name_column, source_column = st.columns([3, 1], vertical_alignment="bottom")
+    name = name_column.text_input("Sipariş adı", base.name if base else "")
+    badge_slot = source_column.empty()  # filled once the route's final state is known
+
+    def show_route_source(source):
+        with badge_slot.container():
+            st.caption("Rota kaynağı")
+            ui.source_badge(source)
+
+    if base and base.route_source == "retrospective":
+        st.warning(
+            "Bu rota geçmiş kayıtlardan çıkarıldı. Planlamaya girmeden önce işlem sırasını, "
+            "tezgâhları ve süreleri kontrol edip onaylayın.",
+            icon=":material/history:",
+        )
+
+    st.subheader("İşlem sırası ve süreler")
+    st.caption(
+        "Satır sırası işlem sırasıdır. Boş (None) hücre, tezgâhın bu işlemi yapamadığı anlamına gelir. "
+        'Süreler dakikadır; düzenlediğiniz süre "Kullanıcı süresi" olur.'
+    )
+    frame = ui.route_editor(base, machines, key=f"route-{choice}")
+    job_id = base.job_id if base else max(j.job_id for j in snapshot.scenario.jobs) + 10
+    job, problems = ui.job_from_route(
+        frame, name=name, base=base, machines=machines, job_id=job_id
+    )
+
+    if problems:
+        show_route_source(base.route_source if base else "user_proposed")
+        for problem in problems:
+            st.warning(problem, icon=":material/edit_note:")
+        return
+
+    st.subheader("Süre kaynakları")
+    for index, op in enumerate(job.operations, start=1):
+        label, badge = st.columns([3, 2], vertical_alignment="center")
+        times = " · ".join(
+            f"{m.name} {op.processing_times[m.machine_id]} dk"
+            for m in machines
+            if m.machine_id in op.processing_times
+        )
+        label.markdown(f"**{index}. {op.name}**  \n{times}")
+        with badge:
+            ui.source_badge(op.duration_source)
+
+    st.divider()
+    approved = st.session_state.get("approved_order")
+    is_approved = approved is not None and approved.model_dump(
+        exclude={"route_source"}
+    ) == job.model_dump(exclude={"route_source"})
+    show_route_source(approved.route_source if is_approved else job.route_source)
+    if is_approved:
+        st.success(
+            f"{approved.name} rotası onaylandı. Yeni sipariş simülasyonu bu rotayı kullanacak.",
+            icon=":material/verified:",
+        )
+        return
+    confirmed = st.checkbox("İşlem sırasını, tezgâhları ve süreleri kontrol ettim")
+    if st.button("Rotayı onayla", type="primary", disabled=not confirmed):
+        st.session_state["approved_order"] = ui.approve(job)
+        st.rerun()
 
 
 @st.cache_data

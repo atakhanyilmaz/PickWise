@@ -13,15 +13,28 @@ from ui import pages  # noqa: E402
 st.set_page_config(
     page_title="PickWise", page_icon=":material/view_timeline:", layout="wide"
 )
+ui.brand()
 navigation = st.navigation(
-    [
-        st.Page(
-            pages.plan_page, title="Plan", icon=":material/view_timeline:", default=True
-        ),
-        st.Page(pages.benchmark_page, title="Benchmark", icon=":material/bar_chart:"),
-        st.Page(pages.about_page, title="Hakkında", icon=":material/info:"),
-    ]
+    {
+        "Planlama": [
+            st.Page(
+                pages.plan_page,
+                title="Plan",
+                icon=":material/view_timeline:",
+                default=True,
+            ),
+            st.Page(pages.route_page, title="Rota onayı", icon=":material/alt_route:"),
+        ],
+        "Doğrulama": [
+            st.Page(
+                pages.benchmark_page, title="Benchmark", icon=":material/bar_chart:"
+            ),
+        ],
+        "Proje": [
+            st.Page(pages.about_page, title="Hakkında", icon=":material/info:"),
+        ],
+    }
 )
-st.sidebar.title("PICKWISE")
-ui.sidebar_settings(active_plan=pages.current_plan()[1])
+_, plan_label, plan_saved = pages.current_plan()
+ui.sidebar_settings(plan_label, plan_saved)
 navigation.run()
