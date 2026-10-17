@@ -424,15 +424,6 @@ out["__interrupt__"][0].value              # soru veya onay bekleyen taslak
 out = graph.invoke(Command(resume=True), config)  # onay
 ```
 
-## Otomatik kontroller (CI)
-
-`.github/workflows/ci.yml` her PR'da ve `main`'e push'ta Python 3.11 ile kaynak
-depoyu sabit commit'ten getirir, `requirements-lock.txt` ve Streamlit'i kurar,
-`ruff check core benchmarks tests ui`, `pytest tests` ve `tutorials/`
-notebook'larını çalıştırır. Streamlit 1.66 `pillow<13` istediği için kurulumda
-kilitteki pillow 13 düşürülür. `ml_experiments` biçim uyarıları düzelince
-ruff kapsamına eklenmeli.
-
 ## Plan kayıt sözleşmesi
 
 
