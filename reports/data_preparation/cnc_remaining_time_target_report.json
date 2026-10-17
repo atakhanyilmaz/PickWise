@@ -1,0 +1,365 @@
+{
+  "input_rows": 52026,
+  "changeover_rows": 36356,
+  "changeover_sessions": 30,
+  "target": "remaining_changeover_time_min",
+  "target_definition": "minutes from the current timestamp through the final timestamp of the same Label_03=0 contiguous changeover",
+  "target_includes_interruptions": true,
+  "window_eligible_rows": {
+    "30_seconds": 35486,
+    "60_seconds": 34586
+  },
+  "split_strategy": "whole ordered sessions: 18 train, 6 validation, 6 test; no session crosses splits",
+  "split_session_counts": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "removed_leakage_columns": [
+    "source_row_index",
+    "Cycle_time_program",
+    "Total_running_time_NC_program",
+    "Net_running_time_program",
+    "Line_Content",
+    "Tool_ID_Magazine_Place_49",
+    "Magazine_9999_number_Place_1",
+    "Magazine_9999_position_Place_1",
+    "Tool_ID_Magazine_9999_Place_1",
+    "Program_Stop",
+    "Label_01",
+    "Label_02",
+    "Label_03",
+    "Label_04",
+    "Label_05",
+    "Label_06",
+    "Label_07",
+    "Label_08",
+    "Label_09",
+    "Label_10"
+  ],
+  "metadata_not_model_features": [
+    "time",
+    "changeover_session_id",
+    "split",
+    "eligible_for_30s_window",
+    "eligible_for_60s_window"
+  ],
+  "line_content_strategy": "Exact NC command text is removed. nc_line_is_active=1 means a command line is reported at the current live observation; 0 means none is reported. This feature is unavailable before a changeover starts.",
+  "structural_missing_strategy": {
+    "Tool_ID": {
+      "sentinel": "__NO_TOOL_IN_SPINDLE__",
+      "indicator": "Tool_ID__was_missing"
+    }
+  },
+  "dropped_machine_specific_magazine_columns": [
+    "Tool_ID_Magazine_Place_49",
+    "Magazine_9999_number_Place_1",
+    "Magazine_9999_position_Place_1",
+    "Tool_ID_Magazine_9999_Place_1"
+  ],
+  "session_summary": [
+    {
+      "changeover_session_id": 1,
+      "start": "2024-03-12 08:16:30",
+      "end": "2024-03-12 08:33:03",
+      "rows": 994,
+      "transition_code": 2.0,
+      "duration_min": 16.55,
+      "transition": "A->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 2,
+      "start": "2024-03-12 08:37:09",
+      "end": "2024-03-12 09:43:59",
+      "rows": 4011,
+      "transition_code": 5.0,
+      "duration_min": 66.83333333333333,
+      "transition": "B->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 3,
+      "start": "2024-03-12 10:10:41",
+      "end": "2024-03-12 10:33:46",
+      "rows": 1386,
+      "transition_code": 3.0,
+      "duration_min": 23.083333333333332,
+      "transition": "C->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 4,
+      "start": "2024-03-12 10:37:43",
+      "end": "2024-03-12 11:02:04",
+      "rows": 1462,
+      "transition_code": 0.0,
+      "duration_min": 24.35,
+      "transition": "B->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 5,
+      "start": "2024-03-12 12:39:20",
+      "end": "2024-03-12 13:17:52",
+      "rows": 2313,
+      "transition_code": 4.0,
+      "duration_min": 38.53333333333333,
+      "transition": "A->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 6,
+      "start": "2024-03-12 13:36:53",
+      "end": "2024-03-12 13:49:51",
+      "rows": 779,
+      "transition_code": 1.0,
+      "duration_min": 12.966666666666667,
+      "transition": "C->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 7,
+      "start": "2024-03-20 06:43:14",
+      "end": "2024-03-20 07:00:53",
+      "rows": 1060,
+      "transition_code": 2.0,
+      "duration_min": 17.65,
+      "transition": "A->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 8,
+      "start": "2024-03-20 07:04:45",
+      "end": "2024-03-20 07:35:34",
+      "rows": 1850,
+      "transition_code": 5.0,
+      "duration_min": 30.816666666666666,
+      "transition": "B->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 9,
+      "start": "2024-03-20 07:54:26",
+      "end": "2024-03-20 08:10:05",
+      "rows": 940,
+      "transition_code": 3.0,
+      "duration_min": 15.65,
+      "transition": "C->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 10,
+      "start": "2024-03-20 08:14:10",
+      "end": "2024-03-20 08:27:35",
+      "rows": 806,
+      "transition_code": 0.0,
+      "duration_min": 13.416666666666666,
+      "transition": "B->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 11,
+      "start": "2024-03-20 08:28:51",
+      "end": "2024-03-20 08:56:13",
+      "rows": 1643,
+      "transition_code": 4.0,
+      "duration_min": 27.366666666666667,
+      "transition": "A->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 12,
+      "start": "2024-03-20 09:14:59",
+      "end": "2024-03-20 09:26:46",
+      "rows": 708,
+      "transition_code": 1.0,
+      "duration_min": 11.783333333333333,
+      "transition": "C->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 13,
+      "start": "2024-03-20 09:28:56",
+      "end": "2024-03-20 09:41:31",
+      "rows": 756,
+      "transition_code": 2.0,
+      "duration_min": 12.583333333333334,
+      "transition": "A->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 14,
+      "start": "2024-03-20 09:45:30",
+      "end": "2024-03-20 10:14:02",
+      "rows": 1713,
+      "transition_code": 5.0,
+      "duration_min": 28.533333333333335,
+      "transition": "B->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 15,
+      "start": "2024-03-20 10:32:47",
+      "end": "2024-03-20 10:49:34",
+      "rows": 1008,
+      "transition_code": 3.0,
+      "duration_min": 16.783333333333335,
+      "transition": "C->B",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 16,
+      "start": "2024-03-20 10:53:29",
+      "end": "2024-03-20 11:04:39",
+      "rows": 671,
+      "transition_code": 0.0,
+      "duration_min": 11.166666666666666,
+      "transition": "B->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 17,
+      "start": "2024-03-20 11:05:51",
+      "end": "2024-03-20 11:32:57",
+      "rows": 1627,
+      "transition_code": 4.0,
+      "duration_min": 27.1,
+      "transition": "A->C",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 18,
+      "start": "2024-03-20 11:51:42",
+      "end": "2024-03-20 12:01:23",
+      "rows": 582,
+      "transition_code": 1.0,
+      "duration_min": 9.683333333333334,
+      "transition": "C->A",
+      "split": "train"
+    },
+    {
+      "changeover_session_id": 19,
+      "start": "2024-03-20 12:02:56",
+      "end": "2024-03-20 12:14:06",
+      "rows": 671,
+      "transition_code": 2.0,
+      "duration_min": 11.166666666666666,
+      "transition": "A->B",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 20,
+      "start": "2024-03-20 12:18:06",
+      "end": "2024-03-20 12:45:07",
+      "rows": 1622,
+      "transition_code": 5.0,
+      "duration_min": 27.016666666666666,
+      "transition": "B->C",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 21,
+      "start": "2024-03-20 14:04:02",
+      "end": "2024-03-20 14:17:47",
+      "rows": 826,
+      "transition_code": 3.0,
+      "duration_min": 13.75,
+      "transition": "C->B",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 22,
+      "start": "2024-03-22 07:32:42",
+      "end": "2024-03-22 07:41:33",
+      "rows": 532,
+      "transition_code": 0.0,
+      "duration_min": 8.85,
+      "transition": "B->A",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 23,
+      "start": "2024-03-22 07:42:50",
+      "end": "2024-03-22 08:09:02",
+      "rows": 1573,
+      "transition_code": 4.0,
+      "duration_min": 26.2,
+      "transition": "A->C",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 24,
+      "start": "2024-03-22 08:33:08",
+      "end": "2024-03-22 08:44:38",
+      "rows": 691,
+      "transition_code": 1.0,
+      "duration_min": 11.5,
+      "transition": "C->A",
+      "split": "validation"
+    },
+    {
+      "changeover_session_id": 25,
+      "start": "2024-03-22 08:45:57",
+      "end": "2024-03-22 08:58:31",
+      "rows": 755,
+      "transition_code": 2.0,
+      "duration_min": 12.566666666666666,
+      "transition": "A->B",
+      "split": "test"
+    },
+    {
+      "changeover_session_id": 26,
+      "start": "2024-03-22 09:02:30",
+      "end": "2024-03-22 09:30:18",
+      "rows": 1669,
+      "transition_code": 5.0,
+      "duration_min": 27.8,
+      "transition": "B->C",
+      "split": "test"
+    },
+    {
+      "changeover_session_id": 27,
+      "start": "2024-03-22 09:53:20",
+      "end": "2024-03-22 10:08:37",
+      "rows": 918,
+      "transition_code": 3.0,
+      "duration_min": 15.283333333333333,
+      "transition": "C->B",
+      "split": "test"
+    },
+    {
+      "changeover_session_id": 28,
+      "start": "2024-03-22 10:12:37",
+      "end": "2024-03-22 10:22:47",
+      "rows": 611,
+      "transition_code": 0.0,
+      "duration_min": 10.166666666666666,
+      "transition": "B->A",
+      "split": "test"
+    },
+    {
+      "changeover_session_id": 29,
+      "start": "2024-03-22 10:24:06",
+      "end": "2024-03-22 10:49:38",
+      "rows": 1533,
+      "transition_code": 4.0,
+      "duration_min": 25.533333333333335,
+      "transition": "A->C",
+      "split": "test"
+    },
+    {
+      "changeover_session_id": 30,
+      "start": "2024-03-22 11:10:38",
+      "end": "2024-03-22 11:21:23",
+      "rows": 646,
+      "transition_code": 1.0,
+      "duration_min": 10.75,
+      "transition": "C->A",
+      "split": "test"
+    }
+  ],
+  "warning": "Rows within a session are temporally dependent. Evaluation must be session-level, never a random row split.",
+  "input": "data/dataforNewVersion/cnc_changeover.csv",
+  "output": "data/dataforNewVersion/cnc_changeover_remaining_time_target.csv"
+}

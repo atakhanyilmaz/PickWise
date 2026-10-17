@@ -1,0 +1,57 @@
+{
+  "input_rows": 4543,
+  "output_rows": 3840,
+  "removed_rows": 703,
+  "removed_row_reasons": {
+    "invalid_timestamp": 0,
+    "non_positive_elapsed_time": 9,
+    "invalid_or_missing_span": 1,
+    "span_elapsed_mismatch_over_tolerance": 693
+  },
+  "target": "target_elapsed_time",
+  "target_formula": "(Complete Timestamp - Start Timestamp).total_seconds() / 60",
+  "target_unit": "minute",
+  "span_agreement_tolerance_min": 1.0,
+  "removed_columns": [
+    "Rework",
+    "Start Timestamp",
+    "Complete Timestamp",
+    "Span"
+  ],
+  "removed_column_descriptions": {
+    "Rework": "Source rework flag; 32 observed Y values and no observed N values.",
+    "Start Timestamp": "Observed report interval start used to derive the target.",
+    "Complete Timestamp": "Observed report interval end used to derive the target.",
+    "Span": "Source HHH:MM duration representation used only as a consistency check."
+  },
+  "remaining_columns": [
+    "Case ID",
+    "Activity",
+    "Resource",
+    "Work Order  Qty",
+    "Part Desc.",
+    "Worker ID",
+    "Report Type",
+    "Qty Completed",
+    "Qty Rejected",
+    "Qty for MRB",
+    "target_elapsed_time"
+  ],
+  "approved_model_feature_candidates": [
+    "Part Desc.",
+    "Work Order  Qty",
+    "Activity"
+  ],
+  "conditional_model_feature_candidates": [
+    "Resource (only when assigned or known before prediction)"
+  ],
+  "identifier_or_audit_columns_not_for_model_input": [
+    "source_row_number",
+    "Case ID",
+    "review_status",
+    "review_issues"
+  ],
+  "warning": "This target is observed elapsed report time, not verified machine processing time. Report Type S/D/B and row aggregation semantics remain unresolved.",
+  "input": "data/dataforNewVersion/production_analysis.csv",
+  "output": "data/dataforNewVersion/production_analysis_target_ready.csv"
+}
