@@ -41,6 +41,22 @@ Doğrulamada global medyan daha iyi:
 Final test başarısı ölçülmedi, ürün akışına bağlanmadı. Bu küçük deney tüm
 olası modellerin başarısız olacağını kanıtlamaz.
 
+Sonraki turda medyan regresyonu, CatBoost ve Gradient Boosting de çalıştırıldı.
+Toplam sürede medyan yine en iyi; geçişte medyan regresyonunun yaklaşık
+41 saniyelik farkı anlamlı kazanç kanıtı değil.
+[Yeni modellerin karşılaştırması](docs/regressor-comparison-results.md).
+
+Modeller yerelde diske kaydediliyor: [kayıt ve yükleme kararı](docs/decisions/012-persisted-evaluation-and-full-refit.md).
+`results/saved_models*/` dizinleri ve model ağırlıkları Git dışındadır; Yunus
+deney kodunu ayrı `.venv-tabpfn` ortamında çalıştırarak bunları yeniden üretebilir.
+Production Analysis CSV'sindeki tüm işlerle fit edilmiş sürümler ile yalnız
+eğitim bölümünü gören değerlendirme sürümleri ayrıdır. Tam veri refit'i
+bağımsız başarı sonucu değildir. Ana uygulamaya otomatik bağlanmadı.
+
+```sh
+.venv-tabpfn/bin/python -m experiments.tabpfn.compare_regressors
+```
+
 ## Dosyalar
 
 - `learnability.py`: iki görevin veri üretimi, medyan/ExtraTrees/TabPFN ve

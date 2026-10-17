@@ -1,6 +1,7 @@
 """Reusable Streamlit building blocks. Pages compose these; no scheduling logic lives here."""
 
 from datetime import date, datetime, time, timedelta
+from math import isfinite
 
 import altair as alt
 import pandas as pd
@@ -222,11 +223,27 @@ def job_from_route(frame, *, name, base, machines, job_id):
     original = base.operations if base else []
     for index, row in enumerate(frame.to_dict("records"), start=1):
         label = "" if pd.isna(row.get("Operasyon")) else str(row["Operasyon"]).strip()
-        times = {
-            m.machine_id: int(row[m.name])
-            for m in machines
-            if not pd.isna(row.get(m.name))
-        }
+        times = {}
+        for machine in machines:
+            value = row.get(machine.name)
+            if pd.isna(value):
+                continue
+            try:
+                numeric = float(value)
+                valid = (
+                    not isinstance(value, bool)
+                    and isfinite(numeric)
+                    and numeric > 0
+                    and numeric.is_integer()
+                )
+            except (TypeError, ValueError, OverflowError):
+                valid = False
+            if not valid:
+                problems.append(
+                    f"{index}. satır: {machine.name} süresi pozitif tam sayı dakika olmalı."
+                )
+                continue
+            times[machine.machine_id] = int(numeric)
         if not label and not times:
             continue
         if not label:

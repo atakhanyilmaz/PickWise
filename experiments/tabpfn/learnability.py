@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 EXPERIMENT = Path(__file__).resolve().parent
 
 
-def datasets(raw, manifest):
+def target_tables(raw, manifest):
     report, cases, pairs = analyze(raw, manifest)
     grouped = raw.groupby("Case ID", sort=False)
     if (
@@ -46,7 +46,6 @@ def datasets(raw, manifest):
     )
     gaps["part"] = gaps.case.map(part)
     gaps["quantity"] = gaps.case.map(qty)
-    # No test outcomes are used for fitting, tuning or model scoring.
     outputs = {}
     for name, frame, features, category, median_keys in (
         ("total_case_span", total, ["part", "quantity"], ["part"], ["part"]),
@@ -58,6 +57,15 @@ def datasets(raw, manifest):
             ["from", "to"],
         ),
     ):
+        outputs[name] = (frame, features, category, median_keys)
+    return outputs, report, cases
+
+
+def datasets(raw, manifest):
+    # No test outcomes are used for fitting, tuning or model scoring.
+    tables, report, cases = target_tables(raw, manifest)
+    outputs = {}
+    for name, (frame, features, category, median_keys) in tables.items():
         train = frame[frame.split.eq("train")].copy()
         valid = frame[frame.split.eq("validation")].copy()
         if train.empty or valid.empty:

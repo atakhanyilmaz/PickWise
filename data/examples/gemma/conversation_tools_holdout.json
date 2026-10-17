@@ -1,0 +1,6 @@
+[
+  {"id":"capacity_before_accepting","text":"Bir müşteriden daha iş almayı düşünüyorum; önce atölyede kaç işimiz kaldığını öğrenmek istiyorum.","initial_state":"inspection","final_state":"inspection","tool":"inspect_plan","answers":[],"expected_times":[],"deadline":null,"due_date":null},
+  {"id":"spoken_duration","text":"Yeni sipariş Torna 2 üzerinde delme.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["Süresi iki saat olacak"],"initial_pending_kind":"duration","expected_times":[{"200":120}],"deadline":null,"due_date":null},
+  {"id":"spoken_machine","text":"Yeni sipariş: torna üzerinde 18 dakika tornalama.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["Bu işi Torna 1 üzerinde yapacağız"],"initial_pending_kind":"machine","expected_times":[{"100":18}],"deadline":null,"due_date":null},
+  {"id":"switch_to_inspection","text":"Yeni sipariş Torna 2 üzerinde delme.","initial_state":"clarification","final_state":"inspection","tool":"inspect_plan","answers":["Süreyi sonra vereyim, önce mevcut planı gösterir misin?"],"initial_pending_kind":"duration","expected_times":[],"deadline":null,"due_date":null}
+]
