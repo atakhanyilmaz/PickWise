@@ -206,4 +206,15 @@ onaylı hedef ve veri kümesini bekler.
 mevcut senaryo ve sonuç modellerini `core.plan_contract.StoredPlanVersion`
 içinde birleştirir. Onay denetim bilgileri ve önceki sürüm kimliği korunur;
 içe aktarılan çizelge yeniden doğrulanır. `PlanRepository` tipli arayüzdür;
-SQLite uygulaması ve atomik sürüm çakışması kontrolü henüz bağlanmadı.
+SQLite uygulaması `core.sqlite_repository.SQLitePlanRepository` içindedir.
+Kayıt/yükleme doğrulaması, atomik sürüm kontrolü ve eski sürümün korunması
+çalışır; UI'nin ayrı plan onayıyla bağlaması gerekir. Kullanım ve CLI
+komutları yukarıdaki sözleşme dokümanındadır.
+
+## CNC veri kontrolü
+
+[CNC hedef tablosunun kontrol raporu](docs/cnc-data-audit.md):
+`ml_experiments.cnc_audit` belirtilen Git commit'indeki ham ve hedef CSV'leri
+değiştirmeden karşılaştırır. Oturum/bölme, süre hesabı, sensörlerin korunması
+ve eksik veri bayrakları kontrol edilir. Bu kalan süre deneyi;
+planlamaya bağlı toplam hazırlık tahmini veya fiziksel anlam onayı değildir.

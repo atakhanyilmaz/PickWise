@@ -1,0 +1,98 @@
+{
+  "method": "dataset_specific_missing_value_strategy",
+  "datasets": {
+    "production_analysis": {
+      "input_rows": 4543,
+      "columns": [
+        {
+          "column": "Rework",
+          "dtype": "object",
+          "missing": 4511,
+          "missing_fraction": 0.9929561963460268,
+          "method": "preserved_missing",
+          "fill_value": null,
+          "imputed": 0,
+          "preserved_missing": 4511,
+          "warning": "Only 32 rows are explicitly Y and there are no observed N values; mode fill would label almost every row as rework."
+        }
+      ],
+      "imputed_cells": 0,
+      "output": "production_analysis_imputed_review.csv"
+    },
+    "cnc_changeovers": {
+      "input_rows": 52026,
+      "columns": [
+        {
+          "column": "Line_Content",
+          "dtype": "object",
+          "missing": 51603,
+          "missing_fraction": 0.9918694498904393,
+          "method": "preserved_missing",
+          "fill_value": null,
+          "imputed": 0,
+          "preserved_missing": 51603,
+          "warning": "No value means no NC-code line is reported; preserve it instead of inventing command text."
+        },
+        {
+          "column": "Tool_ID",
+          "dtype": "object",
+          "missing": 11255,
+          "missing_fraction": 0.21633414062199668,
+          "method": "structural_missing_sentinel",
+          "fill_value": "__NO_TOOL_IN_SPINDLE__",
+          "indicator_column": "Tool_ID__was_missing",
+          "imputed": 11255,
+          "warning": "Sentinel represents an unreported/inactive machine state, not a measured value."
+        },
+        {
+          "column": "Tool_ID_Magazine_Place_49",
+          "dtype": "object",
+          "missing": 1694,
+          "missing_fraction": 0.03256064275554531,
+          "method": "dropped_machine_specific_magazine_field",
+          "imputed": 0,
+          "warning": "Removed instead of inventing a magazine number, position, or tool assignment."
+        },
+        {
+          "column": "Magazine_9999_number_Place_1",
+          "dtype": "float64",
+          "missing": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "method": "dropped_machine_specific_magazine_field",
+          "imputed": 0,
+          "warning": "Removed instead of inventing a magazine number, position, or tool assignment."
+        },
+        {
+          "column": "Magazine_9999_position_Place_1",
+          "dtype": "float64",
+          "missing": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "method": "dropped_machine_specific_magazine_field",
+          "imputed": 0,
+          "warning": "Removed instead of inventing a magazine number, position, or tool assignment."
+        },
+        {
+          "column": "Tool_ID_Magazine_9999_Place_1",
+          "dtype": "object",
+          "missing": 7555,
+          "missing_fraction": 0.1452158536116557,
+          "method": "dropped_machine_specific_magazine_field",
+          "imputed": 0,
+          "warning": "Removed instead of inventing a magazine number, position, or tool assignment."
+        }
+      ],
+      "imputed_cells": 11255,
+      "time_series": {
+        "valid_timestamps": 52026,
+        "nominal_interval_seconds": 1.0,
+        "mean_nominal_interval_seconds": 1.0,
+        "non_nominal_intervals": 6,
+        "gap_file": "cnc_time_gap_candidates.csv",
+        "note": "No timestamps were invalid or missing. Six long intervals are retained as observed; only the next nominal sample time is shown for context."
+      },
+      "output": "cnc_changeover_imputed_review.csv"
+    }
+  },
+  "audit_file": "reports/data_preparation/intermediate/imputation_audit.csv",
+  "scope": "Only source columns with missing values are imputed. Review metadata and derived columns are preserved. Raw and original review copies are unchanged."
+}

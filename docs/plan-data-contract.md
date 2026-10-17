@@ -5,10 +5,12 @@ Bu sözleşme gerçek veri beklemeden kullanılabilir. Planlama nesneleri
 kayıt zarfı ve depo arayüzü `core/plan_contract.py` içindedir.
 Bunları import edin; ikinci bir Machine/Job/Operation modeli oluşturmayın.
 
-**Mevcut:** Pydantic doğrulaması, bağımsız çizelge kontrolü ve tipli depo arayüzü.
-**Yunus'un uygulayacağı:** SQLite tabloları, transaction, kayıt/yükleme,
-sürüm çakışması kontrolü. `PlanRepository` yalnız bir Python Protocol'dür;
-çalışan veritabanı servisi değildir. JSON Schema çapraz alan ve çizelge
+**Mevcut:** Pydantic doğrulaması, bağımsız çizelge kontrolü, tipli depo arayüzü
+ve `core.sqlite_repository.SQLitePlanRepository` uygulaması. SQLite şeması
+Yunus'un `database/schema.sql` dosyasından kullanılır. `PlanRepository` yalnız
+bir Python Protocol'dür; somut sınıf SQLite işlemlerini yürütür.
+UI'nin ayrı plan onay eylemini bu sınıfa bağlaması gerekir.
+JSON Schema çapraz alan ve çizelge
 doğrulayıcılarını çalıştırmaz; kayıt/yüklemede Pydantic doğrulaması zorunludur.
 
 ## Alanların anlamı
@@ -168,5 +170,52 @@ Bu sözleşme TabPFN modelini veya veri adaptörünü uygulamaz.
   aktif sürüm olamamalı.
 - Simülasyon ve iptal güncel planı değiştirmemeli.
 
-Şu anda bu maddelerin SQLite üzerinde sağlandığı iddia edilmez; depo
-uygulaması teslim edildiğinde entegrasyon testleriyle kontrol edilecektir.
+Bu maddeler `tests/test_sqlite_repository.py` içinde gerçek geçici SQLite
+dosyalarıyla kontrol edilir; iki ayrı bağlantı yarışması ve işlem sonundaki
+hata sonrası rollback dahildir. UI üzerinden gerçek insan onayı test edilmedi.
+
+## Somut bağlantı
+
+```python
+from core.sqlite_repository import SQLitePlanRepository
+
+repository = SQLitePlanRepository("database/local/workshop.sqlite3")
+repository.initialize()
+# Yalnız kullanıcı sonucu ayrıca seçip kaydetmeyi onayladıktan sonra:
+repository.save_approved_version(record, expected_current_version_id=None)
+current = repository.load_current(record.plan_id)
+baseline = current.snapshot  # simulate_order / Gemma servislerinin mevcut girdisi
+```
+
+İlk kayıtta expected ve parent `None`; sonraki kayıtta ikisi de yüklenen
+güncel snapshot'ın `version_id` değeridir. `PlanVersionConflict` durumunda
+planı tekrar yükleyip yeni simülasyon/insan onayı gerekir; kör tekrar kayıt yok.
+`record` yerine başarısız `SimulationResult` veya onaylanmamış taslak verilmez.
+
+Kayıt ve yüklemede bütün Pydantic/çizelge doğrulaması tekrar çalışır.
+JSON ile tüm ilişkisel satırlar ve sıraları karşılaştırılır; uyuşmazlık
+`PlanStorageError` üretir. Her bağlantıda foreign key kontrolü açıktır.
+Kayıt `BEGIN IMMEDIATE` transaction kullanır; hata halinde rollback yapılır.
+SQLite kilit bekleme süresi 5 saniyedir; kilit/disk/SQL hataları çağırana döner,
+otomatik onay veya tekrar kayıt yapılmaz.
+
+`initialize()` boş dosyaya şemayı kurar, mevcut tabloları silmez. Otomatik
+şema migration desteği yoktur. Yeni şemada JSON `version_id` alanının eksik
+olması SQL'de reddedilir; daha eski mevcut DB'ye bu CHECK kendiliğinden
+eklenmez, fakat uygulama katmanı her durumda tam doğrulama yapar.
+
+Elle CLI kullanımı (save girdisi tam `StoredPlanVersion` JSON dosyasıdır):
+
+```sh
+.venv/bin/python -m benchmarks.plan_storage_cli --db database/local/workshop.sqlite3 init
+.venv/bin/python -m benchmarks.plan_storage_cli --db database/local/workshop.sqlite3 save \
+  --record YOUR_APPROVED_RECORD.json --first-version --confirm-save
+.venv/bin/python -m benchmarks.plan_storage_cli --db database/local/workshop.sqlite3 load \
+  --plan-id YOUR_PLAN_ID --snapshot-only --output YOUR_BASELINE.json
+```
+
+Sonraki kayıtta `--first-version` yerine `--expected-current VERSION_ID`
+kullanılır. `load --version VERSION_ID` eski sürümü seçer; `--snapshot-only`
+çıktısı mevcut Gemma CLI'nin `--baseline` girdisiyle uyumludur. Export mevcut
+dosyanın üzerine yazmaz. `init` açıkça çağrılmadan kayıt/yükleme yeni DB
+oluşturmaz. Yerel SQLite dosyaları/journalleri Git dışında tutulur.

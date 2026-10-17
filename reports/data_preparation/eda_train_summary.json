@@ -1,0 +1,477 @@
+{
+  "metadata": {
+    "contract_version": 1,
+    "inputs": {
+      "production_analysis": {
+        "path": "data/dataforNewVersion/production_analysis.csv",
+        "source_url": "https://figshare.com/articles/dataset/Production_Analysis_with_Process_Mining_Technology/12697997",
+        "source_version": "2014 dataset record; local CSV checksum tracked in reports",
+        "sha256": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6"
+      },
+      "cnc_changeovers": {
+        "path": "data/dataforNewVersion/cnc_changeove.csv",
+        "source_url": "https://zenodo.org/records/15735480",
+        "source_version": "1.0.1",
+        "sha256": "d7227badb6ae1a27339622b337207cc342f75acc5baa18538352228fd52be580"
+      }
+    }
+  },
+  "datasets": {
+    "production_analysis": {
+      "train_rows": 1029,
+      "interpretation": "Observed timestamp elapsed time is descriptive only; not yet an approved processing-time target.",
+      "elapsed_minutes": {
+        "count": 1029,
+        "median": 77.0,
+        "p90": 377.4000000000001,
+        "p95": 495.1999999999989,
+        "max": 1212.0
+      },
+      "outlier_flags": {
+        "iqr_fence_count": 90,
+        "robust_z_abs_gt_3_5_count": 147,
+        "removed": 0
+      },
+      "numeric_relationships": {
+        "spearman_order_qty_vs_observed_elapsed": 0.0590115777999846
+      },
+      "case_descriptives": {
+        "case_count": 72,
+        "median_report_rows": 13.0,
+        "median_case_span_hours": 247.39166666666665,
+        "max_case_span_hours": 1104.0
+      },
+      "by_report_type": [
+        {
+          "Report Type": "B",
+          "count": 5,
+          "median": 105.0,
+          "mean": 168.6,
+          "max": 368.0
+        },
+        {
+          "Report Type": "D",
+          "count": 854,
+          "median": 75.0,
+          "mean": 140.66978922716626,
+          "max": 1212.0
+        },
+        {
+          "Report Type": "S",
+          "count": 170,
+          "median": 137.5,
+          "mean": 188.43529411764706,
+          "max": 637.0
+        }
+      ],
+      "by_part_top15": [
+        {
+          "Part Desc.": "Spur Gear",
+          "count": 279,
+          "median": 87.0
+        },
+        {
+          "Part Desc.": "Ballnut",
+          "count": 240,
+          "median": 75.0
+        },
+        {
+          "Part Desc.": "Cable Head",
+          "count": 129,
+          "median": 86.0
+        },
+        {
+          "Part Desc.": "Flange",
+          "count": 49,
+          "median": 89.0
+        },
+        {
+          "Part Desc.": "Bearing",
+          "count": 37,
+          "median": 75.0
+        },
+        {
+          "Part Desc.": "Electrical Contact",
+          "count": 35,
+          "median": 172.0
+        },
+        {
+          "Part Desc.": "Socket",
+          "count": 33,
+          "median": 181.0
+        },
+        {
+          "Part Desc.": "Punch Holder",
+          "count": 29,
+          "median": 75.0
+        },
+        {
+          "Part Desc.": "Locknut",
+          "count": 23,
+          "median": 81.0
+        },
+        {
+          "Part Desc.": "Compound Dies",
+          "count": 22,
+          "median": 68.5
+        },
+        {
+          "Part Desc.": "Housing",
+          "count": 20,
+          "median": 75.0
+        },
+        {
+          "Part Desc.": "Fastener",
+          "count": 20,
+          "median": 120.0
+        },
+        {
+          "Part Desc.": "O-Ring",
+          "count": 16,
+          "median": 72.0
+        },
+        {
+          "Part Desc.": "Cutting Wheel",
+          "count": 14,
+          "median": 75.0
+        },
+        {
+          "Part Desc.": "Barrel",
+          "count": 14,
+          "median": 205.0
+        }
+      ],
+      "leakage_fields": [
+        "Complete Timestamp",
+        "Span",
+        "Qty Completed",
+        "Qty Rejected",
+        "Qty for MRB",
+        "Rework",
+        "Worker ID"
+      ],
+      "unseen_category_risk": {
+        "Activity": [
+          "Change Version - Machine 22",
+          "Final Inspection Q.C.",
+          "Flat Grinding - Machine 11",
+          "Flat Grinding - Machine 26",
+          "Grinding Rework",
+          "Grinding Rework - Machine 27",
+          "Lapping - Machine 1",
+          "Laser Marking - Machine 7",
+          "Milling - Machine 10",
+          "Milling - Machine 16",
+          "Nitration Q.C.",
+          "Packing",
+          "Round Grinding - Machine 12",
+          "Round Grinding - Machine 2",
+          "Round Grinding - Machine 3",
+          "Round Grinding - Manual",
+          "Round Grinding - Q.C.",
+          "Stress Relief",
+          "Turn & Mill. & Screw Assem - Machine 9",
+          "Turning & Milling - Machine 10",
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 6",
+          "Turning & Milling - Machine 8",
+          "Turning & Milling - Machine 9",
+          "Turning & Milling Q.C.",
+          "Turning - Machine 8",
+          "Turning - Machine 9",
+          "Turning Q.C.",
+          "Turning Rework - Machine 21",
+          "Wire Cut - Machine 13"
+        ],
+        "Resource": [
+          "Machine 1 - Lapping",
+          "Machine 10 - Grinding",
+          "Machine 11 - Grinding",
+          "Machine 12 - Grinding",
+          "Machine 15 - Turning",
+          "Machine 16 - Milling",
+          "Machine 2 - Round Grinding",
+          "Machine 21 - Turning",
+          "Machine 22 - Milling",
+          "Machine 26 - Flat Grinding",
+          "Machine 27 - Grinding",
+          "Machine 3 - Round Grinding",
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 7- Laser Marking",
+          "Machine 8 - Turning & Milling",
+          "Machine 9 - Turning & Milling",
+          "Oven",
+          "Packing",
+          "Quality Check 1",
+          "Wire Cut - Machine 13"
+        ],
+        "Part Desc.": [
+          "Ballnut",
+          "Barrel",
+          "Bearing",
+          "Blade",
+          "Bushing",
+          "Cable Head",
+          "Compound Dies",
+          "Cutting Wheel",
+          "Disc",
+          "Electrical Contact",
+          "Fastener",
+          "Flange",
+          "Gauge",
+          "Housing",
+          "Locknut",
+          "O-Ring",
+          "Punch Holder",
+          "Seal Head",
+          "Slip Ring Adapter",
+          "Socket",
+          "Spinner",
+          "Spring",
+          "Spur Gear",
+          "Tube"
+        ]
+      }
+    },
+    "cnc_changeovers": {
+      "train_rows": 33441,
+      "train_cycles": 18,
+      "label_03_counts": {
+        "0.0": 24309,
+        "1.0": 9132
+      },
+      "label_10_counts": {
+        "26.0": 9618,
+        "40.0": 9002,
+        "41.0": 2791,
+        "24.0": 1836,
+        "13.0": 1335,
+        "20.0": 1240,
+        "3.0": 1029,
+        "31.0": 830,
+        "42.0": 763,
+        "8.0": 681,
+        "22.0": 608,
+        "15.0": 593,
+        "18.0": 526,
+        "4.0": 506,
+        "6.0": 441,
+        "25.0": 405,
+        "2.0": 338,
+        "7.0": 270,
+        "5.0": 256,
+        "33.0": 74,
+        "14.0": 50,
+        "16.0": 50,
+        "17.0": 48,
+        "19.0": 46,
+        "43.0": 20,
+        "12.0": 18,
+        "27.0": 18,
+        "23.0": 17,
+        "1.0": 17,
+        "21.0": 15
+      },
+      "sensor_missing_fraction_top20": {
+        "Line_Content": 0.9923746299452768,
+        "Magazine_9999_number_Place_1": 0.22592027750366317,
+        "Magazine_9999_position_Place_1": 0.22592027750366317,
+        "Tool_ID_Magazine_9999_Place_1": 0.22592027750366317,
+        "Tool_ID": 0.2229598397177118,
+        "Tool_ID_Magazine_Place_49": 0.05065637989294579,
+        "LED_Chip_flushing": 0.0,
+        "LED_Coolant": 0.0,
+        "Rapid_traverse_button": 0.0,
+        "Door_open": 0.0,
+        "X-axis_feed": 0.0,
+        "X-axis_position_MCS": 0.0,
+        "X-axis_position_WCS": 0.0,
+        "X-axis_position_error": 0.0,
+        "Y-axis_feed": 0.0,
+        "Y-axis_position_MCS": 0.0,
+        "Y-axis_position_WCS": 0.0,
+        "Y-axis_position_error": 0.0,
+        "Z-axis_feed": 0.0,
+        "Z-axis_position_MCS": 0.0
+      },
+      "constant_or_zero_variance_sensors": [],
+      "high_pairwise_correlations_top30": [
+        {
+          "feature_a": "Spindle_speed",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.9998955871633625
+        },
+        {
+          "feature_a": "Spindle_position_WCS",
+          "feature_b": "Spindle_position_MCS",
+          "abs_correlation": 0.9996714136606775
+        },
+        {
+          "feature_a": "Spindle_smoothed_speed",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.9985734142418802
+        },
+        {
+          "feature_a": "Spindle_smoothed_speed",
+          "feature_b": "Spindle_speed",
+          "abs_correlation": 0.9984865917500536
+        },
+        {
+          "feature_a": "Magazine_number_Place_13",
+          "feature_b": "Magazine_number_Place_17",
+          "abs_correlation": 0.9476273087003978
+        },
+        {
+          "feature_a": "Z-axis_position_MCS",
+          "feature_b": "Z-axis_position_WCS",
+          "abs_correlation": 0.9399440227921056
+        },
+        {
+          "feature_a": "Magazine_9999_number_Place_1",
+          "feature_b": "Total_running_time_NC_program",
+          "abs_correlation": 0.8574136304306381
+        },
+        {
+          "feature_a": "X-axis_position_MCS",
+          "feature_b": "X-axis_position_WCS",
+          "abs_correlation": 0.7864913145549551
+        },
+        {
+          "feature_a": "Magazine_number_Place_17",
+          "feature_b": "Total_running_time_NC_program",
+          "abs_correlation": 0.771618350140252
+        },
+        {
+          "feature_a": "Program_line_number",
+          "feature_b": "Spindle_speed",
+          "abs_correlation": 0.7685007397610244
+        },
+        {
+          "feature_a": "Program_line_number",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.76832015663194
+        },
+        {
+          "feature_a": "Program_line_number",
+          "feature_b": "Spindle_smoothed_speed",
+          "abs_correlation": 0.767767428245622
+        },
+        {
+          "feature_a": "Net_running_time_program",
+          "feature_b": "B_Axis_smoothed_torque",
+          "abs_correlation": 0.7606067404997703
+        },
+        {
+          "feature_a": "Z-axis_position_MCS",
+          "feature_b": "Program_line_number",
+          "abs_correlation": 0.7604156865564397
+        },
+        {
+          "feature_a": "Net_running_time_program",
+          "feature_b": "Program_line_number",
+          "abs_correlation": 0.75832465702425
+        },
+        {
+          "feature_a": "Z-axis_position_WCS",
+          "feature_b": "Program_line_number",
+          "abs_correlation": 0.7516133109429165
+        },
+        {
+          "feature_a": "Magazine_number_Place_13",
+          "feature_b": "Total_running_time_NC_program",
+          "abs_correlation": 0.7498496326847454
+        },
+        {
+          "feature_a": "Z-axis_position_MCS",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.7497025754161761
+        },
+        {
+          "feature_a": "Z-axis_position_MCS",
+          "feature_b": "Spindle_speed",
+          "abs_correlation": 0.7496851056073053
+        },
+        {
+          "feature_a": "X-axis_position_WCS",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.7478242070593983
+        },
+        {
+          "feature_a": "X-axis_position_WCS",
+          "feature_b": "Spindle_speed",
+          "abs_correlation": 0.7477966108036744
+        },
+        {
+          "feature_a": "Z-axis_position_MCS",
+          "feature_b": "Spindle_smoothed_speed",
+          "abs_correlation": 0.7468927933551642
+        },
+        {
+          "feature_a": "X-axis_position_WCS",
+          "feature_b": "Spindle_smoothed_speed",
+          "abs_correlation": 0.7461777303919006
+        },
+        {
+          "feature_a": "Z-axis_position_WCS",
+          "feature_b": "Spindle_angular_velocity",
+          "abs_correlation": 0.7380040404027071
+        },
+        {
+          "feature_a": "Z-axis_position_WCS",
+          "feature_b": "Spindle_speed",
+          "abs_correlation": 0.7379847094289741
+        },
+        {
+          "feature_a": "Z-axis_position_WCS",
+          "feature_b": "Spindle_smoothed_speed",
+          "abs_correlation": 0.7358353961014008
+        },
+        {
+          "feature_a": "Net_running_time_program",
+          "feature_b": "Cycle_time_program",
+          "abs_correlation": 0.7340126517710064
+        },
+        {
+          "feature_a": "Tool_magazine_feed",
+          "feature_b": "ToolChange_smoothed_speed_value",
+          "abs_correlation": 0.720376245232946
+        },
+        {
+          "feature_a": "Z-axis_position_WCS",
+          "feature_b": "X-axis_position_WCS",
+          "abs_correlation": 0.6989638120208101
+        },
+        {
+          "feature_a": "Magazine_number_Place_17",
+          "feature_b": "Magazine_9999_number_Place_1",
+          "abs_correlation": 0.6557524611227785
+        }
+      ],
+      "contiguous_phase_run_rows_by_label_03": [
+        {
+          "Label_03": 0.0,
+          "count": 18,
+          "median": 1034.0,
+          "mean": 1350.5,
+          "max": 4011
+        },
+        {
+          "Label_03": 1.0,
+          "count": 18,
+          "median": 237.0,
+          "mean": 507.3333333333333,
+          "max": 1601
+        }
+      ],
+      "train_cycle_row_count": {
+        "median": 1266.5,
+        "min": 656,
+        "max": 5612
+      },
+      "note": "Rows are temporally dependent. Row counts overstate independent sample size; validation/test were not used in feature summaries or plots."
+    }
+  }
+}
