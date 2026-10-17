@@ -256,61 +256,92 @@ class SQLitePlanRepository:
     def save_approved_version(
         self, record: StoredPlanVersion, *, expected_current_version_id: str | None
     ) -> None:
+        self.save_approved_versions(
+            [record],
+            expected_current_version_ids={record.plan_id: expected_current_version_id},
+        )
+
+    def _save_in_transaction(self, conn, record, expected_current_version_id):
+        row = conn.execute(
+            "SELECT current_version_id FROM plans WHERE plan_id=?",
+            (record.plan_id,),
+        ).fetchone()
+        current = row[0] if row is not None else None
+        if (
+            current != expected_current_version_id
+            or record.parent_version_id != current
+        ):
+            raise PlanVersionConflict(
+                "Plan changed or parent differs; reload before saving"
+            )
+        if conn.execute(
+            "SELECT 1 FROM plan_versions WHERE plan_id=? AND version_id=?",
+            (record.plan_id, record.snapshot.version_id),
+        ).fetchone():
+            raise PlanVersionConflict("Plan version already exists")
+        if row is None:
+            conn.execute("INSERT INTO plans(plan_id) VALUES (?)", (record.plan_id,))
+        conn.execute(
+            "INSERT INTO plan_versions(plan_id,version_id,parent_version_id,schema_version,approved_by,approved_at,snapshot_json) VALUES (?,?,?,?,?,?,?)",
+            (
+                record.plan_id,
+                record.snapshot.version_id,
+                record.parent_version_id,
+                record.schema_version,
+                record.approved_by,
+                record.approved_at.isoformat(),
+                record.snapshot.model_dump_json(),
+            ),
+        )
+        for table, values in _rows(record):
+            columns = ",".join(values)
+            placeholders = ",".join("?" for _ in values)
+            conn.execute(
+                f"INSERT INTO {table} ({columns}) VALUES ({placeholders})",
+                tuple(values.values()),
+            )
+        self._verify_relational(conn, record)
+        conn.execute(
+            "UPDATE plan_versions SET is_complete=1 WHERE plan_id=? AND version_id=?",
+            (record.plan_id, record.snapshot.version_id),
+        )
+        updated = conn.execute(
+            "UPDATE plans SET current_version_id=? WHERE plan_id=? AND current_version_id IS ?",
+            (
+                record.snapshot.version_id,
+                record.plan_id,
+                expected_current_version_id,
+            ),
+        )
+        if updated.rowcount != 1:
+            raise PlanVersionConflict("Current version changed")
+
+    def save_approved_versions(
+        self,
+        records: list[StoredPlanVersion],
+        *,
+        expected_current_version_ids: dict[str, str | None],
+    ) -> None:
+        """Append complete plan chains in one transaction.
+
+        Records for each plan must be in parent-first order. This method is used by
+        seed import so a database error cannot leave a partially imported chain.
+        """
+        if not records:
+            return
         # Revalidate mutated model instances as well as imported data.
-        record = StoredPlanVersion.model_validate_json(record.model_dump_json())
+        records = [
+            StoredPlanVersion.model_validate_json(record.model_dump_json())
+            for record in records
+        ]
+        record_plan_ids = {record.plan_id for record in records}
+        if record_plan_ids != set(expected_current_version_ids):
+            raise ValueError("Expected-current entries must match imported plans")
         with self._connection() as conn:
             conn.execute("BEGIN IMMEDIATE")
-            row = conn.execute(
-                "SELECT current_version_id FROM plans WHERE plan_id=?",
-                (record.plan_id,),
-            ).fetchone()
-            current = row[0] if row is not None else None
-            if (
-                current != expected_current_version_id
-                or record.parent_version_id != current
-            ):
-                raise PlanVersionConflict(
-                    "Plan changed or parent differs; reload before saving"
-                )
-            if conn.execute(
-                "SELECT 1 FROM plan_versions WHERE plan_id=? AND version_id=?",
-                (record.plan_id, record.snapshot.version_id),
-            ).fetchone():
-                raise PlanVersionConflict("Plan version already exists")
-            if row is None:
-                conn.execute("INSERT INTO plans(plan_id) VALUES (?)", (record.plan_id,))
-            conn.execute(
-                "INSERT INTO plan_versions(plan_id,version_id,parent_version_id,schema_version,approved_by,approved_at,snapshot_json) VALUES (?,?,?,?,?,?,?)",
-                (
-                    record.plan_id,
-                    record.snapshot.version_id,
-                    record.parent_version_id,
-                    record.schema_version,
-                    record.approved_by,
-                    record.approved_at.isoformat(),
-                    record.snapshot.model_dump_json(),
-                ),
-            )
-            for table, values in _rows(record):
-                columns = ",".join(values)
-                placeholders = ",".join("?" for _ in values)
-                conn.execute(
-                    f"INSERT INTO {table} ({columns}) VALUES ({placeholders})",
-                    tuple(values.values()),
-                )
-            self._verify_relational(conn, record)
-            conn.execute(
-                "UPDATE plan_versions SET is_complete=1 WHERE plan_id=? AND version_id=?",
-                (record.plan_id, record.snapshot.version_id),
-            )
-            updated = conn.execute(
-                "UPDATE plans SET current_version_id=? WHERE plan_id=? AND current_version_id IS ?",
-                (
-                    record.snapshot.version_id,
-                    record.plan_id,
-                    expected_current_version_id,
-                ),
-            )
-            if updated.rowcount != 1:
-                raise PlanVersionConflict("Current version changed")
+            current_by_plan = dict(expected_current_version_ids)
+            for record in records:
+                expected = current_by_plan[record.plan_id]
+                self._save_in_transaction(conn, record, expected)
+                current_by_plan[record.plan_id] = record.snapshot.version_id
             conn.commit()
