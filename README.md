@@ -465,6 +465,23 @@ out["__interrupt__"][0].value              # soru veya onay bekleyen taslak
 out = graph.invoke(Command(resume=True), config)  # onay
 ```
 
+## Başlangıç planı (gerçek kayıtlar)
+
+Arayüzün okuduğu `synthetic-workshop` planının `v1` sürümü Production Analysis
+2012 kayıtlarından üretilir: 10 iş emri, 11 tezgâh, süreler geçmiş medyan,
+rotalar kayıttan çıkarıldığı için `demo_assumption`
+([ADR 015](docs/decisions/015-initial-plan-from-production-analysis.md)).
+Seed'den yerel veritabanını kurmak için:
+
+```sh
+.venv/bin/python -m benchmarks.plan_storage_cli --db database/local/workshop.sqlite3 init
+.venv/bin/python -m benchmarks.plan_storage_cli --db database/local/workshop.sqlite3 import-seed --seed database/seed/seed.json --confirm-import
+```
+
+`v1`'i yeniden üretmek için `python -m core.retrospective_transform --record
+<dosya> --approved-by "<ad>"`, ardından `plan_storage_cli save --first-version
+--confirm-save` ve `publish-seed` kullanılır.
+
 ## Plan kayıt sözleşmesi
 
 

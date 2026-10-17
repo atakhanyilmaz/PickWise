@@ -17,20 +17,25 @@ from core.scenarios import SimulationResult
 from ui import components as ui
 from ui import pages
 
-DEFAULT_MODEL = (
-    "gemma4:e2b"  # the team's evaluated model; any installed Gemma tag can be picked
-)
-EXAMPLES = [
-    "Yeni sipariş: Torna 1 üzerinde 10 dakika tornalama. Mevcut bitişleri koru.",
-    "Yeni sipariş: Torna 2 üzerinde tornalama yapacağız.",
-    "Şu an kaç iş bekliyor?",
-]
+# The team's evaluated model; any installed Gemma tag can be picked.
+DEFAULT_MODEL = "gemma4:e2b"
+
 CONNECTION_ERRORS = {
     "Local Ollama request failed": "Ollama çalışmıyor. Terminalde `ollama serve` ile başlatın.",
     "Model is not installed": "Bu model kurulu değil. `ollama pull {model}` ile indirin.",
     "Cloud-backed models": "Bulut üzerinden çalışan modeller desteklenmez.",
     "not identified as Gemma": "Seçilen model Gemma değil.",
 }
+
+
+def examples(scenario):
+    """Sample requests naming the active plan's own machines (full name or 'M4' style id)."""
+    first, second = scenario.machines[0].name, scenario.machines[-1].name
+    return [
+        f"Yeni sipariş: {first} üzerinde 45 dakika işlem. Mevcut bitişleri koru.",
+        f"Yeni sipariş: {second} üzerinde işlem yapacağız.",
+        "Şu an kaç iş bekliyor?",
+    ]
 
 
 @st.cache_data(ttl=30, show_spinner=False)
@@ -208,7 +213,7 @@ def assistant_page():
     st.subheader("Sohbet")
     if not chat["messages"]:
         st.caption("Örnek talepler")
-        for example in EXAMPLES:
+        for example in examples(baseline.scenario):
             if st.button(
                 example,
                 key=f"example-{example}",

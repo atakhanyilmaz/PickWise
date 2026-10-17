@@ -110,6 +110,12 @@ def clock(minutes):
     return (t0 + timedelta(minutes=int(minutes))).strftime("%d.%m %H:%M")
 
 
+def short_clock(minutes):
+    """Time only on the plan's start day; date and time once the plan runs past midnight."""
+    full = clock(minutes)
+    return full[-5:] if full[:5] == clock(0)[:5] else full
+
+
 def metric_row(items):
     """items: list of (label, value, caption or None)."""
     for column, (label, value, caption) in zip(st.columns(len(items)), items):
@@ -180,9 +186,14 @@ def gantt(rows, machines, job_label, x_title, *, x_max=None, downtimes=()):
     st.altair_chart(chart, width="stretch", height=height + 90)
 
 
-def dispatch_board(statuses):
+def dispatch_board(statuses, per_row=4):
     """One card per machine: what it runs at the chosen moment and what comes next."""
-    for column, status in zip(st.columns(len(statuses)), statuses):
+    columns = [
+        column
+        for start in range(0, len(statuses), per_row)
+        for column in st.columns(per_row)
+    ]
+    for column, status in zip(columns, statuses):
         with column.container(border=True):
             st.markdown(f"**{status.machine_name}**")
             if status.current:
@@ -392,7 +403,7 @@ def comparison_metrics(comparison):
     columns = st.columns(4)
     columns[0].metric(
         "Tüm işler biter",
-        clock(after.makespan)[-5:],
+        short_clock(after.makespan),
         f"{after.makespan - before.makespan:+d} dk",
         delta_color="inverse",
         help=f"Önce {clock(before.makespan)}",

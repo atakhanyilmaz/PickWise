@@ -12,6 +12,7 @@ import pandas as pd
 import streamlit as st
 
 from benchmarks.workshop_order_demo import DemoInput
+from core import retrospective_transform as production
 from core.cpsat_solver import COMMIT, UPSTREAM, read_instance, solve
 from core.downtime import DowntimeRequest
 from core.pipeline import PipelineRequest, dispatch, run
@@ -96,7 +97,7 @@ def plan_page():
         [
             (
                 "Tüm işler biter",
-                ui.clock(metrics.makespan)[-5:],
+                ui.short_clock(metrics.makespan),
                 f"makespan {metrics.makespan} dk",
             ),
             (
@@ -177,14 +178,28 @@ def demo_drafts():
     return {
         "Demo sipariş": demo.new_order,
         "Alternatif tezgâhlı demo": demo.alternative_order,
-        "Boş rota": None,
     }
+
+
+@st.cache_resource(show_spinner=False)
+def production_drafts(version_id, _scenario):
+    """Next recorded work orders that run only on this plan version's machines."""
+    return {job.name: job for job in production.order_drafts(_scenario)}
+
+
+def order_drafts(snapshot):
+    """Order drafts that fit the active plan's machines; the first is the quick demo order."""
+    if snapshot.scenario.scenario_id.startswith(production.SCENARIO_ID):
+        drafts = production_drafts(snapshot.version_id, snapshot.scenario)
+    else:
+        drafts = demo_drafts()
+    return drafts | {"Boş rota": None}
 
 
 def route_page():
     snapshot, _, _ = current_plan()
     machines = snapshot.scenario.machines
-    drafts = demo_drafts()
+    drafts = order_drafts(snapshot)
 
     st.title("Rota onayı")
     st.caption(
@@ -193,7 +208,7 @@ def route_page():
     )
 
     choice = st.segmented_control(
-        "Taslak", list(drafts), default="Demo sipariş", required=True
+        "Taslak", list(drafts), default=next(iter(drafts)), required=True
     )
     base = drafts[choice]
     name_column, source_column = st.columns([3, 1], vertical_alignment="bottom")
@@ -338,7 +353,11 @@ def change_form(baseline):
         if kind == "Yeni sipariş":
             sources = (["Onaylı rota"] if approved else []) + ["Demo sipariş"]
             source = st.radio("Sipariş", sources, horizontal=True)
-            job = approved if source == "Onaylı rota" else demo_drafts()["Demo sipariş"]
+            job = (
+                approved
+                if source == "Onaylı rota"
+                else next(iter(order_drafts(baseline).values()))
+            )
             st.markdown(
                 f"**{job.name}** · " + " → ".join(op.name for op in job.operations)
             )

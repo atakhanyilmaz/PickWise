@@ -1,4 +1,1193 @@
 {
-  "plans": {},
+  "plans": {
+    "synthetic-workshop": {
+      "current_version_id": "v1",
+      "versions": {
+        "v1": {
+          "approved_at": "2026-10-18T02:04:46.155810+03:00",
+          "approved_by": "Nazlısu Başak",
+          "parent_version_id": null,
+          "plan_id": "synthetic-workshop",
+          "schema_version": 1,
+          "snapshot": {
+            "result": {
+              "best_bound": 3347.0,
+              "makespan": 3347,
+              "objective": "makespan_under_hard_deadlines",
+              "runtime_seconds": 0.002202,
+              "scenario_type": "workshop",
+              "schedule": [
+                {
+                  "end": 1428,
+                  "job": 0,
+                  "machine": 7,
+                  "operation": 0,
+                  "source_job_id": 47,
+                  "source_machine_id": 8,
+                  "source_operation_id": 1,
+                  "start": 538
+                },
+                {
+                  "end": 1488,
+                  "job": 0,
+                  "machine": 6,
+                  "operation": 1,
+                  "source_job_id": 47,
+                  "source_machine_id": 7,
+                  "source_operation_id": 2,
+                  "start": 1428
+                },
+                {
+                  "end": 1567,
+                  "job": 0,
+                  "machine": 8,
+                  "operation": 2,
+                  "source_job_id": 47,
+                  "source_machine_id": 11,
+                  "source_operation_id": 3,
+                  "start": 1488
+                },
+                {
+                  "end": 1667,
+                  "job": 0,
+                  "machine": 0,
+                  "operation": 3,
+                  "source_job_id": 47,
+                  "source_machine_id": 1,
+                  "source_operation_id": 4,
+                  "start": 1573
+                },
+                {
+                  "end": 2585,
+                  "job": 0,
+                  "machine": 1,
+                  "operation": 4,
+                  "source_job_id": 47,
+                  "source_machine_id": 2,
+                  "source_operation_id": 5,
+                  "start": 2079
+                },
+                {
+                  "end": 2551,
+                  "job": 1,
+                  "machine": 3,
+                  "operation": 0,
+                  "source_job_id": 115,
+                  "source_machine_id": 4,
+                  "source_operation_id": 1,
+                  "start": 1606
+                },
+                {
+                  "end": 2630,
+                  "job": 1,
+                  "machine": 8,
+                  "operation": 1,
+                  "source_job_id": 115,
+                  "source_machine_id": 11,
+                  "source_operation_id": 2,
+                  "start": 2551
+                },
+                {
+                  "end": 2724,
+                  "job": 1,
+                  "machine": 0,
+                  "operation": 2,
+                  "source_job_id": 115,
+                  "source_machine_id": 1,
+                  "source_operation_id": 3,
+                  "start": 2630
+                },
+                {
+                  "end": 3230,
+                  "job": 1,
+                  "machine": 1,
+                  "operation": 3,
+                  "source_job_id": 115,
+                  "source_machine_id": 2,
+                  "source_operation_id": 4,
+                  "start": 2724
+                },
+                {
+                  "end": 3328,
+                  "job": 1,
+                  "machine": 6,
+                  "operation": 4,
+                  "source_job_id": 115,
+                  "source_machine_id": 7,
+                  "source_operation_id": 5,
+                  "start": 3268
+                },
+                {
+                  "end": 661,
+                  "job": 2,
+                  "machine": 4,
+                  "operation": 0,
+                  "source_job_id": 121,
+                  "source_machine_id": 5,
+                  "source_operation_id": 1,
+                  "start": 0
+                },
+                {
+                  "end": 1606,
+                  "job": 2,
+                  "machine": 3,
+                  "operation": 1,
+                  "source_job_id": 121,
+                  "source_machine_id": 4,
+                  "source_operation_id": 2,
+                  "start": 661
+                },
+                {
+                  "end": 1666,
+                  "job": 2,
+                  "machine": 6,
+                  "operation": 2,
+                  "source_job_id": 121,
+                  "source_machine_id": 7,
+                  "source_operation_id": 3,
+                  "start": 1606
+                },
+                {
+                  "end": 1745,
+                  "job": 2,
+                  "machine": 8,
+                  "operation": 3,
+                  "source_job_id": 121,
+                  "source_machine_id": 11,
+                  "source_operation_id": 4,
+                  "start": 1666
+                },
+                {
+                  "end": 1839,
+                  "job": 2,
+                  "machine": 0,
+                  "operation": 4,
+                  "source_job_id": 121,
+                  "source_machine_id": 1,
+                  "source_operation_id": 5,
+                  "start": 1745
+                },
+                {
+                  "end": 2249,
+                  "job": 2,
+                  "machine": 2,
+                  "operation": 5,
+                  "source_job_id": 121,
+                  "source_machine_id": 3,
+                  "source_operation_id": 6,
+                  "start": 1839
+                },
+                {
+                  "end": 2343,
+                  "job": 2,
+                  "machine": 0,
+                  "operation": 6,
+                  "source_job_id": 121,
+                  "source_machine_id": 1,
+                  "source_operation_id": 7,
+                  "start": 2249
+                },
+                {
+                  "end": 2753,
+                  "job": 2,
+                  "machine": 2,
+                  "operation": 7,
+                  "source_job_id": 121,
+                  "source_machine_id": 3,
+                  "source_operation_id": 8,
+                  "start": 2343
+                },
+                {
+                  "end": 538,
+                  "job": 3,
+                  "machine": 7,
+                  "operation": 0,
+                  "source_job_id": 56,
+                  "source_machine_id": 8,
+                  "source_operation_id": 1,
+                  "start": 0
+                },
+                {
+                  "end": 632,
+                  "job": 3,
+                  "machine": 0,
+                  "operation": 1,
+                  "source_job_id": 56,
+                  "source_machine_id": 1,
+                  "source_operation_id": 2,
+                  "start": 538
+                },
+                {
+                  "end": 692,
+                  "job": 3,
+                  "machine": 6,
+                  "operation": 2,
+                  "source_job_id": 56,
+                  "source_machine_id": 7,
+                  "source_operation_id": 3,
+                  "start": 632
+                },
+                {
+                  "end": 3208,
+                  "job": 4,
+                  "machine": 7,
+                  "operation": 0,
+                  "source_job_id": 103,
+                  "source_machine_id": 8,
+                  "source_operation_id": 1,
+                  "start": 2318
+                },
+                {
+                  "end": 3268,
+                  "job": 4,
+                  "machine": 6,
+                  "operation": 1,
+                  "source_job_id": 103,
+                  "source_machine_id": 7,
+                  "source_operation_id": 2,
+                  "start": 3208
+                },
+                {
+                  "end": 3347,
+                  "job": 4,
+                  "machine": 8,
+                  "operation": 2,
+                  "source_job_id": 103,
+                  "source_machine_id": 11,
+                  "source_operation_id": 3,
+                  "start": 3268
+                },
+                {
+                  "end": 2318,
+                  "job": 5,
+                  "machine": 7,
+                  "operation": 0,
+                  "source_job_id": 129,
+                  "source_machine_id": 8,
+                  "source_operation_id": 1,
+                  "start": 1428
+                },
+                {
+                  "end": 2437,
+                  "job": 5,
+                  "machine": 0,
+                  "operation": 1,
+                  "source_job_id": 129,
+                  "source_machine_id": 1,
+                  "source_operation_id": 2,
+                  "start": 2343
+                },
+                {
+                  "end": 2497,
+                  "job": 5,
+                  "machine": 6,
+                  "operation": 2,
+                  "source_job_id": 129,
+                  "source_machine_id": 7,
+                  "source_operation_id": 3,
+                  "start": 2437
+                },
+                {
+                  "end": 104,
+                  "job": 6,
+                  "machine": 9,
+                  "operation": 0,
+                  "source_job_id": 182,
+                  "source_machine_id": 12,
+                  "source_operation_id": 1,
+                  "start": 0
+                },
+                {
+                  "end": 897,
+                  "job": 6,
+                  "machine": 5,
+                  "operation": 1,
+                  "source_job_id": 182,
+                  "source_machine_id": 6,
+                  "source_operation_id": 2,
+                  "start": 104
+                },
+                {
+                  "end": 957,
+                  "job": 6,
+                  "machine": 6,
+                  "operation": 2,
+                  "source_job_id": 182,
+                  "source_machine_id": 7,
+                  "source_operation_id": 3,
+                  "start": 897
+                },
+                {
+                  "end": 1051,
+                  "job": 6,
+                  "machine": 0,
+                  "operation": 3,
+                  "source_job_id": 182,
+                  "source_machine_id": 1,
+                  "source_operation_id": 4,
+                  "start": 957
+                },
+                {
+                  "end": 1461,
+                  "job": 6,
+                  "machine": 2,
+                  "operation": 4,
+                  "source_job_id": 182,
+                  "source_machine_id": 3,
+                  "source_operation_id": 5,
+                  "start": 1051
+                },
+                {
+                  "end": 455,
+                  "job": 7,
+                  "machine": 10,
+                  "operation": 0,
+                  "source_job_id": 205,
+                  "source_machine_id": 27,
+                  "source_operation_id": 1,
+                  "start": 0
+                },
+                {
+                  "end": 1983,
+                  "job": 8,
+                  "machine": 4,
+                  "operation": 0,
+                  "source_job_id": 80,
+                  "source_machine_id": 5,
+                  "source_operation_id": 1,
+                  "start": 1322
+                },
+                {
+                  "end": 2043,
+                  "job": 8,
+                  "machine": 6,
+                  "operation": 1,
+                  "source_job_id": 80,
+                  "source_machine_id": 7,
+                  "source_operation_id": 2,
+                  "start": 1983
+                },
+                {
+                  "end": 2137,
+                  "job": 8,
+                  "machine": 0,
+                  "operation": 2,
+                  "source_job_id": 80,
+                  "source_machine_id": 1,
+                  "source_operation_id": 3,
+                  "start": 2043
+                },
+                {
+                  "end": 3163,
+                  "job": 8,
+                  "machine": 2,
+                  "operation": 3,
+                  "source_job_id": 80,
+                  "source_machine_id": 3,
+                  "source_operation_id": 4,
+                  "start": 2753
+                },
+                {
+                  "end": 1322,
+                  "job": 9,
+                  "machine": 4,
+                  "operation": 0,
+                  "source_job_id": 82,
+                  "source_machine_id": 5,
+                  "source_operation_id": 1,
+                  "start": 661
+                },
+                {
+                  "end": 1382,
+                  "job": 9,
+                  "machine": 6,
+                  "operation": 1,
+                  "source_job_id": 82,
+                  "source_machine_id": 7,
+                  "source_operation_id": 2,
+                  "start": 1322
+                },
+                {
+                  "end": 1479,
+                  "job": 9,
+                  "machine": 8,
+                  "operation": 2,
+                  "source_job_id": 82,
+                  "source_machine_id": 11,
+                  "source_operation_id": 3,
+                  "start": 1382
+                },
+                {
+                  "end": 1573,
+                  "job": 9,
+                  "machine": 0,
+                  "operation": 3,
+                  "source_job_id": 82,
+                  "source_machine_id": 1,
+                  "source_operation_id": 4,
+                  "start": 1479
+                },
+                {
+                  "end": 2079,
+                  "job": 9,
+                  "machine": 1,
+                  "operation": 4,
+                  "source_job_id": 82,
+                  "source_machine_id": 2,
+                  "source_operation_id": 5,
+                  "start": 1573
+                }
+              ],
+              "seed": 0,
+              "source_job_ids": [
+                47,
+                115,
+                121,
+                56,
+                103,
+                129,
+                182,
+                205,
+                80,
+                82
+              ],
+              "source_machine_ids": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                11,
+                12,
+                27
+              ],
+              "status": "OPTIMAL",
+              "time_limit_seconds": 10.0,
+              "time_unit": "minutes",
+              "violations": [],
+              "workers": 1
+            },
+            "scenario": {
+              "completion_limits": {},
+              "current_time": 0,
+              "description": "Production Analysis 2012 kayıtlarından 10 iş emri (2012-03-05 sonrası ilk başlayanlar); yalnız tezgâh işlemleri.",
+              "jobs": [
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 47,
+                  "name": "İş emri 47 · Ballnut",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "8": 890
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Flat Grinding",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "11": 79
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 5,
+                      "processing_times": {
+                        "2": 506
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 115,
+                  "name": "İş emri 115 · Ballnut",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "4": 945
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Flat Grinding",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "11": 79
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "2": 506
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 5,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 121,
+                  "name": "İş emri 121 · Plug",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "5": 661
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "4": 945
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Flat Grinding",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "11": 79
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 5,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 6,
+                      "processing_times": {
+                        "3": 410
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 7,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 8,
+                      "processing_times": {
+                        "3": 410
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 56,
+                  "name": "İş emri 56 · Spur Gear",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "8": 538
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 103,
+                  "name": "İş emri 103 · Adjusting Nut",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "8": 890
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Flat Grinding",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "11": 79
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 129,
+                  "name": "İş emri 129 · Locker",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "8": 890
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 182,
+                  "name": "İş emri 182 · Ballnut",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Grinding Rework",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "12": 104
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "6": 793
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 5,
+                      "processing_times": {
+                        "3": 410
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 205,
+                  "name": "İş emri 205 · O-Ring",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding - Manual",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "27": 455
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 80,
+                  "name": "İş emri 80 · Cable Head",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "5": 661
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "3": 410
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                },
+                {
+                  "deadline": null,
+                  "due_date": null,
+                  "job_id": 82,
+                  "name": "İş emri 82 · Cable Head",
+                  "operations": [
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Turning & Milling",
+                      "operation_id": 1,
+                      "processing_times": {
+                        "5": 661
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Laser Marking",
+                      "operation_id": 2,
+                      "processing_times": {
+                        "7": 60
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Grinding Rework",
+                      "operation_id": 3,
+                      "processing_times": {
+                        "11": 97
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Lapping",
+                      "operation_id": 4,
+                      "processing_times": {
+                        "1": 94
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    },
+                    {
+                      "duration_source": "historical_median",
+                      "fixed_end": null,
+                      "fixed_machine_id": null,
+                      "fixed_start": null,
+                      "name": "Round Grinding",
+                      "operation_id": 5,
+                      "processing_times": {
+                        "2": 506
+                      },
+                      "remaining_duration": null,
+                      "status": "not_started"
+                    }
+                  ],
+                  "release_time": 0,
+                  "route_source": "demo_assumption"
+                }
+              ],
+              "machines": [
+                {
+                  "machine_id": 1,
+                  "name": "M1 Lapping",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 2,
+                  "name": "M2 Round Grinding",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 3,
+                  "name": "M3 Round Grinding",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 4,
+                  "name": "M4 Turning & Milling",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 5,
+                  "name": "M5 Turning & Milling",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 6,
+                  "name": "M6 Turning & Milling",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 7,
+                  "name": "M7 Laser Marking",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 8,
+                  "name": "M8 Turning & Milling",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 11,
+                  "name": "M11 Grinding",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 12,
+                  "name": "M12 Grinding",
+                  "unavailable_intervals": []
+                },
+                {
+                  "machine_id": 27,
+                  "name": "M27 Grinding",
+                  "unavailable_intervals": []
+                }
+              ],
+              "scenario_id": "production-analysis-2012",
+              "time_unit": "minutes",
+              "time_unit_note": "Süreler, aynı faaliyetin aynı tezgâhta bütün iş emirlerinde gözlenen geçen sürelerinin medyanıdır (dakika). Saf makine süresi değildir; sipariş adedi dikkate alınmaz. Rotalar kayıttan çıkarıldığı için demo varsayımıdır. Kesintisiz çalışma varsayılır."
+            },
+            "version_id": "v1"
+          }
+        }
+      }
+    }
+  },
   "seed_schema_version": 1
 }
