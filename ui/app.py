@@ -24,6 +24,11 @@ navigation = st.navigation(
                 default=True,
             ),
             st.Page(pages.route_page, title="Rota onayı", icon=":material/alt_route:"),
+            st.Page(
+                pages.simulation_page,
+                title="Simülasyon",
+                icon=":material/compare_arrows:",
+            ),
         ],
         "Doğrulama": [
             st.Page(

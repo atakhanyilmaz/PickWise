@@ -1,17 +1,21 @@
-"""Streamlit pages (WP-1N, WP-2N). Each page only loads data through existing services and composes ui.components."""
+"""Streamlit pages (WP-1N to WP-4N). Each page only loads data through existing services and composes ui.components."""
 
 import json
 import sqlite3
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 import streamlit as st
 
 from benchmarks.workshop_order_demo import DemoInput
 from core.cpsat_solver import COMMIT, UPSTREAM, read_instance, solve
-from core.pipeline import dispatch
-from core.scenarios import create_snapshot, plan_metrics
+from core.downtime import DowntimeRequest
+from core.pipeline import PipelineRequest, dispatch, run
+from core.plan_contract import PlanVersionConflict, StoredPlanVersion
+from core.scenarios import OrderRequest, PlanSnapshot, create_snapshot, plan_metrics
 from core.sqlite_repository import PlanStorageError, SQLitePlanRepository
 from core.validation import validate
 from ui import components as ui
@@ -252,6 +256,253 @@ def route_page():
     if st.button("Rotayı onayla", type="primary", disabled=not confirmed):
         st.session_state["approved_order"] = ui.approve(job)
         st.rerun()
+
+
+# The services raise English messages; the UI shows the user what to change.
+SERVICE_ERRORS = {
+    "intersects a started operation": "Duruş, başlamış bir işlemle çakışıyor; başlamış işlem bölünemez. Duruşu bu işlem bittikten sonraya alın.",
+    "cannot rewrite the past": "Duruş, planın şimdiki anından önce başlayamaz.",
+    "already exists": "Bu sipariş kimliği planda zaten var.",
+}
+
+
+def explain_error(error):
+    text = str(error)
+    return next((tr for en, tr in SERVICE_ERRORS.items() if en in text), text)
+
+
+def save_plan(simulation, parent_version_id, approved_by, path=None):
+    """Store a simulated plan as the new approved version; returns its version id.
+
+    parent_version_id is the saved plan the simulation started from (None for the
+    unsaved demo). The repository rejects the save if the current version moved meanwhile.
+    """
+    now = datetime.now(ZoneInfo("Europe/Istanbul"))
+    repository = SQLitePlanRepository(path or DB)  # read DB at call time
+    repository.initialize()
+    version_id = f"v-{now:%Y%m%d-%H%M%S}"
+    record = StoredPlanVersion(
+        plan_id=PLAN_ID,
+        parent_version_id=parent_version_id,
+        approved_by=approved_by,
+        approved_at=now,
+        snapshot=PlanSnapshot(
+            version_id=version_id,
+            scenario=simulation.scenario,
+            result=simulation.result,
+        ),
+    )
+    repository.save_approved_version(
+        record, expected_current_version_id=parent_version_id
+    )
+    return version_id
+
+
+def order_request(baseline, job, *, due, hard, preserve, demo):
+    taken = {j.job_id for j in baseline.scenario.jobs}
+    job = job.model_copy(
+        update={
+            "job_id": job.job_id if job.job_id not in taken else max(taken) + 10,
+            "due_date": due,
+            "deadline": due if hard else None,
+        },
+        deep=True,
+    )
+    return OrderRequest(
+        baseline_version_id=baseline.version_id,
+        scenario_id=f"{baseline.scenario.scenario_id}-siparis",
+        order=job,
+        preserve_existing_completions=preserve,
+        allow_demo=demo,
+        time_limit_seconds=st.session_state["time_limit"],
+    )
+
+
+def change_form(baseline):
+    """Order or downtime inputs; returns a PipelineRequest on submit, else None."""
+    scenario = baseline.scenario
+    kind = st.segmented_control(
+        "Değişiklik",
+        ["Yeni sipariş", "Makine duruşu"],
+        default="Yeni sipariş",
+        required=True,
+    )
+    approved = st.session_state.get("approved_order")
+    if kind == "Yeni sipariş" and approved is None:
+        st.caption(
+            ":material/info: Onaylı rota yok. Rota onayı sayfasında bir rota onaylayın "
+            "ya da etiketli demo siparişle deneyin."
+        )
+    with st.form("change"):
+        if kind == "Yeni sipariş":
+            sources = (["Onaylı rota"] if approved else []) + ["Demo sipariş"]
+            source = st.radio("Sipariş", sources, horizontal=True)
+            job = approved if source == "Onaylı rota" else demo_drafts()["Demo sipariş"]
+            st.markdown(
+                f"**{job.name}** · " + " → ".join(op.name for op in job.operations)
+            )
+            ui.source_badge(job.route_source)
+            with_due = st.checkbox("Termin ekle", value=job.due_date is not None)
+            due = ui.clock_input(
+                "Termin", job.due_date or scenario.current_time + 60, key="due"
+            )
+            hard = st.checkbox(
+                "Sert termin",
+                value=job.deadline is not None,
+                help="Sert terminde çözücü bu saati aşan planı kabul etmez; "
+                "aksi hâlde gecikme yalnız raporlanır.",
+            )
+        else:
+            machine = st.selectbox(
+                "Tezgâh", scenario.machines, format_func=lambda m: m.name
+            )
+            start = ui.clock_input(
+                "Duruş başlangıcı", scenario.current_time, key="stop-start"
+            )
+            end = ui.clock_input(
+                "Duruş bitişi", scenario.current_time + 60, key="stop-end"
+            )
+            reason = st.text_input("Sebep", placeholder="Planlı bakım")
+        preserve = st.checkbox(
+            "Mevcut işlerin bitiş saatlerini koru",
+            help="İşaretlenirse hiçbir mevcut iş önceki planından daha geç bitemez.",
+        )
+        if not st.form_submit_button("Simüle et", type="primary"):
+            return None
+
+    if kind == "Yeni sipariş":
+        if with_due and due < scenario.current_time:
+            st.error("Termin, planın şimdiki anından önce olamaz.")
+            return None
+        return PipelineRequest(
+            order=order_request(
+                baseline,
+                job,
+                due=due if with_due else None,
+                hard=with_due and hard,
+                preserve=preserve,
+                demo=source == "Demo sipariş",
+            )
+        )
+    if end <= start:
+        st.error("Duruş bitişi başlangıcından sonra olmalı.")
+        return None
+    return PipelineRequest(
+        downtime=DowntimeRequest(
+            baseline_version_id=baseline.version_id,
+            scenario_id=f"{scenario.scenario_id}-durus",
+            machine_id=machine.machine_id,
+            start=start,
+            end=end,
+            reason=reason.strip(),
+            preserve_existing_completions=preserve,
+            time_limit_seconds=st.session_state["time_limit"],
+        )
+    )
+
+
+def downtime_bands(scenario):
+    return [
+        (m.name, start, end)
+        for m in scenario.machines
+        for start, end in m.unavailable_intervals
+    ]
+
+
+def simulation_result(baseline, outcome, parent_version_id):
+    simulation = outcome.simulation
+    if simulation.comparison is None:
+        st.error(
+            f"{simulation.message} Başlangıç planı korunur; kaydedilecek yeni plan yok.",
+            icon=":material/block:",
+        )
+        return
+    st.success(simulation.message, icon=":material/check_circle:")
+    comparison = simulation.comparison
+    ui.comparison_metrics(comparison)
+    for job in comparison.after.jobs:
+        if job.job_id in comparison.new_job_ids:
+            late = f", {job.tardiness} dk gecikme" if job.tardiness else ""
+            st.caption(
+                f":material/add_box: {job.name}: bitiş {ui.clock(job.completion)}, "
+                f"termin {ui.clock(job.due_date)}{late}"
+            )
+
+    st.subheader("Önce ve sonra")
+    x_max = max(comparison.before.makespan, comparison.after.makespan)
+    for title, scenario, result in [
+        ("Önce: etkin plan", baseline.scenario, baseline.result),
+        ("Sonra: simülasyon", simulation.scenario, simulation.result),
+    ]:
+        st.caption(title)
+        ui.gantt(
+            [row.model_dump() for row in result.schedule],
+            machines=[m.name for m in scenario.machines],
+            job_label=lambda j, jobs=scenario.jobs: jobs[j].name,
+            x_title="t=0 referansından dakika",
+            x_max=x_max,
+            downtimes=downtime_bands(scenario),
+        )
+
+    st.subheader("Etkilenen işler")
+    ui.impact_table(comparison)
+
+    st.subheader("Simülasyon sonrası şu an")
+    ui.dispatch_board(outcome.dispatch)
+
+    with st.container(border=True):
+        st.markdown("**:material/save: Planı kaydet**")
+        st.caption(
+            "Kaydedilen plan yeni sürüm olur ve Plan sayfasında etkin plan olarak görünür. "
+            "Önceki sürümler silinmez."
+        )
+        approver = st.text_input("Onaylayan", placeholder="Ad Soyad")
+        confirmed = st.checkbox("Bu planı yeni sürüm olarak kaydetmeyi onaylıyorum")
+        if st.button(
+            "Planı kaydet",
+            type="primary",
+            disabled=not (approver.strip() and confirmed),
+        ):
+            try:
+                version = save_plan(simulation, parent_version_id, approver.strip())
+            except PlanVersionConflict:
+                st.error(
+                    "Plan bu arada değişti. Sayfayı yenileyip yeniden simüle edin.",
+                    icon=":material/sync_problem:",
+                )
+                return
+            del st.session_state["simulation"]
+            st.session_state["saved_version"] = version
+            st.rerun()
+
+
+def simulation_page():
+    baseline, label, saved = current_plan()
+    st.title("Simülasyon")
+    st.caption(
+        f"Etkin plan: {label} · simülasyon planı değiştirmez; yeni sürüm yalnız kaydettiğinizde oluşur"
+    )
+    if version := st.session_state.pop("saved_version", None):
+        st.success(
+            f"{version} sürümü kaydedildi ve etkin plan oldu.",
+            icon=":material/verified:",
+        )
+
+    request = change_form(baseline)
+    if request is not None:
+        try:
+            st.session_state["simulation"] = (
+                baseline.version_id,
+                run(baseline, request),
+            )
+        except ValueError as error:
+            st.error(explain_error(error), icon=":material/error:")
+            st.session_state.pop("simulation", None)
+
+    stored = st.session_state.get("simulation")
+    if stored and stored[0] == baseline.version_id:
+        st.divider()
+        simulation_result(baseline, stored[1], baseline.version_id if saved else None)
 
 
 @st.cache_data

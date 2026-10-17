@@ -117,8 +117,12 @@ def status_metric(status):
     return STATUS_SHORT.get(status, status), status_message(status)
 
 
-def gantt(rows, machines, job_label, x_title):
-    """Gantt from schedule rows (job, operation, machine, start, end); machines[i] names machine index i."""
+def gantt(rows, machines, job_label, x_title, *, x_max=None, downtimes=()):
+    """Gantt from schedule rows (job, operation, machine, start, end); machines[i] names machine index i.
+
+    x_max pins the time axis so two charts line up; downtimes are (machine name, start, end)
+    intervals drawn as gray bands behind the operations.
+    """
     frame = pd.DataFrame(
         {
             "Makine": [machines[r["machine"]] for r in rows],
@@ -129,11 +133,30 @@ def gantt(rows, machines, job_label, x_title):
         }
     )
     frame["Süre"] = frame["Bitiş"] - frame["Başlangıç"]
+    x_scale = alt.Scale(domain=[0, x_max]) if x_max else alt.Undefined
+    y = alt.Y("Makine:N", scale=alt.Scale(domain=list(machines)), title=None)
     base = alt.Chart(frame).encode(
-        x=alt.X("Başlangıç:Q", title=x_title),
+        x=alt.X("Başlangıç:Q", title=x_title, scale=x_scale),
         x2="Bitiş:Q",
-        y=alt.Y("Makine:N", scale=alt.Scale(domain=list(machines)), title=None),
+        y=y,
     )
+    layers = []
+    if downtimes:
+        blocked = pd.DataFrame(downtimes, columns=["Makine", "Başlangıç", "Bitiş"])
+        layers.append(
+            alt.Chart(blocked)
+            .mark_bar(height={"band": 0.9}, color="#94A3B8", opacity=0.35)
+            .encode(
+                x=alt.X("Başlangıç:Q", scale=x_scale),
+                x2="Bitiş:Q",
+                y=y,
+                tooltip=[
+                    alt.Tooltip("Makine"),
+                    alt.Tooltip("Başlangıç", title="Duruş başı"),
+                    alt.Tooltip("Bitiş", title="Duruş sonu"),
+                ],
+            )
+        )
     bars = base.mark_bar(height={"band": 0.7}, cornerRadius=2).encode(
         color=alt.Color(
             "İş:N",
@@ -147,7 +170,7 @@ def gantt(rows, machines, job_label, x_title):
         text="Operasyon"
     )
     height = 44 * len(machines)
-    chart = (bars + labels).properties(height=height)
+    chart = alt.layer(*layers, bars, labels).properties(height=height)
     st.altair_chart(chart, width="stretch", height=height + 90)
 
 
@@ -343,3 +366,66 @@ def prediction_scatter(frame, unit):
         )
     )
     st.altair_chart(diagonal + points, width="stretch", height=380)
+
+
+def clock_input(label, default_minute, key):
+    """Date + time picker returning minutes from the sidebar's plan start (t=0)."""
+    t0 = datetime.combine(st.session_state["t0_date"], st.session_state["t0_time"])
+    default = t0 + timedelta(minutes=int(default_minute))
+    day, hour = st.columns(2)
+    picked_day = day.date_input(
+        label, default.date(), key=f"{key}-date", format="DD.MM.YYYY"
+    )
+    picked_time = hour.time_input("Saat", default.time(), key=f"{key}-time", step=300)
+    return int((datetime.combine(picked_day, picked_time) - t0).total_seconds() // 60)
+
+
+def comparison_metrics(comparison):
+    """Before → after plan figures; a rise in finish time or delays is shown as worse."""
+    before, after = comparison.before, comparison.after
+    columns = st.columns(4)
+    columns[0].metric(
+        "Tüm işler biter",
+        clock(after.makespan)[-5:],
+        f"{after.makespan - before.makespan:+d} dk",
+        delta_color="inverse",
+        help=f"Önce {clock(before.makespan)}",
+    )
+    columns[1].metric(
+        "Geç biten mevcut iş",
+        comparison.delayed_existing_job_count,
+        help="Önceki plana göre daha geç biten mevcut iş sayısı",
+    )
+    columns[2].metric(
+        "Termini aşan iş",
+        after.late_job_count,
+        f"{after.late_job_count - before.late_job_count:+d}",
+        delta_color="inverse",
+    )
+    columns[3].metric(
+        "Toplam termin gecikmesi",
+        f"{after.total_tardiness} dk",
+        f"{after.total_tardiness - before.total_tardiness:+d} dk",
+        delta_color="inverse",
+    )
+
+
+def impact_table(comparison):
+    """Every existing job: completion before and after, the shift and soft due-date lateness."""
+    table(
+        [
+            {
+                "İş": impact.name,
+                "Önce bitiş": clock(impact.before_completion),
+                "Sonra bitiş": clock(impact.after_completion),
+                "Fark (dk)": impact.completion_delta,
+                "Önce gecikme (dk)": impact.before_tardiness,
+                "Sonra gecikme (dk)": impact.after_tardiness,
+                "Yeri değişen operasyon": impact.changed_operations,
+            }
+            for impact in comparison.impacts
+        ],
+        column_config={
+            "Fark (dk)": st.column_config.NumberColumn(format="%+d"),
+        },
+    )

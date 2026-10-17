@@ -392,7 +392,22 @@ dakika sürelerini düzenletir. Düzenlenen süre `user_input`, düzenlenen rota
 `user_approved` olur ve oturumda saklanır. Rota ve süre kaynakları Plan
 tablosunda ve onay ekranında aynı renkli rozetlerle gösterilir. Geçmiş veriden
 otomatik rota önerisi henüz yok (WP-2A); retrospektif taslak gelirse uyarıyla
-gösterilir. Simülasyon, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
+gösterilir.
+
+Simülasyon sayfası (WP-4N) etkin plana tek bir değişiklik uygular: yeni sipariş
+(Rota onayı sayfasında onaylanan rota ya da `demo_assumption` etiketli demo
+sipariş; termin ve isteğe bağlı sert termin) veya makine duruşu (tezgâh,
+başlangıç/bitiş saati, sebep). İkisinde de "mevcut bitişleri koru" seçilebilir.
+`core.pipeline.run` çalışır; etkin plan değişmez. Sonuçta durum mesajı, önceki
+plana göre farklar, aynı zaman ekseninde önce/sonra Gantt (duruşlar gri bant),
+etkilenen işler tablosu ve simülasyon sonrası tezgâh durumu gösterilir.
+Uygulanamaz sonuçta kayıt seçeneği çıkmaz; servis hataları (başlamış işlemle
+çakışan duruş, geçmişe duruş) Türkçe açıklanır. "Planı kaydet" onaylayan adı ve
+onay kutusu ister; plan `database/local/workshop.sqlite3` içinde
+`synthetic-workshop` için yeni sürüm olur ve Plan sayfasında etkin plan olarak
+görünür. Kayıt, simülasyonun başladığı sürüm hâlâ güncelse kabul edilir; araya
+başka kayıt girerse `PlanVersionConflict` ile reddedilir. Testler
+(`tests/test_simulation_ui.py`) geçici veritabanı kullanır.
 
 Süre tahmini sayfası (WP-3N) `experiments/tabpfn/results/regressor_comparison/`
 altındaki doğrulama raporunu ve tahmin CSV'lerini okur: iki görev (toplam iş
