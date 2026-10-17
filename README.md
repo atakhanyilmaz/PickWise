@@ -402,8 +402,27 @@ doğrulama → `dispatch`. `dispatch`, seçilen dakikada her tezgâhın işledi�
 operasyonu (`[başlangıç, bitiş)`) ve sıradakini verir; Plan sayfasındaki
 "Şu an tezgâhlarda" kartları bunu gösterir. Başlangıç planı değişmez; değişiklik
 uygulanamazsa görünüm başlangıç planına döner. Plan yükleme ve onaylı kayıt
-çağıranda kalır. Gemma için LangGraph katmanı bu hattı araç olarak kullanacak
-şekilde planlandı, henüz eklenmedi.
+çağıranda kalır.
+
+`core/llm/graph.py` Gemma sipariş akışını LangGraph ile sarar; mevcut
+`core/llm` fonksiyonları değiştirilmez. Akış: `begin_intake` → eksik bilgi
+sorusu (kullanıcı cevabı için durur, `answer_intake`) → onay (kullanıcı `True`
+diyene kadar durur) → `confirm_and_simulate` ve `dispatch` → `explain_simulation`.
+Desteklenmeyen talep, plan inceleme, model hatası veya red akışı simülasyonsuz
+bitirir. Durum düz JSON olarak tutulur ve her adımda Pydantic ile yeniden
+doğrulanır; SQLite'a kayıt yapılmaz. LangSmith izleme varsayılan olarak
+kapalıdır (`LANGSMITH_TRACING` ayarlanmadıkça veri gönderilmez).
+
+```python
+from langgraph.types import Command
+from core.llm.graph import build_order_graph
+
+graph = build_order_graph(baseline, OllamaClient())
+config = {"configurable": {"thread_id": "kullanici-1"}}
+out = graph.invoke({"text": "Yeni sipariş: Torna 1 üzerinde 10 dakika."}, config)
+out["__interrupt__"][0].value              # soru veya onay bekleyen taslak
+out = graph.invoke(Command(resume=True), config)  # onay
+```
 
 ## Otomatik kontroller (CI)
 
