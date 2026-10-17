@@ -199,3 +199,11 @@ Kod kontrolleri ve test kullanıcı yanıtları sonuca dahildir. Önceki 3/5 rap
 tek mesajlı eski API'ye aittir. [Karar ve kapsam](docs/decisions/005-gemma-conversation-reliability.md).
 Yunus'un gerçek veri hazırlığı bu çalışmanın girdisi değildir; TabPFN deneyi
 onaylı hedef ve veri kümesini bekler.
+
+## Plan kayıt sözleşmesi
+
+[Yunus için Pydantic kayıt/yükleme sözleşmesi](docs/plan-data-contract.md),
+mevcut senaryo ve sonuç modellerini `core.plan_contract.StoredPlanVersion`
+içinde birleştirir. Onay denetim bilgileri ve önceki sürüm kimliği korunur;
+içe aktarılan çizelge yeniden doğrulanır. `PlanRepository` tipli arayüzdür;
+SQLite uygulaması ve atomik sürüm çakışması kontrolü henüz bağlanmadı.
