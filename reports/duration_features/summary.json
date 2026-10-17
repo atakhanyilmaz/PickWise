@@ -1,0 +1,104 @@
+{
+  "input_sha256": {
+    "data\\dataforNewVersion\\production_analysis.csv": "bccdcd8efbe52ec315889420d6328ed5cea676e27c3bacd340ac206bcc4646e9",
+    "data\\dataforNewVersion\\production_analysis_target_ready.csv": "5710f3bac40ce69300c7b5934bb186727bf81e74c14272d3f6a9191b7905f0b3",
+    "data\\dataforNewVersion\\cnc_changeover.csv": "d54cafdfd4df36894133356d632027e220a1d43d8fa111184bf68faaaa00c5e3",
+    "data\\dataforNewVersion\\cnc_changeover_remaining_time_target.csv": "b00349f6aaa8725863ffcf8545f53b47f8108b7b6a18c24441d39ecedc5a803a"
+  },
+  "seed": 42,
+  "script_sha256": "d97e89b34b1262ef6da1e99e59474c0132c37ed0a913d936a43f7db5e970000a",
+  "versions": {
+    "python": "3.11.9",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scipy": "1.15.2",
+    "sklearn": "1.6.1",
+    "joblib": "1.4.2"
+  },
+  "fit_policy": "train only; group-disjoint chronological validation selection; final test once",
+  "datasets": {
+    "production_analysis": {
+      "selected": 3,
+      "engineered": 3,
+      "pca": 45,
+      "holdout": {
+        "rows": 351,
+        "groups": 44,
+        "row_mae_min": 118.6302040442007,
+        "group_macro_mae_min": 112.47387202634258,
+        "per_group_mae_min": {
+          "Case 101": 85.75139546112396,
+          "Case 104": 47.201266108041104,
+          "Case 105": 121.5,
+          "Case 106": 56.081004296816104,
+          "Case 107": 46.952253211521054,
+          "Case 111": 204.0497335397885,
+          "Case 113": 133.54217146105665,
+          "Case 118": 54.35157778199163,
+          "Case 119": 261.5171367630988,
+          "Case 123": 191.70647064516027,
+          "Case 124": 84.401576290328,
+          "Case 125": 139.03429526070258,
+          "Case 126": 74.92781320339107,
+          "Case 133": 241.38074363994488,
+          "Case 134": 89.57111545991734,
+          "Case 135": 142.81160159480777,
+          "Case 136": 59.09450527724544,
+          "Case 137": 119.98265194301021,
+          "Case 138": 106.58416617974234,
+          "Case 139": 82.14244968846967,
+          "Case 140": 117.8981360598946,
+          "Case 142": 36.925425856029875,
+          "Case 144": 28.657087287972757,
+          "Case 174": 47.711010323068365,
+          "Case 264": 162.40786520187137,
+          "Case 4": 95.02362729705999,
+          "Case 45": 64.23932954877021,
+          "Case 5": 134.0,
+          "Case 53": 78.68399676781488,
+          "Case 54": 89.77190317905787,
+          "Case 59": 74.7382425596129,
+          "Case 60": 107.9200788517099,
+          "Case 64": 181.0417267642311,
+          "Case 65": 106.9062877557757,
+          "Case 69": 331.83284889694545,
+          "Case 71": 99.2932624080616,
+          "Case 79": 65.38532997918368,
+          "Case 81": 254.04969689123746,
+          "Case 83": 77.11130621582211,
+          "Case 85": 121.12699506454362,
+          "Case 86": 154.2825729048584,
+          "Case 96": 46.80272556574587,
+          "Case 98": 42.03083455416562,
+          "Case 99": 88.42615141948262
+        },
+        "representation_chosen_on_validation": "engineered"
+      }
+    },
+    "cnc_changeover": {
+      "selected": 24,
+      "engineered": 214,
+      "pca": 89,
+      "holdout": {
+        "rows": 5778,
+        "groups": 6,
+        "row_mae_min": 2.4265547478943112,
+        "group_macro_mae_min": 2.436111111111111,
+        "per_group_mae_min": {
+          "25": 3.9833333333333343,
+          "26": 3.0166666666666635,
+          "27": 1.5000000000000016,
+          "28": 3.2499999999999996,
+          "29": 1.8333333333333344,
+          "30": 1.0333333333333314
+        },
+        "representation_chosen_on_validation": "median_baseline"
+      }
+    }
+  },
+  "artifact_layout": {
+    "version": 2,
+    "training_directory": "C:\\software_study\\projelerim\\Job_Shop_Scheduling_Benchmark_Environments_and_Instances\\data\\dataforNewVersion\\biPre",
+    "relocation_script_sha256": "635c2a67a543ba8f7dc0859feec602aa4edfa35b471738432486b2df166c4cb9"
+  }
+}

@@ -93,7 +93,7 @@ def plan_page():
     minute = st.slider(
         "Görüntülenen an (t=0'dan dakika)",
         0,
-        metrics.makespan,
+        max(metrics.makespan, scenario.current_time),
         scenario.current_time,
         help="Varsayılan: planın şimdiki anı. Kaydırarak gün içindeki başka bir anı görün.",
     )

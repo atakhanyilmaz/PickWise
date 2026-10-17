@@ -257,10 +257,11 @@ def test_ambiguous_intent_can_be_answered_without_reclassifying(baseline):
 def test_intent_followup_retains_original_order_details(baseline):
     client = ScriptedClient(fields(), tool="clarify", evidence="Torna 1")
     session = begin_intake("Torna 1 üzerinde 10 dakika işlem.", baseline, client)
+    client.tool, client.evidence = "simulate_order", "yeni sipariş ekle"
     result = answer_intake(session, "yeni sipariş ekle", baseline, client)
     assert result.result.state == "confirmation_required"
     assert result.result.proposed_order.operations[0].processing_times == {100: 10}
-    assert client.calls == ["IntentDecision", "OrderFields"]
+    assert client.calls == ["IntentDecision", "IntentDecision", "OrderFields"]
 
 
 def test_invalid_name_after_missing_duration_is_rejected_without_crash(baseline):

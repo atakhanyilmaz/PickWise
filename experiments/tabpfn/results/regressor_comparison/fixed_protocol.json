@@ -1,0 +1,50 @@
+{
+  "evaluation": "exploratory_reused_validation_final_test_not_scored",
+  "sources": {
+    "/Users/atakan/Documents/PickWise/data/dataforNewVersion/production_analysis.csv": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6",
+    "/Users/atakan/Documents/PickWise/reports/data_preparation/production_analysis_split_manifest.csv": "f8a3a3ee04d13506023b8e444b987ae45c20a326aaaf260a8f393f7d9277ffde"
+  },
+  "model_config": {
+    "quantile_linear": {
+      "quantile": 0.5,
+      "alpha": 0.1,
+      "solver": "highs"
+    },
+    "gradient_boosting_mae": {
+      "loss": "absolute_error",
+      "n_estimators": 100,
+      "learning_rate": 0.05,
+      "max_depth": 2,
+      "min_samples_leaf": 5,
+      "random_state": 0
+    },
+    "catboost_mae": {
+      "iterations": 200,
+      "depth": 3,
+      "learning_rate": 0.03,
+      "l2_leaf_reg": 10,
+      "loss_function": "MAE",
+      "boosting_type": "Ordered",
+      "random_seed": 0,
+      "thread_count": 1,
+      "verbose": false,
+      "allow_writing_files": false
+    }
+  },
+  "versions": {
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.9.1",
+    "catboost": "1.2.10"
+  },
+  "protocol": [
+    "One fixed config per model, chosen before running; no grid search.",
+    "Train-only preprocessing; fixed case-disjoint chronological split.",
+    "Same validation previously inspected; exploratory gains require untouched test confirmation.",
+    "All predictions clipped at zero; no target trimming.",
+    "Train row weights equal; primary gap evaluation case weights equal.",
+    "Conditional destination preassignment and physical target semantics are not verified."
+  ],
+  "runner_sha256": "77714bc2b40719d5849c63533fb277e0a94dc3fd9a78699d82221da64c5480fa",
+  "dataset_builder_sha256": "c3f106d2320ac4b5bdafddbbc2f3039f30b34a3422ae00ff5d7760ae0c73b18f"
+}
