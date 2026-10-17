@@ -81,6 +81,37 @@ girdi sağlayacaktır.
 | EmbeddingGemma 2 | Planlandı | Geçmiş iş özetlerinden kanıtlı benzer kayıt araması henüz uygulanmadı |
 | Streamlit arayüzü | Eklendi(geliştiriliyor)| Çekirdek ve CLI arayüzden bağımsız çalışıyor |
 
+## Yeni Sipariş İçin Gerekli Bilgiler
+
+Bu bölüm sonraki uygulama entegrasyonu için giriş sözleşmesidir; mevcut
+çevrimdışı Production Analysis deneyi henüz sipariş ekranına veya çözücüye
+bağlı değildir.
+
+Kullanıcının gireceği bilgiler:
+
+| Alan | Zorunluluk | Açıklama |
+| --- | --- | --- |
+| Ürün kodu | Zorunlu | Mevcut ürün kataloğunda aranır ve seçilir |
+| Sipariş miktarı | Zorunlu | Pozitif tam sayı olmalıdır |
+| Termin | İsteğe bağlı | Gecikme değerlendirmesinde kullanılır |
+| Model süresi düzeltmesi | İsteğe bağlı | Model önerisi varsayılandır; kullanıcı değiştirebilir ve değişiklik kaydedilir |
+
+Ürün kodu seçilince ürün kataloğundan otomatik getirilecek bilgiler:
+
+- Parça adı
+- NC programı
+- Operasyon sırası
+- Her operasyonun uygun makineleri
+- Standart setup süresi
+- Parça geçiş matrisi
+- Gerekli takım magazini listesi
+
+Bu sürümün giriş sözleşmesinde vardiya, mola, hafta sonu, makine duruşu ve
+öncelik yoktur; canlı CNC sensör bağlantısı da bulunmaz. Model tahmini kullanıcı
+tarafından doğrulanmış gerçek süre değildir. Production Analysis aktiviteleri
+ile FJSP benchmark makineleri arasında doğrulanmış alan eşlemesi olmadığı için
+deney modeli çizelgeleyiciye bağlanmaz.
+
 ## Yapay zekâ ve makine öğrenmesi katmanları
 
 Proje tek bir modele bağımlı değildir. Her yapay zekâ bileşeni farklı ve sınırlı
@@ -373,11 +404,14 @@ Medyan referansı ve veri sızıntısı kontrolleri:
 .\.venv\Scripts\python.exe -m pip install -r requirements-features.txt
 $env:LOKY_MAX_CPU_COUNT='1'
 .\.venv\Scripts\python.exe -m ml_experiments.duration_features
+.\.venv\Scripts\python.exe -m ml_experiments.compare_duration_models
 ```
 
 Production Analysis ve CNC verileri benchmark/sentetik demo verilerinden ayrı
-tutulur. Geçen süre otomatik olarak net makine süresi kabul edilmez; gerçek
-hedef anlamı ve kullanım onayı ayrıca doğrulanmalıdır.
+tutulur. Production Analysis karşılaştırması, `Report Type` sütunu çıkarıldıktan
+sonra S (setup/hazırlık), D (işleme/geçen çalışma) ve B (arıza) satırlarını
+birlikte içeren gözlenen rapor süresini hedefler. Bu hedef net makine süresi
+değildir ve sonuçlar operasyonel planlamaya aktarılmaz.
 
 ## Proje dizinleri
 

@@ -7,3 +7,6 @@ joblib==1.4.2
 threadpoolctl==3.6.0
 pytest==8.3.4
 ruff==0.9.10
+catboost==1.2.10
+xgboost==3.2.0
+lightgbm==4.7.0

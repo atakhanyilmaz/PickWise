@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 
 from ml_experiments.prepare_data import (
@@ -21,6 +23,7 @@ def test_build_production_target_dataset_filters_ambiguous_durations_and_drops_l
             ],
             "Span": ["000:30", "000:30", "000:00", "000:10", None],
             "Rework": [None, None, "Y", None, None],
+            "Report Type": ["D", "S", "B", "D", "S"],
             "start_parsed": ["unused"] * 5,
             "complete_parsed": ["unused"] * 5,
             "timestamp_elapsed_min": [30, 31, 0, 60, 15],
@@ -35,6 +38,7 @@ def test_build_production_target_dataset_filters_ambiguous_durations_and_drops_l
     assert prepared["target_elapsed_time"].tolist() == [30.0, 31.0]
     for column in [
         "Rework",
+        "Report Type",
         "Start Timestamp",
         "Complete Timestamp",
         "Span",
@@ -51,6 +55,8 @@ def test_build_production_target_dataset_filters_ambiguous_durations_and_drops_l
         "invalid_or_missing_span": 1,
         "span_elapsed_mismatch_over_tolerance": 1,
     }
+    assert report["report_type_counts_before_removal"] == {"D": 1, "S": 1}
+    assert report["report_type_meanings"]["B"] == "breakdown"
 
 
 def test_build_production_target_dataset_requires_source_time_fields():
@@ -62,6 +68,20 @@ def test_build_production_target_dataset_requires_source_time_fields():
         assert "Rework" in str(error)
     else:
         raise AssertionError("Expected missing Rework column to be rejected")
+
+
+def test_readme_records_new_order_input_contract():
+    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(encoding="utf-8")
+
+    for required_text in [
+        "Yeni Sipariş İçin Gerekli Bilgiler",
+        "Ürün kodu",
+        "Sipariş miktarı",
+        "NC programı",
+        "Parça geçiş matrisi",
+        "canlı CNC sensör bağlantısı",
+    ]:
+        assert required_text in readme
 
 
 def test_build_cnc_remaining_time_dataset_keeps_sessions_whole_and_drops_labels():

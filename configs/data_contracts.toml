@@ -6,25 +6,25 @@ source_kind = "retrospective_event_log"
 source_url = "https://figshare.com/articles/dataset/Production_Analysis_with_Process_Mining_Technology/12697997"
 source_version = "2014 dataset record; local CSV checksum tracked in reports"
 source_license = "4TU General Terms of Use; review before redistribution"
-prediction_unit = "unresolved_report_row_or_operation_aggregate"
+prediction_unit = "mixed_report_interval_row"
 target = "target_elapsed_time"
-target_status = "provisional_until_report_type_semantics_are_verified"
+target_status = "experimental_mixed_setup_processing_breakdown_elapsed_time"
 group_key = "Case ID"
 time_key = "Start Timestamp"
 end_time_key = "Complete Timestamp"
 duration_unit = "minute"
-unresolved_semantics = ["Report Type S/D/B", "report-row versus operation aggregation", "whether timestamps represent machine runtime"]
+unresolved_semantics = ["report-row versus operation aggregation", "whether timestamps represent machine runtime"]
 
 [production_analysis.tabpfn]
-purpose = "regress verified operation duration; compare with a train-only median baseline"
-prediction_unit = "verified operation after report semantics and aggregation are approved"
+purpose = "compare mixed elapsed-time regressors with a train-only median baseline"
+prediction_unit = "mixed report interval; not a verified operation duration"
 target = "target_elapsed_time"
-target_status = "provisional_until_report_type_semantics_are_verified"
+target_status = "experimental_mixed_setup_processing_breakdown_elapsed_time"
 group_key = "Case ID"
 time_key = "Start Timestamp"
 allowed_features = ["Part Desc.", "Work Order  Qty", "Activity"]
 conditional_features = ["Resource; usable only when machine assignment is known before prediction"]
-forbidden_features = ["Start Timestamp", "Complete Timestamp", "Span", "start_parsed", "complete_parsed", "timestamp_elapsed_min", "span_recorded_min", "span_minus_elapsed_min", "Qty Completed", "Qty Rejected", "Qty for MRB", "Rework", "Worker ID"]
+forbidden_features = ["Start Timestamp", "Complete Timestamp", "Span", "start_parsed", "complete_parsed", "timestamp_elapsed_min", "span_recorded_min", "span_minus_elapsed_min", "Qty Completed", "Qty Rejected", "Qty for MRB", "Rework", "Worker ID", "Report Type"]
 
 [production_analysis.embeddinggemma]
 purpose = "retrieve similar historical work orders for a new order"

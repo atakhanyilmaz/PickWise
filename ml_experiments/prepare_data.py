@@ -45,6 +45,11 @@ PRODUCTION_TIME_LEAKAGE_COLUMNS = [
 ]
 PRODUCTION_REMOVED_COLUMN_DESCRIPTIONS = {
     "Rework": "Source rework flag; 32 observed Y values and no observed N values.",
+    "Report Type": (
+        "Source interval type supplied by the project owner: S=setup/preparation, "
+        "D=processing/elapsed work, B=breakdown. Rows are retained, but the type is "
+        "not available to the mixed elapsed-time model."
+    ),
     "Start Timestamp": "Observed report interval start used to derive the target.",
     "Complete Timestamp": "Observed report interval end used to derive the target.",
     "Span": "Source HHH:MM duration representation used only as a consistency check.",
@@ -674,7 +679,7 @@ def prepare_cnc_remaining_time_target() -> None:
 
 def build_production_target_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Any]]:
     """Build a conservative elapsed-time regression table without target leakage."""
-    required = {"Start Timestamp", "Complete Timestamp", "Span", "Rework"}
+    required = {"Start Timestamp", "Complete Timestamp", "Span", "Rework", "Report Type"}
     missing = sorted(required.difference(frame.columns))
     if missing:
         raise ValueError(f"Production target input is missing required columns: {missing}")
@@ -702,7 +707,11 @@ def build_production_target_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, 
 
     prepared = frame.loc[keep].copy()
     prepared[PRODUCTION_TARGET_COLUMN] = elapsed_min.loc[keep].astype(float)
-    removed_columns = ["Rework", *PRODUCTION_TIME_LEAKAGE_COLUMNS]
+    report_type_counts = {
+        str(key): int(value)
+        for key, value in prepared["Report Type"].value_counts(dropna=False).sort_index().items()
+    }
+    removed_columns = ["Rework", "Report Type", *PRODUCTION_TIME_LEAKAGE_COLUMNS]
     prepared = prepared.drop(columns=[column for column in removed_columns if column in prepared.columns])
 
     report = {
@@ -719,6 +728,13 @@ def build_production_target_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, 
         "target_formula": "(Complete Timestamp - Start Timestamp).total_seconds() / 60",
         "target_unit": PRODUCTION_TARGET_UNIT,
         "span_agreement_tolerance_min": PRODUCTION_TARGET_TOLERANCE_MIN,
+        "report_type_counts_before_removal": report_type_counts,
+        "report_type_meanings": {
+            "S": "setup_or_preparation",
+            "D": "processing_or_elapsed_work",
+            "B": "breakdown",
+        },
+        "report_type_semantics_source": "project_owner; not independently verified from the dataset publisher",
         "removed_columns": [column for column in removed_columns if column in frame.columns],
         "removed_column_descriptions": {
             column: description
@@ -737,8 +753,8 @@ def build_production_target_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, 
             "review_issues",
         ],
         "warning": (
-            "This target is observed elapsed report time, not verified machine processing time. "
-            "Report Type S/D/B and row aggregation semantics remain unresolved."
+            "This target mixes retained S/D/B report intervals after Report Type is removed. "
+            "It is observed elapsed report time, not verified machine processing time."
         ),
     }
     return prepared, report

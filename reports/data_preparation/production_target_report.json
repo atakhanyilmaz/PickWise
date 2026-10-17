@@ -12,14 +12,27 @@
   "target_formula": "(Complete Timestamp - Start Timestamp).total_seconds() / 60",
   "target_unit": "minute",
   "span_agreement_tolerance_min": 1.0,
+  "report_type_counts_before_removal": {
+    "B": 49,
+    "D": 3109,
+    "S": 682
+  },
+  "report_type_meanings": {
+    "S": "setup_or_preparation",
+    "D": "processing_or_elapsed_work",
+    "B": "breakdown"
+  },
+  "report_type_semantics_source": "project_owner; not independently verified from the dataset publisher",
   "removed_columns": [
     "Rework",
+    "Report Type",
     "Start Timestamp",
     "Complete Timestamp",
     "Span"
   ],
   "removed_column_descriptions": {
     "Rework": "Source rework flag; 32 observed Y values and no observed N values.",
+    "Report Type": "Source interval type supplied by the project owner: S=setup/preparation, D=processing/elapsed work, B=breakdown. Rows are retained, but the type is not available to the mixed elapsed-time model.",
     "Start Timestamp": "Observed report interval start used to derive the target.",
     "Complete Timestamp": "Observed report interval end used to derive the target.",
     "Span": "Source HHH:MM duration representation used only as a consistency check."
@@ -31,7 +44,6 @@
     "Work Order  Qty",
     "Part Desc.",
     "Worker ID",
-    "Report Type",
     "Qty Completed",
     "Qty Rejected",
     "Qty for MRB",
@@ -51,7 +63,7 @@
     "review_status",
     "review_issues"
   ],
-  "warning": "This target is observed elapsed report time, not verified machine processing time. Report Type S/D/B and row aggregation semantics remain unresolved.",
+  "warning": "This target mixes retained S/D/B report intervals after Report Type is removed. It is observed elapsed report time, not verified machine processing time.",
   "input": "data/dataforNewVersion/production_analysis.csv",
   "output": "data/dataforNewVersion/production_analysis_target_ready.csv"
 }

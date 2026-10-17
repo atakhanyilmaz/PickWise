@@ -1,0 +1,424 @@
+{
+  "dataset": "cnc_changeover",
+  "representation": "selected",
+  "target": "remaining_changeover_time_min",
+  "target_definition": "remaining wall-clock minutes through final changeover sample",
+  "features": [
+    "elapsed_changeover_time_min",
+    "X-axis_position_MCS",
+    "Y-axis_position_MCS",
+    "Y-axis_position_WCS",
+    "Z-axis_position_MCS",
+    "Spindle_position_error",
+    "Tool_magazine_position_MCS",
+    "Program_line_number",
+    "Tool_ID",
+    "Spindle_motor_temperature",
+    "X_Axis_smoothed_current",
+    "X_Axis_motor_temperature",
+    "Z_Axis_smoothed_current",
+    "Z_Axis_Motor_temperature",
+    "Y_Axis_smoothed_current",
+    "Y_Axis_smoothed_modulation_depth",
+    "ToolChange_smoothed_current_value",
+    "ToolChange_smoothed_modulation_depth",
+    "B_Axis_Motor_temperature",
+    "C_Axis_smoothed_current",
+    "Tool_ID_Magazine_9998_Place_1",
+    "Tool_number_Magazine_9998_Place_1",
+    "Tool_ID_Magazine_9998_Place_2",
+    "Tool_ID_Magazine_9998_Place_3",
+    "transition_from_product",
+    "transition_to_product"
+  ],
+  "seed": 42,
+  "input_sha256": {
+    "data\\dataforNewVersion\\cnc_changeover.csv": "d54cafdfd4df36894133356d632027e220a1d43d8fa111184bf68faaaa00c5e3",
+    "data\\dataforNewVersion\\cnc_changeover_remaining_time_target.csv": "b00349f6aaa8725863ffcf8545f53b47f8108b7b6a18c24441d39ecedc5a803a",
+    "data\\dataforNewVersion\\biPre\\cnc_changeover_selected.csv": "952da84e300e8506132bf9c120ef4683544bc8040633793bee3bf4ce363529b9"
+  },
+  "split_rows": {
+    "train": 24309,
+    "validation": 5915,
+    "test": 6132
+  },
+  "split_groups": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "validation": {
+    "median": {
+      "parameters": {
+        "fallback": "session_transition_total_median_minus_elapsed"
+      },
+      "training_seconds": 0.008225600002333522,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 2.8303916720541,
+        "group_macro_mae_min": 3.038888894421035,
+        "rmse_min": 3.2831604685508013,
+        "median_absolute_error_min": 3.033333329999998,
+        "p90_absolute_error_min": 5.38333333,
+        "r2": 0.7910635703232749,
+        "per_group_mae_min": {
+          "19": 5.3833333332339794,
+          "20": 3.800000033292231,
+          "21": 3.033333299999999,
+          "22": 4.566666700000001,
+          "23": 1.1666666999999997,
+          "24": 0.2833333000000007
+        },
+        "prediction_seconds": 0.007124199997633696,
+        "prediction_ms_per_row": 0.0012044294163370576
+      }
+    },
+    "ridge": {
+      "parameters": {
+        "alpha": 500.0
+      },
+      "training_seconds": 0.02881300001172349,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 8.842655467544352,
+        "group_macro_mae_min": 9.086478250903125,
+        "rmse_min": 11.095998471345975,
+        "median_absolute_error_min": 5.62344052243983,
+        "p90_absolute_error_min": 18.484814328935563,
+        "r2": -1.3865070726487612,
+        "per_group_mae_min": {
+          "19": 2.641882719588855,
+          "20": 4.6622949780811584,
+          "21": 2.5044171114576748,
+          "22": 22.068115518363495,
+          "23": 15.32283826468448,
+          "24": 7.319320913243098
+        },
+        "prediction_seconds": 0.014076099992962554,
+        "prediction_ms_per_row": 0.0023797295000782003
+      }
+    },
+    "elastic_net": {
+      "parameters": {
+        "alpha": 1.0,
+        "l1_ratio": 0.5,
+        "max_iter": 5000
+      },
+      "training_seconds": 0.11221610000939108,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 6.442934565694442,
+        "group_macro_mae_min": 7.113449654952981,
+        "rmse_min": 8.090593567200514,
+        "median_absolute_error_min": 5.126868201287175,
+        "p90_absolute_error_min": 14.45717974070935,
+        "r2": -0.2687928394177017,
+        "per_group_mae_min": {
+          "19": 2.60733217058312,
+          "20": 4.830267954301774,
+          "21": 3.762831952100102,
+          "22": 16.374199158787313,
+          "23": 7.106891402854814,
+          "24": 7.999175291090763
+        },
+        "prediction_seconds": 0.014084499998716637,
+        "prediction_ms_per_row": 0.002381149619394191
+      }
+    },
+    "random_forest": {
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 6,
+        "min_samples_leaf": 20
+      },
+      "training_seconds": 30.484427499992307,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 13.66866947571129,
+        "group_macro_mae_min": 10.902185659849257,
+        "rmse_min": 21.131839171390183,
+        "median_absolute_error_min": 3.934383514903736,
+        "p90_absolute_error_min": 40.181645771514404,
+        "r2": -7.65574677833329,
+        "per_group_mae_min": {
+          "19": 1.3943816967850238,
+          "20": 1.591453372880575,
+          "21": 2.8977909115665077,
+          "22": 8.180729604911697,
+          "23": 39.80215077210957,
+          "24": 11.546607600842163
+        },
+        "prediction_seconds": 0.08044840002548881,
+        "prediction_ms_per_row": 0.013600743875822283
+      }
+    },
+    "extra_trees": {
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 6,
+        "min_samples_leaf": 5
+      },
+      "training_seconds": 6.702172600023914,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 10.576726884599767,
+        "group_macro_mae_min": 8.469380862942652,
+        "rmse_min": 16.10665781241289,
+        "median_absolute_error_min": 4.048371095365411,
+        "p90_absolute_error_min": 31.011437686430423,
+        "r2": -4.028527315571385,
+        "per_group_mae_min": {
+          "19": 1.3381195995544597,
+          "20": 2.0745909238991866,
+          "21": 2.130577570659683,
+          "22": 9.191488587515174,
+          "23": 30.290729500979804,
+          "24": 5.790778995047603
+        },
+        "prediction_seconds": 0.042625100002624094,
+        "prediction_ms_per_row": 0.007206272189792746
+      }
+    },
+    "hist_gradient_boosting": {
+      "parameters": {
+        "loss": "absolute_error",
+        "max_iter": 200,
+        "max_depth": 4,
+        "learning_rate": 0.03,
+        "min_samples_leaf": 20
+      },
+      "training_seconds": 4.556723099987721,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 8.258051429062938,
+        "group_macro_mae_min": 7.139238110786702,
+        "rmse_min": 12.398009113567698,
+        "median_absolute_error_min": 4.466576225501002,
+        "p90_absolute_error_min": 26.809029270287954,
+        "r2": -1.9794345652241412,
+        "per_group_mae_min": {
+          "19": 1.2712093233822495,
+          "20": 0.9370455239318914,
+          "21": 3.8577906673484845,
+          "22": 8.283350874130097,
+          "23": 21.764601868670415,
+          "24": 6.721430407257073
+        },
+        "prediction_seconds": 0.18753739999374375,
+        "prediction_ms_per_row": 0.031705393067412296
+      }
+    },
+    "catboost": {
+      "parameters": {
+        "depth": 4,
+        "learning_rate": 0.08,
+        "iterations": 500,
+        "best_iteration": 7
+      },
+      "training_seconds": 6.723554399999557,
+      "metrics": {
+        "rows": 5915,
+        "groups": 6,
+        "row_mae_min": 3.8332258130599426,
+        "group_macro_mae_min": 3.8826021528984787,
+        "rmse_min": 4.606041962767528,
+        "median_absolute_error_min": 3.693538462068048,
+        "p90_absolute_error_min": 7.284076424097099,
+        "r2": 0.5887691098887411,
+        "per_group_mae_min": {
+          "19": 2.8056796482929656,
+          "20": 3.77790509034564,
+          "21": 2.3168765714852473,
+          "22": 5.829185501297258,
+          "23": 4.228127289957246,
+          "24": 4.337838816012518
+        },
+        "prediction_seconds": 0.03514179997728206,
+        "prediction_ms_per_row": 0.0059411327095996724
+      }
+    }
+  },
+  "selection": {
+    "primary_metric": "validation_group_macro_mae_min",
+    "tie_rule": "within 1 percent chooses median, ridge, elastic_net, random_forest, extra_trees, hist_gradient_boosting, then catboost",
+    "minimum_improvement_over_median": 0.02,
+    "selected_improvement_over_median": 0.0,
+    "winner": "median"
+  },
+  "final_holdout": {
+    "model": "median",
+    "metrics": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 2.4271064483855187,
+      "group_macro_mae_min": 2.436111116633765,
+      "rmse_min": 2.6024181659124412,
+      "median_absolute_error_min": 1.8333334000000008,
+      "p90_absolute_error_min": 3.98333333,
+      "r2": 0.8667389195043925,
+      "per_group_mae_min": {
+        "25": 3.983333333245034,
+        "26": 3.016666699999999,
+        "27": 1.4999999666666655,
+        "28": 3.250000033224223,
+        "29": 1.8333333666666662,
+        "30": 1.0333333000000007
+      },
+      "prediction_seconds": 0.014306900004157797,
+      "prediction_ms_per_row": 0.00233315394718816
+    }
+  },
+  "benchmark_test_summary": {
+    "median": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 2.4271064483855187,
+      "group_macro_mae_min": 2.436111116633765,
+      "rmse_min": 2.6024181659124412,
+      "median_absolute_error_min": 1.8333334000000008,
+      "p90_absolute_error_min": 3.98333333,
+      "r2": 0.8667389195043925,
+      "per_group_mae_min": {
+        "25": 3.983333333245034,
+        "26": 3.016666699999999,
+        "27": 1.4999999666666655,
+        "28": 3.250000033224223,
+        "29": 1.8333333666666662,
+        "30": 1.0333333000000007
+      },
+      "prediction_seconds": 0.011568599991733208,
+      "prediction_ms_per_row": 0.0018865949105892382
+    },
+    "ridge": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 4.392608546704797,
+      "group_macro_mae_min": 3.875918014569944,
+      "rmse_min": 5.569744688688025,
+      "median_absolute_error_min": 3.1470323781777876,
+      "p90_absolute_error_min": 9.903848028987404,
+      "r2": 0.38959266650817514,
+      "per_group_mae_min": {
+        "25": 4.1864068908497645,
+        "26": 9.226551847423952,
+        "27": 1.7417293465056822,
+        "28": 4.286639982301576,
+        "29": 1.9093782525754173,
+        "30": 1.9048017677632694
+      },
+      "prediction_seconds": 0.020980500004952773,
+      "prediction_ms_per_row": 0.003421477495915325
+    },
+    "elastic_net": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 4.795685065770012,
+      "group_macro_mae_min": 4.8628584039114875,
+      "rmse_min": 5.608244055242586,
+      "median_absolute_error_min": 4.304468315407852,
+      "p90_absolute_error_min": 8.743205340255841,
+      "r2": 0.38112494788058304,
+      "per_group_mae_min": {
+        "25": 6.639953522396853,
+        "26": 5.1982252804498446,
+        "27": 3.3470943766573633,
+        "28": 6.36182520142839,
+        "29": 4.317267717585715,
+        "30": 3.31278432495076
+      },
+      "prediction_seconds": 0.020215800002915785,
+      "prediction_ms_per_row": 0.003296771037657499
+    },
+    "random_forest": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 11.912967416281706,
+      "group_macro_mae_min": 8.57778020177476,
+      "rmse_min": 19.588914172213453,
+      "median_absolute_error_min": 2.9642609642819124,
+      "p90_absolute_error_min": 38.50648597841326,
+      "r2": -6.550398842046896,
+      "per_group_mae_min": {
+        "25": 5.9480666850429,
+        "26": 35.88261538727732,
+        "27": 1.9917639235216247,
+        "28": 4.499060649885209,
+        "29": 2.3250199100949063,
+        "30": 0.8201546548265979
+      },
+      "prediction_seconds": 0.06734099998720922,
+      "prediction_ms_per_row": 0.010981898236661647
+    },
+    "extra_trees": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 7.796453284341704,
+      "group_macro_mae_min": 5.734883403584256,
+      "rmse_min": 11.460954835730869,
+      "median_absolute_error_min": 3.6748478016079136,
+      "p90_absolute_error_min": 22.520357281076365,
+      "r2": -1.5845846982306289,
+      "per_group_mae_min": {
+        "25": 2.2327144127678458,
+        "26": 20.619736830864543,
+        "27": 0.8245196343501601,
+        "28": 4.79421017927582,
+        "29": 4.718844232306688,
+        "30": 1.2192751319404813
+      },
+      "prediction_seconds": 0.0698969999793917,
+      "prediction_ms_per_row": 0.011398727980983642
+    },
+    "hist_gradient_boosting": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 6.741921751437161,
+      "group_macro_mae_min": 5.019689467773795,
+      "rmse_min": 10.030438010905488,
+      "median_absolute_error_min": 3.207124431792009,
+      "p90_absolute_error_min": 21.077259830357775,
+      "r2": -0.9796525020726727,
+      "per_group_mae_min": {
+        "25": 3.2515875254754967,
+        "26": 17.156587037281067,
+        "27": 1.2602473196812174,
+        "28": 3.686052211954618,
+        "29": 4.245502570204271,
+        "30": 0.5181601420461068
+      },
+      "prediction_seconds": 0.1990172999794595,
+      "prediction_ms_per_row": 0.032455528372384135
+    },
+    "catboost": {
+      "rows": 6132,
+      "groups": 6,
+      "row_mae_min": 3.742724373788316,
+      "group_macro_mae_min": 3.653640796462526,
+      "rmse_min": 4.449648767869574,
+      "median_absolute_error_min": 3.5003763607264773,
+      "p90_absolute_error_min": 7.093126710591427,
+      "r2": 0.6104164332535238,
+      "per_group_mae_min": {
+        "25": 3.4375025254376697,
+        "26": 4.417785561560388,
+        "27": 2.4669974655337925,
+        "28": 4.77011785226513,
+        "29": 3.8226860681356327,
+        "30": 3.0067553058425425
+      },
+      "prediction_seconds": 0.03647449999698438,
+      "prediction_ms_per_row": 0.0059482224391690115
+    }
+  },
+  "limitations": [
+    "30 changeover sessions from a single CNC machine; split by session chronologically.",
+    "Target is online remaining changeover time (minutes) during setup, not pre-start static setup.",
+    "Workshop schedule integration is an explicit rolling-horizon simulation assumption."
+  ]
+}

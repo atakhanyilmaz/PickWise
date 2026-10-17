@@ -369,7 +369,7 @@ def load_production(data_dir=DATA):
     target = "target_elapsed_time"
     return Dataset("production_analysis", target, prepared.loc[meta.index, PRODUCTION_FEATURES],
                    meta, prepared.loc[meta.index, target], [raw_path, target_path], {
-                       "target_definition": "observed report elapsed minutes; not verified machine runtime",
+                       "target_definition": "mixed S/D/B observed report elapsed minutes; not verified machine runtime",
                        "excluded_rows_boundary_quarantine": quarantined,
                        "cutoffs": assignments["cutoffs"],
                        "excluded_columns": {
@@ -377,11 +377,14 @@ def load_production(data_dir=DATA):
                            "Qty Rejected": "outcome unavailable at prediction time",
                            "Qty for MRB": "outcome unavailable at prediction time",
                            "Worker ID": "identifier; not a known new-order input",
-                           "Report Type": "unresolved reporting semantics",
+                           "Report Type": "removed after retaining all S/D/B interval rows",
                            "Resource": "machine assignment not confirmed before prediction",
                            "Case ID": "group metadata only",
                        },
-                       "limitations": "Report Type S/D/B and report-row aggregation remain unresolved",
+                       "limitations": (
+                           "S/D/B interval types are mixed after their type column is removed; "
+                           "report-row aggregation and machine-runtime meaning remain unresolved"
+                       ),
                    })
 
 
