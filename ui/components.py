@@ -45,13 +45,19 @@ def source_badge(source):
     st.badge(label, icon=icon, color=color)
 
 
+def pill_column(title, colors):
+    """Read-only table column drawing each cell's labels as pills; colors maps label → badge color."""
+    return st.column_config.MultiselectColumn(
+        title,
+        options=list(colors),
+        color=[BADGE_HEX[color] for color in colors.values()],
+        disabled=True,
+    )
+
+
 def source_column(title):
     """Table column that renders source labels as colored pills, matching source_badge."""
-    labels = list(dict.fromkeys(SOURCE_LABELS.values()))
-    colors = {label: BADGE_HEX[color] for label, color, _ in SOURCES.values()}
-    return st.column_config.MultiselectColumn(
-        title, options=labels, color=[colors[label] for label in labels], disabled=True
-    )
+    return pill_column(title, {label: color for label, color, _ in SOURCES.values()})
 
 
 # Wordmark drawn inline (no image file): three Gantt-like bars and the product name.
@@ -429,3 +435,113 @@ def impact_table(comparison):
             "Fark (dk)": st.column_config.NumberColumn(format="%+d"),
         },
     )
+
+
+# Gemma assistant (WP-5N). Gemma only structures the request and picks computed facts,
+# so every card names where its content came from.
+EXPLANATION_ORIGINS = {
+    "gemma_selected_facts": ("Gemma seçti", "violet", ":material/auto_awesome:"),
+    "computed_fallback": ("Hesaplanan metin", "gray", ":material/calculate:"),
+}
+LOG_STAGES = {
+    "intent": "Araç seçimi",
+    "fields": "Alan çıkarımı",
+    "field_answer": "Cevap yorumu",
+    "operations_followup": "Operasyon cevabı",
+    "followup": "Takip cevabı",
+    "preflight": "Kural denetimi",
+    "tool_execution": "Plan inceleme",
+    "error": "Hata",
+    "explanation": "Açıklama",
+}
+
+
+def gemma_status(metadata, error):
+    """Connection badge for the local model, with the identity the client recorded."""
+    if metadata:
+        st.badge("Bağlı", icon=":material/check_circle:", color="green")
+        st.caption(
+            f"{metadata['model_tag']} · {metadata['parameter_size']} · "
+            f"{metadata['quantization']}"
+        )
+        st.caption(
+            f"Ollama {metadata['ollama_version']} · yerel, `{metadata['endpoint']}`"
+        )
+    else:
+        st.badge("Bağlı değil", icon=":material/cloud_off:", color="gray")
+        st.caption(error)
+
+
+def proposal_card(order, preserve_completions, machine_names):
+    """The order Gemma extracted, exactly as the solver would receive it."""
+    job = JobModel.model_validate(order)
+    with st.container(border=True):
+        st.markdown(f"**:material/assignment: {job.name}**")
+        source_badge(job.route_source)
+        table(
+            [
+                {
+                    "Sıra": index,
+                    "İşlem": op.name,
+                    "Makine ve süre": " · ".join(
+                        f"{machine_names[m]} {minutes} dk"
+                        for m, minutes in op.processing_times.items()
+                    ),
+                    "Süre kaynağı": [SOURCE_LABELS[op.duration_source.value]],
+                }
+                for index, op in enumerate(job.operations, 1)
+            ],
+            column_config={"Süre kaynağı": source_column("Süre kaynağı")},
+        )
+        if job.deadline is not None:
+            st.caption(f":material/flag: Sert termin: {clock(job.deadline)}")
+        elif job.due_date is not None:
+            st.caption(f":material/flag: Hedef termin: {clock(job.due_date)}")
+        else:
+            st.caption(":material/flag: Termin yok")
+        st.caption(
+            ":material/lock: Mevcut işlerin bitiş saatleri korunur"
+            if preserve_completions
+            else ":material/lock_open: Mevcut işler gerekirse kayabilir"
+        )
+        st.caption(
+            "Makine ve süreler yalnız sizin yazdıklarınızdan alınır; Gemma süre veya makine üretmez."
+        )
+
+
+def explanation_card(explanation):
+    """Turkish summary built from computed facts; the badge tells who picked them."""
+    label, color, icon = EXPLANATION_ORIGINS[explanation["origin"]]
+    with st.container(border=True):
+        st.markdown("**:material/chat: Sonucun açıklaması**")
+        st.badge(label, icon=icon, color=color)
+        st.markdown("\n".join(f"- {line}" for line in explanation["text"].splitlines()))
+        st.caption(
+            "Her cümle çözücü sonucundan şablonla yazılır. Gemma yalnız hangi bulguların "
+            "gösterileceğini seçer; seçim geçersizse hesaplanan metnin tamamı gösterilir."
+        )
+
+
+def model_log(audit, explanation=None):
+    """Which step asked the model, with which model and prompt version (AGENTS.md §4)."""
+    stages = list(audit)
+    if explanation:
+        stages.append(
+            {"stage": "explanation", "metadata": explanation["model_metadata"]}
+        )
+    rows = []
+    for stage in stages:
+        meta = stage.get("metadata") or {}
+        model = meta.get("model_tag") or ("Kod kuralı" if stage.get("origin") else "—")
+        rows.append(
+            {
+                "Adım": LOG_STAGES.get(stage["stage"], stage["stage"]),
+                "Model": model,
+                "İstem sürümü": meta.get("prompt_version", "—"),
+                "Süre (sn)": round(meta["total_duration"] / 1e9, 1)
+                if meta.get("total_duration")
+                else None,
+                "Not": meta.get("fallback_reason") or stage.get("type") or "",
+            }
+        )
+    table(rows)

@@ -6,6 +6,7 @@ import pytest
 from langgraph.types import Command
 
 from benchmarks.workshop_order_demo import DemoInput
+from core.domain_rules import JobModel
 from core.llm.conversation import IntentDecision, OrderFields
 from core.llm.graph import build_order_graph
 from core.llm.ollama_client import ModelUnavailable
@@ -73,7 +74,8 @@ def test_missing_duration_is_asked_then_order_waits_for_approval(baseline):
     out = graph.invoke(Command(resume="iki saat"), config)
     proposal = pause(out)
     assert proposal["kind"] == "confirmation"
-    assert proposal["order"]["operations"][0]["processing_times"] == {100: 120}
+    order = JobModel.model_validate(proposal["order"])
+    assert order.operations[0].processing_times == {100: 120}
     assert "simulation" not in out
 
 
@@ -83,7 +85,8 @@ def test_approval_runs_simulation_dispatch_and_explanation(baseline):
     out = graph.invoke(Command(resume=True), config)
     assert out["simulation"]["comparison"] is not None
     assert {s["machine_name"] for s in out["dispatch"]} == {"Torna 1", "Torna 2"}
-    assert "başlangıç planı değiştirilmedi" in out["explanation"]
+    assert "başlangıç planı değiştirilmedi" in out["explanation"]["text"]
+    assert out["explanation"]["origin"] == "computed_fallback"
     assert baseline.model_dump() == before
 
 
@@ -98,3 +101,14 @@ def test_unsupported_request_stops_without_pausing(baseline):
     _, _, out = start(baseline, ScriptedClient(), text="Torna 1 için duruş ekle.")
     assert "__interrupt__" not in out
     assert "desteklenmiyor" in out["message"]
+
+
+def test_inspection_request_is_answered_from_computed_plan_facts(baseline):
+    _, _, out = start(
+        baseline,
+        ScriptedClient(tool="inspect_plan"),
+        text="Yeni sipariş almadan önce kaç iş bekliyor?",
+    )
+    assert "__interrupt__" not in out and "simulation" not in out
+    assert out["message"].startswith("Yüklü planda")
+    assert "Plan değiştirilmedi" in out["message"]

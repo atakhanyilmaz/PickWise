@@ -1,9 +1,10 @@
-"""Streamlit pages (WP-1N to WP-4N). Each page only loads data through existing services and composes ui.components."""
+"""Streamlit pages (WP-1N to WP-5N). Each page only loads data through existing services and composes ui.components."""
 
 import json
 import sqlite3
 from collections import defaultdict
 from datetime import datetime
+from importlib import metadata
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -409,7 +410,8 @@ def downtime_bands(scenario):
     ]
 
 
-def simulation_result(baseline, outcome, parent_version_id):
+def simulation_result(baseline, outcome, parent_version_id, state_key="simulation"):
+    """Before/after view and the save panel; `state_key` is the session entry cleared after saving."""
     simulation = outcome.simulation
     if simulation.comparison is None:
         st.error(
@@ -471,7 +473,7 @@ def simulation_result(baseline, outcome, parent_version_id):
                     icon=":material/sync_problem:",
                 )
                 return
-            del st.session_state["simulation"]
+            st.session_state.pop(state_key, None)
             st.session_state["saved_version"] = version
             st.rerun()
 
@@ -708,82 +710,263 @@ def experiment_page():
     )
 
 
+# Hakkında (WP-5N): what is reused from open source and what the team built.
+# Laid out as a 4×3 grid: the flow runs right along the top row, then back along the bottom.
+ARCHITECTURE = """
+digraph {
+  graph [rankdir=LR bgcolor="transparent" nodesep=0.5 ranksep=0.7 fontname="Helvetica"]
+  node [shape=box style="rounded,filled" fontname="Helvetica" fontsize=13 fontcolor="#1F2937" color="#CBD5E1" width=1.9 height=0.65]
+  edge [color="#94A3B8" arrowsize=0.8 fontname="Helvetica" fontsize=10 fontcolor="#64748B"]
+  data [label="Plan, sipariş, duruş\n(JSON, SQLite)" fillcolor="#FED7AA"]
+  gemma [label="Gemma (yerel)\ntalep ve açıklama" fillcolor="#E9D5FF"]
+  env [label="Çizelgeleme ortamı\nBrandimarte" fillcolor="#E2E8F0"]
+  rules [label="Atölye kuralları\n(Pydantic)" fillcolor="#FED7AA"]
+  store [label="Onaylı plan\nsürümleri" fillcolor="#FED7AA"]
+  solver [label="CP-SAT çözücü" fillcolor="#BFDBFE"]
+  ui [label="Streamlit arayüzü\nonay ve kayıt" fillcolor="#FED7AA"]
+  check [label="Bağımsız\ndoğrulayıcı" fillcolor="#FED7AA"]
+  compare [label="Önce / sonra\nkarşılaştırma" fillcolor="#FED7AA"]
+  {rank=same; data; gemma}
+  {rank=same; env; rules; store}
+  {rank=same; solver; ui}
+  {rank=same; check; compare}
+  data -> rules -> solver -> check
+  env -> solver
+  check -> compare
+  ui -> compare [dir=back]
+  store -> ui [dir=back]
+  gemma -> rules [label="onaylı taslak"]
+  gemma -> compare [dir=back style=dashed label="hesaplanan bulgular"]
+}
+"""
+ORIGINS = {"Açık kaynak": "gray", "Açık kaynak + ekip": "blue", "Ekip": "orange"}
+STATES = {
+    "Çalışıyor": "green",
+    "Deneysel": "violet",
+    "Deney": "violet",
+    "Bekliyor": "gray",
+}
+COMPONENTS = [
+    (
+        "Çizelgeleme ortamı",
+        "İş, operasyon ve makine yapıları; benchmark ayrıştırıcıları",
+        "Açık kaynak",
+        "Çalışıyor",
+        "scheduling_environment/",
+    ),
+    (
+        "Brandimarte örnekleri",
+        "Mk01–Mk10 esnek atölye problemleri",
+        "Açık kaynak",
+        "Çalışıyor",
+        "external/job_shop_benchmark/",
+    ),
+    (
+        "CP-SAT çözücü",
+        "Makine ataması ve zamanlama; süre sınırı ve çözüm durumu",
+        "Açık kaynak + ekip",
+        "Çalışıyor",
+        "core/cpsat_solver.py",
+    ),
+    (
+        "Atölye kuralları",
+        "Termin, duruş, başlamış ve tamamlanmış işlemler",
+        "Ekip",
+        "Çalışıyor",
+        "core/workshop_model.py",
+    ),
+    (
+        "Bağımsız doğrulayıcı",
+        "Çizelgeyi çözücüden ayrı denetler",
+        "Ekip",
+        "Çalışıyor",
+        "core/validation.py",
+    ),
+    (
+        "Sipariş ve duruş simülasyonu",
+        "Önce/sonra karşılaştırma ve etkilenen işler",
+        "Ekip",
+        "Çalışıyor",
+        "core/scenarios.py, core/downtime.py",
+    ),
+    (
+        "Veri hattı",
+        "Plan → değişiklik → çözüm → tezgâh durumu",
+        "Ekip",
+        "Çalışıyor",
+        "core/pipeline.py",
+    ),
+    (
+        "Plan sürümleri",
+        "Onaylı planları SQLite'ta sürüm olarak saklar",
+        "Ekip",
+        "Çalışıyor",
+        "core/sqlite_repository.py",
+    ),
+    (
+        "Gemma talep ve açıklama",
+        "Türkçe talebi siparişe çevirir, sonucu açıklar",
+        "Ekip",
+        "Deneysel",
+        "core/llm/",
+    ),
+    (
+        "LangGraph akışı",
+        "Soru ve onay için duraklayan sipariş akışı",
+        "Ekip",
+        "Deneysel",
+        "core/llm/graph.py",
+    ),
+    (
+        "Süre tahmini",
+        "TabPFN ve diğer modellerin medyanla karşılaştırması; planda kullanılmaz",
+        "Ekip",
+        "Deney",
+        "experiments/tabpfn/",
+    ),
+    (
+        "Benzer iş arama",
+        "EmbeddingGemma ile geçmiş iş özetlerinde arama",
+        "Ekip",
+        "Bekliyor",
+        "—",
+    ),
+    (
+        "Arayüz",
+        "Streamlit sayfaları, Altair Gantt ve bileşenler",
+        "Ekip",
+        "Çalışıyor",
+        "ui/",
+    ),
+]
+LIBRARIES = [
+    ("ortools", "OR-Tools", "Apache-2.0", "CP-SAT çözücü"),
+    ("streamlit", "Streamlit", "Apache-2.0", "Arayüz"),
+    ("altair", "Altair", "BSD-3-Clause", "Gantt ve grafikler"),
+    ("pydantic", "Pydantic", "MIT", "Veri sözleşmeleri"),
+    ("pandas", "pandas", "BSD-3-Clause", "Tablolar"),
+    ("langgraph", "LangGraph", "MIT", "Gemma akışı"),
+]
+TEAM = [
+    (
+        "Atakan Yılmaz",
+        "atakhanyilmaz",
+        "Çözücü ve Brandimarte kıyası, dinamik yeniden çizelgeleme, Gemma akışı, süre tahmini modelleri",
+    ),
+    (
+        "Yunus",
+        "yunussfr",
+        "Veri doğrulama, SQLite plan sürümleri, veri hattı, EmbeddingGemma arama",
+    ),
+    (
+        "Nazlısu Başak",
+        "nazlisu07",
+        "Arayüz ve bileşenler, Gantt ve grafikler, rota onayı, simülasyon ve Gemma ekranları, tutorial'lar",
+    ),
+]
+LIMITS = [
+    "Tezgâhlar kesintisiz çalışır varsayılır; vardiya, mola ve takvim yok.",
+    "Operasyonlar bölünemez; hazırlık süresi sıraya bağlı değildir.",
+    "Demo planı ve demo sipariş açıkça etiketli örnek verilerdir; gerçek işletme ölçümü yoktur.",
+    "Brandimarte süreleri benchmark birimidir, dakika değildir.",
+    "Gemma akışı deneyseldir; model yoksa her şey elle girişle çalışır.",
+    "Süre tahmini modelleri medyanı güvenilir biçimde geçemedi; planlama onaylı süreleri kullanır.",
+]
+
+
+def library_version(package):
+    try:
+        return metadata.version(package)
+    except metadata.PackageNotFoundError:
+        return "kurulu değil"
+
+
 def about_page():
     st.title("Hakkında")
     st.write(
-        "PickWise, fason imalat atölyeleri için bir üretim planlama yardımcısıdır. "
-        "Mevcut plana yeni bir sipariş eklendiğinde işlerin ne zaman biteceğini, "
-        "hangi tezgâhın yükleneceğini ve hangi siparişlerin etkileneceğini gösterir."
+        "PickWise, fason imalat atölyeleri için yerelde çalışan bir üretim planlama "
+        "yardımcısıdır. Temel soru şudur: bu yeni siparişi mevcut plana eklersem ne zaman "
+        "biter, hangi işler gecikir ve başka bir uygun makine sonucu değiştirir mi?"
     )
-    st.subheader("Bileşenler")
+    does, does_not = st.columns(2)
+    with does.container(border=True, height="stretch"):
+        st.markdown("**:material/check_circle: Ne yapar**")
+        st.markdown(
+            "- Planı CP-SAT ile çözer, sonucu bağımsız doğrulayıcıdan geçirir\n"
+            "- Yeni sipariş ve makine duruşunun etkisini önce/sonra gösterir\n"
+            "- Rota ve sürelerin kaynağını rozetle belirtir\n"
+            "- Onaylanan planı yeni sürüm olarak saklar"
+        )
+    with does_not.container(border=True, height="stretch"):
+        st.markdown("**:material/do_not_disturb_on: Ne yapmaz**")
+        st.markdown(
+            "- Ölçülmemiş tasarruf veya verimlilik iddiası üretmez\n"
+            "- Gemma'ya süre, saat ya da makine seçtirmez\n"
+            "- Onayınız olmadan planı değiştirmez veya kaydetmez\n"
+            "- Verileri buluta göndermez; model yerel Ollama'da çalışır"
+        )
+
+    st.subheader("Mimari")
+    st.graphviz_chart(ARCHITECTURE)
+    st.caption(
+        "Turuncu: ekibin geliştirdiği · Mavi: açık kaynak üzerine ekip uyarlaması · "
+        "Gri: açık kaynak · Mor: yerel dil modeli"
+    )
+
+    st.subheader("Açık kaynak ve ekip katkısı")
     ui.table(
         [
-            {"Bileşen": b, "Ne yapar": w, "Kaynak": k, "Durum": d}
-            for b, w, k, d in [
-                (
-                    "Çizelgeleme ortamı",
-                    "İş, operasyon, makine modeli; benchmark ayrıştırıcıları",
-                    "Açık kaynak",
-                    "Kullanılıyor",
-                ),
-                (
-                    "CP-SAT çözücü",
-                    "Makine ataması ve zamanlama",
-                    "Açık kaynak + OR-Tools",
-                    "Kullanılıyor",
-                ),
-                (
-                    "Doğrulayıcı",
-                    "Çizelgeyi çözücüden bağımsız denetler",
-                    "Ekip",
-                    "Kullanılıyor",
-                ),
-                (
-                    "Atölye modeli",
-                    "Termin, duruş, tamamlanmış ve devam eden işlemler",
-                    "Ekip",
-                    "Kullanılıyor",
-                ),
-                (
-                    "Plan karşılaştırma",
-                    "Yeni sipariş öncesi ve sonrası",
-                    "Ekip",
-                    "Hazır, arayüze bağlanacak",
-                ),
-                (
-                    "Plan sürümleri",
-                    "Onaylı planlar (SQLite)",
-                    "Ekip",
-                    "Plan ekranı okuyor",
-                ),
-                ("Arayüz", "Streamlit sayfaları ve Gantt", "Ekip", "Bu ekran"),
-                ("TabPFN", "Geçmiş kayıtlardan süre tahmini", "Ekip", "Aşama 3"),
-                ("EmbeddingGemma", "Benzer geçmiş işleri bulur", "Ekip", "Aşama 5"),
-                (
-                    "Gemma",
-                    "Türkçe talebi forma çevirir, sonucu açıklar",
-                    "Ekip",
-                    "Deneysel servis hazır",
-                ),
-            ]
-        ]
+            {
+                "Bileşen": name,
+                "Ne yapar": what,
+                "Kaynak": [origin],
+                "Durum": [state],
+                "Kod": path,
+            }
+            for name, what, origin, state, path in COMPONENTS
+        ],
+        column_config={
+            "Kaynak": ui.pill_column("Kaynak", ORIGINS),
+            "Durum": ui.pill_column("Durum", STATES),
+            "Kod": st.column_config.TextColumn("Kod", width="medium"),
+        },
     )
-    left, right = st.columns(2)
-    with left:
-        st.subheader("Açık kaynak")
-        st.write(
-            "Çizelgeleme ortamı, Brandimarte verileri ve CP-SAT modeli "
-            "[TU Eindhoven Job Shop Scheduling Benchmark](https://github.com/ai-for-decision-making-tue/"
-            f"Job_Shop_Scheduling_Benchmark_Environments_and_Instances) deposundan alınmıştır "
-            f"(commit {COMMIT[:7]}, MIT lisansı)."
-        )
-    with right:
-        st.subheader("Ekip")
-        st.markdown(
-            "- **Atakan Yılmaz:** çözücü, dinamik yeniden çizelgeleme, TabPFN, Gemma\n"
-            "- **Yunus:** veri hattı, SQLite şeması, EmbeddingGemma\n"
-            "- **Nazlısu Başak:** arayüz, Gantt ve görselleştirme, tutorial'lar"
-        )
     st.caption(
-        "Sürüm 0.1 (demo) · TabPFN ve Gemma model lisansları ayrıca doğrulanacak."
+        "Çizelgeleme ortamı, Brandimarte verileri ve CP-SAT modelinin temeli "
+        "[TU Eindhoven Job Shop Scheduling Benchmark](https://github.com/ai-for-decision-making-tue/"
+        f"Job_Shop_Scheduling_Benchmark_Environments_and_Instances) deposundan alınmıştır "
+        f"(commit `{COMMIT[:7]}`, MIT lisansı)."
     )
+
+    st.subheader("Kütüphaneler ve modeller")
+    left, right = st.columns([3, 2])
+    with left:
+        ui.table(
+            [
+                {
+                    "Kütüphane": name,
+                    "Sürüm": library_version(package),
+                    "Lisans": license,
+                    "Kullanım": use,
+                }
+                for package, name, license, use in LIBRARIES
+            ]
+        )
+    with right.container(border=True):
+        st.markdown("**:material/gavel: Model lisansları**")
+        st.markdown(
+            "- **Gemma:** Google Gemma kullanım şartları; ağırlıklar Ollama ile yerelde\n"
+            "- **TabPFN v2:** Prior Labs ağırlık lisansı, `experiments/tabpfn/docs/licenses`\n"
+            "- Deponun MIT lisansı dış veri ve modelleri kapsamaz."
+        )
+
+    st.subheader("Ekip")
+    for column, (name, handle, work) in zip(st.columns(len(TEAM)), TEAM):
+        with column.container(border=True, height="stretch"):
+            st.markdown(f"**{name}**")
+            st.caption(f"[@{handle}](https://github.com/{handle})")
+            st.write(work)
+
+    st.subheader("Varsayımlar ve sınırlamalar")
+    st.markdown("\n".join(f"- {limit}" for limit in LIMITS))
+    st.caption("Sürüm 0.1 (demo) · Code_Night")

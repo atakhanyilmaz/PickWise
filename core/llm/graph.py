@@ -3,7 +3,7 @@
 The graph adds only the human pauses; every decision stays in the tested functions it calls:
 
     intake ─▶ clarify ↺ ─▶ confirm ─▶ simulate ─▶ explain
-       └──────────┴──────────┴─▶ stop (unsupported, inspection, model error, declined)
+       └──────────┴──────────┴─▶ stop (unsupported, inspection answer, model error, declined)
 
 Usage:
 
@@ -14,7 +14,10 @@ Usage:
     out = graph.invoke(Command(resume="iki saat"), config)  # answer a question
     out = graph.invoke(Command(resume=True), config)        # approve the proposal
 
-State holds plain JSON (model_dump) so the checkpointer stores no custom classes;
+`explanation` is an Explanation dump: text, origin (Gemma-selected or computed
+fallback), selected fact ids and model metadata.
+
+State holds plain JSON (model_dump(mode="json")) so the checkpointer stores no custom classes;
 nodes revalidate it with the Pydantic models on every read. Nothing is saved to SQLite.
 """
 
@@ -25,7 +28,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import interrupt
 
 from core.llm.conversation import IntakeSession, answer_intake, begin_intake
-from core.llm.explanation import explain_simulation
+from core.llm.explanation import explain_inspection, explain_simulation
 from core.llm.intake import confirm_and_simulate
 from core.pipeline import dispatch
 from core.scenarios import PlanSnapshot, SimulationResult
@@ -37,7 +40,7 @@ class OrderState(TypedDict, total=False):
     approved: bool
     simulation: dict
     dispatch: list[dict]
-    explanation: str
+    explanation: dict
     message: str
 
 
@@ -63,7 +66,11 @@ def build_order_graph(
     """Compile the order graph for one baseline plan and one model client."""
 
     def intake(state):
-        return {"session": begin_intake(state["text"], baseline, client).model_dump()}
+        return {
+            "session": begin_intake(state["text"], baseline, client).model_dump(
+                mode="json"
+            )
+        }
 
     def clarify(state):
         session = _session(state)
@@ -75,7 +82,9 @@ def build_order_graph(
             }
         )
         return {
-            "session": answer_intake(session, answer, baseline, client).model_dump()
+            "session": answer_intake(session, answer, baseline, client).model_dump(
+                mode="json"
+            )
         }
 
     def confirm(state):
@@ -83,7 +92,7 @@ def build_order_graph(
         decision = interrupt(
             {
                 "kind": "confirmation",
-                "order": result.proposed_order.model_dump(),
+                "order": result.proposed_order.model_dump(mode="json"),
                 "preserve_existing_completions": result.preserve_existing_completions,
             }
         )
@@ -107,18 +116,26 @@ def build_order_graph(
             else []
         )
         return {
-            "simulation": simulation.model_dump(),
-            "dispatch": [status.model_dump() for status in statuses],
+            "simulation": simulation.model_dump(mode="json"),
+            "dispatch": [status.model_dump(mode="json") for status in statuses],
         }
 
     def explain(state):
         simulation = SimulationResult.model_validate(state["simulation"])
-        return {"explanation": explain_simulation(simulation, client).text}
+        return {
+            "explanation": explain_simulation(simulation, client).model_dump(
+                mode="json"
+            )
+        }
 
     def stop(state):
         if state.get("approved") is False:
             return {"message": "Onay verilmedi; simülasyon çalıştırılmadı."}
-        return {"message": " ".join(_session(state).result.questions)}
+        result = _session(state).result
+        if result.state == "inspection":
+            answer = explain_inspection(result.user_text, result.inspection, client)
+            return {"message": answer.text}
+        return {"message": " ".join(result.questions)}
 
     graph = StateGraph(OrderState)
     for name, node in [

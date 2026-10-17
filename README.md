@@ -370,7 +370,7 @@ indirilmez. Taslak ayrı insan onayı olmadan simüle edilmez. Bu deneysel akı�
 
 Medyan referansı ve veri sızıntısı kontrolleri:
 =======
-## Arayüz (WP-1N, WP-2N)
+## Arayüz (WP-1N … WP-5N)
 
 ```sh
 .venv/bin/streamlit run ui/app.py
@@ -414,6 +414,26 @@ altındaki doğrulama raporunu ve tahmin CSV'lerini okur: iki görev (toplam iş
 süresi, makineler arası bekleme) için model başına MAE grafiği, seçilen modelde
 gerçek ve tahmin noktaları, bütün metrikler. Hiçbir model medyanı güvenilir
 biçimde geçmediği için planlamadaki süre kaynağı kullanıcı süresi olarak kalır.
+
+Gemma asistanı sayfası (WP-5N, `ui/assistant.py`) `core/llm/graph.py` akışını
+sohbet olarak sürer: Türkçe talep → eksik makine/süre/termin soruları (hızlı
+cevap düğmeleri veya sohbet kutusu) → çıkarılan siparişin onay kartı → yalnız
+"Onayla ve simüle et" ile simülasyon → açıklama kartı. Açıklamadaki her cümle
+çözücü sonucundan şablonla yazılır; rozet, bulguları Gemma'nın mı seçtiğini
+yoksa hesaplanan yedek metnin mi gösterildiğini belirtir. "Model kaydı" her
+adımın modelini, istem sürümünü ve süresini listeler. Önce/sonra Gantt ve
+"Planı kaydet" Simülasyon sayfasıyla aynı bileşenlerdir. Model yerel Ollama'dan
+seçilir (yalnız kurulu Gemma etiketleri; varsayılan `gemma4:e2b`); model yoksa
+sayfa bunu söyler ve Simülasyon sayfasındaki elle girişe yönlendirir. Benzer
+geçmiş iş kartı EmbeddingGemma araması (WP-5Y) gelene kadar "henüz bağlı değil"
+olarak görünür. Testler (`tests/test_assistant_ui.py`) senaryolu bir model
+istemcisi ve geçici veritabanı kullanır; gerçek Gemma kalitesinin ölçümü
+değildir.
+
+Hakkında sayfası ürünün ne yaptığını ve yapmadığını, mimari şemayı, açık kaynak
+ile ekip katkısını ayıran bileşen tablosunu (kaynak ve durum rozetleri, kod
+yolu), kütüphane sürümleri ve lisanslarını, model lisanslarını, ekibi ve
+varsayımları gösterir.
 
 ## Planlama hattı
 

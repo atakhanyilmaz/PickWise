@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import streamlit as st  # noqa: E402
 
+from ui import assistant  # noqa: E402
 from ui import components as ui  # noqa: E402
 from ui import pages  # noqa: E402
 
@@ -28,6 +29,11 @@ navigation = st.navigation(
                 pages.simulation_page,
                 title="Simülasyon",
                 icon=":material/compare_arrows:",
+            ),
+            st.Page(
+                assistant.assistant_page,
+                title="Gemma asistanı",
+                icon=":material/smart_toy:",
             ),
         ],
         "Doğrulama": [
