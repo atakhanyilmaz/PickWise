@@ -552,10 +552,34 @@ def answer_intake(
     value = answer.strip().rstrip(".")
     if slot.kind == "intent":
         session.messages.append(answer)
+        # A reply that is one of the offered choices is the user's own decision:
+        # route it in code instead of asking the model again (it may answer clarify).
+        choice = _normalize(value)
+        if choice == "planı incele":
+            return _inspect(session, baseline, answer)
+        if choice == "yeni sipariş ekle" and client is not None:
+            session.result.tool = "simulate_order"
+            session.audit.append(
+                {"stage": "intent", "origin": "code_rule", "reason": "offered_choice"}
+            )
+            try:
+                return _extract_fields(
+                    session, baseline, client, "\n".join(session.messages)
+                )
+            except (ModelUnavailable, InvalidModelOutput) as exc:
+                session.result.state = (
+                    "model_unavailable"
+                    if isinstance(exc, ModelUnavailable)
+                    else "invalid_model_output"
+                )
+                session.result.questions = [
+                    "Sipariş alanları doğrulanamadı; plan değiştirilmedi. Manuel giriş kullanılabilir."
+                ]
+                session.audit.append({"stage": "error", "type": type(exc).__name__})
+                session.result.model_metadata = {"stages": session.audit}
+                return session
         if client is None:
             # Explicit manual controls remain usable without a running model.
-            if _normalize(value) == "planı incele":
-                return _inspect(session, baseline, answer)
             session.result.questions = [
                 "Doğal dil yanıtını yorumlamak için Gemma gerekli; manuel plan inceleme veya form kullanılabilir."
             ]

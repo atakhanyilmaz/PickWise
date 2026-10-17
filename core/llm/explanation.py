@@ -127,7 +127,8 @@ def explain_inspection(query, inspection, client=None):
             metadata["fallback_reason"] = (
                 "Model unavailable or inspection fact selection invalid"
             )
-    selected = list(dict.fromkeys(selected + ["scope"]))
+    # The counts and the finish time always answer the question; the model only adds.
+    selected = list(dict.fromkeys(["workload", "completion"] + selected + ["scope"]))
     return Explanation(
         text="\n".join(facts[k] for k in selected),
         origin=origin,

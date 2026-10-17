@@ -204,3 +204,28 @@ def test_inspection_explanation_uses_tool_facts_and_falls_back_on_invention(base
     assert invalid.origin == "computed_fallback"
     assert "999" not in invalid.text
     assert "Plan değiştirilmedi" in invalid.text
+
+
+def test_offered_intent_choice_does_not_loop_when_the_model_says_clarify(baseline):
+    client = ScriptedClient(
+        fields(machine=None, duration=None), tool="clarify", evidence=""
+    )
+    session = begin_intake("merhaba", baseline, client)
+    assert session.pending[0].kind == "intent"
+    order = answer_intake(session, "yeni sipariş ekle", baseline, client)
+    assert order.result.tool == "simulate_order"
+    assert order.pending[0].kind != "intent"
+    inspection = answer_intake(session, "Planı incele", baseline, client)
+    assert inspection.result.state == "inspection"
+
+
+def test_inspection_answer_always_states_counts_and_finish(baseline):
+    from tests.test_gemma_service import FakeClient
+
+    inspection = execute_tool("inspect_plan", {"query": "planı incele"}, baseline)
+    result = explain_inspection(
+        "planı incele", inspection, FakeClient(FactSelection(fact_ids=["scope"]))
+    )
+    assert result.origin == "gemma_selected_facts"
+    assert result.text.startswith("Yüklü planda 2 iş var")
+    assert "Planın son bitişi" in result.text

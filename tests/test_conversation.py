@@ -261,7 +261,8 @@ def test_intent_followup_retains_original_order_details(baseline):
     result = answer_intake(session, "yeni sipariş ekle", baseline, client)
     assert result.result.state == "confirmation_required"
     assert result.result.proposed_order.operations[0].processing_times == {100: 10}
-    assert client.calls == ["IntentDecision", "IntentDecision", "OrderFields"]
+    # The offered choice is routed in code; only the first intent asks the model.
+    assert client.calls == ["IntentDecision", "OrderFields"]
 
 
 def test_invalid_name_after_missing_duration_is_rejected_without_crash(baseline):
