@@ -168,3 +168,34 @@ medyan fallback, izinli özellikler ve MAE/RMSE raporlaması hazırdır.
 [Gemma ve deney kararı](docs/decisions/004-local-gemma-and-duration-evaluation.md).
 
 Genişletilmiş kontrol: `.venv/bin/ruff check core tests benchmarks ml_experiments`.
+
+## Gemma: niyet ayrımı ve takip soruları
+
+UI/CLI akışı artık `core.llm.conversation.begin_intake` ve `answer_intake`
+fonksiyonlarını kullanır. Niyet ve alan çıkarımı ayrı model çağrılarıdır.
+Eksik/belirsiz alan `session.pending` içinde soru ve seçeneklerle döner.
+Makine/süre yanıtı yalnız ilgili alanı kodla değiştirir; diğer alanlar korunur.
+Süre örnekleri `iki saat`, `bir buçuk saat`, `25 dakika` olabilir. Son taslak
+ayrı insan onayı gerektirir. `extract_order` eski tek mesajlı API olarak kalır.
+
+```sh
+.venv/bin/python -m benchmarks.gemma_order_cli \
+  --baseline results/workshop_order/baseline.json \
+  --text 'Yeni sipariş: Torna 1 üzerinde tornalama yapacağız.'
+```
+
+CLI süreyi sorar; ardından tamamlanmış taslağı gösterip ayrıca onay ister.
+Gerçek tarih dönüşümü yoktur: göreli termin için kullanıcıdan `t=40 dakika`
+gibi açık sınır istenir. Duruş doğal dil aracı ve senaryo servisi sonraki aşamadadır.
+
+```sh
+.venv/bin/python -m benchmarks.gemma_conversation_evaluation --split development
+.venv/bin/python -m benchmarks.gemma_conversation_evaluation --split heldout
+```
+
+Son gerçek model çalıştırmasında geliştirme 7/8, ayrı test 6/6 akış geçti.
+Bu küçük sentetik servis testi; genel model/saha doğruluğu iddiası değildir.
+Kod kontrolleri ve test kullanıcı yanıtları sonuca dahildir. Önceki 3/5 rapor
+tek mesajlı eski API'ye aittir. [Karar ve kapsam](docs/decisions/005-gemma-conversation-reliability.md).
+Yunus'un gerçek veri hazırlığı bu çalışmanın girdisi değildir; TabPFN deneyi
+onaylı hedef ve veri kümesini bekler.

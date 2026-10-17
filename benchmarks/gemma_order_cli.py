@@ -6,7 +6,8 @@ from pathlib import Path
 
 from core.domain_rules import JobModel
 from core.llm.explanation import explain_simulation
-from core.llm.intake import confirm_and_simulate, extract_order
+from core.llm.intake import confirm_and_simulate
+from core.llm.conversation import begin_intake, answer_intake
 from core.llm.ollama_client import OllamaClient
 from core.scenarios import OrderRequest, PlanSnapshot, simulate_order
 
@@ -25,7 +26,26 @@ def main():
     client = None
     if args.text:
         client = OllamaClient(args.model)
-        intake = extract_order(args.text, baseline, client)
+        session = begin_intake(args.text, baseline, client)
+        for _ in range(12):
+            (args.output / "session.json").write_text(
+                session.model_dump_json(indent=2), encoding="utf-8"
+            )
+            if session.result.state != "clarification" or not session.pending:
+                break
+            slot = session.pending[0]
+            print(slot.question)
+            if slot.choices:
+                print("Seçenekler:", ", ".join(slot.choices))
+            answer = input("Yanıt (vazgeçmek için iptal): ")
+            if answer.strip().lower() == "iptal":
+                print("İstek iptal edildi; simülasyon çalıştırılmadı.")
+                return
+            session = answer_intake(session, answer, baseline, client)
+        (args.output / "session.json").write_text(
+            session.model_dump_json(indent=2), encoding="utf-8"
+        )
+        intake = session.result
         (args.output / "intake.json").write_text(
             intake.model_dump_json(indent=2), encoding="utf-8"
         )

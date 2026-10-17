@@ -79,14 +79,66 @@ class IntakeResult(Contract):
 
 
 def _minutes(text):
-    match = re.fullmatch(
-        r"\s*(\d+(?:[.,]\d+)?)\s*(dakika|dk|saat)\s*", text, re.IGNORECASE
-    )
+    match = re.fullmatch(r"\s*(.+?)\s*(dakika|dk|saat)\s*", text, re.IGNORECASE)
     if not match:
         raise ValueError("Süre dakika veya saat birimiyle açık yazılmalı.")
-    value = Decimal(match[1].replace(",", ".")) * (
-        60 if match[2].lower() == "saat" else 1
+    raw = _normalize(match[1]).replace(",", ".")
+    units = dict(
+        zip(
+            (
+                "sıfır",
+                "bir",
+                "iki",
+                "üç",
+                "dört",
+                "beş",
+                "altı",
+                "yedi",
+                "sekiz",
+                "dokuz",
+            ),
+            range(10),
+        )
     )
+    tens = dict(
+        zip(
+            (
+                "on",
+                "yirmi",
+                "otuz",
+                "kırk",
+                "elli",
+                "altmış",
+                "yetmiş",
+                "seksen",
+                "doksan",
+            ),
+            range(10, 100, 10),
+        )
+    )
+    if re.fullmatch(r"\d+(?:\.\d+)?", raw):
+        value = Decimal(raw)
+    elif raw == "yarım":
+        value = Decimal("0.5")
+    else:
+        words = raw.split()
+        half = words[-1:] == ["buçuk"]
+        if half:
+            words = words[:-1]
+        if len(words) == 1 and words[0] in units | tens:
+            value = Decimal((units | tens)[words[0]])
+        elif (
+            len(words) == 2
+            and words[0] in tens
+            and words[1] in units
+            and units[words[1]] > 0
+        ):
+            value = Decimal(tens[words[0]] + units[words[1]])
+        else:
+            raise ValueError("Süreyi örneğin 25 dakika veya iki saat olarak belirtin.")
+        if half:
+            value += Decimal("0.5")
+    value *= 60 if match[2].lower() == "saat" else 1
     if value <= 0 or value != value.to_integral_value():
         raise ValueError("Süre pozitif tamsayı dakikaya dönüşmeli.")
     return int(value)
@@ -109,7 +161,14 @@ def _machine(text, scenario):
 
 
 def interpret_draft(
-    text: str, baseline: PlanSnapshot, draft: IntakeDraft, metadata=None
+    text: str,
+    baseline: PlanSnapshot,
+    draft: IntakeDraft,
+    metadata=None,
+    *,
+    resolved_time=False,
+    resolved_preservation=False,
+    resolved_no_deadline=False,
 ):
     baseline = PlanSnapshot.model_validate(baseline.model_dump())
     result = IntakeResult(
@@ -128,7 +187,7 @@ def interpret_draft(
         unsupported.append(
             "Bu talepteki takvim/duruş/hazırlık veya ticari işlem bu sipariş aracında desteklenmiyor."
         )
-    if re.search(
+    if not resolved_time and re.search(
         r"\b(yarın|bugün|sabah|akşam|pazartesi|salı|çarşamba|perşembe|cuma|cumartesi|pazar)\b",
         lower,
     ):
@@ -226,7 +285,7 @@ def interpret_draft(
                     deadline = int(match[1])
                 else:
                     due_date = int(match[1])
-    elif has_termin:
+    elif has_termin and not resolved_no_deadline:
         questions.append("İstenen termin ve sert/yumuşak türü açık değil; doğrulayın.")
     if draft.preservation != "none":
         if not draft.preservation_text or draft.preservation_text not in text:
@@ -245,7 +304,9 @@ def interpret_draft(
                 questions.append(
                     "Mevcut yumuşak müşteri terminlerini sert sınıra çevirmek bu araçta desteklenmiyor; mevcut bitişleri koruma seçeneğini kullanabilirsiniz."
                 )
-    elif re.search(r"geciktirme|gecikmesin|bitişleri koru|terminlerini koru", lower):
+    elif not resolved_preservation and re.search(
+        r"geciktirme|gecikmesin|bitişleri koru|terminlerini koru", lower
+    ):
         questions.append(
             "Korunacak sınır açık değil: mevcut bitişler mi, müşteri terminleri mi?"
         )
@@ -270,6 +331,7 @@ def interpret_draft(
 
 
 def extract_order(text, baseline, client):
+    """Legacy single-turn interface; UI/CLI should use begin_intake/answer_intake."""
     baseline = PlanSnapshot.model_validate(baseline.model_dump())
     if not text.strip():
         return IntakeResult(
