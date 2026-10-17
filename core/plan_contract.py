@@ -72,3 +72,12 @@ class PlanRepository(Protocol):
     ) -> None:
         """Atomically insert and advance current; see docs/plan-data-contract.md."""
         ...
+
+    def save_approved_versions(
+        self,
+        records: list[StoredPlanVersion],
+        *,
+        expected_current_version_ids: dict[str, str | None],
+    ) -> None:
+        """Atomically append validated version chains for one or more plans."""
+        ...

@@ -1,0 +1,415 @@
+{
+  "dataset": "production_analysis",
+  "target": "target_elapsed_time",
+  "target_unit": "minute",
+  "notes": {
+    "target_definition": "observed report elapsed minutes; not verified machine runtime",
+    "excluded_rows_boundary_quarantine": 2501,
+    "cutoffs": {
+      "train_validation": "2012-02-19 22:21:48",
+      "validation_test": "2012-03-12 09:59:12"
+    },
+    "excluded_columns": {
+      "Qty Completed": "outcome unavailable at prediction time",
+      "Qty Rejected": "outcome unavailable at prediction time",
+      "Qty for MRB": "outcome unavailable at prediction time",
+      "Worker ID": "identifier; not a known new-order input",
+      "Report Type": "unresolved reporting semantics",
+      "Resource": "machine assignment not confirmed before prediction",
+      "Case ID": "group metadata only"
+    },
+    "limitations": "Report Type S/D/B and report-row aggregation remain unresolved"
+  },
+  "input_rows": 1339,
+  "input_model_features": 3,
+  "evaluation_splits": {
+    "train": {
+      "rows": 838,
+      "groups": 71
+    },
+    "validation": {
+      "rows": 150,
+      "groups": 15
+    },
+    "test": {
+      "rows": 351,
+      "groups": 44
+    }
+  },
+  "selection": {
+    "fit_rows": 838,
+    "fit_groups": 71,
+    "diagnostic_sample_rows": 838,
+    "parameters": {
+      "k": 3,
+      "range_normalized_variance_threshold": 0.0001,
+      "categorical_dominance": 0.995,
+      "absolute_pearson": 0.95,
+      "continuous_vif_threshold": 20,
+      "seed": 42
+    },
+    "input_features": [
+      "Part Desc.",
+      "Work Order  Qty",
+      "Activity"
+    ],
+    "selected_features": [
+      "Part Desc.",
+      "Work Order  Qty",
+      "Activity"
+    ],
+    "dropped_features": {},
+    "normalized_numeric_variances": {
+      "Work Order  Qty": 0.06684698126496186
+    },
+    "correlation_removals": [],
+    "vif_removals": [],
+    "categorical_bijection_removals": [],
+    "mutual_information": {
+      "Part Desc.": 0.03410940705008336,
+      "Work Order  Qty": 0.06334032468165507,
+      "Activity": 0.22142988416478415
+    },
+    "final_continuous_vif": {
+      "Work Order  Qty": 1.0
+    },
+    "lasso": {
+      "role": "diagnostic_only; MI retains possible nonlinear effects",
+      "target_transform": "log1p(minutes)",
+      "alpha": 0.012784315197624376,
+      "iterations": 14,
+      "sample_rows": 838,
+      "nonzero_encoded_features": 12,
+      "coefficients": {
+        "Work Order  Qty": 0.0,
+        "Part Desc._Ballnut": -0.018556090340693634,
+        "Part Desc._Barrel": 0.0,
+        "Part Desc._Bearing": -0.0,
+        "Part Desc._Blade": -0.0,
+        "Part Desc._Bushing": 0.0,
+        "Part Desc._Cable Head": -0.0,
+        "Part Desc._Compound Dies": -0.0,
+        "Part Desc._Cutting Wheel": -0.0,
+        "Part Desc._Disc": 0.0,
+        "Part Desc._Electrical Contact": 0.0,
+        "Part Desc._Fastener": -0.0,
+        "Part Desc._Flange": 0.0,
+        "Part Desc._Gauge": -0.0,
+        "Part Desc._Housing": 0.0,
+        "Part Desc._Locknut": 0.0,
+        "Part Desc._O-Ring": -0.0,
+        "Part Desc._Punch Holder": -0.021091401769469147,
+        "Part Desc._Seal Head": 0.0,
+        "Part Desc._Slip Ring Adapter": 0.0,
+        "Part Desc._Socket": 0.13402444089212845,
+        "Part Desc._Spinner": -0.0,
+        "Part Desc._Spur Gear": -0.0044266007640065014,
+        "Part Desc._Tube": 0.0,
+        "Activity_Change Version - Machine 22": 0.0,
+        "Activity_Final Inspection Q.C.": -0.6055175822048356,
+        "Activity_Flat Grinding - Machine 11": -0.3599272001711197,
+        "Activity_Flat Grinding - Machine 26": 0.0,
+        "Activity_Grinding Rework": -0.0,
+        "Activity_Grinding Rework - Machine 27": 0.0,
+        "Activity_Lapping - Machine 1": -0.4947162734338804,
+        "Activity_Laser Marking - Machine 7": -1.1711154428836017,
+        "Activity_Milling - Machine 16": 0.0,
+        "Activity_Nitration Q.C.": -0.0,
+        "Activity_Round Grinding - Machine 12": -0.0,
+        "Activity_Round Grinding - Machine 2": 0.0,
+        "Activity_Round Grinding - Machine 3": 0.0,
+        "Activity_Round Grinding - Manual": 0.0,
+        "Activity_Round Grinding - Q.C.": -0.0,
+        "Activity_Stress Relief": 0.0,
+        "Activity_Turn & Mill. & Screw Assem - Machine 9": 0.0,
+        "Activity_Turning & Milling - Machine 10": 0.33049010254436345,
+        "Activity_Turning & Milling - Machine 4": 0.0,
+        "Activity_Turning & Milling - Machine 5": 0.0,
+        "Activity_Turning & Milling - Machine 6": 0.3917667575178004,
+        "Activity_Turning & Milling - Machine 8": 0.009610761342755441,
+        "Activity_Turning & Milling - Machine 9": 0.0,
+        "Activity_Turning & Milling Q.C.": -1.0084181597142725,
+        "Activity_Turning - Machine 8": 0.0,
+        "Activity_Turning - Machine 9": 0.0,
+        "Activity_Turning Q.C.": -0.0,
+        "Activity_Turning Rework - Machine 21": -0.0,
+        "Activity_Wire Cut - Machine 13": 0.0
+      }
+    }
+  },
+  "extraction": {
+    "windows_seconds": [],
+    "causal": true,
+    "future_rows_used": false,
+    "cold_start_rows_without_full_history": 0,
+    "constant_engineered_columns_removed": [],
+    "engineered_features": [
+      "Part Desc.",
+      "Activity",
+      "log1p_work_order_qty"
+    ],
+    "encoded_features_before_pca": 53,
+    "pca_components": 45,
+    "pca_explained_variance_ratio": [
+      0.04060059688606759,
+      0.03339425537641062,
+      0.0326876824407761,
+      0.03090456207414729,
+      0.028237190466891982,
+      0.027767311600230986,
+      0.027297653762680844,
+      0.027055531541396633,
+      0.026171534122517433,
+      0.024773035421383184,
+      0.02424922007373697,
+      0.02415634426535932,
+      0.023420681745024426,
+      0.022527928450056186,
+      0.022149762247747486,
+      0.021788388015788026,
+      0.02167645700787813,
+      0.021269111024275297,
+      0.021052796087042264,
+      0.020710916498953742,
+      0.020290326796847145,
+      0.02020933497498112,
+      0.01940273223705501,
+      0.019116872036093597,
+      0.01894230398480051,
+      0.018937180585877865,
+      0.01892162502225546,
+      0.018916835576075524,
+      0.01889059647858156,
+      0.0187314326160324,
+      0.01841618409016307,
+      0.01831524466830995,
+      0.01780045768549758,
+      0.017609155272562082,
+      0.017297623389790448,
+      0.016983594467550732,
+      0.016580984623123112,
+      0.016418960857002028,
+      0.01626527307286353,
+      0.01526836820346326,
+      0.015091353796857845,
+      0.013459814349760466,
+      0.013094109615362535,
+      0.012190751133146882,
+      0.011608676219294253
+    ],
+    "pca_retained_variance": 0.9506507508617127,
+    "categories_unknown_to_training": {
+      "Part Desc.": [
+        "Assembly 1",
+        "Clamp",
+        "Cylinder",
+        "Drill",
+        "Drum",
+        "Hinge",
+        "Piston",
+        "Spring",
+        "Wheel"
+      ],
+      "Activity": [
+        "Fix - Machine 15M",
+        "Grinding Rework - Machine 12",
+        "Milling - Machine 8",
+        "SETUP     Turning & Milling - Machine 5",
+        "Setup - Machine 8",
+        "Turning - Machine 21",
+        "Turning - Machine 4"
+      ]
+    }
+  },
+  "validation_metrics": {
+    "selected": {
+      "rows": 150,
+      "groups": 15,
+      "row_mae_min": 133.4531019947054,
+      "group_macro_mae_min": 127.85821700188181,
+      "per_group_mae_min": {
+        "Case 108": 89.0894143911465,
+        "Case 114": 98.84140363354327,
+        "Case 116": 129.69137479115184,
+        "Case 130": 165.7508456305481,
+        "Case 156": 160.4775305164047,
+        "Case 205": 73.0044682538155,
+        "Case 212": 95.11362163343357,
+        "Case 214": 125.51164413111125,
+        "Case 30": 97.87266530836935,
+        "Case 56": 95.81060077142111,
+        "Case 68": 105.67394414026427,
+        "Case 84": 99.09219528862542,
+        "Case 89": 193.79492368551828,
+        "Case 90": 220.85125570999634,
+        "Case 91": 167.29736714287765
+      }
+    },
+    "engineered": {
+      "rows": 150,
+      "groups": 15,
+      "row_mae_min": 130.76209358959278,
+      "group_macro_mae_min": 126.46645352138138,
+      "per_group_mae_min": {
+        "Case 108": 86.48547609033199,
+        "Case 114": 98.90132448712386,
+        "Case 116": 129.44730648869,
+        "Case 130": 171.2311175692924,
+        "Case 156": 135.56619238929127,
+        "Case 205": 79.89216107719811,
+        "Case 212": 94.32419620453915,
+        "Case 214": 125.05515217403828,
+        "Case 30": 101.17885571215389,
+        "Case 56": 97.02140770789084,
+        "Case 68": 100.79946941213564,
+        "Case 84": 98.04462624592323,
+        "Case 89": 193.65530300060954,
+        "Case 90": 221.33041698050835,
+        "Case 91": 164.06379728099404
+      }
+    },
+    "pca": {
+      "rows": 150,
+      "groups": 15,
+      "row_mae_min": 153.79510064232164,
+      "group_macro_mae_min": 152.01435699064857,
+      "per_group_mae_min": {
+        "Case 108": 89.30553685408856,
+        "Case 114": 95.34883093401504,
+        "Case 116": 126.58918158223253,
+        "Case 130": 182.4910763566446,
+        "Case 156": 125.5686053901896,
+        "Case 205": 56.85471073984552,
+        "Case 212": 91.76701474712969,
+        "Case 214": 123.69366905462523,
+        "Case 30": 260.42729227419045,
+        "Case 56": 138.76821103349866,
+        "Case 68": 136.82917673697864,
+        "Case 84": 90.06613426946649,
+        "Case 89": 266.95580828212655,
+        "Case 90": 224.97669336109252,
+        "Case 91": 270.57341324360397
+      }
+    },
+    "median_baseline": {
+      "rows": 150,
+      "groups": 15,
+      "row_mae_min": 144.36333333333334,
+      "group_macro_mae_min": 140.26741057417527,
+      "per_group_mae_min": {
+        "Case 108": 52.92307692307692,
+        "Case 114": 95.0,
+        "Case 116": 159.0,
+        "Case 130": 172.0,
+        "Case 156": 112.03846153846153,
+        "Case 205": 37.333333333333336,
+        "Case 212": 97.125,
+        "Case 214": 125.61111111111111,
+        "Case 30": 245.0,
+        "Case 56": 77.92857142857143,
+        "Case 68": 119.5,
+        "Case 84": 95.6470588235294,
+        "Case 89": 241.45454545454547,
+        "Case 90": 237.75,
+        "Case 91": 235.7
+      }
+    }
+  },
+  "final_holdout": {
+    "rows": 351,
+    "groups": 44,
+    "row_mae_min": 118.6302040442007,
+    "group_macro_mae_min": 112.47387202634258,
+    "per_group_mae_min": {
+      "Case 101": 85.75139546112396,
+      "Case 104": 47.201266108041104,
+      "Case 105": 121.5,
+      "Case 106": 56.081004296816104,
+      "Case 107": 46.952253211521054,
+      "Case 111": 204.0497335397885,
+      "Case 113": 133.54217146105665,
+      "Case 118": 54.35157778199163,
+      "Case 119": 261.5171367630988,
+      "Case 123": 191.70647064516027,
+      "Case 124": 84.401576290328,
+      "Case 125": 139.03429526070258,
+      "Case 126": 74.92781320339107,
+      "Case 133": 241.38074363994488,
+      "Case 134": 89.57111545991734,
+      "Case 135": 142.81160159480777,
+      "Case 136": 59.09450527724544,
+      "Case 137": 119.98265194301021,
+      "Case 138": 106.58416617974234,
+      "Case 139": 82.14244968846967,
+      "Case 140": 117.8981360598946,
+      "Case 142": 36.925425856029875,
+      "Case 144": 28.657087287972757,
+      "Case 174": 47.711010323068365,
+      "Case 264": 162.40786520187137,
+      "Case 4": 95.02362729705999,
+      "Case 45": 64.23932954877021,
+      "Case 5": 134.0,
+      "Case 53": 78.68399676781488,
+      "Case 54": 89.77190317905787,
+      "Case 59": 74.7382425596129,
+      "Case 60": 107.9200788517099,
+      "Case 64": 181.0417267642311,
+      "Case 65": 106.9062877557757,
+      "Case 69": 331.83284889694545,
+      "Case 71": 99.2932624080616,
+      "Case 79": 65.38532997918368,
+      "Case 81": 254.04969689123746,
+      "Case 83": 77.11130621582211,
+      "Case 85": 121.12699506454362,
+      "Case 86": 154.2825729048584,
+      "Case 96": 46.80272556574587,
+      "Case 98": 42.03083455416562,
+      "Case 99": 88.42615141948262
+    },
+    "representation_chosen_on_validation": "engineered"
+  },
+  "probe": "fixed Ridge(alpha=10), equal weight per training group, predictions clipped at zero",
+  "selection_rule": "minimum validation group-macro MAE, including the train-only median baseline",
+  "warning": "Experimental feature comparison; PCA variance is not prediction accuracy. No operational model approval.",
+  "artifacts": {
+    "selected": {
+      "path": "data\\dataforNewVersion\\biPre_intermediate\\production_analysis\\production_analysis_selected.csv",
+      "rows": 1339,
+      "model_features": 3,
+      "metadata_columns": [
+        "source_row",
+        "group_id",
+        "split"
+      ],
+      "target_column": "target_elapsed_time",
+      "bytes": 83615,
+      "sha256": "9be7ea737808ffdf9930f99e4249cc43030d19e354e2719280f7a38ed9037adb"
+    },
+    "engineered": {
+      "path": "data\\dataforNewVersion\\biPre\\production_analysis_engineered.csv",
+      "rows": 1339,
+      "model_features": 3,
+      "metadata_columns": [
+        "source_row",
+        "group_id",
+        "split"
+      ],
+      "target_column": "target_elapsed_time",
+      "bytes": 93952,
+      "sha256": "a4d0563d1f2b23672eb71590bbb24c3d614a6039c3625baf287d86564f3078f8"
+    },
+    "extracted": {
+      "path": "data\\dataforNewVersion\\biPre_intermediate\\production_analysis\\production_analysis_extracted.csv",
+      "rows": 1339,
+      "model_features": 45,
+      "metadata_columns": [
+        "source_row",
+        "group_id",
+        "split"
+      ],
+      "target_column": "target_elapsed_time",
+      "bytes": 782952,
+      "sha256": "90e2ba1b533fb6662991c3c3bcb7021119de1d1b2c2723fbf428d30bdf220ed5"
+    }
+  }
+}

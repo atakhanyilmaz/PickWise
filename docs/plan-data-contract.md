@@ -118,6 +118,10 @@ save_approved_version(
     record: StoredPlanVersion,
     *, expected_current_version_id: str | None,
 ) -> None
+save_approved_versions(
+    records: list[StoredPlanVersion],
+    *, expected_current_version_ids: dict[str, str | None],
+) -> None
 ```
 
 Kayıt/yükleme davranışları:
@@ -219,3 +223,19 @@ kullanılır. `load --version VERSION_ID` eski sürümü seçer; `--snapshot-onl
 çıktısı mevcut Gemma CLI'nin `--baseline` girdisiyle uyumludur. Export mevcut
 dosyanın üzerine yazmaz. `init` açıkça çağrılmadan kayıt/yükleme yeni DB
 oluşturmaz. Yerel SQLite dosyaları/journalleri Git dışında tutulur.
+
+## Git seed alışverişi
+
+`database/seed/seed.json` yalnız onaylı plan sürümlerini taşır. Üst seviye
+`seed_schema_version=1`; her plan kaydı bir `current_version_id` ve
+`version_id` anahtarlı tam `StoredPlanVersion` nesneleri içerir. Plan geçmişi
+tek kökten tek güncel yaprağa uzanan doğrusal bir zincir olmalıdır. Eksik
+parent, farklı içerikli aynı sürüm, birden fazla çocuk veya bozuk çizelge tüm
+dosyanın reddedilmesine neden olur.
+
+`publish-seed` yerel SQLite'daki seçilen onaylı sürümü ve eksik atalarını
+atomik dosya değişimiyle seed'e ekler; Git komutu çalıştırmaz. `import-seed`
+önce bütün dosyayı ve yerel/paylaşılan ortak geçmişi doğrular, sonra bütün
+eksik kuyrukları tek SQLite transaction'ında ekler. Tekrar import güvenlidir.
+Yerel ve paylaşılan geçmiş ayrışırsa kullanıcı güncel plan üzerinden yeniden
+simülasyon ve onay yapmadan hiçbir sürüm aktif hale getirilmez.

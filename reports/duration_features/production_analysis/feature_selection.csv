@@ -1,0 +1,4 @@
+feature,selected,reason,mutual_information
+Part Desc.,True,selected_mutual_information_top_k,0.03410940705008336
+Work Order  Qty,True,selected_mutual_information_top_k,0.06334032468165507
+Activity,True,selected_mutual_information_top_k,0.22142988416478415

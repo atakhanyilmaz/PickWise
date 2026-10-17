@@ -1,0 +1,1340 @@
+source_row,group_id,split,Part Desc.,Activity,log1p_work_order_qty,target_elapsed_time
+0,Case 1,train,Cable Head,Turning & Milling - Machine 4,2.39789527,379
+1,Case 1,train,Cable Head,Turning & Milling - Machine 4,2.39789527,58
+2,Case 1,train,Cable Head,Turning & Milling - Machine 4,2.39789527,22
+3,Case 1,train,Cable Head,Turning & Milling - Machine 4,2.39789527,217
+4,Case 1,train,Cable Head,Turning & Milling Q.C.,2.39789527,90
+5,Case 1,train,Cable Head,Laser Marking - Machine 7,2.39789527,9
+9,Case 1,train,Cable Head,Lapping - Machine 1,2.39789527,33
+10,Case 1,train,Cable Head,Round Grinding - Machine 3,2.39789527,264
+11,Case 1,train,Cable Head,Round Grinding - Machine 3,2.39789527,110
+12,Case 1,train,Cable Head,Final Inspection Q.C.,2.39789527,60
+13,Case 1,train,Cable Head,Final Inspection Q.C.,2.39789527,241
+16,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,244
+17,Case 10,train,Spur Gear,Turning Q.C.,5.52942909,15
+18,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,37
+19,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,222
+20,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,403
+21,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,25
+22,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,82
+23,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,127
+24,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,619
+25,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,117
+26,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,118
+27,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,541
+28,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,232
+29,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,13
+30,Case 10,train,Spur Gear,Turning & Milling - Machine 9,5.52942909,525
+31,Case 10,train,Spur Gear,Turning Q.C.,5.52942909,152
+32,Case 10,train,Spur Gear,Laser Marking - Machine 7,5.52942909,86
+33,Case 10,train,Spur Gear,Laser Marking - Machine 7,5.52942909,114
+34,Case 10,train,Spur Gear,Laser Marking - Machine 7,5.52942909,47
+35,Case 10,train,Spur Gear,Flat Grinding - Machine 11,5.52942909,150
+36,Case 10,train,Spur Gear,Flat Grinding - Machine 11,5.52942909,417
+37,Case 10,train,Spur Gear,Flat Grinding - Machine 11,5.52942909,100
+38,Case 10,train,Spur Gear,Final Inspection Q.C.,5.52942909,98
+54,Case 101,test,Housing,Setup - Machine 8,3.33220451,76
+55,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,145
+56,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,45
+57,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,76
+58,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,322
+59,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,46
+60,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,201
+61,Case 101,test,Housing,Turning & Milling - Machine 8,3.33220451,139
+63,Case 101,test,Housing,Flat Grinding - Machine 11,3.33220451,60
+64,Case 101,test,Housing,Lapping - Machine 1,3.33220451,100
+65,Case 101,test,Housing,Round Grinding - Machine 12,3.33220451,90
+66,Case 101,test,Housing,Round Grinding - Machine 12,3.33220451,420
+67,Case 101,test,Housing,Final Inspection Q.C.,3.33220451,281
+68,Case 101,test,Housing,Lapping - Machine 1,3.33220451,60
+69,Case 101,test,Housing,Laser Marking - Machine 7,3.33220451,14
+120,Case 104,test,Cable Head,Turning & Milling - Machine 5,3.52636052,343
+121,Case 104,test,Cable Head,Turning & Milling - Machine 5,3.52636052,254
+122,Case 104,test,Cable Head,Turning & Milling - Machine 5,3.52636052,247
+123,Case 104,test,Cable Head,Turning & Milling Q.C.,3.52636052,120
+124,Case 104,test,Cable Head,Turning & Milling Q.C.,3.52636052,46
+125,Case 104,test,Cable Head,Laser Marking - Machine 7,3.52636052,28
+126,Case 105,test,Bearing,Turning & Milling - Machine 4,2.77258872,436
+127,Case 105,test,Bearing,Turning & Milling - Machine 4,2.77258872,193
+128,Case 106,test,Ballnut,Turning & Milling - Machine 8,3.68887945,330
+129,Case 106,test,Ballnut,Turning & Milling - Machine 8,3.68887945,223
+130,Case 106,test,Ballnut,Turning & Milling Q.C.,3.68887945,28
+131,Case 106,test,Ballnut,Laser Marking - Machine 7,3.68887945,73
+132,Case 106,test,Ballnut,Flat Grinding - Machine 11,3.68887945,38
+133,Case 106,test,Ballnut,Final Inspection Q.C.,3.68887945,150
+136,Case 107,test,Cable Head,Turning & Milling - Machine 10,3.04452244,311
+137,Case 108,validation,Bushing,Turning & Milling - Machine 4,2.77258872,337
+138,Case 108,validation,Bushing,Turning & Milling - Machine 4,2.77258872,134
+139,Case 108,validation,Bushing,Turning & Milling Q.C.,2.77258872,100
+140,Case 108,validation,Bushing,Turning & Milling - Machine 4,2.77258872,205
+141,Case 108,validation,Bushing,Turning & Milling Q.C.,2.77258872,64
+144,Case 108,validation,Bushing,Flat Grinding - Machine 11,2.77258872,59
+146,Case 108,validation,Bushing,Lapping - Machine 1,2.77258872,52
+147,Case 108,validation,Bushing,Round Grinding - Machine 3,2.77258872,166
+148,Case 108,validation,Bushing,Round Grinding - Machine 3,2.77258872,172
+149,Case 108,validation,Bushing,Round Grinding - Machine 3,2.77258872,104
+150,Case 108,validation,Bushing,Round Grinding - Machine 3,2.77258872,213
+151,Case 108,validation,Bushing,Final Inspection Q.C.,2.77258872,292
+153,Case 108,validation,Bushing,Final Inspection Q.C.,2.77258872,27
+170,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,336
+171,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,170
+172,Case 11,train,Spur Gear,Turning & Milling Q.C.,4.61512052,54
+173,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,392
+174,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,330
+175,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,418
+177,Case 11,train,Spur Gear,Turning & Milling Q.C.,4.61512052,98
+179,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,80
+180,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,335
+182,Case 11,train,Spur Gear,Turning & Milling - Machine 9,4.61512052,81
+183,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,419
+184,Case 11,train,Spur Gear,Turning & Milling - Machine 10,4.61512052,193
+185,Case 11,train,Spur Gear,Laser Marking - Machine 7,4.61512052,32
+186,Case 11,train,Spur Gear,Turning & Milling Q.C.,4.61512052,1
+187,Case 11,train,Spur Gear,Laser Marking - Machine 7,4.61512052,85
+189,Case 11,train,Spur Gear,Final Inspection Q.C.,4.61512052,178
+190,Case 11,train,Spur Gear,Turning & Milling Q.C.,4.61512052,1
+264,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,183
+265,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,386
+266,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,540
+267,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,208
+268,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,661
+269,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,241
+271,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,396
+272,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,660
+273,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,341
+274,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,332
+275,Case 111,test,Cable Head,Turning - Machine 4,5.70711026,562
+277,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,473
+278,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,506
+279,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,649
+280,Case 111,test,Cable Head,Turning & Milling Q.C.,5.70711026,121
+281,Case 111,test,Cable Head,Laser Marking - Machine 7,5.70711026,18
+282,Case 111,test,Cable Head,Laser Marking - Machine 7,5.70711026,101
+283,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,421
+284,Case 111,test,Cable Head,Turning & Milling Q.C.,5.70711026,35
+285,Case 111,test,Cable Head,Turning & Milling Q.C.,5.70711026,239
+286,Case 111,test,Cable Head,Turning & Milling - Machine 4,5.70711026,1200
+287,Case 111,test,Cable Head,Laser Marking - Machine 7,5.70711026,136
+325,Case 113,test,Cable Head,SETUP     Turning & Milling - Machine 5,3.36729583,220
+326,Case 113,test,Cable Head,Turning & Milling - Machine 5,3.36729583,530
+327,Case 113,test,Cable Head,Turning & Milling Q.C.,3.36729583,241
+328,Case 113,test,Cable Head,Laser Marking - Machine 7,3.36729583,24
+329,Case 114,validation,Ballnut,Turning & Milling - Machine 6,3.04452244,290
+330,Case 114,validation,Ballnut,Turning & Milling Q.C.,3.04452244,83
+331,Case 114,validation,Ballnut,Turning & Milling - Machine 6,3.04452244,51
+332,Case 114,validation,Ballnut,Turning & Milling - Machine 6,3.04452244,452
+334,Case 114,validation,Ballnut,Turning & Milling Q.C.,3.04452244,1
+335,Case 114,validation,Ballnut,Turning & Milling Q.C.,3.04452244,8
+359,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,279
+360,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,308
+361,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,179
+363,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,123
+364,Case 116,validation,Clamp,Final Inspection Q.C.,5.08759634,60
+365,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,402
+366,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,482
+367,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,449
+368,Case 116,validation,Clamp,Round Grinding - Manual,5.08759634,81
+370,Case 116,validation,Clamp,Final Inspection Q.C.,5.08759634,59
+375,Case 118,test,Ballnut,Turning & Milling - Machine 6,2.39789527,121
+376,Case 118,test,Ballnut,Turning & Milling - Machine 6,2.39789527,197
+377,Case 118,test,Ballnut,Turning & Milling Q.C.,2.39789527,83
+378,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,525
+379,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,55
+380,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,630
+381,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,335
+382,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,626
+383,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,570
+384,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,570
+385,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,405
+386,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,617
+387,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,568
+388,Case 119,test,Cylinder,Turning & Milling - Machine 10,3.71357207,600
+389,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,262
+390,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,112
+391,Case 12,train,Spur Gear,Turning Q.C.,4.24849524,46
+392,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,509
+393,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,587
+394,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,347
+395,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,412
+396,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,348
+397,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,105
+398,Case 12,train,Spur Gear,Turning - Machine 9,4.24849524,164
+401,Case 12,train,Spur Gear,Lapping - Machine 1,4.24849524,120
+403,Case 12,train,Spur Gear,Flat Grinding - Machine 11,4.24849524,167
+404,Case 12,train,Spur Gear,Laser Marking - Machine 7,4.24849524,60
+407,Case 12,train,Spur Gear,Final Inspection Q.C.,4.24849524,143
+408,Case 12,train,Spur Gear,Laser Marking - Machine 7,4.24849524,170
+409,Case 12,train,Spur Gear,Flat Grinding - Machine 11,4.24849524,1
+410,Case 12,train,Spur Gear,Flat Grinding - Machine 11,4.24849524,111
+411,Case 12,train,Spur Gear,Final Inspection Q.C.,4.24849524,120
+412,Case 12,train,Spur Gear,Final Inspection Q.C.,4.24849524,103
+413,Case 12,train,Spur Gear,Final Inspection Q.C.,4.24849524,1
+474,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,150
+475,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,270
+476,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,80
+477,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,437
+478,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,338
+479,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,122
+480,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,76
+481,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,2
+482,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,336
+483,Case 123,test,Cable Head,Turning & Milling Q.C.,4.39444915,61
+484,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,1328
+485,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,1
+486,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,89
+487,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,18
+488,Case 123,test,Cable Head,Turning & Milling Q.C.,4.39444915,161
+489,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,1
+490,Case 123,test,Cable Head,Turning & Milling - Machine 4,4.39444915,1
+491,Case 123,test,Cable Head,Laser Marking - Machine 7,4.39444915,50
+492,Case 124,test,Ballnut,Turning & Milling - Machine 4,2.56494936,455
+493,Case 124,test,Ballnut,Turning & Milling - Machine 4,2.56494936,83
+494,Case 124,test,Ballnut,Turning & Milling - Machine 4,2.56494936,115
+495,Case 124,test,Ballnut,Turning & Milling - Machine 4,2.56494936,282
+496,Case 124,test,Ballnut,Turning & Milling Q.C.,2.56494936,99
+497,Case 124,test,Ballnut,Laser Marking - Machine 7,2.56494936,19
+498,Case 124,test,Ballnut,Lapping - Machine 1,2.56494936,14
+499,Case 124,test,Ballnut,Final Inspection Q.C.,2.56494936,105
+500,Case 124,test,Ballnut,Final Inspection Q.C.,2.56494936,15
+502,Case 125,test,Ballnut,Turning & Milling - Machine 6,3.8918203,312
+503,Case 125,test,Ballnut,Turning & Milling - Machine 6,3.8918203,356
+504,Case 125,test,Ballnut,Turning & Milling Q.C.,3.8918203,158
+505,Case 125,test,Ballnut,Turning & Milling - Machine 6,3.8918203,15
+506,Case 125,test,Ballnut,Turning & Milling - Machine 6,3.8918203,44
+508,Case 126,test,Housing,Turning & Milling - Machine 4,2.39789527,624
+509,Case 126,test,Housing,Turning & Milling - Machine 4,2.39789527,60
+510,Case 126,test,Housing,Turning & Milling Q.C.,2.39789527,60
+511,Case 126,test,Housing,Turning & Milling - Machine 4,2.39789527,196
+512,Case 126,test,Housing,Turning & Milling Q.C.,2.39789527,38
+513,Case 126,test,Housing,Laser Marking - Machine 7,2.39789527,1
+515,Case 126,test,Housing,Lapping - Machine 1,2.39789527,56
+516,Case 126,test,Housing,Lapping - Machine 1,2.39789527,47
+517,Case 126,test,Housing,Round Grinding - Machine 12,2.39789527,45
+518,Case 126,test,Housing,Round Grinding - Machine 12,2.39789527,52
+519,Case 126,test,Housing,Round Grinding - Machine 12,2.39789527,156
+520,Case 126,test,Housing,Final Inspection Q.C.,2.39789527,121
+572,Case 13,train,Spur Gear,Turning - Machine 9,3.04452244,90
+573,Case 13,train,Spur Gear,Turning - Machine 9,3.04452244,25
+574,Case 13,train,Spur Gear,Turning - Machine 9,3.04452244,180
+576,Case 13,train,Spur Gear,Turning Q.C.,3.04452244,53
+577,Case 13,train,Spur Gear,Laser Marking - Machine 7,3.04452244,40
+579,Case 130,validation,Ballnut,Turning & Milling - Machine 6,4.84418709,83
+581,Case 133,test,Spring,Turning & Milling - Machine 4,4.29045944,519
+582,Case 133,test,Spring,Turning & Milling - Machine 4,4.29045944,116
+583,Case 133,test,Spring,Turning & Milling - Machine 4,4.29045944,558
+584,Case 134,test,Spring,Turning & Milling - Machine 4,4.29045944,120
+585,Case 134,test,Spring,Turning & Milling - Machine 4,4.29045944,250
+586,Case 134,test,Spring,Turning & Milling - Machine 4,4.29045944,340
+587,Case 134,test,Spring,Turning & Milling - Machine 4,4.29045944,362
+588,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,510
+589,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,316
+590,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,34
+591,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,310
+592,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,1
+593,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,214
+594,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,329
+596,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,409
+597,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,475
+598,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,211
+599,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,18
+600,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,237
+601,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,416
+602,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,138
+603,Case 135,test,Housing,Turning & Milling Q.C.,6.2166061,60
+604,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,211
+605,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,467
+606,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,410
+607,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,480
+608,Case 135,test,Housing,Turning & Milling Q.C.,6.2166061,61
+609,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,60
+610,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,121
+611,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,222
+612,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,103
+613,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,324
+614,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,500
+615,Case 135,test,Housing,Turning & Milling Q.C.,6.2166061,301
+616,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,447
+617,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,407
+618,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,559
+619,Case 135,test,Housing,Turning & Milling Q.C.,6.2166061,181
+620,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,401
+621,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,344
+622,Case 135,test,Housing,Turning & Milling - Machine 5,6.2166061,342
+623,Case 135,test,Housing,Turning & Milling Q.C.,6.2166061,60
+624,Case 136,test,Ballnut,Turning & Milling - Machine 6,6.39859493,259
+625,Case 136,test,Ballnut,Turning & Milling - Machine 6,6.39859493,381
+626,Case 136,test,Ballnut,Turning & Milling Q.C.,6.39859493,45
+627,Case 137,test,Housing,Turning & Milling - Machine 4,2.77258872,317
+628,Case 137,test,Housing,Turning & Milling - Machine 4,2.77258872,174
+629,Case 137,test,Housing,Turning & Milling - Machine 4,2.77258872,499
+630,Case 137,test,Housing,Turning & Milling Q.C.,2.77258872,55
+631,Case 138,test,Cable Head,Turning & Milling - Machine 4,3.71357207,48
+632,Case 138,test,Cable Head,Turning & Milling - Machine 4,3.71357207,302
+633,Case 138,test,Cable Head,Turning & Milling - Machine 4,3.71357207,349
+634,Case 138,test,Cable Head,Turning & Milling - Machine 4,3.71357207,478
+635,Case 138,test,Cable Head,Turning & Milling - Machine 5,3.71357207,123
+636,Case 138,test,Cable Head,Turning & Milling Q.C.,3.71357207,30
+637,Case 138,test,Cable Head,Turning & Milling Q.C.,3.71357207,30
+638,Case 138,test,Cable Head,Turning & Milling Q.C.,3.71357207,45
+639,Case 138,test,Cable Head,Laser Marking - Machine 7,3.71357207,28
+640,Case 139,test,Cable Head,Round Grinding - Q.C.,5.51342875,62
+641,Case 140,test,Cable Head,Turning & Milling - Machine 5,1.79175947,645
+643,Case 140,test,Cable Head,Turning & Milling Q.C.,1.79175947,60
+645,Case 140,test,Cable Head,Lapping - Machine 1,1.79175947,115
+646,Case 140,test,Cable Head,Round Grinding - Machine 2,1.79175947,220
+647,Case 140,test,Cable Head,Round Grinding - Machine 2,1.79175947,51
+648,Case 140,test,Cable Head,Round Grinding - Machine 2,1.79175947,36
+649,Case 140,test,Cable Head,Grinding Rework - Machine 12,1.79175947,43
+650,Case 140,test,Cable Head,Round Grinding - Machine 2,1.79175947,32
+652,Case 140,test,Cable Head,Final Inspection Q.C.,1.79175947,111
+654,Case 142,test,Ballnut,Turning & Milling Q.C.,2.94443898,126
+655,Case 142,test,Ballnut,Turning & Milling Q.C.,2.94443898,70
+657,Case 144,test,Cable Head,Final Inspection Q.C.,0.693147181,61
+675,Case 146,train,Ballnut,Final Inspection Q.C.,3.09104245,100
+694,Case 150,train,Ballnut,Final Inspection Q.C.,2.94443898,1
+695,Case 153,train,Housing,Round Grinding - Manual,3.8501476,50
+696,Case 153,train,Housing,Round Grinding - Manual,3.8501476,55
+697,Case 153,train,Housing,Final Inspection Q.C.,3.8501476,37
+698,Case 153,train,Housing,Final Inspection Q.C.,3.8501476,35
+701,Case 154,train,Ballnut,Flat Grinding - Machine 26,3.33220451,270
+702,Case 154,train,Ballnut,Final Inspection Q.C.,3.33220451,191
+704,Case 155,train,Ballnut,Turning - Machine 8,3.8918203,285
+705,Case 155,train,Ballnut,Turning & Milling - Machine 8,3.8918203,42
+707,Case 155,train,Ballnut,Turning & Milling - Machine 8,3.8918203,391
+708,Case 155,train,Ballnut,Turning & Milling Q.C.,3.8918203,23
+710,Case 155,train,Ballnut,Laser Marking - Machine 7,3.8918203,21
+711,Case 155,train,Ballnut,Laser Marking - Machine 7,3.8918203,45
+712,Case 155,train,Ballnut,Lapping - Machine 1,3.8918203,78
+713,Case 155,train,Ballnut,Final Inspection Q.C.,3.8918203,98
+716,Case 156,validation,Drill,Turning & Milling - Machine 9,6.39859493,230
+717,Case 156,validation,Drill,Turning & Milling - Machine 9,6.39859493,420
+718,Case 156,validation,Drill,Turning & Milling - Machine 9,6.39859493,383
+719,Case 156,validation,Drill,Turning & Milling - Machine 9,6.39859493,157
+720,Case 156,validation,Drill,Turning & Milling - Machine 9,6.39859493,569
+721,Case 156,validation,Drill,Turning & Milling Q.C.,6.39859493,78
+722,Case 156,validation,Drill,Final Inspection Q.C.,6.39859493,15
+723,Case 156,validation,Drill,Turning & Milling Q.C.,6.39859493,1
+724,Case 156,validation,Drill,Laser Marking - Machine 7,6.39859493,19
+725,Case 156,validation,Drill,Lapping - Machine 1,6.39859493,78
+726,Case 156,validation,Drill,Final Inspection Q.C.,6.39859493,76
+727,Case 156,validation,Drill,Final Inspection Q.C.,6.39859493,1
+728,Case 156,validation,Drill,Turning & Milling - Machine 10,6.39859493,4
+784,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,272
+785,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,292
+786,Case 174,test,Ballnut,Turning & Milling Q.C.,4.02535169,67
+787,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,229
+788,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,69
+789,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,211
+790,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,217
+791,Case 174,test,Ballnut,Turning & Milling - Machine 6,4.02535169,364
+792,Case 174,test,Ballnut,Turning & Milling Q.C.,4.02535169,83
+793,Case 174,test,Ballnut,Turning & Milling Q.C.,4.02535169,31
+794,Case 174,test,Ballnut,Laser Marking - Machine 7,4.02535169,54
+795,Case 174,test,Ballnut,Lapping - Machine 1,4.02535169,88
+796,Case 174,test,Ballnut,Lapping - Machine 1,4.02535169,58
+797,Case 174,test,Ballnut,Lapping - Machine 1,4.02535169,122
+799,Case 174,test,Ballnut,Round Grinding - Machine 12,4.02535169,216
+800,Case 174,test,Ballnut,Round Grinding - Machine 12,4.02535169,70
+801,Case 174,test,Ballnut,Lapping - Machine 1,4.02535169,223
+803,Case 174,test,Ballnut,Final Inspection Q.C.,4.02535169,97
+804,Case 175,train,Spinner,Round Grinding - Q.C.,3.98898405,30
+805,Case 175,train,Spinner,Round Grinding - Q.C.,3.98898405,27
+1102,Case 188,train,Punch Holder,Laser Marking - Machine 7,5.86078622,105
+1103,Case 188,train,Punch Holder,Lapping - Machine 1,5.86078622,30
+1104,Case 188,train,Punch Holder,Lapping - Machine 1,5.86078622,160
+1105,Case 188,train,Punch Holder,Lapping - Machine 1,5.86078622,60
+1106,Case 188,train,Punch Holder,Turning & Milling Q.C.,5.86078622,4
+1107,Case 188,train,Punch Holder,Wire Cut - Machine 13,5.86078622,360
+1108,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,130
+1109,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,205
+1110,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,623
+1111,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,175
+1112,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,4
+1113,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,175
+1114,Case 188,train,Punch Holder,Laser Marking - Machine 7,5.86078622,2
+1115,Case 188,train,Punch Holder,Lapping - Machine 1,5.86078622,1
+1116,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,23
+1117,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,297
+1118,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,138
+1119,Case 188,train,Punch Holder,Round Grinding - Machine 3,5.86078622,488
+1121,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,244
+1122,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,3
+1123,Case 188,train,Punch Holder,Turning & Milling Q.C.,5.86078622,3
+1124,Case 188,train,Punch Holder,Turning & Milling Q.C.,5.86078622,27
+1125,Case 188,train,Punch Holder,Turning & Milling Q.C.,5.86078622,26
+1126,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,5
+1128,Case 188,train,Punch Holder,Final Inspection Q.C.,5.86078622,647
+1132,Case 189,train,Tube,Turning & Milling Q.C.,2.19722458,60
+1133,Case 189,train,Tube,Turning & Milling Q.C.,2.19722458,130
+1134,Case 189,train,Tube,Final Inspection Q.C.,2.19722458,360
+1135,Case 189,train,Tube,Final Inspection Q.C.,2.19722458,170
+1154,Case 190,train,Seal Head,Turning & Milling Q.C.,2.83321334,143
+1156,Case 190,train,Seal Head,Turning & Milling Q.C.,2.83321334,112
+1220,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,40
+1221,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,552
+1222,Case 194,train,Socket,Turning & Milling Q.C.,3.71357207,92
+1223,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,637
+1224,Case 194,train,Socket,Turning & Milling Q.C.,3.71357207,189
+1225,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,579
+1226,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,356
+1227,Case 194,train,Socket,Turning & Milling Q.C.,3.71357207,90
+1228,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,1212
+1229,Case 194,train,Socket,Stress Relief,3.71357207,240
+1230,Case 194,train,Socket,Turning & Milling - Machine 10,3.71357207,202
+1231,Case 194,train,Socket,Turning & Milling Q.C.,3.71357207,538
+1232,Case 194,train,Socket,Turning - Machine 9,3.71357207,427
+1233,Case 194,train,Socket,Turning - Machine 9,3.71357207,86
+1234,Case 194,train,Socket,Turning - Machine 9,3.71357207,535
+1235,Case 194,train,Socket,Turning & Milling Q.C.,3.71357207,30
+1236,Case 194,train,Socket,Turning - Machine 9,3.71357207,86
+1237,Case 194,train,Socket,Turning - Machine 9,3.71357207,1
+1238,Case 194,train,Socket,Turning Q.C.,3.71357207,100
+1239,Case 194,train,Socket,Laser Marking - Machine 7,3.71357207,26
+1241,Case 194,train,Socket,Lapping - Machine 1,3.71357207,189
+1242,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,230
+1243,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,262
+1244,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,421
+1245,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,181
+1246,Case 194,train,Socket,Grinding Rework - Machine 27,3.71357207,114
+1247,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,60
+1248,Case 194,train,Socket,Final Inspection Q.C.,3.71357207,300
+1253,Case 195,train,Slip Ring Adapter,Turning & Milling Q.C.,4.39444915,185
+1255,Case 195,train,Slip Ring Adapter,Lapping - Machine 1,4.39444915,97
+1256,Case 195,train,Slip Ring Adapter,Lapping - Machine 1,4.39444915,235
+1257,Case 195,train,Slip Ring Adapter,Flat Grinding - Machine 11,4.39444915,265
+1258,Case 195,train,Slip Ring Adapter,Flat Grinding - Machine 11,4.39444915,43
+1259,Case 195,train,Slip Ring Adapter,Round Grinding - Machine 2,4.39444915,79
+1260,Case 195,train,Slip Ring Adapter,Round Grinding - Machine 2,4.39444915,147
+1261,Case 195,train,Slip Ring Adapter,Round Grinding - Machine 2,4.39444915,171
+1262,Case 195,train,Slip Ring Adapter,Round Grinding - Machine 2,4.39444915,529
+1263,Case 195,train,Slip Ring Adapter,Round Grinding - Machine 2,4.39444915,473
+1264,Case 195,train,Slip Ring Adapter,Round Grinding - Q.C.,4.39444915,88
+1266,Case 195,train,Slip Ring Adapter,Final Inspection Q.C.,4.39444915,45
+1442,Case 200,train,Cable Head,Grinding Rework - Machine 27,3.93182563,74
+1443,Case 200,train,Cable Head,Final Inspection Q.C.,3.93182563,28
+1478,Case 203,train,Gauge,Turning & Milling Q.C.,1.79175947,103
+1479,Case 203,train,Gauge,Laser Marking - Machine 7,1.79175947,50
+1481,Case 203,train,Gauge,Flat Grinding - Machine 11,1.79175947,26
+1482,Case 203,train,Gauge,Lapping - Machine 1,1.79175947,29
+1484,Case 203,train,Gauge,Final Inspection Q.C.,1.79175947,13
+1485,Case 205,validation,O-Ring,Round Grinding - Manual,3.25809654,100
+1486,Case 205,validation,O-Ring,Round Grinding - Manual,3.25809654,50
+1487,Case 205,validation,O-Ring,Final Inspection Q.C.,3.25809654,47
+1489,Case 206,train,Cutting Wheel,Turning & Milling Q.C.,3.09104245,5
+1490,Case 206,train,Cutting Wheel,Laser Marking - Machine 7,3.09104245,11
+1491,Case 206,train,Cutting Wheel,Lapping - Machine 1,3.09104245,49
+1492,Case 206,train,Cutting Wheel,Round Grinding - Manual,3.09104245,94
+1493,Case 206,train,Cutting Wheel,Round Grinding - Manual,3.09104245,436
+1494,Case 206,train,Cutting Wheel,Final Inspection Q.C.,3.09104245,296
+1497,Case 206,train,Cutting Wheel,Round Grinding - Machine 12,3.09104245,60
+1498,Case 206,train,Cutting Wheel,Round Grinding - Machine 12,3.09104245,105
+1499,Case 206,train,Cutting Wheel,Round Grinding - Machine 12,3.09104245,100
+1500,Case 206,train,Cutting Wheel,Final Inspection Q.C.,3.09104245,119
+1504,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,390
+1506,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,120
+1507,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,210
+1508,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,539
+1509,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,300
+1512,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,113
+1513,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,369
+1514,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,458
+1515,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,450
+1516,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,661
+1518,Case 207,train,Flange,Turning & Milling - Machine 6,4.83628191,395
+1519,Case 207,train,Flange,Turning & Milling Q.C.,4.83628191,60
+1520,Case 207,train,Flange,Turning & Milling Q.C.,4.83628191,20
+1521,Case 207,train,Flange,Turning & Milling Q.C.,4.83628191,10
+1522,Case 207,train,Flange,Turning & Milling Q.C.,4.83628191,10
+1523,Case 207,train,Flange,Turning & Milling - Machine 9,4.83628191,1
+1524,Case 207,train,Flange,Turning & Milling Q.C.,4.83628191,13
+1526,Case 207,train,Flange,Laser Marking - Machine 7,4.83628191,64
+1527,Case 207,train,Flange,Lapping - Machine 1,4.83628191,115
+1528,Case 207,train,Flange,Laser Marking - Machine 7,4.83628191,1
+1530,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,149
+1531,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,56
+1532,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,128
+1533,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,174
+1534,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,273
+1535,Case 207,train,Flange,Round Grinding - Machine 2,4.83628191,89
+1536,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,30
+1537,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,60
+1538,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,110
+1539,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,171
+1540,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,150
+1541,Case 207,train,Flange,Final Inspection Q.C.,4.83628191,15
+1544,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,442
+1545,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,396
+1546,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,238
+1547,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,275
+1548,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,510
+1549,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,86
+1550,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,596
+1551,Case 208,train,Cable Head,Turning & Milling - Machine 10,2.63905733,132
+1552,Case 208,train,Cable Head,Turning & Milling Q.C.,2.63905733,360
+1553,Case 208,train,Cable Head,Laser Marking - Machine 7,2.63905733,53
+1554,Case 208,train,Cable Head,Lapping - Machine 1,2.63905733,141
+1555,Case 208,train,Cable Head,Round Grinding - Machine 2,2.63905733,364
+1556,Case 208,train,Cable Head,Round Grinding - Machine 2,2.63905733,167
+1557,Case 208,train,Cable Head,Round Grinding - Machine 2,2.63905733,311
+1558,Case 208,train,Cable Head,Final Inspection Q.C.,2.63905733,120
+1559,Case 208,train,Cable Head,Grinding Rework - Machine 27,2.63905733,277
+1560,Case 208,train,Cable Head,Grinding Rework - Machine 27,2.63905733,100
+1561,Case 208,train,Cable Head,Grinding Rework - Machine 27,2.63905733,158
+1562,Case 208,train,Cable Head,Grinding Rework - Machine 27,2.63905733,155
+1564,Case 208,train,Cable Head,Final Inspection Q.C.,2.63905733,60
+1606,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,360
+1607,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,50
+1608,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,567
+1609,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,450
+1610,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,619
+1611,Case 210,train,Spur Gear,Turning & Milling Q.C.,4.4543473,41
+1612,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,540
+1613,Case 210,train,Spur Gear,Turning & Milling - Machine 6,4.4543473,218
+1614,Case 210,train,Spur Gear,Turning & Milling Q.C.,4.4543473,97
+1615,Case 210,train,Spur Gear,Turning & Milling Q.C.,4.4543473,5
+1616,Case 210,train,Spur Gear,Laser Marking - Machine 7,4.4543473,23
+1617,Case 210,train,Spur Gear,Laser Marking - Machine 7,4.4543473,20
+1618,Case 210,train,Spur Gear,Grinding Rework,4.4543473,149
+1619,Case 210,train,Spur Gear,Lapping - Machine 1,4.4543473,88
+1620,Case 210,train,Spur Gear,Lapping - Machine 1,4.4543473,48
+1622,Case 210,train,Spur Gear,Lapping - Machine 1,4.4543473,91
+1623,Case 210,train,Spur Gear,Lapping - Machine 1,4.4543473,40
+1624,Case 210,train,Spur Gear,Round Grinding - Machine 12,4.4543473,65
+1625,Case 210,train,Spur Gear,Round Grinding - Machine 12,4.4543473,234
+1626,Case 210,train,Spur Gear,Round Grinding - Machine 12,4.4543473,34
+1627,Case 210,train,Spur Gear,Final Inspection Q.C.,4.4543473,315
+1628,Case 210,train,Spur Gear,Round Grinding - Manual,4.4543473,441
+1630,Case 210,train,Spur Gear,Round Grinding - Manual,4.4543473,87
+1631,Case 210,train,Spur Gear,Final Inspection Q.C.,4.4543473,54
+1632,Case 210,train,Spur Gear,Final Inspection Q.C.,4.4543473,1
+1634,Case 211,train,Spur Gear,Turning & Milling Q.C.,4.44265126,18
+1635,Case 211,train,Spur Gear,Laser Marking - Machine 7,4.44265126,51
+1636,Case 211,train,Spur Gear,Laser Marking - Machine 7,4.44265126,44
+1638,Case 211,train,Spur Gear,Lapping - Machine 1,4.44265126,377
+1639,Case 211,train,Spur Gear,Final Inspection Q.C.,4.44265126,457
+1643,Case 212,validation,Ballnut,Turning & Milling - Machine 6,4.20469262,61
+1644,Case 212,validation,Ballnut,Turning & Milling - Machine 6,4.20469262,458
+1645,Case 212,validation,Ballnut,Turning & Milling - Machine 6,4.20469262,180
+1646,Case 212,validation,Ballnut,Turning & Milling Q.C.,4.20469262,84
+1647,Case 212,validation,Ballnut,Turning & Milling - Machine 6,4.20469262,401
+1648,Case 212,validation,Ballnut,Turning & Milling - Machine 6,4.20469262,328
+1649,Case 212,validation,Ballnut,Turning & Milling Q.C.,4.20469262,43
+1650,Case 212,validation,Ballnut,Turning & Milling Q.C.,4.20469262,1
+1651,Case 212,validation,Ballnut,Laser Marking - Machine 7,4.20469262,30
+1652,Case 212,validation,Ballnut,Lapping - Machine 1,4.20469262,100
+1653,Case 212,validation,Ballnut,Lapping - Machine 1,4.20469262,219
+1654,Case 212,validation,Ballnut,Final Inspection Q.C.,4.20469262,280
+1657,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,399
+1658,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,121
+1659,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,277
+1660,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,600
+1661,Case 214,validation,Ballnut,Turning & Milling Q.C.,5.01727984,69
+1662,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,47
+1663,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,404
+1664,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,244
+1665,Case 214,validation,Ballnut,Turning & Milling - Machine 6,5.01727984,631
+1666,Case 214,validation,Ballnut,Turning & Milling Q.C.,5.01727984,19
+1667,Case 214,validation,Ballnut,Turning & Milling Q.C.,5.01727984,4
+1668,Case 214,validation,Ballnut,Flat Grinding - Machine 11,5.01727984,225
+1669,Case 214,validation,Ballnut,Flat Grinding - Machine 11,5.01727984,4
+1670,Case 214,validation,Ballnut,Laser Marking - Machine 7,5.01727984,106
+1671,Case 214,validation,Ballnut,Laser Marking - Machine 7,5.01727984,81
+1672,Case 214,validation,Ballnut,Lapping - Machine 1,5.01727984,28
+1673,Case 214,validation,Ballnut,Lapping - Machine 1,5.01727984,247
+1674,Case 214,validation,Ballnut,Final Inspection Q.C.,5.01727984,319
+1676,Case 215,train,Ballnut,Turning & Milling - Machine 8,4.69134788,241
+1677,Case 215,train,Ballnut,Turning & Milling - Machine 8,4.69134788,145
+1678,Case 215,train,Ballnut,Turning & Milling - Machine 8,4.69134788,70
+1679,Case 215,train,Ballnut,Turning & Milling Q.C.,4.69134788,1
+1681,Case 215,train,Ballnut,Laser Marking - Machine 7,4.69134788,43
+1682,Case 215,train,Ballnut,Lapping - Machine 1,4.69134788,147
+1685,Case 215,train,Ballnut,Final Inspection Q.C.,4.69134788,216
+1688,Case 218,train,Flange,Change Version - Machine 22,5.40267738,339
+1689,Case 218,train,Flange,Change Version - Machine 22,5.40267738,594
+1690,Case 218,train,Flange,Change Version - Machine 22,5.40267738,554
+1691,Case 218,train,Flange,Change Version - Machine 22,5.40267738,480
+1692,Case 218,train,Flange,Final Inspection Q.C.,5.40267738,126
+1694,Case 218,train,Flange,Laser Marking - Machine 7,5.40267738,83
+1695,Case 218,train,Flange,Final Inspection Q.C.,5.40267738,50
+1696,Case 219,train,Cable Head,Lapping - Machine 1,3.4339872,69
+1697,Case 219,train,Cable Head,Lapping - Machine 1,3.4339872,28
+1698,Case 219,train,Cable Head,Round Grinding - Machine 2,3.4339872,52
+1699,Case 219,train,Cable Head,Round Grinding - Machine 2,3.4339872,50
+1700,Case 219,train,Cable Head,Round Grinding - Machine 2,3.4339872,139
+1701,Case 219,train,Cable Head,Round Grinding - Machine 2,3.4339872,317
+1702,Case 219,train,Cable Head,Round Grinding - Machine 2,3.4339872,334
+1703,Case 219,train,Cable Head,Final Inspection Q.C.,3.4339872,349
+1704,Case 219,train,Cable Head,Final Inspection Q.C.,3.4339872,1
+1707,Case 22,train,Ballnut,Turning & Milling - Machine 9,1.79175947,120
+1708,Case 22,train,Ballnut,Turning & Milling - Machine 9,1.79175947,536
+1709,Case 22,train,Ballnut,Turning & Milling - Machine 9,1.79175947,64
+1710,Case 22,train,Ballnut,Turning & Milling - Machine 9,1.79175947,27
+1711,Case 22,train,Ballnut,Turning & Milling - Machine 9,1.79175947,360
+1712,Case 22,train,Ballnut,Turning & Milling Q.C.,1.79175947,16
+1713,Case 22,train,Ballnut,Laser Marking - Machine 7,1.79175947,59
+1714,Case 22,train,Ballnut,Lapping - Machine 1,1.79175947,113
+1715,Case 22,train,Ballnut,Round Grinding - Machine 12,1.79175947,40
+1716,Case 22,train,Ballnut,Round Grinding - Machine 12,1.79175947,100
+1717,Case 22,train,Ballnut,Final Inspection Q.C.,1.79175947,61
+1719,Case 22,train,Ballnut,Final Inspection Q.C.,1.79175947,61
+1721,Case 223,train,Ballnut,Turning & Milling - Machine 8,3.4339872,190
+1722,Case 223,train,Ballnut,Turning & Milling Q.C.,3.4339872,161
+1723,Case 223,train,Ballnut,Turning & Milling - Machine 8,3.4339872,108
+1724,Case 223,train,Ballnut,Turning & Milling - Machine 8,3.4339872,99
+1725,Case 223,train,Ballnut,Turning & Milling - Machine 8,3.4339872,110
+1726,Case 223,train,Ballnut,Turning & Milling - Machine 8,3.4339872,481
+1727,Case 223,train,Ballnut,Turning & Milling Q.C.,3.4339872,100
+1728,Case 223,train,Ballnut,Laser Marking - Machine 7,3.4339872,47
+1731,Case 223,train,Ballnut,Flat Grinding - Machine 11,3.4339872,40
+1732,Case 223,train,Ballnut,Lapping - Machine 1,3.4339872,20
+1733,Case 223,train,Ballnut,Final Inspection Q.C.,3.4339872,20
+1737,Case 223,train,Ballnut,Final Inspection Q.C.,3.4339872,120
+1739,Case 223,train,Ballnut,Flat Grinding - Machine 11,3.4339872,45
+1740,Case 223,train,Ballnut,Lapping - Machine 1,3.4339872,50
+1741,Case 223,train,Ballnut,Final Inspection Q.C.,3.4339872,117
+1742,Case 223,train,Ballnut,Final Inspection Q.C.,3.4339872,20
+1745,Case 224,train,Gauge,Turning & Milling Q.C.,3.71357207,100
+1746,Case 224,train,Gauge,Turning & Milling Q.C.,3.71357207,30
+1747,Case 224,train,Gauge,Turning & Milling Q.C.,3.71357207,30
+1824,Case 227,train,Gauge,Final Inspection Q.C.,2.39789527,56
+1825,Case 228,train,Ballnut,Turning & Milling - Machine 8,2.39789527,76
+1826,Case 228,train,Ballnut,Turning & Milling - Machine 8,2.39789527,60
+1827,Case 228,train,Ballnut,Turning & Milling - Machine 8,2.39789527,60
+1829,Case 228,train,Ballnut,Turning & Milling Q.C.,2.39789527,49
+1832,Case 228,train,Ballnut,Flat Grinding - Machine 11,2.39789527,119
+1833,Case 228,train,Ballnut,Final Inspection Q.C.,2.39789527,80
+1836,Case 229,train,Ballnut,Turning & Milling - Machine 8,3.21887582,417
+1837,Case 229,train,Ballnut,Turning Q.C.,3.21887582,97
+1838,Case 229,train,Ballnut,Turning & Milling - Machine 8,3.21887582,411
+1839,Case 229,train,Ballnut,Turning & Milling - Machine 8,3.21887582,126
+1840,Case 229,train,Ballnut,Turning Q.C.,3.21887582,99
+1841,Case 229,train,Ballnut,Laser Marking - Machine 7,3.21887582,25
+1842,Case 229,train,Ballnut,Flat Grinding - Machine 11,3.21887582,131
+1843,Case 229,train,Ballnut,Laser Marking - Machine 7,3.21887582,38
+1844,Case 229,train,Ballnut,Final Inspection Q.C.,3.21887582,166
+1845,Case 229,train,Ballnut,Final Inspection Q.C.,3.21887582,30
+1905,Case 231,train,Cable Head,Lapping - Machine 1,3.04452244,182
+1906,Case 231,train,Cable Head,Round Grinding - Machine 2,3.04452244,214
+1907,Case 231,train,Cable Head,Round Grinding - Machine 2,3.04452244,102
+1908,Case 231,train,Cable Head,Round Grinding - Machine 2,3.04452244,440
+1909,Case 231,train,Cable Head,Round Grinding - Machine 2,3.04452244,299
+1910,Case 231,train,Cable Head,Round Grinding - Q.C.,3.04452244,188
+1911,Case 231,train,Cable Head,Round Grinding - Q.C.,3.04452244,168
+1912,Case 231,train,Cable Head,Round Grinding - Q.C.,3.04452244,30
+1913,Case 231,train,Cable Head,Final Inspection Q.C.,3.04452244,30
+1914,Case 231,train,Cable Head,Round Grinding - Q.C.,3.04452244,178
+1915,Case 231,train,Cable Head,Final Inspection Q.C.,3.04452244,70
+1916,Case 231,train,Cable Head,Final Inspection Q.C.,3.04452244,69
+1918,Case 231,train,Cable Head,Final Inspection Q.C.,3.04452244,30
+1919,Case 231,train,Cable Head,Final Inspection Q.C.,3.04452244,40
+1920,Case 232,train,Cable Head,Turning & Milling Q.C.,1.79175947,5
+1923,Case 232,train,Cable Head,Lapping - Machine 1,1.79175947,45
+1924,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,60
+1925,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,157
+1926,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,341
+1927,Case 232,train,Cable Head,Lapping - Machine 1,1.79175947,19
+1928,Case 232,train,Cable Head,Round Grinding - Manual,1.79175947,66
+1929,Case 232,train,Cable Head,Round Grinding - Manual,1.79175947,104
+1930,Case 232,train,Cable Head,Round Grinding - Manual,1.79175947,128
+1931,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,30
+1932,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,374
+1933,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,210
+1934,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,95
+1935,Case 232,train,Cable Head,Round Grinding - Machine 12,1.79175947,216
+1936,Case 232,train,Cable Head,Final Inspection Q.C.,1.79175947,240
+1938,Case 232,train,Cable Head,Final Inspection Q.C.,1.79175947,1
+1939,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,300
+1940,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,269
+1941,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,196
+1942,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,270
+1943,Case 233,train,Ballnut,Turning & Milling Q.C.,3.21887582,154
+1944,Case 233,train,Ballnut,Laser Marking - Machine 7,3.21887582,22
+1945,Case 233,train,Ballnut,Flat Grinding - Machine 11,3.21887582,143
+1946,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,165
+1947,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,37
+1948,Case 233,train,Ballnut,Turning & Milling Q.C.,3.21887582,60
+1949,Case 233,train,Ballnut,Turn & Mill. & Screw Assem - Machine 9,3.21887582,91
+1950,Case 233,train,Ballnut,Turning & Milling Q.C.,3.21887582,101
+1951,Case 233,train,Ballnut,Turning & Milling Q.C.,3.21887582,37
+1952,Case 233,train,Ballnut,Turning Rework - Machine 21,3.21887582,60
+1953,Case 233,train,Ballnut,Laser Marking - Machine 7,3.21887582,4
+1954,Case 233,train,Ballnut,Flat Grinding - Machine 11,3.21887582,22
+1955,Case 233,train,Ballnut,Turning & Milling Q.C.,3.21887582,31
+1956,Case 233,train,Ballnut,Lapping - Machine 1,3.21887582,25
+1957,Case 233,train,Ballnut,Round Grinding - Machine 2,3.21887582,101
+1958,Case 233,train,Ballnut,Round Grinding - Machine 2,3.21887582,45
+1959,Case 233,train,Ballnut,Round Grinding - Machine 2,3.21887582,167
+1960,Case 233,train,Ballnut,Round Grinding - Machine 2,3.21887582,232
+1961,Case 233,train,Ballnut,Final Inspection Q.C.,3.21887582,180
+1962,Case 233,train,Ballnut,Final Inspection Q.C.,3.21887582,96
+1964,Case 233,train,Ballnut,Final Inspection Q.C.,3.21887582,21
+2041,Case 236,train,Spur Gear,Round Grinding - Manual,3.04452244,45
+2042,Case 236,train,Spur Gear,Round Grinding - Manual,3.04452244,105
+2043,Case 236,train,Spur Gear,Turning & Milling Q.C.,3.04452244,54
+2044,Case 236,train,Spur Gear,Round Grinding - Manual,3.04452244,290
+2045,Case 236,train,Spur Gear,Round Grinding - Manual,3.04452244,460
+2046,Case 236,train,Spur Gear,Round Grinding - Manual,3.04452244,44
+2047,Case 236,train,Spur Gear,Final Inspection Q.C.,3.04452244,336
+2088,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,360
+2089,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,420
+2090,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,120
+2091,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,660
+2093,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,8
+2094,Case 238,train,Electrical Contact,Turning & Milling Q.C.,5.77144112,87
+2095,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,350
+2096,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,618
+2097,Case 238,train,Electrical Contact,Turning & Milling Q.C.,5.77144112,39
+2098,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,650
+2099,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,11
+2100,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,627
+2101,Case 238,train,Electrical Contact,Turning & Milling - Machine 4,5.77144112,643
+2102,Case 238,train,Electrical Contact,Turning & Milling Q.C.,5.77144112,83
+2103,Case 238,train,Electrical Contact,Turning & Milling Q.C.,5.77144112,32
+2104,Case 238,train,Electrical Contact,Laser Marking - Machine 7,5.77144112,199
+2105,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,51
+2106,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,243
+2107,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,10
+2108,Case 238,train,Electrical Contact,Turning & Milling Q.C.,5.77144112,307
+2109,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,393
+2110,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,172
+2111,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,647
+2112,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,625
+2113,Case 238,train,Electrical Contact,Round Grinding - Machine 3,5.77144112,80
+2114,Case 238,train,Electrical Contact,Round Grinding - Machine 2,5.77144112,43
+2115,Case 238,train,Electrical Contact,Round Grinding - Machine 2,5.77144112,5
+2116,Case 238,train,Electrical Contact,Round Grinding - Machine 2,5.77144112,45
+2117,Case 238,train,Electrical Contact,Round Grinding - Machine 2,5.77144112,540
+2118,Case 238,train,Electrical Contact,Round Grinding - Machine 2,5.77144112,385
+2120,Case 238,train,Electrical Contact,Final Inspection Q.C.,5.77144112,302
+2121,Case 238,train,Electrical Contact,Final Inspection Q.C.,5.77144112,80
+2123,Case 239,train,Ballnut,Turning & Milling - Machine 6,2.83321334,462
+2124,Case 239,train,Ballnut,Turning & Milling - Machine 6,2.83321334,49
+2125,Case 239,train,Ballnut,Turning & Milling - Machine 6,2.83321334,188
+2126,Case 239,train,Ballnut,Turning & Milling Q.C.,2.83321334,26
+2127,Case 239,train,Ballnut,Turning & Milling - Machine 6,2.83321334,322
+2128,Case 239,train,Ballnut,Turning & Milling Q.C.,2.83321334,125
+2129,Case 239,train,Ballnut,Nitration Q.C.,2.83321334,3
+2130,Case 239,train,Ballnut,Laser Marking - Machine 7,2.83321334,13
+2131,Case 239,train,Ballnut,Lapping - Machine 1,2.83321334,61
+2132,Case 239,train,Ballnut,Final Inspection Q.C.,2.83321334,221
+2150,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,218
+2151,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,479
+2152,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,190
+2153,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,651
+2154,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,526
+2155,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,215
+2157,Case 240,train,Bearing,Turning & Milling Q.C.,5.09986643,1
+2158,Case 240,train,Bearing,Laser Marking - Machine 7,5.09986643,40
+2159,Case 240,train,Bearing,Flat Grinding - Machine 11,5.09986643,42
+2161,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,122
+2162,Case 240,train,Bearing,Lapping - Machine 1,5.09986643,53
+2163,Case 240,train,Bearing,Turning & Milling - Machine 6,5.09986643,389
+2164,Case 240,train,Bearing,Final Inspection Q.C.,5.09986643,195
+2166,Case 240,train,Bearing,Turning & Milling Q.C.,5.09986643,1
+2167,Case 240,train,Bearing,Laser Marking - Machine 7,5.09986643,125
+2168,Case 240,train,Bearing,Turning & Milling Q.C.,5.09986643,3
+2169,Case 240,train,Bearing,Flat Grinding - Machine 11,5.09986643,95
+2171,Case 240,train,Bearing,Lapping - Machine 1,5.09986643,47
+2172,Case 240,train,Bearing,Lapping - Machine 1,5.09986643,61
+2173,Case 240,train,Bearing,Final Inspection Q.C.,5.09986643,55
+2179,Case 241,train,Ballnut,Turning & Milling - Machine 6,2.83321334,211
+2180,Case 241,train,Ballnut,Turning & Milling Q.C.,2.83321334,177
+2181,Case 241,train,Ballnut,Turning & Milling - Machine 6,2.83321334,170
+2182,Case 241,train,Ballnut,Turning & Milling - Machine 6,2.83321334,321
+2183,Case 241,train,Ballnut,Turning & Milling Q.C.,2.83321334,100
+2184,Case 241,train,Ballnut,Laser Marking - Machine 7,2.83321334,72
+2187,Case 241,train,Ballnut,Final Inspection Q.C.,2.83321334,203
+2189,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,439
+2190,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,91
+2191,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,222
+2192,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,390
+2193,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,49
+2194,Case 242,train,Spur Gear,Turning & Milling Q.C.,3.71357207,119
+2195,Case 242,train,Spur Gear,Turning & Milling Q.C.,3.71357207,1
+2197,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,205
+2198,Case 242,train,Spur Gear,Laser Marking - Machine 7,3.71357207,16
+2199,Case 242,train,Spur Gear,Lapping - Machine 1,3.71357207,99
+2200,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,138
+2201,Case 242,train,Spur Gear,Round Grinding - Manual,3.71357207,105
+2202,Case 242,train,Spur Gear,Round Grinding - Manual,3.71357207,520
+2203,Case 242,train,Spur Gear,Turning & Milling - Machine 6,3.71357207,362
+2205,Case 242,train,Spur Gear,Turning & Milling Q.C.,3.71357207,30
+2206,Case 242,train,Spur Gear,Round Grinding - Machine 12,3.71357207,547
+2207,Case 242,train,Spur Gear,Round Grinding - Manual,3.71357207,547
+2208,Case 242,train,Spur Gear,Laser Marking - Machine 7,3.71357207,45
+2209,Case 242,train,Spur Gear,Lapping - Machine 1,3.71357207,72
+2210,Case 242,train,Spur Gear,Final Inspection Q.C.,3.71357207,120
+2211,Case 242,train,Spur Gear,Round Grinding - Manual,3.71357207,524
+2212,Case 242,train,Spur Gear,Round Grinding - Machine 12,3.71357207,500
+2214,Case 242,train,Spur Gear,Final Inspection Q.C.,3.71357207,19
+2215,Case 242,train,Spur Gear,Final Inspection Q.C.,3.71357207,120
+2217,Case 242,train,Spur Gear,Final Inspection Q.C.,3.71357207,30
+2218,Case 243,train,Spur Gear,Turning & Milling - Machine 6,2.39789527,238
+2219,Case 243,train,Spur Gear,Turning & Milling - Machine 6,2.39789527,240
+2220,Case 243,train,Spur Gear,Turning & Milling Q.C.,2.39789527,138
+2221,Case 243,train,Spur Gear,Turning & Milling - Machine 6,2.39789527,338
+2222,Case 243,train,Spur Gear,Turning & Milling Q.C.,2.39789527,126
+2223,Case 243,train,Spur Gear,Laser Marking - Machine 7,2.39789527,54
+2224,Case 243,train,Spur Gear,Lapping - Machine 1,2.39789527,130
+2225,Case 243,train,Spur Gear,Round Grinding - Machine 2,2.39789527,147
+2226,Case 243,train,Spur Gear,Round Grinding - Machine 2,2.39789527,78
+2227,Case 243,train,Spur Gear,Final Inspection Q.C.,2.39789527,357
+2228,Case 243,train,Spur Gear,Final Inspection Q.C.,2.39789527,262
+2231,Case 244,train,Cable Head,Lapping - Machine 1,1.79175947,34
+2232,Case 244,train,Cable Head,Lapping - Machine 1,1.79175947,75
+2233,Case 244,train,Cable Head,Round Grinding - Machine 12,1.79175947,98
+2234,Case 244,train,Cable Head,Round Grinding - Machine 12,1.79175947,364
+2235,Case 244,train,Cable Head,Round Grinding - Machine 12,1.79175947,262
+2236,Case 244,train,Cable Head,Final Inspection Q.C.,1.79175947,100
+2237,Case 244,train,Cable Head,Round Grinding - Machine 12,1.79175947,78
+2238,Case 244,train,Cable Head,Round Grinding - Machine 12,1.79175947,87
+2239,Case 244,train,Cable Head,Final Inspection Q.C.,1.79175947,210
+2240,Case 244,train,Cable Head,Final Inspection Q.C.,1.79175947,27
+2259,Case 246,train,Disc,Turning & Milling - Machine 9,3.61091791,420
+2260,Case 246,train,Disc,Turning & Milling - Machine 9,3.61091791,460
+2262,Case 246,train,Disc,Turning & Milling Q.C.,3.61091791,100
+2263,Case 246,train,Disc,Laser Marking - Machine 7,3.61091791,42
+2264,Case 246,train,Disc,Flat Grinding - Machine 11,3.61091791,415
+2266,Case 246,train,Disc,Flat Grinding - Machine 11,3.61091791,139
+2267,Case 246,train,Disc,Final Inspection Q.C.,3.61091791,83
+2269,Case 248,train,Housing,Turning & Milling - Machine 9,3.21887582,318
+2270,Case 248,train,Housing,Turning & Milling - Machine 9,3.21887582,111
+2271,Case 248,train,Housing,Turning & Milling - Machine 9,3.21887582,344
+2273,Case 248,train,Housing,Turning & Milling Q.C.,3.21887582,60
+2274,Case 248,train,Housing,Laser Marking - Machine 7,3.21887582,69
+2276,Case 248,train,Housing,Flat Grinding - Machine 11,3.21887582,179
+2277,Case 248,train,Housing,Lapping - Machine 1,3.21887582,107
+2278,Case 248,train,Housing,Round Grinding - Machine 2,3.21887582,144
+2279,Case 248,train,Housing,Round Grinding - Machine 2,3.21887582,23
+2280,Case 248,train,Housing,Round Grinding - Machine 2,3.21887582,279
+2281,Case 248,train,Housing,Final Inspection Q.C.,3.21887582,161
+2283,Case 248,train,Housing,Final Inspection Q.C.,3.21887582,84
+2284,Case 249,train,Ballnut,Turning & Milling - Machine 8,4.17438727,422
+2285,Case 249,train,Ballnut,Turning & Milling - Machine 8,4.17438727,54
+2286,Case 249,train,Ballnut,Turning & Milling Q.C.,4.17438727,48
+2287,Case 249,train,Ballnut,Turning & Milling - Machine 8,4.17438727,292
+2288,Case 249,train,Ballnut,Turning & Milling - Machine 8,4.17438727,506
+2289,Case 249,train,Ballnut,Turning & Milling - Machine 8,4.17438727,129
+2290,Case 249,train,Ballnut,Turning & Milling Q.C.,4.17438727,100
+2291,Case 249,train,Ballnut,Flat Grinding - Machine 11,4.17438727,149
+2292,Case 249,train,Ballnut,Lapping - Machine 1,4.17438727,74
+2293,Case 249,train,Ballnut,Round Grinding - Manual,4.17438727,44
+2294,Case 249,train,Ballnut,Round Grinding - Machine 2,4.17438727,234
+2295,Case 249,train,Ballnut,Round Grinding - Machine 2,4.17438727,74
+2296,Case 249,train,Ballnut,Round Grinding - Machine 2,4.17438727,540
+2297,Case 249,train,Ballnut,Round Grinding - Machine 2,4.17438727,111
+2298,Case 249,train,Ballnut,Round Grinding - Machine 2,4.17438727,364
+2299,Case 249,train,Ballnut,Final Inspection Q.C.,4.17438727,250
+2300,Case 249,train,Ballnut,Laser Marking - Machine 7,4.17438727,1
+2301,Case 249,train,Ballnut,Laser Marking - Machine 7,4.17438727,51
+2303,Case 249,train,Ballnut,Final Inspection Q.C.,4.17438727,35
+2328,Case 250,train,Barrel,Milling - Machine 16,3.49650756,510
+2329,Case 250,train,Barrel,Milling - Machine 16,3.49650756,240
+2330,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,350
+2331,Case 250,train,Barrel,Milling - Machine 16,3.49650756,540
+2332,Case 250,train,Barrel,Milling - Machine 16,3.49650756,360
+2333,Case 250,train,Barrel,Milling - Machine 16,3.49650756,670
+2335,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,100
+2336,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,100
+2337,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,19
+2338,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,230
+2339,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,90
+2340,Case 250,train,Barrel,Final Inspection Q.C.,3.49650756,180
+2356,Case 252,train,Ballnut,Turning & Milling - Machine 6,2.56494936,13
+2357,Case 252,train,Ballnut,Turning & Milling - Machine 6,2.56494936,137
+2358,Case 252,train,Ballnut,Turning & Milling - Machine 6,2.56494936,148
+2359,Case 252,train,Ballnut,Turning & Milling Q.C.,2.56494936,27
+2360,Case 252,train,Ballnut,Turning & Milling - Machine 6,2.56494936,413
+2361,Case 252,train,Ballnut,Turning & Milling Q.C.,2.56494936,2
+2362,Case 252,train,Ballnut,Laser Marking - Machine 7,2.56494936,20
+2363,Case 252,train,Ballnut,Lapping - Machine 1,2.56494936,100
+2364,Case 252,train,Ballnut,Final Inspection Q.C.,2.56494936,37
+2365,Case 252,train,Ballnut,Final Inspection Q.C.,2.56494936,1
+2367,Case 253,train,Blade,Turning & Milling - Machine 9,2.83321334,208
+2368,Case 253,train,Blade,Turning & Milling - Machine 9,2.83321334,66
+2369,Case 253,train,Blade,Turning & Milling Q.C.,2.83321334,59
+2370,Case 253,train,Blade,Turning & Milling - Machine 9,2.83321334,156
+2371,Case 253,train,Blade,Turning & Milling Q.C.,2.83321334,60
+2372,Case 253,train,Blade,Laser Marking - Machine 7,2.83321334,17
+2373,Case 253,train,Blade,Lapping - Machine 1,2.83321334,151
+2378,Case 253,train,Blade,Final Inspection Q.C.,2.83321334,12
+2381,Case 254,train,Spur Gear,Laser Marking - Machine 7,5.420535,120
+2382,Case 254,train,Spur Gear,Flat Grinding - Machine 11,5.420535,120
+2383,Case 254,train,Spur Gear,Flat Grinding - Machine 11,5.420535,79
+2384,Case 254,train,Spur Gear,Flat Grinding - Machine 11,5.420535,86
+2385,Case 254,train,Spur Gear,Final Inspection Q.C.,5.420535,31
+2387,Case 254,train,Spur Gear,Final Inspection Q.C.,5.420535,1
+2388,Case 255,train,Bushing,Turning - Machine 8,3.71357207,660
+2390,Case 255,train,Bushing,Laser Marking - Machine 7,3.71357207,45
+2391,Case 255,train,Bushing,Final Inspection Q.C.,3.71357207,60
+2526,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,224
+2527,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,109
+2528,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,107
+2529,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,26
+2530,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,270
+2531,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,47
+2532,Case 258,train,Ballnut,Turning & Milling - Machine 6,3.93182563,619
+2533,Case 258,train,Ballnut,Turning & Milling Q.C.,3.93182563,162
+2534,Case 258,train,Ballnut,Turning & Milling Q.C.,3.93182563,34
+2535,Case 258,train,Ballnut,Laser Marking - Machine 7,3.93182563,41
+2536,Case 258,train,Ballnut,Lapping - Machine 1,3.93182563,290
+2537,Case 258,train,Ballnut,Turning & Milling Q.C.,3.93182563,15
+2538,Case 258,train,Ballnut,Final Inspection Q.C.,3.93182563,309
+2670,Case 261,train,Bearing,Turning & Milling - Machine 8,4.11087386,327
+2671,Case 261,train,Bearing,Turning & Milling - Machine 8,4.11087386,278
+2672,Case 261,train,Bearing,Turning & Milling Q.C.,4.11087386,24
+2673,Case 261,train,Bearing,Turning & Milling - Machine 8,4.11087386,263
+2674,Case 261,train,Bearing,Turning & Milling Q.C.,4.11087386,21
+2676,Case 261,train,Bearing,Laser Marking - Machine 7,4.11087386,38
+2677,Case 261,train,Bearing,Flat Grinding - Machine 11,4.11087386,37
+2679,Case 261,train,Bearing,Final Inspection Q.C.,4.11087386,1
+2680,Case 262,train,Spur Gear,Turning & Milling - Machine 6,3.61091791,310
+2681,Case 262,train,Spur Gear,Turning & Milling - Machine 6,3.61091791,66
+2682,Case 262,train,Spur Gear,Turning & Milling - Machine 6,3.61091791,330
+2683,Case 262,train,Spur Gear,Turning & Milling Q.C.,3.61091791,74
+2684,Case 262,train,Spur Gear,Turning & Milling Q.C.,3.61091791,3
+2685,Case 262,train,Spur Gear,Laser Marking - Machine 7,3.61091791,50
+2686,Case 262,train,Spur Gear,Flat Grinding - Machine 11,3.61091791,21
+2687,Case 262,train,Spur Gear,Flat Grinding - Machine 11,3.61091791,53
+2688,Case 262,train,Spur Gear,Flat Grinding - Machine 11,3.61091791,14
+2689,Case 262,train,Spur Gear,Lapping - Machine 1,3.61091791,76
+2690,Case 262,train,Spur Gear,Lapping - Machine 1,3.61091791,98
+2691,Case 262,train,Spur Gear,Round Grinding - Manual,3.61091791,148
+2692,Case 262,train,Spur Gear,Round Grinding - Manual,3.61091791,374
+2693,Case 262,train,Spur Gear,Final Inspection Q.C.,3.61091791,122
+2695,Case 262,train,Spur Gear,Final Inspection Q.C.,3.61091791,1
+2696,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,120
+2697,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,366
+2698,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,139
+2699,Case 263,train,Compound Dies,Turning & Milling Q.C.,2.94443898,60
+2700,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,99
+2701,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,321
+2702,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,18
+2703,Case 263,train,Compound Dies,Turning & Milling - Machine 8,2.94443898,135
+2704,Case 263,train,Compound Dies,Turning & Milling Q.C.,2.94443898,60
+2705,Case 263,train,Compound Dies,Flat Grinding - Machine 11,2.94443898,41
+2706,Case 263,train,Compound Dies,Nitration Q.C.,2.94443898,100
+2707,Case 263,train,Compound Dies,Laser Marking - Machine 7,2.94443898,13
+2708,Case 263,train,Compound Dies,Lapping - Machine 1,2.94443898,40
+2709,Case 263,train,Compound Dies,Round Grinding - Manual,2.94443898,62
+2713,Case 263,train,Compound Dies,Round Grinding - Manual,2.94443898,393
+2714,Case 263,train,Compound Dies,Final Inspection Q.C.,2.94443898,279
+2715,Case 263,train,Compound Dies,Final Inspection Q.C.,2.94443898,31
+2718,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,410
+2719,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,33
+2720,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,130
+2721,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,613
+2722,Case 264,test,Bearing,Turning & Milling Q.C.,4.89034913,17
+2723,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,472
+2724,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,54
+2725,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,633
+2726,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,27
+2727,Case 264,test,Bearing,Turning & Milling Q.C.,4.89034913,26
+2728,Case 264,test,Bearing,Turning & Milling Q.C.,4.89034913,7
+2729,Case 264,test,Bearing,Turning & Milling - Machine 6,4.89034913,255
+2730,Case 264,test,Bearing,Laser Marking - Machine 7,4.89034913,139
+2731,Case 264,test,Bearing,Turning & Milling Q.C.,4.89034913,19
+2732,Case 265,train,O-Ring,Turning - Machine 8,2.30258509,307
+2733,Case 265,train,O-Ring,Turning - Machine 8,2.30258509,52
+2734,Case 265,train,O-Ring,Turning & Milling - Machine 8,2.30258509,225
+2735,Case 265,train,O-Ring,Turning & Milling - Machine 8,2.30258509,40
+2736,Case 265,train,O-Ring,Turning & Milling - Machine 8,2.30258509,54
+2738,Case 265,train,O-Ring,Laser Marking - Machine 7,2.30258509,16
+2739,Case 265,train,O-Ring,Lapping - Machine 1,2.30258509,69
+2740,Case 265,train,O-Ring,Round Grinding - Manual,2.30258509,77
+2741,Case 265,train,O-Ring,Round Grinding - Manual,2.30258509,59
+2742,Case 265,train,O-Ring,Round Grinding - Manual,2.30258509,28
+2743,Case 265,train,O-Ring,Round Grinding - Manual,2.30258509,228
+2744,Case 265,train,O-Ring,Final Inspection Q.C.,2.30258509,303
+2745,Case 265,train,O-Ring,Final Inspection Q.C.,2.30258509,347
+2905,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,530
+2906,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,72
+2907,Case 268,train,Locknut,Turning & Milling Q.C.,3.58351894,60
+2908,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,248
+2909,Case 268,train,Locknut,Turning & Milling Q.C.,3.58351894,65
+2910,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,266
+2911,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,317
+2913,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,129
+2914,Case 268,train,Locknut,Turning & Milling Q.C.,3.58351894,103
+2915,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,130
+2916,Case 268,train,Locknut,Turning & Milling - Machine 8,3.58351894,217
+2917,Case 268,train,Locknut,Turning & Milling Q.C.,3.58351894,30
+2919,Case 268,train,Locknut,Turning & Milling Q.C.,3.58351894,81
+2920,Case 268,train,Locknut,Flat Grinding - Machine 11,3.58351894,61
+2921,Case 268,train,Locknut,Lapping - Machine 1,3.58351894,40
+2922,Case 268,train,Locknut,Round Grinding - Machine 3,3.58351894,230
+2923,Case 268,train,Locknut,Round Grinding - Machine 3,3.58351894,440
+2924,Case 268,train,Locknut,Round Grinding - Machine 3,3.58351894,136
+2925,Case 268,train,Locknut,Laser Marking - Machine 7,3.58351894,45
+2927,Case 268,train,Locknut,Final Inspection Q.C.,3.58351894,29
+2928,Case 269,train,Ballnut,Turning & Milling - Machine 8,2.56494936,300
+2929,Case 269,train,Ballnut,Turning & Milling - Machine 8,2.56494936,465
+2930,Case 269,train,Ballnut,Turning & Milling Q.C.,2.56494936,156
+2932,Case 269,train,Ballnut,Turning & Milling - Machine 8,2.56494936,235
+2933,Case 269,train,Ballnut,Turning & Milling Q.C.,2.56494936,73
+2934,Case 269,train,Ballnut,Turning & Milling - Machine 8,2.56494936,120
+2935,Case 269,train,Ballnut,Turning & Milling - Machine 8,2.56494936,289
+2936,Case 269,train,Ballnut,Turning & Milling Q.C.,2.56494936,70
+2937,Case 269,train,Ballnut,Turning & Milling Q.C.,2.56494936,100
+2940,Case 269,train,Ballnut,Round Grinding - Machine 2,2.56494936,150
+2941,Case 269,train,Ballnut,Round Grinding - Machine 2,2.56494936,358
+2942,Case 269,train,Ballnut,Round Grinding - Machine 12,2.56494936,56
+2943,Case 269,train,Ballnut,Round Grinding - Machine 12,2.56494936,79
+2944,Case 269,train,Ballnut,Final Inspection Q.C.,2.56494936,100
+2945,Case 269,train,Ballnut,Final Inspection Q.C.,2.56494936,114
+2946,Case 269,train,Ballnut,Final Inspection Q.C.,2.56494936,155
+2948,Case 269,train,Ballnut,Final Inspection Q.C.,2.56494936,31
+2949,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,114
+2950,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,180
+2951,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,65
+2952,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,195
+2953,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,270
+2954,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,4
+2955,Case 27,train,Ballnut,Turning & Milling - Machine 8,2.56494936,85
+2956,Case 27,train,Ballnut,Turning & Milling Q.C.,2.56494936,1
+2957,Case 27,train,Ballnut,Lapping - Machine 1,2.56494936,67
+2958,Case 27,train,Ballnut,Round Grinding - Manual,2.56494936,60
+2959,Case 27,train,Ballnut,Round Grinding - Manual,2.56494936,224
+2960,Case 27,train,Ballnut,Laser Marking - Machine 7,2.56494936,16
+2961,Case 27,train,Ballnut,Final Inspection Q.C.,2.56494936,192
+2963,Case 27,train,Ballnut,Final Inspection Q.C.,2.56494936,158
+3023,Case 272,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,302
+3024,Case 272,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,148
+3025,Case 272,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,420
+3026,Case 272,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,20
+3027,Case 272,train,Spur Gear,Turning & Milling Q.C.,3.04452244,48
+3028,Case 272,train,Spur Gear,Flat Grinding - Machine 11,3.04452244,100
+3029,Case 272,train,Spur Gear,Turning & Milling Q.C.,3.04452244,175
+3030,Case 272,train,Spur Gear,Laser Marking - Machine 7,3.04452244,27
+3031,Case 272,train,Spur Gear,Lapping - Machine 1,3.04452244,30
+3032,Case 272,train,Spur Gear,Round Grinding - Machine 3,3.04452244,60
+3033,Case 272,train,Spur Gear,Round Grinding - Machine 3,3.04452244,100
+3034,Case 272,train,Spur Gear,Round Grinding - Machine 3,3.04452244,90
+3035,Case 272,train,Spur Gear,Final Inspection Q.C.,3.04452244,247
+3037,Case 272,train,Spur Gear,Final Inspection Q.C.,3.04452244,2
+3039,Case 273,train,Spur Gear,Turning & Milling - Machine 9,2.56494936,410
+3040,Case 273,train,Spur Gear,Turning & Milling - Machine 9,2.56494936,1011
+3041,Case 273,train,Spur Gear,Turning & Milling - Machine 9,2.56494936,4
+3042,Case 273,train,Spur Gear,Turning & Milling Q.C.,2.56494936,71
+3043,Case 273,train,Spur Gear,Flat Grinding - Machine 11,2.56494936,149
+3044,Case 273,train,Spur Gear,Laser Marking - Machine 7,2.56494936,8
+3045,Case 273,train,Spur Gear,Lapping - Machine 1,2.56494936,120
+3046,Case 273,train,Spur Gear,Round Grinding - Manual,2.56494936,75
+3047,Case 273,train,Spur Gear,Round Grinding - Machine 12,2.56494936,39
+3048,Case 273,train,Spur Gear,Round Grinding - Machine 12,2.56494936,42
+3049,Case 273,train,Spur Gear,Round Grinding - Machine 12,2.56494936,259
+3051,Case 273,train,Spur Gear,Final Inspection Q.C.,2.56494936,305
+3052,Case 273,train,Spur Gear,Final Inspection Q.C.,2.56494936,1
+3053,Case 273,train,Spur Gear,Final Inspection Q.C.,2.56494936,189
+3054,Case 274,train,Spur Gear,Turning & Milling - Machine 8,1.38629436,342
+3055,Case 274,train,Spur Gear,Turning & Milling - Machine 8,1.38629436,193
+3056,Case 274,train,Spur Gear,Turning & Milling Q.C.,1.38629436,95
+3057,Case 274,train,Spur Gear,Turning & Milling - Machine 8,1.38629436,98
+3058,Case 274,train,Spur Gear,Turning & Milling Q.C.,1.38629436,44
+3059,Case 274,train,Spur Gear,Flat Grinding - Machine 11,1.38629436,40
+3060,Case 274,train,Spur Gear,Lapping - Machine 1,1.38629436,60
+3061,Case 274,train,Spur Gear,Round Grinding - Manual,1.38629436,150
+3062,Case 274,train,Spur Gear,Round Grinding - Q.C.,1.38629436,62
+3064,Case 274,train,Spur Gear,Final Inspection Q.C.,1.38629436,97
+3065,Case 274,train,Spur Gear,Final Inspection Q.C.,1.38629436,10
+3067,Case 277,train,Cable Head,Milling - Machine 16,1.38629436,510
+3069,Case 277,train,Cable Head,Lapping - Machine 1,1.38629436,54
+3070,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,90
+3071,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,315
+3072,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,100
+3073,Case 277,train,Cable Head,Lapping - Machine 1,1.38629436,10
+3074,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,57
+3075,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,463
+3077,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,132
+3078,Case 277,train,Cable Head,Final Inspection Q.C.,1.38629436,389
+3079,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,105
+3080,Case 277,train,Cable Head,Round Grinding - Manual,1.38629436,31
+3165,Case 3,train,Cable Head,Turning & Milling - Machine 5,2.39789527,635
+3166,Case 3,train,Cable Head,Turning & Milling Q.C.,2.39789527,69
+3167,Case 3,train,Cable Head,Turning & Milling - Machine 4,2.39789527,194
+3168,Case 3,train,Cable Head,Turning & Milling Q.C.,2.39789527,40
+3169,Case 3,train,Cable Head,Laser Marking - Machine 7,2.39789527,20
+3170,Case 3,train,Cable Head,Lapping - Machine 1,2.39789527,58
+3171,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,41
+3172,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,90
+3173,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,229
+3174,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,84
+3175,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,48
+3176,Case 3,train,Cable Head,Round Grinding - Machine 3,2.39789527,354
+3177,Case 3,train,Cable Head,Final Inspection Q.C.,2.39789527,180
+3178,Case 3,train,Cable Head,Final Inspection Q.C.,2.39789527,60
+3180,Case 30,validation,Cable Head,Turning & Milling - Machine 5,3.93182563,338
+3181,Case 30,validation,Cable Head,Turning & Milling Q.C.,3.93182563,30
+3182,Case 30,validation,Cable Head,Turning & Milling - Machine 5,3.93182563,198
+3183,Case 30,validation,Cable Head,Turning & Milling - Machine 5,3.93182563,119
+3184,Case 30,validation,Cable Head,Turning & Milling - Machine 5,3.93182563,465
+3185,Case 30,validation,Cable Head,Turning & Milling Q.C.,3.93182563,40
+3406,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,463
+3407,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,188
+3408,Case 39,train,Spur Gear,Turning & Milling Q.C.,2.39789527,73
+3409,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,188
+3410,Case 39,train,Spur Gear,Turning & Milling Q.C.,2.39789527,50
+3411,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,103
+3412,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,300
+3413,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,23
+3414,Case 39,train,Spur Gear,Turning & Milling - Machine 10,2.39789527,336
+3415,Case 39,train,Spur Gear,Turning & Milling Q.C.,2.39789527,94
+3416,Case 39,train,Spur Gear,Turning & Milling Q.C.,2.39789527,89
+3417,Case 39,train,Spur Gear,Laser Marking - Machine 7,2.39789527,22
+3418,Case 39,train,Spur Gear,Round Grinding - Q.C.,2.39789527,67
+3419,Case 4,test,Cable Head,SETUP     Turning & Milling - Machine 5,2.77258872,241
+3420,Case 4,test,Cable Head,Turning & Milling - Machine 5,2.77258872,352
+3421,Case 4,test,Cable Head,Turning & Milling Q.C.,2.77258872,120
+3422,Case 4,test,Cable Head,Turning & Milling - Machine 5,2.77258872,24
+3423,Case 4,test,Cable Head,Turning & Milling - Machine 5,2.77258872,463
+3424,Case 4,test,Cable Head,Turning & Milling - Machine 5,2.77258872,210
+3425,Case 4,test,Cable Head,Turning & Milling Q.C.,2.77258872,61
+3426,Case 4,test,Cable Head,Laser Marking - Machine 7,2.77258872,1
+3429,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,156
+3430,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,137
+3431,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,26
+3432,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,48
+3433,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,368
+3434,Case 40,train,Spur Gear,Turning - Machine 9,3.61091791,416
+3435,Case 40,train,Spur Gear,Turning Q.C.,3.61091791,28
+3436,Case 40,train,Spur Gear,Flat Grinding - Machine 11,3.61091791,55
+3437,Case 40,train,Spur Gear,Laser Marking - Machine 7,3.61091791,24
+3439,Case 40,train,Spur Gear,Final Inspection Q.C.,3.61091791,1
+3440,Case 41,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,225
+3441,Case 41,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,64
+3442,Case 41,train,Spur Gear,Turning & Milling Q.C.,3.04452244,183
+3443,Case 41,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,214
+3444,Case 41,train,Spur Gear,Turning & Milling - Machine 9,3.04452244,254
+3445,Case 41,train,Spur Gear,Grinding Rework,3.04452244,30
+3447,Case 41,train,Spur Gear,Laser Marking - Machine 7,3.04452244,20
+3448,Case 41,train,Spur Gear,Lapping - Machine 1,3.04452244,30
+3449,Case 41,train,Spur Gear,Round Grinding - Machine 3,3.04452244,187
+3450,Case 41,train,Spur Gear,Round Grinding - Machine 3,3.04452244,190
+3452,Case 41,train,Spur Gear,Final Inspection Q.C.,3.04452244,263
+3534,Case 45,test,Spur Gear,Turning & Milling - Machine 6,2.77258872,343
+3535,Case 45,test,Spur Gear,Turning & Milling - Machine 6,2.77258872,192
+3536,Case 45,test,Spur Gear,Turning & Milling - Machine 6,2.77258872,242
+3537,Case 45,test,Spur Gear,Turning & Milling Q.C.,2.77258872,174
+3538,Case 45,test,Spur Gear,Fix - Machine 15M,2.77258872,96
+3540,Case 45,test,Spur Gear,Turning & Milling Q.C.,2.77258872,37
+3542,Case 46,train,Ballnut,Turning & Milling - Machine 6,2.39789527,387
+3543,Case 46,train,Ballnut,Turning & Milling - Machine 6,2.39789527,185
+3544,Case 46,train,Ballnut,Turning & Milling - Machine 6,2.39789527,156
+3545,Case 46,train,Ballnut,Turning & Milling - Machine 6,2.39789527,280
+3546,Case 46,train,Ballnut,Turning & Milling Q.C.,2.39789527,115
+3549,Case 46,train,Ballnut,Final Inspection Q.C.,2.39789527,53
+3550,Case 46,train,Ballnut,Final Inspection Q.C.,2.39789527,12
+3607,Case 5,test,Bearing,Turning & Milling - Machine 8,2.77258872,297
+3608,Case 5,test,Bearing,Turning & Milling - Machine 8,2.77258872,29
+3634,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,126
+3635,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,68
+3636,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,79
+3637,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,120
+3638,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,105
+3639,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,227
+3640,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,60
+3641,Case 53,test,Wheel,Turning & Milling Q.C.,2.39789527,60
+3642,Case 53,test,Wheel,Turning & Milling - Machine 8,2.39789527,210
+3643,Case 53,test,Wheel,Turning & Milling Q.C.,2.39789527,11
+3644,Case 53,test,Wheel,Turning & Milling Q.C.,2.39789527,68
+3645,Case 53,test,Wheel,Laser Marking - Machine 7,2.39789527,102
+3646,Case 53,test,Wheel,Flat Grinding - Machine 11,2.39789527,1
+3647,Case 53,test,Wheel,Round Grinding - Machine 12,2.39789527,70
+3648,Case 53,test,Wheel,Round Grinding - Machine 12,2.39789527,111
+3649,Case 53,test,Wheel,Final Inspection Q.C.,2.39789527,180
+3650,Case 53,test,Wheel,Final Inspection Q.C.,2.39789527,14
+3652,Case 54,test,Ballnut,Turning & Milling - Machine 4,3.21887582,406
+3653,Case 54,test,Ballnut,Turning & Milling - Machine 4,3.21887582,218
+3654,Case 54,test,Ballnut,Turning & Milling - Machine 4,3.21887582,45
+3655,Case 54,test,Ballnut,Turning & Milling - Machine 4,3.21887582,387
+3656,Case 54,test,Ballnut,Turning & Milling Q.C.,3.21887582,59
+3657,Case 54,test,Ballnut,Turning & Milling - Machine 4,3.21887582,414
+3658,Case 54,test,Ballnut,Turning & Milling Q.C.,3.21887582,15
+3659,Case 54,test,Ballnut,Flat Grinding - Machine 11,3.21887582,60
+3661,Case 54,test,Ballnut,Turning & Milling Q.C.,3.21887582,49
+3662,Case 54,test,Ballnut,Final Inspection Q.C.,3.21887582,40
+3663,Case 54,test,Ballnut,Flat Grinding - Machine 11,3.21887582,1
+3665,Case 54,test,Ballnut,Laser Marking - Machine 7,3.21887582,1
+3667,Case 54,test,Ballnut,Final Inspection Q.C.,3.21887582,23
+3686,Case 56,validation,Spur Gear,Turning - Machine 8,3.21887582,89
+3687,Case 56,validation,Spur Gear,Turning - Machine 8,3.21887582,242
+3689,Case 56,validation,Spur Gear,Turning - Machine 8,3.21887582,130
+3690,Case 56,validation,Spur Gear,Turning Q.C.,3.21887582,34
+3691,Case 56,validation,Spur Gear,Lapping - Machine 1,3.21887582,73
+3692,Case 56,validation,Spur Gear,Laser Marking - Machine 7,3.21887582,18
+3693,Case 56,validation,Spur Gear,Final Inspection Q.C.,3.21887582,49
+3701,Case 59,test,Ballnut,Turning & Milling - Machine 6,2.39789527,367
+3702,Case 59,test,Ballnut,Turning & Milling - Machine 6,2.39789527,108
+3703,Case 59,test,Ballnut,Turning & Milling - Machine 6,2.39789527,57
+3704,Case 59,test,Ballnut,Turning & Milling Q.C.,2.39789527,50
+3705,Case 59,test,Ballnut,Laser Marking - Machine 7,2.39789527,5
+3706,Case 59,test,Ballnut,Lapping - Machine 1,2.39789527,38
+3708,Case 59,test,Ballnut,Final Inspection Q.C.,2.39789527,101
+3728,Case 60,test,Assembly 1,Turning - Machine 8,2.77258872,107
+3729,Case 60,test,Assembly 1,Lapping - Machine 1,2.77258872,20
+3730,Case 60,test,Assembly 1,Turning - Machine 8,2.77258872,157
+3731,Case 60,test,Assembly 1,Turning Q.C.,2.77258872,60
+3732,Case 60,test,Assembly 1,Turning - Machine 8,2.77258872,98
+3733,Case 60,test,Assembly 1,Turning - Machine 8,2.77258872,399
+3734,Case 60,test,Assembly 1,Turning Q.C.,2.77258872,58
+3735,Case 60,test,Assembly 1,Turning Q.C.,2.77258872,46
+3736,Case 60,test,Assembly 1,Lapping - Machine 1,2.77258872,36
+3737,Case 60,test,Assembly 1,Laser Marking - Machine 7,2.77258872,11
+3738,Case 60,test,Assembly 1,Final Inspection Q.C.,2.77258872,60
+3739,Case 60,test,Assembly 1,Final Inspection Q.C.,2.77258872,1
+3837,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,450
+3838,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,400
+3839,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,339
+3840,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,397
+3841,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,162
+3842,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,79
+3843,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,1
+3844,Case 64,test,Cable Head,Turning & Milling - Machine 5,5.56452041,602
+3845,Case 65,test,Bearing,Turning & Milling - Machine 9,6.2166061,60
+3846,Case 65,test,Bearing,Turning & Milling Q.C.,6.2166061,51
+3847,Case 65,test,Bearing,Turning & Milling - Machine 9,6.2166061,304
+3848,Case 65,test,Bearing,Turning & Milling - Machine 9,6.2166061,418
+3849,Case 65,test,Bearing,Turning & Milling - Machine 9,6.2166061,359
+3850,Case 65,test,Bearing,Turning & Milling - Machine 9,6.2166061,180
+3885,Case 68,validation,Spur Gear,Turning - Machine 21,1.94591015,270
+3886,Case 68,validation,Spur Gear,Turning - Machine 8,1.94591015,60
+3887,Case 68,validation,Spur Gear,Final Inspection Q.C.,1.94591015,91
+3889,Case 68,validation,Spur Gear,Final Inspection Q.C.,1.94591015,30
+3890,Case 69,test,Ballnut,Milling - Machine 8,1.79175947,479
+3981,Case 71,test,Spur Gear,Turning & Milling - Machine 10,3.68887945,143
+3982,Case 71,test,Spur Gear,Turning & Milling - Machine 10,3.68887945,197
+3984,Case 71,test,Spur Gear,Turning Q.C.,3.68887945,4
+3985,Case 71,test,Spur Gear,Laser Marking - Machine 7,3.68887945,36
+3986,Case 71,test,Spur Gear,Flat Grinding - Machine 11,3.68887945,1
+3988,Case 72,train,Spur Gear,Turning & Milling - Machine 8,2.56494936,574
+3989,Case 72,train,Spur Gear,Turning & Milling - Machine 8,2.56494936,46
+3990,Case 72,train,Spur Gear,Turning & Milling Q.C.,2.56494936,86
+3992,Case 72,train,Spur Gear,Flat Grinding - Machine 11,2.56494936,1
+3993,Case 72,train,Spur Gear,Laser Marking - Machine 7,2.56494936,206
+3997,Case 72,train,Spur Gear,Final Inspection Q.C.,2.56494936,1
+3998,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,8
+3999,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,552
+4000,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,209
+4001,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,173
+4002,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,131
+4003,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,76
+4004,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,338
+4005,Case 73,train,Fastener,Turning & Milling Q.C.,3.93182563,62
+4006,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,262
+4007,Case 73,train,Fastener,Turning & Milling - Machine 4,3.93182563,148
+4008,Case 73,train,Fastener,Turning & Milling Q.C.,3.93182563,22
+4009,Case 73,train,Fastener,Laser Marking - Machine 7,3.93182563,20
+4010,Case 73,train,Fastener,Round Grinding - Machine 2,3.93182563,109
+4011,Case 73,train,Fastener,Round Grinding - Machine 2,3.93182563,34
+4012,Case 73,train,Fastener,Round Grinding - Machine 2,3.93182563,250
+4013,Case 73,train,Fastener,Round Grinding - Machine 2,3.93182563,54
+4014,Case 73,train,Fastener,Round Grinding - Machine 2,3.93182563,135
+4015,Case 73,train,Fastener,Round Grinding - Q.C.,3.93182563,24
+4017,Case 73,train,Fastener,Final Inspection Q.C.,3.93182563,298
+4019,Case 74,train,Ballnut,Final Inspection Q.C.,1.38629436,36
+4165,Case 79,test,Bearing,Turning & Milling Q.C.,4.72738782,61
+4166,Case 79,test,Bearing,Laser Marking - Machine 7,4.72738782,229
+4168,Case 79,test,Bearing,Lapping - Machine 1,4.72738782,87
+4169,Case 79,test,Bearing,Final Inspection Q.C.,4.72738782,87
+4182,Case 81,test,Bearing,Turning & Milling Q.C.,4.38202663,79
+4183,Case 81,test,Bearing,Turning & Milling Q.C.,4.38202663,371
+4184,Case 81,test,Bearing,Turning & Milling Q.C.,4.38202663,560
+4198,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,408
+4199,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,98
+4200,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,379
+4201,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,193
+4202,Case 83,test,Housing,Turning & Milling Q.C.,4.44265126,60
+4203,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,327
+4204,Case 83,test,Housing,Turning & Milling - Machine 5,4.44265126,330
+4205,Case 83,test,Housing,Turning & Milling Q.C.,4.44265126,90
+4207,Case 83,test,Housing,Laser Marking - Machine 7,4.44265126,33
+4208,Case 83,test,Housing,Flat Grinding - Machine 11,4.44265126,76
+4209,Case 83,test,Housing,Lapping - Machine 1,4.44265126,145
+4210,Case 83,test,Housing,Flat Grinding - Machine 11,4.44265126,22
+4211,Case 83,test,Housing,Lapping - Machine 1,4.44265126,29
+4212,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,364
+4213,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,63
+4214,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,29
+4215,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,16
+4216,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,311
+4217,Case 84,validation,Piston,Turning & Milling Q.C.,2.77258872,61
+4218,Case 84,validation,Piston,Turning & Milling - Machine 8,2.77258872,160
+4219,Case 84,validation,Piston,Turning & Milling Q.C.,2.77258872,1
+4220,Case 84,validation,Piston,Laser Marking - Machine 7,2.77258872,53
+4221,Case 84,validation,Piston,Flat Grinding - Machine 11,2.77258872,35
+4222,Case 84,validation,Piston,Round Grinding - Manual,2.77258872,177
+4223,Case 84,validation,Piston,Round Grinding - Manual,2.77258872,277
+4224,Case 84,validation,Piston,Final Inspection Q.C.,2.77258872,377
+4226,Case 84,validation,Piston,Final Inspection Q.C.,2.77258872,1
+4227,Case 84,validation,Piston,Final Inspection Q.C.,2.77258872,165
+4229,Case 84,validation,Piston,Grinding Rework - Machine 27,2.77258872,120
+4232,Case 84,validation,Piston,Final Inspection Q.C.,2.77258872,64
+4233,Case 85,test,Ballnut,Turning & Milling - Machine 6,3.25809654,576
+4234,Case 85,test,Ballnut,Turning & Milling - Machine 6,3.25809654,62
+4235,Case 85,test,Ballnut,Turning & Milling - Machine 6,3.25809654,249
+4237,Case 85,test,Ballnut,Turning & Milling - Machine 6,3.25809654,184
+4238,Case 85,test,Ballnut,Turning & Milling Q.C.,3.25809654,38
+4239,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,161
+4240,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,369
+4241,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,94
+4242,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,629
+4243,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,70
+4244,Case 86,test,Ballnut,Turning & Milling - Machine 6,4.26267988,1
+4245,Case 86,test,Ballnut,Turning & Milling Q.C.,4.26267988,40
+4246,Case 86,test,Ballnut,Turning & Milling Q.C.,4.26267988,107
+4336,Case 89,validation,Drum,SETUP     Turning & Milling - Machine 5,5.30330491,141
+4337,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,232
+4338,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,232
+4339,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,348
+4340,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,352
+4341,Case 89,validation,Drum,Turning & Milling - Machine 6,5.30330491,110
+4342,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,1250
+4343,Case 89,validation,Drum,Turning & Milling - Machine 6,5.30330491,54
+4344,Case 89,validation,Drum,Turning & Milling - Machine 5,5.30330491,453
+4345,Case 89,validation,Drum,Turning & Milling Q.C.,5.30330491,63
+4348,Case 89,validation,Drum,Final Inspection Q.C.,5.30330491,1
+4361,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,524
+4362,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,442
+4363,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,379
+4364,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,354
+4365,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,1200
+4366,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,433
+4367,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,129
+4368,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,16
+4369,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,652
+4370,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,523
+4371,Case 90,validation,Drum,Turning & Milling - Machine 6,5.30330491,388
+4372,Case 90,validation,Drum,Turning Q.C.,5.30330491,345
+4374,Case 90,validation,Drum,Laser Marking - Machine 7,5.30330491,32
+4375,Case 90,validation,Drum,Final Inspection Q.C.,5.30330491,14
+4377,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,102
+4378,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,352
+4379,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,105
+4380,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,446
+4381,Case 91,validation,Hinge,Turning Q.C.,5.86078622,6
+4382,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,20
+4383,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,494
+4384,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,129
+4385,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,607
+4386,Case 91,validation,Hinge,Turning & Milling - Machine 5,5.86078622,394
+4387,Case 91,validation,Hinge,Turning Q.C.,5.86078622,223
+4388,Case 91,validation,Hinge,Turning Q.C.,5.86078622,32
+4389,Case 91,validation,Hinge,Laser Marking - Machine 7,5.86078622,1
+4390,Case 91,validation,Hinge,Turning Q.C.,5.86078622,3
+4392,Case 91,validation,Hinge,Final Inspection Q.C.,5.86078622,1
+4509,Case 96,test,Ballnut,Turning & Milling Q.C.,5.30330491,113
+4510,Case 96,test,Ballnut,Turning & Milling Q.C.,5.30330491,149
+4512,Case 96,test,Ballnut,Lapping - Machine 1,5.30330491,69
+4513,Case 96,test,Ballnut,Laser Marking - Machine 7,5.30330491,150
+4514,Case 96,test,Ballnut,Lapping - Machine 1,5.30330491,162
+4517,Case 96,test,Ballnut,Final Inspection Q.C.,5.30330491,100
+4530,Case 98,test,Ballnut,Turning & Milling Q.C.,5.80211838,158
+4531,Case 98,test,Ballnut,Laser Marking - Machine 7,5.80211838,30
+4532,Case 98,test,Ballnut,Laser Marking - Machine 7,5.80211838,55
+4533,Case 98,test,Ballnut,Laser Marking - Machine 7,5.80211838,30
+4534,Case 99,test,Drill,Turning & Milling Q.C.,6.23048145,244
+4535,Case 99,test,Drill,Turning & Milling Q.C.,6.23048145,12
+4538,Case 99,test,Drill,Laser Marking - Machine 7,6.23048145,58
+4539,Case 99,test,Drill,Lapping - Machine 1,6.23048145,120
+4540,Case 99,test,Drill,Final Inspection Q.C.,6.23048145,24
+4541,Case 99,test,Drill,Final Inspection Q.C.,6.23048145,234
