@@ -1,0 +1,54 @@
+{
+  "source": "SYNTHETIC DEMO - not Production Analysis",
+  "source_version": "v1",
+  "target_definition": "recorded_elapsed_minutes",
+  "target_reviewed": true,
+  "train": [
+    {
+      "record_id": "r1",
+      "job_id": "j1",
+      "part_desc": "synthetic_part",
+      "operation_type": "turning",
+      "machine_id": "M1",
+      "batch_size": 1,
+      "started_at": "2026-10-16T08:00:00+03:00",
+      "finished_at": "2026-10-16T08:10:00+03:00",
+      "duration_minutes": 10
+    },
+    {
+      "record_id": "r2",
+      "job_id": "j2",
+      "part_desc": "synthetic_part",
+      "operation_type": "turning",
+      "machine_id": "M1",
+      "batch_size": 1,
+      "started_at": "2026-10-16T09:00:00+03:00",
+      "finished_at": "2026-10-16T09:20:00+03:00",
+      "duration_minutes": 20
+    }
+  ],
+  "test": [
+    {
+      "record_id": "r3",
+      "job_id": "j3",
+      "part_desc": "synthetic_part",
+      "operation_type": "turning",
+      "machine_id": "M1",
+      "batch_size": 1,
+      "started_at": "2026-10-16T10:00:00+03:00",
+      "finished_at": "2026-10-16T10:25:00+03:00",
+      "duration_minutes": 25
+    },
+    {
+      "record_id": "r4",
+      "job_id": "j4",
+      "part_desc": "synthetic_part",
+      "operation_type": "unseen",
+      "machine_id": "M1",
+      "batch_size": 1,
+      "started_at": "2026-10-16T11:00:00+03:00",
+      "finished_at": "2026-10-16T11:05:00+03:00",
+      "duration_minutes": 5
+    }
+  ]
+}

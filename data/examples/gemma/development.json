@@ -1,0 +1,10 @@
+[
+ {"id":"complete","text":"Yeni sipariş: tornalama, Torna 1 üzerinde 10 dakika. Sert termin t=20 dakika.","initial_state":"confirmation_required","final_state":"confirmation_required","tool":"simulate_order","answers":[],"expected_times":[{"100":10}],"deadline":20,"due_date":null},
+ {"id":"missing_duration","text":"Yeni sipariş: Torna 1 üzerinde tornalama yapacağız.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["10 dakika"],"expected_times":[{"100":10}],"deadline":null,"due_date":null},
+ {"id":"ambiguous_machine","text":"Yeni sipariş: torna üzerinde 10 dakika tornalama.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["Torna 2"],"expected_times":[{"200":10}],"deadline":null,"due_date":null},
+ {"id":"ambiguous_date","text":"Yeni sipariş: Torna 1 üzerinde 10 dakika tornalama, yarın sabah teslim.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["sert","t=40 dakika"],"expected_times":[{"100":10}],"deadline":40,"due_date":null},
+ {"id":"inspect","text":"Mevcut planın bitişini ve gecikmelerini göster.","initial_state":"inspection","final_state":"inspection","tool":"inspect_plan","answers":[],"expected_times":[],"deadline":null,"due_date":null},
+ {"id":"word_duration","text":"Yeni sipariş Torna 1 üzerinde iki saat tornalama.","initial_state":"confirmation_required","final_state":"confirmation_required","tool":"simulate_order","answers":[],"expected_times":[{"100":120}],"deadline":null,"due_date":null},
+ {"id":"protection","text":"Yeni sipariş Torna 1 üzerinde 10 dakika tornalama. Mevcut bitişleri koru.","initial_state":"confirmation_required","final_state":"confirmation_required","tool":"simulate_order","answers":[],"expected_times":[{"100":10}],"deadline":null,"due_date":null,"preserve_existing_completions":true},
+ {"id":"unsupported_downtime","text":"Torna 1 için iki saat duruş ekle.","initial_state":"unsupported","final_state":"unsupported","tool":"unsupported","answers":[],"expected_times":[],"deadline":null,"due_date":null}
+]

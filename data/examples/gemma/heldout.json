@@ -1,0 +1,8 @@
+[
+ {"id":"new_job_alias","text":"Yeni iş: Torna 2 üzerinde 12 dk tornalama.","initial_state":"confirmation_required","final_state":"confirmation_required","tool":"simulate_order","answers":[],"expected_times":[{"200":12}],"deadline":null,"due_date":null},
+ {"id":"view_plan_variant","text":"Planı aç, işlerin ne zaman bittiğini söyle.","initial_state":"inspection","final_state":"inspection","tool":"inspect_plan","answers":[],"expected_times":[],"deadline":null,"due_date":null},
+ {"id":"word_duration_ambiguous_machine","text":"Yeni siparişin tornalaması torna üzerinde yirmi dakika sürecek.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["Torna 1"],"expected_times":[{"100":20}],"deadline":null,"due_date":null},
+ {"id":"duration_followup_fraction","text":"Yeni sipariş Torna 2 üzerinde tornalama gerektiriyor.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["bir buçuk saat"],"expected_times":[{"200":90}],"deadline":null,"due_date":null},
+ {"id":"soft_deadline","text":"Yeni iş Torna 1 üzerinde 5 dk tornalama; hedef termin t=35 dakika.","initial_state":"confirmation_required","final_state":"confirmation_required","tool":"simulate_order","answers":[],"expected_times":[{"100":5}],"deadline":null,"due_date":35},
+ {"id":"protection_clarification","text":"Yeni sipariş Torna 1 üzerinde 10 dk tornalama; mevcut işleri geciktirme.","initial_state":"clarification","final_state":"confirmation_required","tool":"simulate_order","answers":["koruma yok"],"expected_times":[{"100":10}],"deadline":null,"due_date":null,"preserve_existing_completions":false}
+]
