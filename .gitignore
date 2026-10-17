@@ -1,4 +1,22 @@
 .venv/
+.venv-tabpfn/
+experiments/tabpfn/results/learnability/model_cache/
+experiments/tabpfn/results/saved_models*/**/*.joblib
+experiments/tabpfn/results/saved_models*/**/*.cbm
+experiments/tabpfn/results/saved_models*/**/*.tabpfn_fit
+# Model artifacts stay local; experiment source and reports may be shared.
+experiments/tabpfn/results/saved_models*/
+experiments/upstream_models/
+*.joblib
+*.cbm
+*.tabpfn_fit
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.pkl
+*.pickle
 __pycache__/
 .pytest_cache/
 .ruff_cache/

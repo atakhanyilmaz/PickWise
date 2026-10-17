@@ -1,0 +1,400 @@
+{
+  "evaluation": "exploratory_reused_validation_final_test_not_scored",
+  "sources": {
+    "/Users/atakan/Documents/PickWise/data/dataforNewVersion/production_analysis.csv": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6",
+    "/Users/atakan/Documents/PickWise/reports/data_preparation/production_analysis_split_manifest.csv": "f8a3a3ee04d13506023b8e444b987ae45c20a326aaaf260a8f393f7d9277ffde"
+  },
+  "model_config": {
+    "quantile_linear": {
+      "quantile": 0.5,
+      "alpha": 0.1,
+      "solver": "highs"
+    },
+    "gradient_boosting_mae": {
+      "loss": "absolute_error",
+      "n_estimators": 100,
+      "learning_rate": 0.05,
+      "max_depth": 2,
+      "min_samples_leaf": 5,
+      "random_state": 0
+    },
+    "catboost_mae": {
+      "iterations": 200,
+      "depth": 3,
+      "learning_rate": 0.03,
+      "l2_leaf_reg": 10,
+      "loss_function": "MAE",
+      "boosting_type": "Ordered",
+      "random_seed": 0,
+      "thread_count": 1,
+      "verbose": false,
+      "allow_writing_files": false
+    }
+  },
+  "versions": {
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.9.1",
+    "catboost": "1.2.10"
+  },
+  "protocol": [
+    "One fixed config per model, chosen before running; no grid search.",
+    "Train-only preprocessing; fixed case-disjoint chronological split.",
+    "Same validation previously inspected; exploratory gains require untouched test confirmation.",
+    "All predictions clipped at zero; no target trimming.",
+    "Train row weights equal; primary gap evaluation case weights equal.",
+    "Conditional destination preassignment and physical target semantics are not verified."
+  ],
+  "runner_sha256": "77714bc2b40719d5849c63533fb277e0a94dc3fd9a78699d82221da64c5480fa",
+  "dataset_builder_sha256": "c3f106d2320ac4b5bdafddbbc2f3039f30b34a3422ae00ff5d7760ae0c73b18f",
+  "tasks": {
+    "total_case_span": {
+      "features": [
+        "part",
+        "quantity"
+      ],
+      "train_rows": 72,
+      "train_cases": 72,
+      "validation_rows": 17,
+      "validation_cases": 17,
+      "statuses": {
+        "quantile_linear": "real_fit_predict_completed",
+        "gradient_boosting_mae": "real_fit_predict_completed",
+        "catboost_mae": "real_fit_predict_completed"
+      },
+      "runtime_seconds": {
+        "quantile_linear": 0.017228666998562403,
+        "gradient_boosting_mae": 0.041211249998013955,
+        "catboost_mae": 0.07456033299968112
+      },
+      "unseen_category_rows": {
+        "part": 7
+      },
+      "previous_predictions_sha256": "fdc52d7f879920c04bf2b42732a703ac7e9d8138458836c3c96511cdd884de39",
+      "previous_models_status": "stored_real_predictions_identity_checked_not_refitted",
+      "validation_scores": {
+        "global_median": {
+          "mae_minutes": 9442.264705882353,
+          "rmse_minutes": 10361.847757802772,
+          "case_macro_mae_minutes": 9442.264705882353,
+          "max_absolute_error_minutes": 14768.5
+        },
+        "group_median": {
+          "mae_minutes": 10649.911764705883,
+          "rmse_minutes": 12372.550234645383,
+          "case_macro_mae_minutes": 10649.911764705883,
+          "max_absolute_error_minutes": 21833.0
+        },
+        "quantile_linear": {
+          "mae_minutes": 9640.529411764706,
+          "rmse_minutes": 10605.913369991513,
+          "case_macro_mae_minutes": 9640.529411764706,
+          "max_absolute_error_minutes": 15250.0
+        },
+        "gradient_boosting_mae": {
+          "mae_minutes": 10302.574580585291,
+          "rmse_minutes": 12684.070209363746,
+          "case_macro_mae_minutes": 10302.574580585291,
+          "max_absolute_error_minutes": 25691.52941973436
+        },
+        "catboost_mae": {
+          "mae_minutes": 13916.737306673347,
+          "rmse_minutes": 16256.928129655782,
+          "case_macro_mae_minutes": 13916.737306673347,
+          "max_absolute_error_minutes": 36123.65691109617
+        },
+        "tabpfn_v2": {
+          "mae_minutes": 11366.683225684044,
+          "rmse_minutes": 12671.614619264717,
+          "case_macro_mae_minutes": 11366.683225684044,
+          "max_absolute_error_minutes": 20308.912279154287
+        },
+        "extra_trees": {
+          "mae_minutes": 14054.652946869506,
+          "rmse_minutes": 15825.9726540927,
+          "case_macro_mae_minutes": 14054.652946869506,
+          "max_absolute_error_minutes": 26271.26088113482
+        }
+      },
+      "paired_improvement_over_global_median": {
+        "group_median": {
+          "case_macro_mae_improvement_minutes": -1207.6470588235295,
+          "bootstrap_95_percent_interval_minutes": [
+            -2852.136029411765,
+            419.11764705882354
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "quantile_linear": {
+          "case_macro_mae_improvement_minutes": -198.26470588235293,
+          "bootstrap_95_percent_interval_minutes": [
+            -368.20588235294116,
+            28.323529411764707
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "gradient_boosting_mae": {
+          "case_macro_mae_improvement_minutes": -860.3098747029386,
+          "bootstrap_95_percent_interval_minutes": [
+            -3640.8052203850184,
+            2054.2173924823073
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "catboost_mae": {
+          "case_macro_mae_improvement_minutes": -4474.472600790993,
+          "bootstrap_95_percent_interval_minutes": [
+            -8861.267947938732,
+            -759.1665841448978
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -1924.418519801692,
+          "bootstrap_95_percent_interval_minutes": [
+            -3386.613817126566,
+            -417.37814338253753
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -4612.388240987151,
+          "bootstrap_95_percent_interval_minutes": [
+            -7328.4993310366,
+            -1987.526559239672
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      },
+      "paired_improvement_over_group_median": {
+        "quantile_linear": {
+          "case_macro_mae_improvement_minutes": 1009.3823529411765,
+          "bootstrap_95_percent_interval_minutes": [
+            -646.2323529411764,
+            2632.3227941176465
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "gradient_boosting_mae": {
+          "case_macro_mae_improvement_minutes": 347.33718412059096,
+          "bootstrap_95_percent_interval_minutes": [
+            -2367.4041967493317,
+            3283.693587603948
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "catboost_mae": {
+          "case_macro_mae_improvement_minutes": -3266.825541967464,
+          "bootstrap_95_percent_interval_minutes": [
+            -7733.1252045270985,
+            643.3515644610648
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -716.7714609781625,
+          "bootstrap_95_percent_interval_minutes": [
+            -2753.4688622568738,
+            1208.310264477119
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -3404.741182163622,
+          "bootstrap_95_percent_interval_minutes": [
+            -6454.973603247653,
+            -604.9357092370444
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      }
+    },
+    "conditional_machine_gap": {
+      "features": [
+        "part",
+        "quantity",
+        "from",
+        "to"
+      ],
+      "train_rows": 106,
+      "train_cases": 52,
+      "validation_rows": 13,
+      "validation_cases": 8,
+      "statuses": {
+        "quantile_linear": "real_fit_predict_completed",
+        "gradient_boosting_mae": "real_fit_predict_completed",
+        "catboost_mae": "real_fit_predict_completed"
+      },
+      "runtime_seconds": {
+        "quantile_linear": 0.004865417002292816,
+        "gradient_boosting_mae": 0.027609625001787208,
+        "catboost_mae": 0.02939979200164089
+      },
+      "unseen_category_rows": {
+        "part": 8,
+        "from": 2,
+        "to": 1
+      },
+      "previous_predictions_sha256": "7f1c85c75ff4a8353cc19d83733d210be1aeb13d39b61a7938b00448370889cc",
+      "previous_models_status": "stored_real_predictions_identity_checked_not_refitted",
+      "validation_scores": {
+        "global_median": {
+          "mae_minutes": 2334.1153846153848,
+          "rmse_minutes": 4760.487396265218,
+          "case_macro_mae_minutes": 1780.3333333333333,
+          "max_absolute_error_minutes": 14432.5
+        },
+        "group_median": {
+          "mae_minutes": 2431.9615384615386,
+          "rmse_minutes": 4694.216824578286,
+          "case_macro_mae_minutes": 1923.0416666666667,
+          "max_absolute_error_minutes": 14350.0
+        },
+        "quantile_linear": {
+          "mae_minutes": 2335.3846153846152,
+          "rmse_minutes": 4767.696282918391,
+          "case_macro_mae_minutes": 1779.6458333333333,
+          "max_absolute_error_minutes": 14449.0
+        },
+        "gradient_boosting_mae": {
+          "mae_minutes": 2401.303606344486,
+          "rmse_minutes": 4723.052286755886,
+          "case_macro_mae_minutes": 1886.1485133926517,
+          "max_absolute_error_minutes": 14586.799470129563
+        },
+        "catboost_mae": {
+          "mae_minutes": 2478.9791084057865,
+          "rmse_minutes": 4642.0209586725305,
+          "case_macro_mae_minutes": 1963.114392673194,
+          "max_absolute_error_minutes": 14075.986710612773
+        },
+        "tabpfn_v2": {
+          "mae_minutes": 2724.4860779112882,
+          "rmse_minutes": 4347.191336190808,
+          "case_macro_mae_minutes": 2354.7791459530104,
+          "max_absolute_error_minutes": 13077.310614631902
+        },
+        "extra_trees": {
+          "mae_minutes": 2802.639432828883,
+          "rmse_minutes": 4270.088699721736,
+          "case_macro_mae_minutes": 2507.3178334755303,
+          "max_absolute_error_minutes": 11188.883747474743
+        }
+      },
+      "paired_improvement_over_global_median": {
+        "group_median": {
+          "case_macro_mae_improvement_minutes": -142.70833333333334,
+          "bootstrap_95_percent_interval_minutes": [
+            -258.7609375,
+            -30.885416666666725
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "quantile_linear": {
+          "case_macro_mae_improvement_minutes": 0.6875,
+          "bootstrap_95_percent_interval_minutes": [
+            -9.625,
+            10.3125
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "gradient_boosting_mae": {
+          "case_macro_mae_improvement_minutes": -105.81518005931837,
+          "bootstrap_95_percent_interval_minutes": [
+            -257.9885738251006,
+            46.56495323008186
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "catboost_mae": {
+          "case_macro_mae_improvement_minutes": -182.78105933986095,
+          "bootstrap_95_percent_interval_minutes": [
+            -439.0971879659951,
+            40.67350030350202
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -574.4458126196771,
+          "bootstrap_95_percent_interval_minutes": [
+            -1091.2099214264244,
+            -7.142338505538262
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -726.9845001421968,
+          "bootstrap_95_percent_interval_minutes": [
+            -2095.2972346078404,
+            280.4962626020283
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      },
+      "paired_improvement_over_group_median": {
+        "quantile_linear": {
+          "case_macro_mae_improvement_minutes": 143.39583333333334,
+          "bootstrap_95_percent_interval_minutes": [
+            34.43750000000001,
+            253.67031249999985
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "gradient_boosting_mae": {
+          "case_macro_mae_improvement_minutes": 36.89315327401497,
+          "bootstrap_95_percent_interval_minutes": [
+            -138.55918351035987,
+            253.46749690413768
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "catboost_mae": {
+          "case_macro_mae_improvement_minutes": -40.07272600652759,
+          "bootstrap_95_percent_interval_minutes": [
+            -359.2928972910852,
+            239.14976240234597
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -431.7374792863438,
+          "bootstrap_95_percent_interval_minutes": [
+            -944.4350425537659,
+            157.74954251594806
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -584.2761668088634,
+          "bootstrap_95_percent_interval_minutes": [
+            -1879.7064229135574,
+            403.4419233110133
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      }
+    }
+  }
+}
