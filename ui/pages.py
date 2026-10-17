@@ -10,6 +10,7 @@ import streamlit as st
 
 from benchmarks.workshop_order_demo import DemoInput
 from core.cpsat_solver import COMMIT, UPSTREAM, read_instance, solve
+from core.pipeline import dispatch
 from core.scenarios import create_snapshot, plan_metrics
 from core.sqlite_repository import PlanStorageError, SQLitePlanRepository
 from core.validation import validate
@@ -87,6 +88,17 @@ def plan_page():
             ("Çözücü durumu", *ui.status_metric(result.status)),
         ]
     )
+
+    st.subheader("Şu an tezgâhlarda")
+    minute = st.slider(
+        "Görüntülenen an (t=0'dan dakika)",
+        0,
+        metrics.makespan,
+        scenario.current_time,
+        help="Varsayılan: planın şimdiki anı. Kaydırarak gün içindeki başka bir anı görün.",
+    )
+    st.caption(f"{ui.clock(minute)} itibarıyla")
+    ui.dispatch_board(dispatch(scenario, result, minute))
 
     st.subheader("Tezgâh yükleme")
     ui.gantt(

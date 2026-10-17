@@ -150,6 +150,28 @@ def gantt(rows, machines, job_label, x_title):
     st.altair_chart(chart, width="stretch", height=height + 90)
 
 
+def dispatch_board(statuses):
+    """One card per machine: what it runs at the chosen moment and what comes next."""
+    for column, status in zip(st.columns(len(statuses)), statuses):
+        with column.container(border=True):
+            st.markdown(f"**{status.machine_name}**")
+            if status.current:
+                st.badge("Çalışıyor", icon=":material/play_arrow:", color="green")
+                st.markdown(
+                    f"{status.current.job_name} · {status.current.operation_name}"
+                )
+                st.caption(f"Biter: {clock(status.current.end)}")
+            else:
+                st.badge("Boşta", icon=":material/pause:", color="gray")
+            if status.next:
+                st.caption(
+                    f"Sırada: {status.next.job_name} · {status.next.operation_name}, "
+                    f"{clock(status.next.start)}"
+                )
+            else:
+                st.caption("Sırada iş yok")
+
+
 def table(records, column_config=None):
     st.dataframe(
         pd.DataFrame(records),

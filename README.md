@@ -225,6 +225,26 @@ tablosunda ve onay ekranında aynı renkli rozetlerle gösterilir. Geçmiş veri
 otomatik rota önerisi henüz yok (WP-2A); retrospektif taslak gelirse uyarıyla
 gösterilir. Simülasyon, önce/sonra ve plan kaydetme sonraki pakettir (WP-4N).
 
+## Planlama hattı
+
+`core/pipeline.py` mevcut servisleri tek girişte sıralar: plan → tek değişiklik
+(yeni sipariş `simulate_order` veya duruş `simulate_downtime`) → çözüm ve
+doğrulama → `dispatch`. `dispatch`, seçilen dakikada her tezgâhın işlediği
+operasyonu (`[başlangıç, bitiş)`) ve sıradakini verir; Plan sayfasındaki
+"Şu an tezgâhlarda" kartları bunu gösterir. Başlangıç planı değişmez; değişiklik
+uygulanamazsa görünüm başlangıç planına döner. Plan yükleme ve onaylı kayıt
+çağıranda kalır. Gemma için LangGraph katmanı bu hattı araç olarak kullanacak
+şekilde planlandı, henüz eklenmedi.
+
+## Otomatik kontroller (CI)
+
+`.github/workflows/ci.yml` her PR'da ve `main`'e push'ta Python 3.11 ile kaynak
+depoyu sabit commit'ten getirir, `requirements-lock.txt` ve Streamlit'i kurar,
+`ruff check core benchmarks tests ui`, `pytest tests` ve `tutorials/`
+notebook'larını çalıştırır. Streamlit 1.66 `pillow<13` istediği için kurulumda
+kilitteki pillow 13 düşürülür. `ml_experiments` biçim uyarıları düzelince
+ruff kapsamına eklenmeli.
+
 ## Plan kayıt sözleşmesi
 
 [Yunus için Pydantic kayıt/yükleme sözleşmesi](docs/plan-data-contract.md),
