@@ -1,0 +1,14 @@
+case,y,part,quantity,from,to,global_median,group_median,extra_trees,tabpfn_v2
+Case 108,293.0,Bushing,15,Machine 7- Laser Marking,Machine 11 - Grinding,463.5,40.5,685.6711464857226,1479.9614879364121
+Case 108,211.0,Bushing,15,Machine 11 - Grinding,Machine 1 - Lapping,463.5,617.5,2050.649127407076,2231.647527564082
+Case 108,8942.0,Bushing,15,Machine 1 - Lapping,Machine 3 - Round Grinding,463.5,1080.0,954.799402582505,1923.0155413237787
+Case 156,574.0,Drill,600,Machine 7- Laser Marking,Machine 1 - Lapping,463.5,36.0,5520.6661055900595,2066.570121165684
+Case 212,331.0,Ballnut,66,Machine 7- Laser Marking,Machine 1 - Lapping,463.5,36.0,625.0147551813748,1054.3353696618356
+Case 214,14896.0,Ballnut,150,Machine 11 - Grinding,Machine 7- Laser Marking,463.5,546.0,3707.116252525256,1818.6893853680972
+Case 214,705.0,Ballnut,150,Machine 7- Laser Marking,Machine 1 - Lapping,463.5,36.0,937.2517996566955,1175.3532471408473
+Case 56,1.0,Spur Gear,24,Machine 1 - Lapping,Machine 7- Laser Marking,463.5,758.0,954.799402582505,1644.8962727283633
+Case 68,60.0,Spur Gear,6,Machine 21 - Turning,Machine 8 - Turning & Milling,463.5,463.5,954.799402582505,1867.2100502377796
+Case 84,3883.0,Piston,15,Machine 7- Laser Marking,Machine 11 - Grinding,463.5,40.5,685.6711464857226,1479.9614879364121
+Case 84,1738.0,Piston,15,Machine 11 - Grinding,Machine 27 - Grinding,463.5,463.5,3939.196270264223,2356.1351939293054
+Case 89,1154.0,Drum,200,Machine 5 - Turning & Milling,Machine 6 - Turning & Milling,463.5,463.5,1824.4257093093956,2165.5954634672958
+Case 89,189.0,Drum,200,Machine 6 - Turning & Milling,Machine 5 - Turning & Milling,463.5,463.5,1824.4257093093956,2133.280693643426
