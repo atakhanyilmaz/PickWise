@@ -63,7 +63,7 @@ def routing_catalog():
     ]
 
 
-def execute_tool(name, arguments, baseline, *, user_confirmed=False):
+def execute_tool(name, arguments, baseline, *, user_confirmed=False, time_limit=10):
     """No eval, SQL or arbitrary function lookup; only implemented tools run."""
     baseline = PlanSnapshot.model_validate(baseline.model_dump())
     if name == "inspect_plan":
@@ -98,7 +98,11 @@ def execute_tool(name, arguments, baseline, *, user_confirmed=False):
     if name == "simulate_order":
         inputs = SimulateOrderInput.model_validate(arguments)
         return confirm_and_simulate(
-            inputs.intake, baseline, inputs.scenario_id, user_confirmed=user_confirmed
+            inputs.intake,
+            baseline,
+            inputs.scenario_id,
+            user_confirmed=user_confirmed,
+            time_limit=time_limit,
         )
     raise ValueError(f"Unknown planning tool: {name}")
 

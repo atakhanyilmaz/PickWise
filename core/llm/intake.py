@@ -79,7 +79,11 @@ class IntakeResult(Contract):
 
 
 def _minutes(text):
-    match = re.fullmatch(r"\s*(.+?)\s*(dakika|dk|saat)\s*", text, re.IGNORECASE)
+    match = re.fullmatch(
+        r"\s*(.+?)\s*(dakika|dk|saat)(?:['’.]?(?:da|de|ta|te|dan|den|tan|ten|lık|lik|luk|lük))?\s*",
+        text,
+        re.IGNORECASE,
+    )
     if not match:
         raise ValueError("Süre dakika veya saat birimiyle açık yazılmalı.")
     raw = _normalize(match[1]).replace(",", ".")
@@ -148,13 +152,35 @@ def _normalize(text):
     return " ".join(text.replace("İ", "i").replace("I", "ı").lower().split())
 
 
+def _in_text(value, text):
+    if value is None or not value.strip():
+        return False
+    return (
+        re.search(
+            r"(?<!\w)"
+            + re.escape(_normalize(value))
+            + r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten))?(?!\w)",
+            _normalize(text),
+        )
+        is not None
+    )
+
+
 def _machine(text, scenario):
-    key = _normalize(text)
+    key = re.sub(
+        r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten)|\s+üzerinde)$",
+        "",
+        _normalize(text),
+    )
     found = [
         m
         for m in scenario.machines
         if key in (_normalize(m.name), str(m.machine_id), f"m{m.machine_id}")
     ]
+    if not found:
+        match = re.fullmatch(r"(?:torna|makine|tezgah|tezgâh|m)\s*(\d+)", key)
+        if match and 1 <= int(match[1]) <= len(scenario.machines):
+            found = [scenario.machines[int(match[1]) - 1]]
     if len(found) != 1:
         raise ValueError(f"Makineyi benzersiz ad veya kimlikle belirtin: {text}")
     return found[0].machine_id
@@ -227,7 +253,7 @@ def interpret_draft(
             if option.machine_text is None:
                 questions.append(f"{index + 1}. işlem hangi makinede yapılabilir?")
                 continue
-            if option.machine_text not in text:
+            if not _in_text(option.machine_text, text):
                 raise InvalidModelOutput("Machine evidence is not in the user message")
             try:
                 machine = _machine(option.machine_text, baseline.scenario)
@@ -239,7 +265,7 @@ def interpret_draft(
                     f"{index + 1}. işlemin {option.machine_text} üzerindeki süresi nedir?"
                 )
                 continue
-            if option.duration_text not in text:
+            if not _in_text(option.duration_text, text):
                 raise InvalidModelOutput("Duration evidence is not in the user message")
             try:
                 duration = _minutes(option.duration_text)
@@ -268,7 +294,7 @@ def interpret_draft(
         )
     elif draft.deadline_kind in ("hard", "soft"):
         evidence = draft.deadline_text
-        if not evidence or evidence not in text:
+        if not evidence or not _in_text(evidence, text):
             questions.append(
                 "Termini ortak zaman referansından t=20 dakika gibi açık belirtin."
             )
@@ -288,7 +314,7 @@ def interpret_draft(
     elif has_termin and not resolved_no_deadline:
         questions.append("İstenen termin ve sert/yumuşak türü açık değil; doğrulayın.")
     if draft.preservation != "none":
-        if not draft.preservation_text or draft.preservation_text not in text:
+        if not draft.preservation_text or not _in_text(draft.preservation_text, text):
             raise InvalidModelOutput("Preservation evidence is missing")
         if draft.preservation == "ambiguous":
             questions.append(
@@ -311,7 +337,7 @@ def interpret_draft(
             "Korunacak sınır açık değil: mevcut bitişler mi, müşteri terminleri mi?"
         )
     name = draft.order_name or "Yeni sipariş"
-    if draft.order_name and draft.order_name not in text:
+    if draft.order_name and not _in_text(draft.order_name, text):
         raise InvalidModelOutput("Order name is not grounded in user text")
     result.questions = list(dict.fromkeys(questions))
     result.preserve_existing_completions = draft.preservation == "completions"

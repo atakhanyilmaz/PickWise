@@ -110,5 +110,34 @@ def test_inspection_request_is_answered_from_computed_plan_facts(baseline):
         text="Yeni sipariş almadan önce kaç iş bekliyor?",
     )
     assert "__interrupt__" not in out and "simulation" not in out
+    assert out["inspection"]["workload"]["total_job_count"] == 2
     assert out["message"].startswith("Yüklü planda")
     assert "Plan değiştirilmedi" in out["message"]
+
+
+def test_case_insensitive_and_suffixed_evidence_reaches_confirmation(baseline):
+    _, _, out = start(
+        baseline,
+        ScriptedClient(),
+        text="Yeni sipariş: torna 1de 10 dakikada tornalama.",
+    )
+    proposal = pause(out)
+    assert proposal["kind"] == "confirmation"
+    order = JobModel.model_validate(proposal["order"])
+    assert order.operations[0].processing_times == {100: 10}
+
+
+def test_empty_evidence_is_allowed_only_for_clarification(baseline):
+    client = ScriptedClient(tool="clarify")
+    original = client.structured
+
+    def empty_evidence(schema, system, data, prompt_version):
+        if schema is IntentDecision:
+            return IntentDecision(tool="clarify", evidence=""), {}
+        return original(schema, system, data, prompt_version)
+
+    client.structured = empty_evidence
+    _, _, out = start(baseline, client, text="Merhaba")
+    question = pause(out)
+    assert question["kind"] == "question"
+    assert "Planı incelemek" in question["questions"][0]

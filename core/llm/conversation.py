@@ -164,7 +164,10 @@ def _route(session, baseline, client, text):
         {"stage": "intent", "metadata": meta, "decision": decision.model_dump()}
     )
     session.result.model_metadata = {"stages": session.audit}
-    if not _evidence(decision.evidence, text):
+    grounded = _evidence(decision.evidence, text)
+    if (decision.tool == "clarify" and decision.evidence and not grounded) or (
+        decision.tool != "clarify" and not grounded
+    ):
         raise InvalidModelOutput(
             "Tool selection evidence is not grounded in latest reply"
         )
@@ -231,10 +234,18 @@ def _fingerprint(baseline):
 
 
 def _evidence(value, text):
-    if value is None:
+    if value is None or not value.strip():
         return False
     # Reject partial numbers/names, e.g. Torna 1 inside Torna 10 or 10 inside 110.
-    return re.search(r"(?<!\w)" + re.escape(value) + r"(?!\w)", text) is not None
+    return (
+        re.search(
+            r"(?<!\w)"
+            + re.escape(_normalize(value))
+            + r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten))?(?!\w)",
+            _normalize(text),
+        )
+        is not None
+    )
 
 
 def _calendar(text):

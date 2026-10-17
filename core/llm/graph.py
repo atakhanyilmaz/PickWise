@@ -29,7 +29,7 @@ from langgraph.types import interrupt
 
 from core.llm.conversation import IntakeSession, answer_intake, begin_intake
 from core.llm.explanation import explain_inspection, explain_simulation
-from core.llm.intake import confirm_and_simulate
+from core.llm.tools import execute_tool
 from core.pipeline import dispatch
 from core.scenarios import PlanSnapshot, SimulationResult
 
@@ -39,6 +39,7 @@ class OrderState(TypedDict, total=False):
     session: dict
     approved: bool
     simulation: dict
+    inspection: dict
     dispatch: list[dict]
     explanation: dict
     message: str
@@ -99,10 +100,13 @@ def build_order_graph(
         return {"approved": decision is True}
 
     def simulate(state):
-        simulation = confirm_and_simulate(
-            _session(state).result,
+        simulation = execute_tool(
+            "simulate_order",
+            {
+                "intake": _session(state).result.model_dump(),
+                "scenario_id": scenario_id,
+            },
             baseline,
-            scenario_id,
             user_confirmed=True,
             time_limit=time_limit,
         )
@@ -134,7 +138,7 @@ def build_order_graph(
         result = _session(state).result
         if result.state == "inspection":
             answer = explain_inspection(result.user_text, result.inspection, client)
-            return {"message": answer.text}
+            return {"inspection": result.inspection, "message": answer.text}
         return {"message": " ".join(result.questions)}
 
     graph = StateGraph(OrderState)
