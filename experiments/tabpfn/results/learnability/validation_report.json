@@ -1,0 +1,230 @@
+{
+  "evaluation": "validation_only_test_not_scored",
+  "seed": 0,
+  "device": "cpu",
+  "sources": {
+    "/Users/atakan/Documents/PickWise/data/dataforNewVersion/production_analysis.csv": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6",
+    "/Users/atakan/Documents/PickWise/reports/data_preparation/production_analysis_split_manifest.csv": "f8a3a3ee04d13506023b8e444b987ae45c20a326aaaf260a8f393f7d9277ffde"
+  },
+  "versions": {
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "scikit-learn": "1.9.1",
+    "tabpfn": "9.2.0",
+    "torch": "2.14.1"
+  },
+  "limitations": [
+    "Conditional destination is taken from retrospective reports; its preassignment at prediction time is not verified.",
+    "Machine gaps include waiting and reporting effects, not certified transport time.",
+    "Whole-case span is observed event-log span, not certified delivery time.",
+    "Small validation cohorts and prior descriptive inspection limit confidence.",
+    "No final test score, solver integration or operational approval."
+  ],
+  "tasks": {
+    "total_case_span": {
+      "features": [
+        "part",
+        "quantity"
+      ],
+      "train_rows": 72,
+      "train_cases": 72,
+      "validation_rows": 17,
+      "validation_cases": 17,
+      "group_median_fallback_count": 7,
+      "unseen_category_rows": {
+        "part": 7
+      },
+      "runtime_seconds": {
+        "extra_trees": 0.028647291001107078,
+        "tabpfn_v2": 0.20257645799938473
+      },
+      "model_status": {
+        "tabpfn_v2": "real_model_completed"
+      },
+      "validation_scores": {
+        "global_median": {
+          "mae_minutes": 9442.264705882353,
+          "rmse_minutes": 10361.847757802772,
+          "case_macro_mae_minutes": 9442.264705882353,
+          "max_absolute_error_minutes": 14768.5
+        },
+        "group_median": {
+          "mae_minutes": 10649.911764705883,
+          "rmse_minutes": 12372.550234645383,
+          "case_macro_mae_minutes": 10649.911764705883,
+          "max_absolute_error_minutes": 21833.0
+        },
+        "extra_trees": {
+          "mae_minutes": 14054.652946869504,
+          "rmse_minutes": 15825.9726540927,
+          "case_macro_mae_minutes": 14054.652946869504,
+          "max_absolute_error_minutes": 26271.26088113482
+        },
+        "tabpfn_v2": {
+          "mae_minutes": 11366.683225684044,
+          "rmse_minutes": 12671.614619264717,
+          "case_macro_mae_minutes": 11366.683225684044,
+          "max_absolute_error_minutes": 20308.912279154287
+        }
+      },
+      "paired_validation_improvement_over_global_median": {
+        "group_median": {
+          "case_macro_mae_improvement_minutes": -1207.6470588235295,
+          "bootstrap_95_percent_interval_minutes": [
+            -2852.136029411765,
+            419.11764705882354
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -4612.388240987151,
+          "bootstrap_95_percent_interval_minutes": [
+            -7328.4993310366,
+            -1987.526559239672
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -1924.4185198016921,
+          "bootstrap_95_percent_interval_minutes": [
+            -3386.613817126567,
+            -417.3781433825373
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      },
+      "paired_validation_improvement_over_group_median": {
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -3404.7411821636215,
+          "bootstrap_95_percent_interval_minutes": [
+            -6454.973603247653,
+            -604.9357092370442
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -716.7714609781628,
+          "bootstrap_95_percent_interval_minutes": [
+            -2753.468862256874,
+            1208.3102644771193
+          ],
+          "case_count": 17,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      }
+    },
+    "conditional_machine_gap": {
+      "features": [
+        "part",
+        "quantity",
+        "from",
+        "to"
+      ],
+      "train_rows": 106,
+      "train_cases": 52,
+      "validation_rows": 13,
+      "validation_cases": 8,
+      "group_median_fallback_count": 4,
+      "unseen_category_rows": {
+        "part": 8,
+        "from": 2,
+        "to": 1
+      },
+      "runtime_seconds": {
+        "extra_trees": 0.023470916999940528,
+        "tabpfn_v2": 0.21457720900070854
+      },
+      "model_status": {
+        "tabpfn_v2": "real_model_completed"
+      },
+      "validation_scores": {
+        "global_median": {
+          "mae_minutes": 2334.1153846153848,
+          "rmse_minutes": 4760.487396265218,
+          "case_macro_mae_minutes": 1780.3333333333333,
+          "max_absolute_error_minutes": 14432.5
+        },
+        "group_median": {
+          "mae_minutes": 2431.9615384615386,
+          "rmse_minutes": 4694.216824578286,
+          "case_macro_mae_minutes": 1923.0416666666667,
+          "max_absolute_error_minutes": 14350.0
+        },
+        "extra_trees": {
+          "mae_minutes": 2802.639432828883,
+          "rmse_minutes": 4270.088699721736,
+          "case_macro_mae_minutes": 2507.3178334755303,
+          "max_absolute_error_minutes": 11188.883747474743
+        },
+        "tabpfn_v2": {
+          "mae_minutes": 2724.486077911288,
+          "rmse_minutes": 4347.191336190808,
+          "case_macro_mae_minutes": 2354.7791459530104,
+          "max_absolute_error_minutes": 13077.310614631902
+        }
+      },
+      "paired_validation_improvement_over_global_median": {
+        "group_median": {
+          "case_macro_mae_improvement_minutes": -142.70833333333334,
+          "bootstrap_95_percent_interval_minutes": [
+            -258.7609375,
+            -30.885416666666725
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -726.9845001421968,
+          "bootstrap_95_percent_interval_minutes": [
+            -2095.2972346078404,
+            280.4962626020283
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -574.4458126196771,
+          "bootstrap_95_percent_interval_minutes": [
+            -1091.2099214264244,
+            -7.142338505538291
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      },
+      "paired_validation_improvement_over_group_median": {
+        "extra_trees": {
+          "case_macro_mae_improvement_minutes": -584.2761668088634,
+          "bootstrap_95_percent_interval_minutes": [
+            -1879.7064229135574,
+            403.4419233110133
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        },
+        "tabpfn_v2": {
+          "case_macro_mae_improvement_minutes": -431.7374792863438,
+          "bootstrap_95_percent_interval_minutes": [
+            -944.4350425537659,
+            157.74954251594812
+          ],
+          "case_count": 8,
+          "interpretation": "positive favors candidate; exploratory validation interval, not production assurance"
+        }
+      }
+    }
+  },
+  "raw_case_count": 225,
+  "runner_sha256": "c3f106d2320ac4b5bdafddbbc2f3039f30b34a3422ae00ff5d7760ae0c73b18f",
+  "checkpoint_files": [
+    {
+      "name": "tabpfn-v2-regressor.ckpt",
+      "bytes": 44390977,
+      "sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736"
+    }
+  ]
+}

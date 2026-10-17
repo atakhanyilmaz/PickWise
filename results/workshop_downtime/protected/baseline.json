@@ -1,0 +1,137 @@
+{
+  "version_id": "downtime-demo-v1",
+  "scenario": {
+    "scenario_id": "workshop_demo_base",
+    "description": "Sentetik atölye örneği; bütün süreler ve terminler demo varsayımıdır. Sürekli çalışma kabul edilir.",
+    "machines": [
+      {
+        "machine_id": 100,
+        "name": "Torna 1",
+        "unavailable_intervals": []
+      },
+      {
+        "machine_id": 200,
+        "name": "Torna 2",
+        "unavailable_intervals": []
+      }
+    ],
+    "jobs": [
+      {
+        "job_id": 10,
+        "name": "Devam eden iş",
+        "operations": [
+          {
+            "operation_id": 1,
+            "name": "Tamamlanmış işlem",
+            "processing_times": {
+              "100": 3
+            },
+            "duration_source": "demo_assumption",
+            "status": "completed",
+            "fixed_machine_id": 100,
+            "fixed_start": 0,
+            "fixed_end": 3,
+            "remaining_duration": null
+          },
+          {
+            "operation_id": 2,
+            "name": "Devam eden işlem",
+            "processing_times": {
+              "100": 7
+            },
+            "duration_source": "demo_assumption",
+            "status": "in_progress",
+            "fixed_machine_id": 100,
+            "fixed_start": 3,
+            "fixed_end": null,
+            "remaining_duration": 5
+          }
+        ],
+        "route_source": "demo_assumption",
+        "deadline": null,
+        "due_date": 10,
+        "release_time": 0
+      },
+      {
+        "job_id": 20,
+        "name": "Bekleyen mevcut iş",
+        "operations": [
+          {
+            "operation_id": 1,
+            "name": "Tornalama",
+            "processing_times": {
+              "100": 5
+            },
+            "duration_source": "demo_assumption",
+            "status": "not_started",
+            "fixed_machine_id": null,
+            "fixed_start": null,
+            "fixed_end": null,
+            "remaining_duration": null
+          }
+        ],
+        "route_source": "demo_assumption",
+        "deadline": null,
+        "due_date": 20,
+        "release_time": 10
+      }
+    ],
+    "current_time": 5,
+    "completion_limits": {},
+    "time_unit": "minutes",
+    "time_unit_note": "Tüm süreler t=0 referansından dakika; sentetik demo."
+  },
+  "result": {
+    "status": "OPTIMAL",
+    "makespan": 15,
+    "best_bound": 15.0,
+    "runtime_seconds": 0.00036,
+    "time_limit_seconds": 2.0,
+    "seed": 0,
+    "workers": 1,
+    "schedule": [
+      {
+        "job": 0,
+        "operation": 0,
+        "machine": 0,
+        "start": 0,
+        "end": 3,
+        "source_job_id": 10,
+        "source_operation_id": 1,
+        "source_machine_id": 100
+      },
+      {
+        "job": 0,
+        "operation": 1,
+        "machine": 0,
+        "start": 3,
+        "end": 10,
+        "source_job_id": 10,
+        "source_operation_id": 2,
+        "source_machine_id": 100
+      },
+      {
+        "job": 1,
+        "operation": 0,
+        "machine": 0,
+        "start": 10,
+        "end": 15,
+        "source_job_id": 20,
+        "source_operation_id": 1,
+        "source_machine_id": 100
+      }
+    ],
+    "violations": [],
+    "time_unit": "minutes",
+    "objective": "makespan_under_hard_deadlines",
+    "scenario_type": "workshop",
+    "source_machine_ids": [
+      100,
+      200
+    ],
+    "source_job_ids": [
+      10,
+      20
+    ]
+  }
+}

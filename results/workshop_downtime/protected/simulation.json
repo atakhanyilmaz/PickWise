@@ -1,0 +1,126 @@
+{
+  "baseline_version_id": "downtime-demo-v1",
+  "request": {
+    "baseline_version_id": "downtime-demo-v1",
+    "scenario_id": "outage-protected",
+    "machine_id": 100,
+    "start": 10,
+    "end": 20,
+    "reason": "Sentetik planlı bakım",
+    "preserve_existing_completions": true,
+    "time_limit_seconds": 2.0
+  },
+  "scenario": {
+    "scenario_id": "outage-protected",
+    "description": "Sentetik atölye örneği; bütün süreler ve terminler demo varsayımıdır. Sürekli çalışma kabul edilir.\nPlanlı duruş: M100, [10, 20) dakika. Sentetik planlı bakım",
+    "machines": [
+      {
+        "machine_id": 100,
+        "name": "Torna 1",
+        "unavailable_intervals": [
+          [
+            10,
+            20
+          ]
+        ]
+      },
+      {
+        "machine_id": 200,
+        "name": "Torna 2",
+        "unavailable_intervals": []
+      }
+    ],
+    "jobs": [
+      {
+        "job_id": 10,
+        "name": "Devam eden iş",
+        "operations": [
+          {
+            "operation_id": 1,
+            "name": "Tamamlanmış işlem",
+            "processing_times": {
+              "100": 3
+            },
+            "duration_source": "demo_assumption",
+            "status": "completed",
+            "fixed_machine_id": 100,
+            "fixed_start": 0,
+            "fixed_end": 3,
+            "remaining_duration": null
+          },
+          {
+            "operation_id": 2,
+            "name": "Devam eden işlem",
+            "processing_times": {
+              "100": 7
+            },
+            "duration_source": "demo_assumption",
+            "status": "in_progress",
+            "fixed_machine_id": 100,
+            "fixed_start": 3,
+            "fixed_end": null,
+            "remaining_duration": 5
+          }
+        ],
+        "route_source": "demo_assumption",
+        "deadline": null,
+        "due_date": 10,
+        "release_time": 0
+      },
+      {
+        "job_id": 20,
+        "name": "Bekleyen mevcut iş",
+        "operations": [
+          {
+            "operation_id": 1,
+            "name": "Tornalama",
+            "processing_times": {
+              "100": 5
+            },
+            "duration_source": "demo_assumption",
+            "status": "not_started",
+            "fixed_machine_id": null,
+            "fixed_start": null,
+            "fixed_end": null,
+            "remaining_duration": null
+          }
+        ],
+        "route_source": "demo_assumption",
+        "deadline": null,
+        "due_date": 20,
+        "release_time": 10
+      }
+    ],
+    "current_time": 5,
+    "completion_limits": {
+      "10": 10,
+      "20": 15
+    },
+    "time_unit": "minutes",
+    "time_unit_note": "Tüm süreler t=0 referansından dakika; sentetik demo."
+  },
+  "result": {
+    "status": "INFEASIBLE",
+    "makespan": null,
+    "best_bound": 0.0,
+    "runtime_seconds": 0.000123,
+    "time_limit_seconds": 2.0,
+    "seed": 0,
+    "workers": 1,
+    "schedule": [],
+    "violations": null,
+    "time_unit": "minutes",
+    "objective": "makespan_under_hard_deadlines",
+    "scenario_type": "workshop",
+    "source_machine_ids": [
+      100,
+      200
+    ],
+    "source_job_ids": [
+      10,
+      20
+    ]
+  },
+  "comparison": null,
+  "message": "Bu senaryonun modellenen kısıtları altında uygulanabilir plan yok."
+}

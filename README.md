@@ -186,7 +186,8 @@ ayrı insan onayı gerektirir. `extract_order` eski tek mesajlı API olarak kal�
 
 CLI süreyi sorar; ardından tamamlanmış taslağı gösterip ayrıca onay ister.
 Gerçek tarih dönüşümü yoktur: göreli termin için kullanıcıdan `t=40 dakika`
-gibi açık sınır istenir. Duruş doğal dil aracı ve senaryo servisi sonraki aşamadadır.
+gibi açık sınır istenir. Duruş doğal dil aracı sonraki aşamadadır;
+manuel planlı duruş servisi aşağıdaki bölümde açıklanır.
 
 ```sh
 .venv/bin/python -m benchmarks.gemma_conversation_evaluation --split development
@@ -218,3 +219,39 @@ komutları yukarıdaki sözleşme dokümanındadır.
 değiştirmeden karşılaştırır. Oturum/bölme, süre hesabı, sensörlerin korunması
 ve eksik veri bayrakları kontrol edilir. Bu kalan süre deneyi;
 planlamaya bağlı toplam hazırlık tahmini veya fiziksel anlam onayı değildir.
+
+## Ayrı TabPFN deneyleri
+
+İki regresyonun kodu, raporları, sonuçları, testleri ve bağımlılık kilidi
+[experiments/tabpfn](experiments/tabpfn/README.md) altında tutulur.
+Uygulamanın planlama, Gemma ve SQLite akışı bu paketi import etmez.
+İki gerçek v2 doğrulama deneyinde global medyan geçilemedi; ürün akışına
+bağlanmadı.
+
+## Veri hazırlama testleri
+
+Veri hazırlama ve testleri için ek doğrudan bağımlılık:
+
+```sh
+.venv/bin/python -m pip install -r requirements-data.txt
+.venv/bin/python -m pytest -q tests
+```
+
+`matplotlib==3.9.2` ve kurulu ek bağımlılıkları `requirements-lock.txt` içine
+alındı. Son yerel doğrulamada Yunus'un veri hazırlama testleri dahil 202 test
+geçti; matplotlib/pyparsing kaynaklı deprecation uyarıları hata değildir.
+
+## Planlı makine duruşu
+
+`core.downtime.simulate_downtime` mevcut planı değiştirmeden makine duruşu
+ekler, uygun alternatifleri çözer ve mevcut işlerin bitiş/termin etkisini
+hesaplar. Başlamış operasyonu kesme/devam ettirme desteklenmez; açıkça
+reddedilir. Kaydetme ayrı insan seçimi ve SQLite sürüm kaydı gerektirir.
+[Servis sözleşmesi ve sınırlar](docs/downtime-simulation.md).
+
+```sh
+.venv/bin/python -m benchmarks.workshop_downtime_demo
+```
+
+JSON ve önce/sonra Gantt çıktıları `results/workshop_downtime/` altında.
+Gemma doğal dil duruş aracı ve UI bağlantısı henüz yoktur.

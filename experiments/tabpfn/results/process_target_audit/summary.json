@@ -1,0 +1,2902 @@
+{
+  "raw_rows": 4543,
+  "case_count": 225,
+  "resource_count": 31,
+  "resource_names": [
+    "Machine 1 - Lapping",
+    "Machine 10 - Grinding",
+    "Machine 11 - Grinding",
+    "Machine 12 - Grinding",
+    "Machine 14 - Milling",
+    "Machine 15 - Turning",
+    "Machine 16 - Milling",
+    "Machine 17 - Sinking",
+    "Machine 18 - Wire Cutting",
+    "Machine 19 - Grinding",
+    "Machine 2 - Round Grinding",
+    "Machine 21 - Turning",
+    "Machine 22 - Milling",
+    "Machine 23 - Turning",
+    "Machine 25 - Grinding",
+    "Machine 26 - Flat Grinding",
+    "Machine 27 - Grinding",
+    "Machine 3 - Round Grinding",
+    "Machine 4 - Turning & Milling",
+    "Machine 5 - Turning & Milling",
+    "Machine 6 - Turning & Milling",
+    "Machine 7- Laser Marking",
+    "Machine 8 - Turning & Milling",
+    "Machine 9 - Turning & Milling",
+    "Manual Deburring",
+    "Manual Milling - Machine 28",
+    "Oven",
+    "Packing",
+    "Quality Check 1",
+    "Quality Check 2",
+    "Wire Cut - Machine 13"
+  ],
+  "exact_duplicate_excess_rows": 22,
+  "event_key_duplicate_excess_rows": 50,
+  "cases_with_overlapping_intervals": 160,
+  "cases_with_tied_starts": 71,
+  "cases_with_event_duplicates": 38,
+  "cases_with_multiple_parts_or_quantities": 0,
+  "cases_with_report_sum_greater_than_case_span": 1,
+  "observed_case_span_minutes": {
+    "count": 225,
+    "min": 30.0,
+    "p25": 7901.0,
+    "median": 20018.0,
+    "p75": 41616.0,
+    "p95": 103619.99999999999,
+    "max": 125935.0
+  },
+  "case_counts_by_split": {
+    "boundary_quarantine": 91,
+    "train": 72,
+    "test": 45,
+    "validation": 17
+  },
+  "case_span_by_split": {
+    "boundary_quarantine": {
+      "count": 91,
+      "min": 2607.0,
+      "p25": 30101.5,
+      "median": 46004.0,
+      "p75": 67899.5,
+      "p95": 121892.0,
+      "max": 125935.0
+    },
+    "test": {
+      "count": 45,
+      "min": 62.0,
+      "p25": 2060.0,
+      "median": 5766.0,
+      "p75": 10861.0,
+      "p95": 17441.399999999998,
+      "max": 22186.0
+    },
+    "train": {
+      "count": 72,
+      "min": 30.0,
+      "p25": 8750.0,
+      "median": 14843.5,
+      "p75": 24996.0,
+      "p95": 44852.80000000003,
+      "max": 66240.0
+    },
+    "validation": {
+      "count": 17,
+      "min": 75.0,
+      "p25": 1925.0,
+      "median": 8275.0,
+      "p75": 16329.0,
+      "p95": 26226.999999999996,
+      "max": 28939.0
+    }
+  },
+  "case_overlap_by_split": {
+    "boundary_quarantine": 79,
+    "test": 18,
+    "train": 51,
+    "validation": 12
+  },
+  "cases_with_single_resource": 16,
+  "observed_case_span_is_verified_order_lead_time": false,
+  "adjacent_gap_is_verified_machine_transfer_time": false,
+  "adjacent_different_resource_pairs": 2290,
+  "negative_gap_pairs": 570,
+  "zero_gap_pairs": 69,
+  "positive_gap_pairs": 1651,
+  "timestamp_screened_pairs": 1556,
+  "timestamp_screened_pair_cases": 207,
+  "timestamp_screened_pair_counts_by_split": {
+    "boundary_quarantine": 962,
+    "train": 402,
+    "test": 123,
+    "validation": 69
+  },
+  "timestamp_screened_case_counts_by_split": {
+    "boundary_quarantine": 91,
+    "test": 34,
+    "train": 68,
+    "validation": 14
+  },
+  "timestamp_screened_gap_minutes": {
+    "count": 1556,
+    "min": 0.0,
+    "p25": 152.25,
+    "median": 533.0,
+    "p75": 1954.5,
+    "p95": 12615.75,
+    "max": 82374.0
+  },
+  "screened_pairs_over_one_day": 447,
+  "screened_named_machine_to_machine_pairs": 418,
+  "screened_named_machine_pair_cases": 153,
+  "edges_seen_in_all_three_splits": 18,
+  "edge_case_coverage": [
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 4,
+      "test": 1,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 5,
+      "test": 2,
+      "train": 4,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 21,
+      "test": 1,
+      "train": 7,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 21 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 6,
+      "test": 0,
+      "train": 9,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 21,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 3,
+      "train": 2,
+      "validation": 1
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 2,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 17,
+      "test": 3,
+      "train": 8,
+      "validation": 3
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Oven",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 8,
+      "test": 0,
+      "train": 3,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 13,
+      "test": 2,
+      "train": 7,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 6,
+      "test": 3,
+      "train": 10,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 19 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 9,
+      "test": 3,
+      "train": 6,
+      "validation": 0
+    },
+    {
+      "from": "Machine 14 - Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 14 - Milling",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Packing",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 16 - Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 16 - Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 17 - Sinking",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 18 - Wire Cutting",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 19 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 1,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 25 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 17,
+      "test": 0,
+      "train": 11,
+      "validation": 0
+    },
+    {
+      "from": "Machine 21 - Turning",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 21 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 22 - Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 23 - Turning",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 23 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 25 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 26 - Flat Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 7,
+      "test": 0,
+      "train": 3,
+      "validation": 1
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 11,
+      "test": 0,
+      "train": 10,
+      "validation": 2
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 23,
+      "test": 0,
+      "train": 4,
+      "validation": 1
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Quality Check 2",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 3,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 2,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 17,
+      "test": 5,
+      "train": 4,
+      "validation": 1
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 15,
+      "test": 5,
+      "train": 0,
+      "validation": 2
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 11,
+      "test": 9,
+      "train": 10,
+      "validation": 4
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 32,
+      "test": 7,
+      "train": 22,
+      "validation": 3
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 8,
+      "test": 4,
+      "train": 11,
+      "validation": 2
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 21 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Manual Deburring",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Packing",
+      "boundary_quarantine": 3,
+      "test": 2,
+      "train": 4,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 15,
+      "test": 3,
+      "train": 7,
+      "validation": 1
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Wire Cut - Machine 13",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 14,
+      "test": 5,
+      "train": 11,
+      "validation": 3
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 14 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 17 - Sinking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 6,
+      "test": 1,
+      "train": 9,
+      "validation": 1
+    },
+    {
+      "from": "Manual Deburring",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Deburring",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Milling - Machine 28",
+      "to": "Machine 17 - Sinking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Milling - Machine 28",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Oven",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 15 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 2,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 46,
+      "test": 8,
+      "train": 31,
+      "validation": 5
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 19,
+      "test": 4,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 7,
+      "test": 0,
+      "train": 2,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 6,
+      "test": 2,
+      "train": 9,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 15 - Turning",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 8,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 26 - Flat Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 11,
+      "test": 0,
+      "train": 4,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 9,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 10,
+      "test": 3,
+      "train": 3,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 7,
+      "test": 2,
+      "train": 0,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 7,
+      "test": 1,
+      "train": 3,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 54,
+      "test": 15,
+      "train": 36,
+      "validation": 5
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 9,
+      "test": 1,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 5,
+      "test": 1,
+      "train": 6,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Manual Deburring",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Oven",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Packing",
+      "boundary_quarantine": 51,
+      "test": 7,
+      "train": 46,
+      "validation": 8
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Wire Cut - Machine 13",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 2",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    }
+  ],
+  "edge_row_counts": [
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 4,
+      "test": 1,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 5,
+      "test": 2,
+      "train": 4,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 33,
+      "test": 1,
+      "train": 7,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 21 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 7,
+      "test": 0,
+      "train": 10,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 31,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 3,
+      "train": 3,
+      "validation": 1
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 2,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 1 - Lapping",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 20,
+      "test": 3,
+      "train": 9,
+      "validation": 3
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Oven",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 10 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 18,
+      "test": 0,
+      "train": 3,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 14,
+      "test": 3,
+      "train": 8,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 11 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 6,
+      "test": 3,
+      "train": 10,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 19 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 12 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 10,
+      "test": 3,
+      "train": 6,
+      "validation": 0
+    },
+    {
+      "from": "Machine 14 - Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 14 - Milling",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Packing",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 15 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 16 - Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 16 - Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 17 - Sinking",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 18 - Wire Cutting",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 19 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 6,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 1,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 25 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 6,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 2 - Round Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 24,
+      "test": 0,
+      "train": 11,
+      "validation": 0
+    },
+    {
+      "from": "Machine 21 - Turning",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 21 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 22 - Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 23 - Turning",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 23 - Turning",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 25 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 26 - Flat Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 9,
+      "test": 0,
+      "train": 3,
+      "validation": 2
+    },
+    {
+      "from": "Machine 27 - Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 15,
+      "test": 0,
+      "train": 11,
+      "validation": 2
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Packing",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 29,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Machine 3 - Round Grinding",
+      "to": "Quality Check 2",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 7,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 2,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 4 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 25,
+      "test": 6,
+      "train": 4,
+      "validation": 1
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 6,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 5 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 22,
+      "test": 5,
+      "train": 0,
+      "validation": 2
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 6 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 22,
+      "test": 9,
+      "train": 13,
+      "validation": 6
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 35,
+      "test": 7,
+      "train": 23,
+      "validation": 3
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 9,
+      "test": 4,
+      "train": 12,
+      "validation": 2
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 21 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Manual Deburring",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Packing",
+      "boundary_quarantine": 3,
+      "test": 2,
+      "train": 4,
+      "validation": 0
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 16,
+      "test": 3,
+      "train": 7,
+      "validation": 1
+    },
+    {
+      "from": "Machine 7- Laser Marking",
+      "to": "Wire Cut - Machine 13",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Packing",
+      "boundary_quarantine": 1,
+      "test": 1,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 8 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 15,
+      "test": 6,
+      "train": 14,
+      "validation": 4
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 14 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 17 - Sinking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Packing",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Machine 9 - Turning & Milling",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 12,
+      "test": 1,
+      "train": 12,
+      "validation": 1
+    },
+    {
+      "from": "Manual Deburring",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Deburring",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Milling - Machine 28",
+      "to": "Machine 17 - Sinking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Manual Milling - Machine 28",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Oven",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 15 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 16 - Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 4,
+      "test": 0,
+      "train": 2,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 1,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 0,
+      "validation": 1
+    },
+    {
+      "from": "Packing",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 73,
+      "test": 8,
+      "train": 33,
+      "validation": 5
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 21,
+      "test": 4,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 10 - Grinding",
+      "boundary_quarantine": 18,
+      "test": 0,
+      "train": 5,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 11 - Grinding",
+      "boundary_quarantine": 6,
+      "test": 2,
+      "train": 9,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 12 - Grinding",
+      "boundary_quarantine": 3,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 15 - Turning",
+      "boundary_quarantine": 5,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 2 - Round Grinding",
+      "boundary_quarantine": 12,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 23 - Turning",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 26 - Flat Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 27 - Grinding",
+      "boundary_quarantine": 18,
+      "test": 0,
+      "train": 4,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 12,
+      "test": 0,
+      "train": 2,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 4 - Turning & Milling",
+      "boundary_quarantine": 19,
+      "test": 3,
+      "train": 3,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 5 - Turning & Milling",
+      "boundary_quarantine": 13,
+      "test": 5,
+      "train": 0,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 6 - Turning & Milling",
+      "boundary_quarantine": 18,
+      "test": 2,
+      "train": 3,
+      "validation": 2
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 58,
+      "test": 15,
+      "train": 37,
+      "validation": 5
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 8 - Turning & Milling",
+      "boundary_quarantine": 15,
+      "test": 1,
+      "train": 8,
+      "validation": 1
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Machine 9 - Turning & Milling",
+      "boundary_quarantine": 17,
+      "test": 1,
+      "train": 7,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Manual Deburring",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Oven",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Packing",
+      "boundary_quarantine": 76,
+      "test": 7,
+      "train": 48,
+      "validation": 8
+    },
+    {
+      "from": "Quality Check 1",
+      "to": "Wire Cut - Machine 13",
+      "boundary_quarantine": 2,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Quality Check 2",
+      "to": "Quality Check 1",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 1 - Lapping",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 18 - Wire Cutting",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 3 - Round Grinding",
+      "boundary_quarantine": 0,
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    {
+      "from": "Wire Cut - Machine 13",
+      "to": "Machine 7- Laser Marking",
+      "boundary_quarantine": 1,
+      "test": 0,
+      "train": 0,
+      "validation": 0
+    }
+  ],
+  "limitations": [
+    "Sorted adjacent reports are not verified operation predecessors or material transfers.",
+    "Overlap can reflect batches, partial reports, parallel work or data errors; do not silently delete it.",
+    "Case span excludes any unrecorded time before the first or after the last event; shipment/acceptance endpoints are not certified.",
+    "Report Type S/D/B and source timezone remain unresolved.",
+    "Part and quantity consistency does not prove all records describe one indivisible part.",
+    "Only descriptive integrity statistics are produced; no model fit, feature selection or success claim."
+  ],
+  "sensitivity_skipping_intermediate_stations": {
+    "chronological_machine_pairs": 975,
+    "nonnegative_pairs": 751,
+    "cases_with_any_pair": 181,
+    "nonnegative_pairs_by_split": {
+      "boundary_quarantine": 493,
+      "train": 182,
+      "test": 51,
+      "validation": 25
+    },
+    "verified_direct_transfers": false
+  },
+  "sources": {
+    "/Users/atakan/Documents/PickWise/data/dataforNewVersion/production_analysis.csv": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6",
+    "/Users/atakan/Documents/PickWise/reports/data_preparation/production_analysis_split_manifest.csv": "f8a3a3ee04d13506023b8e444b987ae45c20a326aaaf260a8f393f7d9277ffde"
+  }
+}
