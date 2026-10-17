@@ -9,7 +9,7 @@
         "sha256": "ef2477450926aa650e83a038cc81578a048a31ee22dfb858b5eab2a7883a21e6"
       },
       "cnc_changeovers": {
-        "path": "data/dataforNewVersion/cnc_changeove.csv",
+        "path": "data/dataforNewVersion/cnc_changeover.csv",
         "source_url": "https://zenodo.org/records/15735480",
         "source_version": "1.0.1",
         "sha256": "d7227badb6ae1a27339622b337207cc342f75acc5baa18538352228fd52be580"

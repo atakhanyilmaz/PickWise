@@ -21,13 +21,13 @@ Dönüşüm pipeline'ı, model eğitimi ve test setiyle son değerlendirme bu te
 
 | Veri kaynağı | Birincil kullanım | İlk hedef | Tahmin anında kullanılabilecek bilgi | Kullanılmayacak veya ayrı tutulacak bilgi |
 | --- | --- | --- | --- | --- |
-| Production Analysis | TabPFN regresyonu | Anlamı doğrulanmış operasyon kaydının dakika cinsinden `recorded_duration_min` değeri | Parça açıklaması, sipariş miktarı, operasyon türü ve planlama anında gerçekten biliniyorsa atanmış kaynak | Bitiş zamanı, `Span`, tamamlanan/reddedilen/MRB miktarı, `Rework`, testten hesaplanan özetler |
+| Production Analysis | TabPFN regresyonu | Dakika cinsinden deneysel `target_elapsed_time`; doğrulanmış operasyon süresi değildir | Parça açıklaması, sipariş miktarı, operasyon türü ve planlama anında gerçekten biliniyorsa atanmış kaynak | Başlangıç/bitiş zamanı, `Span`, tamamlanan/reddedilen/MRB miktarı, `Rework`, testten hesaplanan özetler |
 | Production Analysis | EmbeddingGemma 2 ile geçmiş iş arama | Denetimli hedef yok; arama birimi iş emri veya doğrulanmış operasyon özeti | Tahmin anında mevcut metinsel iş ve rota bilgisi | Doğrulama/test dönemindeki gelecekteki işlerin arama indeksine eklenmesi |
 | CNC Changeovers v1.0.1 | Değişim/üretim oturumlarının betimleyici analizi | Bu ürün planında denetimli hedef yok; `Label_03` oturum/faz sınırı bulmak için, `Label_10` daha ayrıntılı betimleme için kullanılır | Sensör kayıtları, oturum ve fazlar | 30 oturumu bağımsız satır gibi değerlendirmek; etiketleri özellik olarak kullanmak; sınıflandırmayı mevcut ürün göreviymiş gibi sunmak |
 | Brandimarte | CP-SAT ve sezgisel yöntem doğrulaması | Tahmin hedefi yok; makespan ve çizelge geçerliliği | Benchmark dosyasındaki işler, operasyonlar, uygun makineler ve süreler | TabPFN eğitim verisi olarak kullanma |
 | Gemma | Türkçe talep yapılandırma ve sonuç açıklama | Bu iki CSV üzerinde model eğitimi yok | Kullanıcı talebi ve hesaplanmış araç çıktıları | Süre, uygun makine veya performans değerlerini modelin üretmesi |
 
-Production Analysis hedefi şimdilik özellikle `recorded_duration_min` olarak adlandırılmalıdır. Başlangıç-bitiş farkının saf makine çalışma süresi olduğu doğrulanmadan `processing_time_min` adı kullanılmayacaktır. `Report Type` değerleri olan `S`, `D` ve `B` ile satırların operasyona nasıl birleştirileceği, hedef tablo oluşturulmadan önce veri kaynağı dokümanıyla doğrulanacaktır.
+Production Analysis hedefi `target_elapsed_time` adıyla dakika cinsinden oluşturulur: `Complete Timestamp - Start Timestamp`. Bu alan doğrulanmış saf makine çalışma süresi değil, kayıtta gözlenen geçen süredir; bu nedenle `processing_time_min` adı kullanılmaz. Model adayında yalnızca pozitif hedefe sahip ve `Span` ile en fazla 1 dakika ayrışan kayıtlar tutulur. `Report Type` değerleri olan `S`, `D` ve `B` ile satırların operasyona nasıl birleştirileceği doğrulanana kadar hedef deneysel kabul edilir.
 
 CNC verisi ürün planında bağımsız hazırlık/değişim analizi içindir; mevcut ürün hedefi bir sınıflandırma modeli değildir. Resmî veri tanımı 30 oturum ve beş tam değişim matrisini doğrular. `Label_03` ve `Label_10` bu hazırlık aşamasında yalnızca fazları betimlemek için kullanılır; 52.026 saniyelik satır bağımsız oturum sayılmaz.
 
@@ -73,7 +73,28 @@ Bu bulgular, CSV satırlarının doğrudan bağımsız operasyon örneği sayıl
 | 4 Veri bölme | İş emri zaman sınırı ve CNC çevrim/matris grupları için satır manifestleri, zaman/sınıf kapsamı üretilir; sınır aşan her iş emrinin nedeni ve tarih aralığı `production_boundary_cases.csv` içine yazılır | Production Analysis'ta 91/225 iş sınırları aştığı için karantinada; kalan iş oranı 60/20/20 değildir. Bu set regresyon değerlendirmesi için zayıftır. CNC bölümleri ilerideki deneyler için ayrılmıştır; mevcut model doğrulaması değildir | Grup çakışması sıfır; CNC 18/6/6 çevrim ve 3/1/1 matris olarak korunur |
 | 5 Detaylı analiz | Süre dağılımı, IQR/MAD aykırı işaretleri, parça/rapor türü ve miktar ilişkisi, vaka özeti; CNC faz/oturum süreleri, etiket özetleri, sensör eksikleri/sabitliği/korelasyonları. Grafikler eğitim verisinden | Production gözlenen süre yalnızca betimleyicidir; doğrulanmış model hedefi değildir. CNC satırları zaman bağımlıdır; sınıflandırma üründe kararlaştırılmış değildir | EDA kodu yalnızca `train` gruplarını analiz eder; test/validasyon grafikleri veya özellik kararlarına karışmaz |
 
-Uygulama komutu: `.venv\\Scripts\\python.exe -m ml_experiments.prepare_data all`. Tek adımlar `profile`, `quality`, `split` ve `eda` argümanlarıyla çalıştırılabilir. Raporlar `reports/data_preparation/` altına yazılır ve `.gitignore` ile dışarıda tutulur.
+Uygulama komutu: `.venv\\Scripts\\python.exe -m ml_experiments.prepare_data all`. Tek adımlar `profile`, `quality`, `review`, `impute`, `target`, `remaining`, `split` ve `eda` argümanlarıyla çalıştırılabilir. Raporlar `reports/data_preparation/` altına yazılır ve `.gitignore` ile dışarıda tutulur.
+
+`data/dataforNewVersion/` yalnız iki ham CSV ile iki nihai dönüştürülmüş CSV içerir. Review, audit, zaman boşluğu ve ara impute dosyaları gerekiyorsa `reports/data_preparation/intermediate/` altında üretilir. Production Analysis için `Rework` boşluğu korunur. CNC'de `Tool_ID` boşluğu `__NO_TOOL_IN_SPINDLE__` ve `Tool_ID__was_missing` ile temsil edilir. `Line_Content` metni nihai veriden çıkarılıp `nc_line_is_active` özelliğine dönüştürülür. Makineye özgü `Tool_ID_Magazine_Place_49` ile üç `Magazine_9999_*` alanı uydurma sentinel/`-1` değeri verilmeden nihai model adayından tamamen çıkarılır. CNC zamanlarındaki altı uzun aralık değiştirilmez ve changeover pencerelerinin içinden geçmesine izin verilmez.
+
+`remaining` adımı `Label_03 = 0` olan 30 kesintisiz changeover oturumu için `remaining_changeover_time_min` hedefini üretir. Hedef mevcut satırdan aynı oturumun son damgasına kalan duvar saati dakikasıdır. `history_seconds_available`, 30/60 saniyelik pencere uygunluk işaretleri, bilinen ürün geçişi ve tam oturum bazlı `train`/`validation`/`test` ayrımı eklenir. `Line_Content` komut metni ve ters anlamlı eksiklik göstergesi kaldırılır; yerine yalnız canlı kontrolcüden bilinebilen `nc_line_is_active` (`0/1`) eklenir. Bu özellik yeni sipariş girildiği anda bilinmez ve yalnız devam eden changeover kalan-süre modelinde kullanılabilir. Tüm `Label_*` alanları, inceleme metadata'sı, eski türetilmiş oturum kimlikleri ve geleceği kodlayan sayaçlar çıktıdan çıkarılır. `time`, `changeover_session_id`, `split` ve pencere uygunluk işaretleri yalnızca sıralama/gruplama metadata'sıdır; modele özellik olarak verilmez. Üretilen dosya `cnc_changeover_remaining_time_target.csv`, denetim raporu `cnc_remaining_time_target_report.json` olur.
+
+`target` adımı en güncel Production Analysis impute adayını okuyup `production_analysis_target_ready.csv` üretir. `Rework`, `Start Timestamp`, `Complete Timestamp`, `Span`, ayrıştırılmış zaman alanları ve süre karşılaştırma alanları hedef oluşturulduktan sonra kaldırılır; böylece hedefin kendisini veren alanlar modele sızmaz. Satır kabul/red sayıları ve gerekçeleri `production_target_report.json` içinde tutulur.
+
+Kaldırılan Production Analysis alanlarının anlamı:
+
+| Alan | Karşılığı | Kaldırma gerekçesi |
+| --- | --- | --- |
+| `Rework` | Kaynaktaki yeniden işleme işareti | Yalnızca 32 `Y` gözlemi vardır, doğrulanmış `N` yoktur; eksiklik yaklaşık %99,3'tür |
+| `Start Timestamp` | Kayıt aralığının gözlenen başlangıcı | Hedefi üretir; model girdisinde hedef sızıntısı yaratır |
+| `Complete Timestamp` | Kayıt aralığının gözlenen bitişi | Hedefi üretir; tahmin anında bilinmez |
+| `Span` | Kaynaktaki `HHH:MM` biçimli süre | Hedefin doğrudan başka gösterimidir; yalnızca kalite kontrolünde kullanılır |
+| `start_parsed`, `complete_parsed` | Başlangıç/bitiş damgalarının normalize edilmiş inceleme kopyaları | Kaynak zaman alanlarını tekrarlar |
+| `timestamp_elapsed_min` | Damga farkının önceki dakika türevi | `target_elapsed_time` ile aynı bilgidir |
+| `span_recorded_min` | `Span` alanının dakikaya çevrilmiş hali | Hedefin doğrudan başka gösterimidir |
+| `span_minus_elapsed_min` | İki süre gösteriminin farkı | Hedef kullanılarak hesaplandığı için sızıntıdır |
+
+Çıktıda denetim için tutulan `source_row_number`, `Case ID`, `review_status` ve `review_issues` model girdisi değildir. İlk özellik adayları `Part Desc.`, `Work Order  Qty` ve `Activity` alanlarıdır. `Resource` yalnızca yeni siparişin makinesi tahmin anında atanmış veya doğrulanmışsa kullanılabilir. Tamamlanan/reddedilen/MRB miktarları ve `Worker ID` de veri sözleşmesinde yasak özellik olarak kalır.
 
 ## 5. Uygulama tasarımı
 

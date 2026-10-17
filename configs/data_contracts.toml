@@ -7,7 +7,7 @@ source_url = "https://figshare.com/articles/dataset/Production_Analysis_with_Pro
 source_version = "2014 dataset record; local CSV checksum tracked in reports"
 source_license = "4TU General Terms of Use; review before redistribution"
 prediction_unit = "unresolved_report_row_or_operation_aggregate"
-target = "recorded_duration_min"
+target = "target_elapsed_time"
 target_status = "provisional_until_report_type_semantics_are_verified"
 group_key = "Case ID"
 time_key = "Start Timestamp"
@@ -18,13 +18,13 @@ unresolved_semantics = ["Report Type S/D/B", "report-row versus operation aggreg
 [production_analysis.tabpfn]
 purpose = "regress verified operation duration; compare with a train-only median baseline"
 prediction_unit = "verified operation after report semantics and aggregation are approved"
-target = "recorded_duration_min"
+target = "target_elapsed_time"
 target_status = "provisional_until_report_type_semantics_are_verified"
 group_key = "Case ID"
 time_key = "Start Timestamp"
 allowed_features = ["Part Desc.", "Work Order  Qty", "Activity"]
 conditional_features = ["Resource; usable only when machine assignment is known before prediction"]
-forbidden_features = ["Complete Timestamp", "Span", "Qty Completed", "Qty Rejected", "Qty for MRB", "Rework", "Worker ID"]
+forbidden_features = ["Start Timestamp", "Complete Timestamp", "Span", "start_parsed", "complete_parsed", "timestamp_elapsed_min", "span_recorded_min", "span_minus_elapsed_min", "Qty Completed", "Qty Rejected", "Qty for MRB", "Rework", "Worker ID"]
 
 [production_analysis.embeddinggemma]
 purpose = "retrieve similar historical work orders for a new order"
@@ -37,23 +37,24 @@ conditional_features = ["Resource; only if verified as a known route or assigned
 forbidden_features = ["future or held-out work orders", "unverified route inference", "completion outcomes"]
 
 [cnc_changeovers]
-path = "data/dataforNewVersion/cnc_changeove.csv"
+path = "data/dataforNewVersion/cnc_changeover.csv"
 source_kind = "one_second_sensor_stream"
 source_url = "https://zenodo.org/records/15735480"
 source_doi = "10.5281/zenodo.15735480"
 source_version = "1.0.1"
 source_license = "review record before redistribution"
-prediction_unit = "sensor_row for descriptive setup and production phase analysis"
-target = "none_for_current_product_plan"
-segmentation_marker = "Label_03; descriptive phase segmentation only"
+prediction_unit = "one-second observation within a complete changeover session"
+target = "remaining_changeover_time_min"
+target_status = "experimental_single_machine_thirty_session_target"
+segmentation_marker = "Label_03; 0=changeover and 1=production; segmentation only, never a model feature"
 secondary_marker = "Label_10; detailed descriptive phase analysis only"
 group_key = "derived_cycle_id"
 time_key = "time"
 duration_unit = "second sampling interval"
-primary_model = "none; optional supervised phase classification is a separate future experiment"
-allowed_features = ["sensor columns for descriptive analysis; not a production model feature list"]
-conditional_features = ["Program_status", "Program_line_number", "Program_path", "Tool_ID", "Operation_mode; verify each is available before the prediction timestamp and does not encode the phase label"]
-forbidden_features = ["all Label_* columns", "local row index as a unique key", "future rows", "features derived from future timestamps", "Program_Stop", "Total_running_time_NC_program", "Net_running_time_program", "Cycle_time_program"]
+primary_model = "experimental 30-second or 60-second sensor-window regression"
+allowed_features = ["sensor history at or before prediction time", "known transition_from_product", "known transition_to_product", "elapsed_changeover_time_min"]
+conditional_features = ["nc_line_is_active", "Program_status", "Program_line_number", "Program_path", "Tool_ID", "Operation_mode; live-only signals, retain only when read from the controller at prediction time"]
+forbidden_features = ["all Label_* columns", "Line_Content command text", "absolute time", "source row index", "session id as a feature", "split", "future rows", "future interruption labels", "Program_Stop", "Total_running_time_NC_program", "Net_running_time_program", "Cycle_time_program"]
 session_grouping = "contiguous Label_03 runs paired in source order; six cycles per matrix"
 
 [brandimarte]

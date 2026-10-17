@@ -27,7 +27,53 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACTS_PATH = ROOT / "configs" / "data_contracts.toml"
 OUT = ROOT / "reports" / "data_preparation"
+INTERMEDIATE = OUT / "intermediate"
 CONTRACTS = tomllib.loads(CONTRACTS_PATH.read_text(encoding="utf-8"))
+
+PRODUCTION_TARGET_COLUMN = "target_elapsed_time"
+PRODUCTION_TARGET_UNIT = "minute"
+PRODUCTION_TARGET_TOLERANCE_MIN = 1.0
+PRODUCTION_TIME_LEAKAGE_COLUMNS = [
+    "Start Timestamp",
+    "Complete Timestamp",
+    "Span",
+    "start_parsed",
+    "complete_parsed",
+    "timestamp_elapsed_min",
+    "span_recorded_min",
+    "span_minus_elapsed_min",
+]
+PRODUCTION_REMOVED_COLUMN_DESCRIPTIONS = {
+    "Rework": "Source rework flag; 32 observed Y values and no observed N values.",
+    "Start Timestamp": "Observed report interval start used to derive the target.",
+    "Complete Timestamp": "Observed report interval end used to derive the target.",
+    "Span": "Source HHH:MM duration representation used only as a consistency check.",
+    "start_parsed": "Normalized review copy of Start Timestamp.",
+    "complete_parsed": "Normalized review copy of Complete Timestamp.",
+    "timestamp_elapsed_min": "Previous derived copy of the same timestamp-difference target.",
+    "span_recorded_min": "Numeric minute conversion of Span.",
+    "span_minus_elapsed_min": "Difference between the two duration representations.",
+}
+
+CNC_STRUCTURAL_MISSING_SENTINELS: dict[str, str | float] = {
+    "Tool_ID": "__NO_TOOL_IN_SPINDLE__",
+}
+
+CNC_DROPPED_MAGAZINE_COLUMNS = [
+    "Tool_ID_Magazine_Place_49",
+    "Magazine_9999_number_Place_1",
+    "Magazine_9999_position_Place_1",
+    "Tool_ID_Magazine_9999_Place_1",
+]
+
+CNC_TRANSITIONS = {
+    0: ("B", "A"),
+    1: ("C", "A"),
+    2: ("A", "B"),
+    3: ("C", "B"),
+    4: ("A", "C"),
+    5: ("B", "C"),
+}
 
 
 def run_metadata() -> dict[str, Any]:
@@ -208,6 +254,515 @@ def quality() -> None:
     print(f"Wrote {OUT / 'quality_report.json'}")
 
 
+def review_copies() -> None:
+    """Write side-by-side inspection datasets; never modify or overwrite raw inputs."""
+    quality_data = json.loads((OUT / "quality_report.json").read_text(encoding="utf-8"))["datasets"]
+    for name in ("production_analysis", "cnc_changeovers"):
+        frame = read_csv(name).copy()
+        issues = quality_data[name]["issues"]
+        row_codes: list[set[str]] = [set() for _ in range(len(frame))]
+        for item in issues:
+            for row in item.get("affected_source_rows", []):
+                row_codes[int(row)].add(item["issue_code"])
+        frame.insert(0, "source_row_number", np.arange(1, len(frame) + 1))
+        frame["review_status"] = ["review_required" if codes else "valid" for codes in row_codes]
+        frame["review_issues"] = ["|".join(sorted(codes)) for codes in row_codes]
+        if name == "production_analysis":
+            start = pd.to_datetime(frame["Start Timestamp"], errors="coerce")
+            end = pd.to_datetime(frame["Complete Timestamp"], errors="coerce")
+            span = frame["Span"].astype("string").str.strip()
+            valid_span = span.str.fullmatch(r"\d+:\d{2}", na=False)
+            parts = span[valid_span].str.extract(r"^(\d+):(\d{2})$").astype(float)
+            span_min = pd.Series(np.nan, index=frame.index)
+            span_min.loc[valid_span] = parts[0].to_numpy() * 60 + parts[1].to_numpy()
+            frame["start_parsed"] = start.dt.strftime("%Y-%m-%d %H:%M:%S")
+            frame["complete_parsed"] = end.dt.strftime("%Y-%m-%d %H:%M:%S")
+            frame["timestamp_elapsed_min"] = (end - start).dt.total_seconds() / 60
+            frame["span_recorded_min"] = span_min
+            frame["span_minus_elapsed_min"] = span_min - frame["timestamp_elapsed_min"]
+            filename = "production_analysis_review.csv"
+        else:
+            phase_run, cycle = cnc_sessions(frame)
+            frame["derived_phase_run_id"] = phase_run.to_numpy() + 1
+            frame["derived_cycle_id"] = cycle.to_numpy() + 1
+            delta = pd.to_datetime(frame["time"], errors="coerce").diff().dt.total_seconds()
+            frame["seconds_from_previous_row"] = delta
+            filename = "cnc_changeover_review.csv"
+        INTERMEDIATE.mkdir(parents=True, exist_ok=True)
+        output_path = INTERMEDIATE / filename
+        serialized = frame.to_csv(index=False).encode("utf-8-sig")
+        if output_path.exists() and output_path.read_bytes() == serialized:
+            continue
+        temporary_path = output_path.with_name(output_path.name + ".tmp")
+        temporary_path.write_bytes(serialized)
+        temporary_path.replace(output_path)
+    print("Wrote side-by-side review CSVs; raw inputs were not modified.")
+
+
+def impute_review_copies() -> None:
+    """Create imputed candidates from review copies and retain a cell-level audit."""
+    data_dir = INTERMEDIATE
+    data_dir.mkdir(parents=True, exist_ok=True)
+    audit: list[dict[str, Any]] = []
+    report: dict[str, Any] = {
+        "method": "dataset_specific_missing_value_strategy",
+        "datasets": {},
+    }
+
+    def write_csv_preserving_open_file(frame: pd.DataFrame, preferred_name: str) -> str:
+        preferred = data_dir / preferred_name
+        candidates = [preferred] + [preferred.with_name(f"{preferred.stem}_corrected{n or ''}{preferred.suffix}") for n in range(1, 5)]
+        for candidate in candidates:
+            try:
+                frame.to_csv(candidate, index=False, encoding="utf-8-sig")
+                return candidate.name
+            except PermissionError:
+                continue
+        raise PermissionError(f"All candidate output paths are locked: {preferred_name}")
+
+    preserve_missing = {
+        "production_analysis": {"Rework": "Only 32 rows are explicitly Y and there are no observed N values; mode fill would label almost every row as rework."},
+        "cnc_changeovers": {"Line_Content": "No value means no NC-code line is reported; preserve it instead of inventing command text."},
+    }
+    for dataset, review_name, output_name in [
+        ("production_analysis", "production_analysis_review.csv", "production_analysis_imputed_review.csv"),
+        ("cnc_changeovers", "cnc_changeover_review.csv", "cnc_changeover_imputed_review.csv"),
+    ]:
+        frame = pd.read_csv(data_dir / review_name, low_memory=False)
+        source = read_csv(dataset)
+        dataset_report: dict[str, Any] = {"input_rows": len(frame), "columns": [], "imputed_cells": 0}
+        for column in source.columns:
+            if column not in frame.columns:
+                continue
+            missing = frame[column].isna()
+            count = int(missing.sum())
+            if not count:
+                continue
+            original_dtype = str(source[column].dtype)
+            if dataset == "cnc_changeovers" and column in CNC_DROPPED_MAGAZINE_COLUMNS:
+                dataset_report["columns"].append({
+                    "column": column,
+                    "dtype": original_dtype,
+                    "missing": count,
+                    "missing_fraction": count / len(frame),
+                    "method": "dropped_machine_specific_magazine_field",
+                    "imputed": 0,
+                    "warning": "Removed instead of inventing a magazine number, position, or tool assignment.",
+                })
+                continue
+            if dataset == "cnc_changeovers" and column in CNC_STRUCTURAL_MISSING_SENTINELS:
+                fill_value = CNC_STRUCTURAL_MISSING_SENTINELS[column]
+                indicator_column = f"{column}__was_missing"
+                frame[indicator_column] = missing.astype("int8")
+                for row_index in frame.index[missing]:
+                    audit.append({
+                        "dataset": dataset,
+                        "source_row_number": int(frame.at[row_index, "source_row_number"]),
+                        "column": column,
+                        "old_value": "",
+                        "new_value": str(fill_value),
+                        "method": "structural_missing_sentinel",
+                        "statistic": "",
+                        "missing_fraction": count / len(frame),
+                        "applied": True,
+                        "note": "Structural machine state retained with an explicit sentinel and missing-state indicator; no observed value was invented.",
+                    })
+                frame.loc[missing, column] = fill_value
+                dataset_report["columns"].append({
+                    "column": column,
+                    "dtype": original_dtype,
+                    "missing": count,
+                    "missing_fraction": count / len(frame),
+                    "method": "structural_missing_sentinel",
+                    "fill_value": fill_value,
+                    "indicator_column": indicator_column,
+                    "imputed": count,
+                    "warning": "Sentinel represents an unreported/inactive machine state, not a measured value.",
+                })
+                dataset_report["imputed_cells"] += count
+                continue
+            if column in preserve_missing.get(dataset, {}):
+                dataset_report["columns"].append({
+                    "column": column,
+                    "dtype": original_dtype,
+                    "missing": count,
+                    "missing_fraction": count / len(frame),
+                    "method": "preserved_missing",
+                    "fill_value": None,
+                    "imputed": 0,
+                    "preserved_missing": count,
+                    "warning": preserve_missing[dataset][column],
+                })
+                continue
+            if dataset == "cnc_changeovers":
+                dataset_report["columns"].append({
+                    "column": column,
+                    "dtype": original_dtype,
+                    "missing": count,
+                    "method": "unfilled_requires_semantic_review",
+                    "imputed": 0,
+                })
+                continue
+            if pd.api.types.is_numeric_dtype(source[column]):
+                values = pd.to_numeric(frame.loc[~missing, column], errors="coerce").dropna()
+                if values.empty:
+                    method, fill_value = "unfilled_no_observed_values", None
+                else:
+                    method, fill_value = "median", float(values.median())
+            elif pd.api.types.is_datetime64_any_dtype(source[column]):
+                method, fill_value = "time_candidate_only", None
+            else:
+                values = frame.loc[~missing, column].astype("string").dropna()
+                if values.empty:
+                    method, fill_value = "unfilled_no_observed_values", None
+                else:
+                    modes = values.mode()
+                    fill_value = sorted(modes.astype(str).tolist())[0]
+                    method = "mode"
+            if fill_value is None:
+                dataset_report["columns"].append({"column": column, "dtype": original_dtype, "missing": count, "method": method, "imputed": 0})
+                continue
+            proportion = count / len(frame)
+            observed = frame.loc[missing, column]
+            for row_index, old_value in observed.items():
+                audit.append({
+                    "dataset": dataset,
+                    "source_row_number": int(frame.at[row_index, "source_row_number"]),
+                    "column": column,
+                    "old_value": "",
+                    "new_value": str(fill_value),
+                    "method": method,
+                    "statistic": str(fill_value),
+                    "missing_fraction": proportion,
+                    "applied": True,
+                    "note": "High missing fraction; imputed value is a statistical placeholder, not a verified observation." if proportion >= 0.5 else "Statistical placeholder; not a verified observation.",
+                })
+            frame.loc[missing, column] = fill_value
+            dataset_report["columns"].append({
+                "column": column,
+                "dtype": original_dtype,
+                "missing": count,
+                "missing_fraction": proportion,
+                "method": method,
+                "fill_value": fill_value,
+                "imputed": count,
+                "warning": "High missing fraction; validate meaning before modeling." if proportion >= 0.5 else None,
+            })
+            dataset_report["imputed_cells"] += count
+
+        if dataset == "cnc_changeovers":
+            frame = frame.drop(columns=[column for column in CNC_DROPPED_MAGAZINE_COLUMNS if column in frame])
+            timestamps = pd.to_datetime(frame["time"], errors="coerce")
+            intervals = timestamps.diff().dt.total_seconds()
+            positive = intervals[intervals.gt(0)]
+            cadence = float(positive.mode().min()) if not positive.empty else None
+            # The six outlying intervals are gaps between valid observations, not invalid timestamps.
+            # Estimate only a review candidate, never overwrite the observed source time.
+            ordinary = positive[positive.eq(cadence)] if cadence is not None else pd.Series(dtype=float)
+            mean_interval = float(ordinary.mean()) if not ordinary.empty else cadence
+            gap_mask = intervals.notna() & intervals.ne(mean_interval)
+            gap_rows = []
+            for index in frame.index[gap_mask]:
+                previous = timestamps.iloc[index - 1]
+                next_expected = previous + pd.to_timedelta(mean_interval, unit="s") if pd.notna(previous) and mean_interval is not None else pd.NaT
+                gap = {
+                    "dataset": dataset,
+                    "source_row_number": int(frame.at[index, "source_row_number"]),
+                    "column": "time",
+                    "old_value": timestamps.iloc[index].strftime("%Y-%m-%d %H:%M:%S"),
+                    "new_value": "",
+                    "method": "observed_gap_retained",
+                    "statistic": mean_interval,
+                    "missing_fraction": None,
+                    "applied": False,
+                    "note": "Gözlenen zaman korundu. Bu, eksik/geçersiz damga değil zaman aralığı boşluğudur; damga doldurulmadı.",
+                }
+                audit.append(gap)
+                gap_rows.append({
+                    "source_row_number": gap["source_row_number"],
+                    "previous_observed_time": timestamps.iloc[index - 1].strftime("%Y-%m-%d %H:%M:%S"),
+                    "observed_time": gap["old_value"],
+                    "observed_interval_seconds": float(intervals.iloc[index]),
+                    "nominal_mean_interval_seconds": mean_interval,
+                    "next_expected_sample_after_previous": next_expected.strftime("%Y-%m-%d %H:%M:%S") if pd.notna(next_expected) else "",
+                    "note": gap["note"],
+                })
+            dataset_report["time_series"] = {
+                "valid_timestamps": int(timestamps.notna().sum()),
+                "nominal_interval_seconds": cadence,
+                "mean_nominal_interval_seconds": mean_interval,
+                "non_nominal_intervals": len(gap_rows),
+                "gap_file": "cnc_time_gap_candidates.csv",
+                "note": "No timestamps were invalid or missing. Six long intervals are retained as observed; only the next nominal sample time is shown for context.",
+            }
+            dataset_report["time_series"]["gap_file"] = write_csv_preserving_open_file(pd.DataFrame(gap_rows), "cnc_time_gap_candidates.csv")
+
+        dataset_report["output"] = write_csv_preserving_open_file(frame, output_name)
+        report["datasets"][dataset] = dataset_report
+
+    report["audit_file"] = f"reports/data_preparation/intermediate/{write_csv_preserving_open_file(pd.DataFrame(audit), 'imputation_audit.csv')}"
+    report["scope"] = "Only source columns with missing values are imputed. Review metadata and derived columns are preserved. Raw and original review copies are unchanged."
+    json_write(OUT / "imputation_report.json", report)
+    print("Wrote imputed review candidates and cell-level audit; raw and original review files were not modified.")
+
+
+def build_cnc_remaining_time_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Create row targets for remaining wall-clock time in each changeover session."""
+    required = {"time", "Label_03", "Label_09"}
+    missing = sorted(required.difference(frame.columns))
+    if missing:
+        raise ValueError(f"CNC remaining-time input is missing required columns: {missing}")
+
+    timestamps = pd.to_datetime(frame["time"], errors="coerce")
+    labels = pd.to_numeric(frame["Label_03"], errors="coerce")
+    if timestamps.isna().any():
+        raise ValueError("CNC remaining-time target requires valid timestamps.")
+    if not labels.isin([0, 1]).all():
+        raise ValueError("CNC remaining-time target requires Label_03 values 0 or 1.")
+
+    phase_run, cycle = cnc_sessions(frame)
+    changeover_mask = labels.eq(0)
+    if not changeover_mask.any():
+        raise ValueError("No Label_03=0 changeover rows were found.")
+
+    work = frame.loc[changeover_mask].copy()
+    work_time = timestamps.loc[changeover_mask]
+    work_run = phase_run.loc[changeover_mask]
+    work_cycle = cycle.loc[changeover_mask]
+    end_by_run = work_time.groupby(work_run).transform("max")
+    start_by_run = work_time.groupby(work_run).transform("min")
+    previous_time = work_time.groupby(work_run).shift()
+    non_one_second = previous_time.notna() & work_time.sub(previous_time).dt.total_seconds().ne(1)
+    if non_one_second.any():
+        raise ValueError("A changeover session contains a non-one-second sampling gap; inspect before windowing.")
+
+    work.insert(0, "changeover_session_id", work_cycle.astype("int64").to_numpy() + 1)
+    work["elapsed_changeover_time_min"] = work_time.sub(start_by_run).dt.total_seconds() / 60
+    work["remaining_changeover_time_min"] = end_by_run.sub(work_time).dt.total_seconds() / 60
+    work["history_seconds_available"] = work.groupby("changeover_session_id").cumcount().astype("int64") + 1
+    work["eligible_for_30s_window"] = work["history_seconds_available"].ge(30)
+    work["eligible_for_60s_window"] = work["history_seconds_available"].ge(60)
+
+    if "Line_Content__was_missing" in work.columns:
+        work["nc_line_is_active"] = work["Line_Content__was_missing"].eq(0).astype("int8")
+    elif "Line_Content" in work.columns:
+        work["nc_line_is_active"] = work["Line_Content"].notna().astype("int8")
+
+    if "Tool_ID" in work.columns:
+        tool_missing = work["Tool_ID"].isna()
+        if "Tool_ID__was_missing" not in work.columns:
+            work["Tool_ID__was_missing"] = tool_missing.astype("int8")
+        work["Tool_ID"] = work["Tool_ID"].fillna("__NO_TOOL_IN_SPINDLE__")
+
+    transition_codes = pd.to_numeric(work["Label_09"], errors="coerce")
+    unknown_transition = ~transition_codes.isin(CNC_TRANSITIONS)
+    if unknown_transition.any():
+        raise ValueError(f"Unknown Label_09 changeover codes: {sorted(transition_codes[unknown_transition].dropna().unique())}")
+    work["transition_from_product"] = transition_codes.map(lambda value: CNC_TRANSITIONS[int(value)][0])
+    work["transition_to_product"] = transition_codes.map(lambda value: CNC_TRANSITIONS[int(value)][1])
+
+    session_ids = work["changeover_session_id"]
+    work["split"] = np.select(
+        [session_ids.le(18), session_ids.le(24)],
+        ["train", "validation"],
+        default="test",
+    )
+
+    forbidden_exact = {
+        "source_row_index",
+        "source_row_number",
+        "review_status",
+        "review_issues",
+        "derived_phase_run_id",
+        "derived_cycle_id",
+        "seconds_from_previous_row",
+        "Line_Content",
+        "Line_Content__was_missing",
+        *CNC_DROPPED_MAGAZINE_COLUMNS,
+        *(f"{column}__was_missing" for column in CNC_DROPPED_MAGAZINE_COLUMNS),
+        "Program_Stop",
+        "Total_running_time_NC_program",
+        "Net_running_time_program",
+        "Cycle_time_program",
+    }
+    label_columns = [column for column in work.columns if str(column).startswith("Label_")]
+    removed_columns = [column for column in work.columns if column in forbidden_exact or column in label_columns]
+    work = work.drop(columns=removed_columns)
+
+    session_summary = (
+        pd.DataFrame({
+            "changeover_session_id": work_cycle.astype("int64").to_numpy() + 1,
+            "phase_run": work_run.to_numpy(),
+            "time": work_time.to_numpy(),
+            "transition_code": transition_codes.to_numpy(),
+        })
+        .groupby("changeover_session_id", sort=True)
+        .agg(
+            start=("time", "min"),
+            end=("time", "max"),
+            rows=("time", "size"),
+            transition_code=("transition_code", "first"),
+        )
+        .reset_index()
+    )
+    session_summary["duration_min"] = (
+        pd.to_datetime(session_summary["end"]) - pd.to_datetime(session_summary["start"])
+    ).dt.total_seconds() / 60
+    session_summary["transition"] = session_summary["transition_code"].map(
+        lambda value: "->".join(CNC_TRANSITIONS[int(value)])
+    )
+    session_summary["split"] = np.select(
+        [session_summary["changeover_session_id"].le(18), session_summary["changeover_session_id"].le(24)],
+        ["train", "validation"],
+        default="test",
+    )
+
+    report = {
+        "input_rows": int(len(frame)),
+        "changeover_rows": int(len(work)),
+        "changeover_sessions": int(session_summary["changeover_session_id"].nunique()),
+        "target": "remaining_changeover_time_min",
+        "target_definition": "minutes from the current timestamp through the final timestamp of the same Label_03=0 contiguous changeover",
+        "target_includes_interruptions": True,
+        "window_eligible_rows": {
+            "30_seconds": int(work["eligible_for_30s_window"].sum()),
+            "60_seconds": int(work["eligible_for_60s_window"].sum()),
+        },
+        "split_strategy": "whole ordered sessions: 18 train, 6 validation, 6 test; no session crosses splits",
+        "split_session_counts": {str(k): int(v) for k, v in session_summary["split"].value_counts().items()},
+        "removed_leakage_columns": removed_columns,
+        "metadata_not_model_features": [
+            "time",
+            "changeover_session_id",
+            "split",
+            "eligible_for_30s_window",
+            "eligible_for_60s_window",
+        ],
+        "line_content_strategy": (
+            "Exact NC command text is removed. nc_line_is_active=1 means a command line "
+            "is reported at the current live observation; 0 means none is reported. "
+            "This feature is unavailable before a changeover starts."
+        ),
+        "structural_missing_strategy": {
+            column: {"sentinel": value, "indicator": f"{column}__was_missing"}
+            for column, value in CNC_STRUCTURAL_MISSING_SENTINELS.items()
+        },
+        "dropped_machine_specific_magazine_columns": CNC_DROPPED_MAGAZINE_COLUMNS,
+        "session_summary": session_summary.astype(object).where(pd.notna(session_summary), None).to_dict("records"),
+        "warning": "Rows within a session are temporally dependent. Evaluation must be session-level, never a random row split.",
+    }
+    return work, report
+
+
+def prepare_cnc_remaining_time_target() -> None:
+    """Write the corrected CNC data and experimental remaining-time target table."""
+    data_dir = ROOT / "data" / "dataforNewVersion"
+    frame = read_csv("cnc_changeovers")
+    prepared, report = build_cnc_remaining_time_dataset(frame)
+    output_path = data_dir / "cnc_changeover_remaining_time_target.csv"
+    prepared.to_csv(output_path, index=False, encoding="utf-8-sig")
+    report.update({
+        "input": CONTRACTS["cnc_changeovers"]["path"],
+        "output": "data/dataforNewVersion/cnc_changeover_remaining_time_target.csv",
+    })
+    json_write(OUT / "cnc_remaining_time_target_report.json", report)
+    print(
+        f"Wrote {output_path.name}: {report['changeover_rows']} rows across "
+        f"{report['changeover_sessions']} whole sessions."
+    )
+
+
+def build_production_target_dataset(frame: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Build a conservative elapsed-time regression table without target leakage."""
+    required = {"Start Timestamp", "Complete Timestamp", "Span", "Rework"}
+    missing = sorted(required.difference(frame.columns))
+    if missing:
+        raise ValueError(f"Production target input is missing required columns: {missing}")
+
+    start = pd.to_datetime(frame["Start Timestamp"], errors="coerce")
+    complete = pd.to_datetime(frame["Complete Timestamp"], errors="coerce")
+    elapsed_min = (complete - start).dt.total_seconds() / 60
+
+    span_text = frame["Span"].astype("string").str.strip()
+    span_match = span_text.str.fullmatch(r"\d{1,}:\d{2}", na=False)
+    span_parts = span_text[span_match].str.extract(r"^(\d+):(\d{2})$").astype(float)
+    span_min = pd.Series(np.nan, index=frame.index, dtype=float)
+    span_min.loc[span_match] = span_parts[0].to_numpy() * 60 + span_parts[1].to_numpy()
+
+    invalid_timestamp = start.isna() | complete.isna()
+    non_positive_elapsed = ~invalid_timestamp & elapsed_min.le(0)
+    invalid_span = ~invalid_timestamp & ~non_positive_elapsed & span_min.isna()
+    span_mismatch = (
+        ~invalid_timestamp
+        & ~non_positive_elapsed
+        & ~invalid_span
+        & span_min.sub(elapsed_min).abs().gt(PRODUCTION_TARGET_TOLERANCE_MIN)
+    )
+    keep = ~(invalid_timestamp | non_positive_elapsed | invalid_span | span_mismatch)
+
+    prepared = frame.loc[keep].copy()
+    prepared[PRODUCTION_TARGET_COLUMN] = elapsed_min.loc[keep].astype(float)
+    removed_columns = ["Rework", *PRODUCTION_TIME_LEAKAGE_COLUMNS]
+    prepared = prepared.drop(columns=[column for column in removed_columns if column in prepared.columns])
+
+    report = {
+        "input_rows": int(len(frame)),
+        "output_rows": int(len(prepared)),
+        "removed_rows": int((~keep).sum()),
+        "removed_row_reasons": {
+            "invalid_timestamp": int(invalid_timestamp.sum()),
+            "non_positive_elapsed_time": int(non_positive_elapsed.sum()),
+            "invalid_or_missing_span": int(invalid_span.sum()),
+            "span_elapsed_mismatch_over_tolerance": int(span_mismatch.sum()),
+        },
+        "target": PRODUCTION_TARGET_COLUMN,
+        "target_formula": "(Complete Timestamp - Start Timestamp).total_seconds() / 60",
+        "target_unit": PRODUCTION_TARGET_UNIT,
+        "span_agreement_tolerance_min": PRODUCTION_TARGET_TOLERANCE_MIN,
+        "removed_columns": [column for column in removed_columns if column in frame.columns],
+        "removed_column_descriptions": {
+            column: description
+            for column, description in PRODUCTION_REMOVED_COLUMN_DESCRIPTIONS.items()
+            if column in frame.columns
+        },
+        "remaining_columns": prepared.columns.tolist(),
+        "approved_model_feature_candidates": ["Part Desc.", "Work Order  Qty", "Activity"],
+        "conditional_model_feature_candidates": [
+            "Resource (only when assigned or known before prediction)"
+        ],
+        "identifier_or_audit_columns_not_for_model_input": [
+            "source_row_number",
+            "Case ID",
+            "review_status",
+            "review_issues",
+        ],
+        "warning": (
+            "This target is observed elapsed report time, not verified machine processing time. "
+            "Report Type S/D/B and row aggregation semantics remain unresolved."
+        ),
+    }
+    return prepared, report
+
+
+def prepare_production_target() -> None:
+    """Write a model candidate from the latest imputed Production Analysis review file."""
+    data_dir = ROOT / "data" / "dataforNewVersion"
+    frame = read_csv("production_analysis")
+    prepared, report = build_production_target_dataset(frame)
+
+    output_path = data_dir / "production_analysis_target_ready.csv"
+    prepared.to_csv(output_path, index=False, encoding="utf-8-sig")
+    report.update({
+        "input": CONTRACTS["production_analysis"]["path"],
+        "output": "data/dataforNewVersion/production_analysis_target_ready.csv",
+    })
+    json_write(OUT / "production_target_report.json", report)
+    print(
+        f"Wrote {output_path.name}: {report['output_rows']} accepted rows, "
+        f"{report['removed_rows']} rejected rows."
+    )
+
+
 def split_production(frame: pd.DataFrame) -> dict[str, Any]:
     starts = pd.to_datetime(frame["Start Timestamp"], errors="coerce")
     ends = pd.to_datetime(frame["Complete Timestamp"], errors="coerce")
@@ -345,10 +900,10 @@ def eda() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("step",choices=["profile","quality","split","eda","all"])
+    parser.add_argument("step",choices=["profile","quality","review","impute","target","remaining","split","eda","all"])
     args = parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True)
-    steps={"profile":profile,"quality":quality,"split":splits,"eda":eda}
+    steps={"profile":profile,"quality":quality,"review":review_copies,"impute":impute_review_copies,"target":prepare_production_target,"remaining":prepare_cnc_remaining_time_target,"split":splits,"eda":eda}
     if args.step == "all":
         for fn in steps.values(): fn()
     else:
