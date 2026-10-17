@@ -57,7 +57,7 @@ class ScriptedClient:
 def offline(tmp_path, monkeypatch):
     """No Ollama and no real database: a scripted model and a temporary SQLite file."""
     monkeypatch.setattr(pages, "DB", tmp_path / "workshop.sqlite3")
-    monkeypatch.setattr(assistant, "installed_models", lambda: [])
+    monkeypatch.setattr(assistant, "installed_models", lambda: ["gemma4:e4b"])
     monkeypatch.setattr(
         assistant, "connect", lambda model: (ScriptedClient(), METADATA, None)
     )
@@ -131,3 +131,25 @@ def test_saving_from_the_assistant_creates_a_plan_version(offline):
     assert not app.chat_message  # the conversation starts over on the new plan
     record = SQLitePlanRepository(offline).load_current(pages.PLAN_ID)
     assert record.approved_by == "Nazlısu Başak"
+
+
+def test_only_installed_models_are_listed_in_preference_order(monkeypatch):
+    installed = ["gemma2:2b", "gemma3:4b", "gemma4:e4b"]
+    assert assistant.model_options(installed) == [
+        "gemma4:e4b",
+        "gemma3:4b",
+        "gemma2:2b",
+    ]
+    monkeypatch.setattr(assistant, "installed_models", lambda: installed)
+    app = open_page()
+    assert app.selectbox[0].options == [
+        assistant.model_label(t) for t in assistant.model_options(installed)
+    ]
+    assert app.selectbox[0].value == "gemma4:e4b" and app.chat_input
+
+
+def test_without_installed_gemma_the_recommended_pull_command_is_shown(monkeypatch):
+    monkeypatch.setattr(assistant, "installed_models", lambda: [])
+    app = open_page()
+    assert not app.selectbox and not app.chat_input
+    assert app.code[0].value == "ollama pull gemma4:e4b"

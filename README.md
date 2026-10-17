@@ -409,12 +409,6 @@ görünür. Kayıt, simülasyonun başladığı sürüm hâlâ güncelse kabul e
 başka kayıt girerse `PlanVersionConflict` ile reddedilir. Testler
 (`tests/test_simulation_ui.py`) geçici veritabanı kullanır.
 
-Süre tahmini sayfası (WP-3N) `experiments/tabpfn/results/regressor_comparison/`
-altındaki doğrulama raporunu ve tahmin CSV'lerini okur: iki görev (toplam iş
-süresi, makineler arası bekleme) için model başına MAE grafiği, seçilen modelde
-gerçek ve tahmin noktaları, bütün metrikler. Hiçbir model medyanı güvenilir
-biçimde geçmediği için planlamadaki süre kaynağı kullanıcı süresi olarak kalır.
-
 Gemma asistanı sayfası (WP-5N, `ui/assistant.py`) `core/llm/graph.py` akışını
 sohbet olarak sürer: Türkçe talep → eksik makine/süre/termin soruları (hızlı
 cevap düğmeleri veya sohbet kutusu) → çıkarılan siparişin onay kartı → yalnız
@@ -422,10 +416,13 @@ cevap düğmeleri veya sohbet kutusu) → çıkarılan siparişin onay kartı �
 çözücü sonucundan şablonla yazılır; rozet, bulguları Gemma'nın mı seçtiğini
 yoksa hesaplanan yedek metnin mi gösterildiğini belirtir. "Model kaydı" her
 adımın modelini, istem sürümünü ve süresini listeler. Önce/sonra Gantt ve
-"Planı kaydet" Simülasyon sayfasıyla aynı bileşenlerdir. Model yerel Ollama'dan
-seçilir (yalnız kurulu Gemma etiketleri; varsayılan `gemma4:e2b`); model yoksa
-sayfa bunu söyler ve Simülasyon sayfasındaki elle girişe yönlendirir. Benzer
-geçmiş iş kartı EmbeddingGemma araması (WP-5Y) gelene kadar "henüz bağlı değil"
+"Planı kaydet" Simülasyon sayfasıyla aynı bileşenlerdir. Model listesi yalnız
+bu bilgisayarda Ollama'ya kurulu Gemma modellerini gösterir; bilinen modeller
+tercih sırasıyla gelir (`gemma4:e4b`, `gemma4:e2b`, …) ve ilki seçilir.
+`gemma4:e4b` ekibin Gemma test setlerinde 29/30 geçti. Kurulu Gemma yoksa sayfa
+önerilen modelin `ollama pull` komutunu verir ve Simülasyon sayfasındaki elle
+girişe yönlendirir; uygulama kendisi model indirmez. Bulut modelleri
+desteklenmez. Benzer geçmiş iş kartı EmbeddingGemma araması (WP-5Y) gelene kadar "henüz bağlı değil"
 olarak görünür. Testler (`tests/test_assistant_ui.py`) senaryolu bir model
 istemcisi ve geçici veritabanı kullanır; gerçek Gemma kalitesinin ölçümü
 değildir.

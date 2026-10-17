@@ -1,4 +1,4 @@
-"""Streamlit pages (WP-1N to WP-5N). Each page only loads data through existing services and composes ui.components."""
+"""Streamlit pages (WP-1N, WP-2N, WP-4N, WP-5N). Each page only loads data through existing services and composes ui.components."""
 
 import json
 import sqlite3
@@ -28,27 +28,6 @@ PLAN_ID = "synthetic-workshop"
 RESULTS = ROOT / "results/brandimarte"
 INSTANCES = [f"Mk{i:02}" for i in range(1, 11)]
 METHODS = {"cp_sat": "CP-SAT", "job_order_eft": "Referans"}
-EXPERIMENT = ROOT / "experiments/tabpfn/results/regressor_comparison"
-# label -> (task key, display unit, minutes per unit)
-TASKS = {
-    "Toplam iş süresi": ("total_case_span", "gün", 1440),
-    "Makineler arası bekleme": ("conditional_machine_gap", "saat", 60),
-}
-MODELS = {
-    "global_median": "Global medyan",
-    "group_median": "Grup medyanı",
-    "quantile_linear": "Medyan regresyonu",
-    "gradient_boosting_mae": "Gradient Boosting",
-    "catboost_mae": "CatBoost",
-    "tabpfn_v2": "TabPFN v2",
-    "extra_trees": "ExtraTrees",
-}
-FEATURES = {
-    "part": "parça",
-    "quantity": "miktar",
-    "from": "önceki makine",
-    "to": "sonraki makine",
-}
 
 
 @st.cache_resource
@@ -619,113 +598,6 @@ def benchmark_page():
         f"Kayıtlı sonuç: {meta['created_utc'][:10]} · OR-Tools {meta['ortools']} · "
         f"{meta['time_limit_seconds']:.0f} sn sınır, tek worker, seed 0. "
         '"Uygulanabilir" sonuç optimal diye etiketlenmez. Referans yöntem kaynak deponun FIFO/SPT uygulaması değildir.'
-    )
-
-
-@st.cache_data
-def experiment_report():
-    return json.loads(
-        (EXPERIMENT / "validation_report.json").read_text(encoding="utf-8")
-    )
-
-
-def experiment_page():
-    st.title("Süre tahmini deneyi")
-    st.caption(
-        "Gerçek Production Analysis verisinde doğrulama sonuçları · keşifsel; "
-        "final test skoru hesaplanmadı"
-    )
-    st.info(
-        "Hiçbir model global medyanı güvenilir biçimde geçemedi. Tahmin modelleri "
-        "planlamaya bağlanmadı; planlama kullanıcının onayladığı süreleri kullanır.",
-        icon=":material/info:",
-    )
-
-    label = st.segmented_control(
-        "Tahmin edilen süre", list(TASKS), default="Toplam iş süresi", required=True
-    )
-    key, unit, per_unit = TASKS[label]
-    task = experiment_report()["tasks"][key]
-    # The gap task weights every case equally, matching the team's main metric.
-    metric = "case_macro_mae_minutes"
-    scores = pd.DataFrame(
-        [
-            {
-                "Model": MODELS[name],
-                "MAE": values[metric] / per_unit,
-                "RMSE": values["rmse_minutes"] / per_unit,
-                "En büyük hata": values["max_absolute_error_minutes"] / per_unit,
-            }
-            for name, values in task["validation_scores"].items()
-        ]
-    ).sort_values("MAE")
-    mae = scores.set_index("Model")["MAE"]
-    best = mae.idxmin()
-    median = mae["Global medyan"]
-
-    def amount(value, sign=False):
-        return f"{value:{'+' if sign else ''}.2f} {unit}".replace(".", ",")
-
-    ui.metric_row(
-        [
-            (
-                "Eğitim / doğrulama",
-                f"{task['train_cases']} / {task['validation_cases']} iş",
-                f"{task['train_rows']} / {task['validation_rows']} satır",
-            ),
-            (
-                "En düşük hata",
-                amount(mae[best]),
-                best
-                if best == "Global medyan"
-                else f"{best}: medyandan yalnız {amount(median - mae[best])} iyi; anlamlı kazanım değil",
-            ),
-            ("Global medyan", amount(median), "karşılaştırma ölçütü"),
-            (
-                "TabPFN v2",
-                amount(mae["TabPFN v2"]),
-                f"medyandan {amount(mae['TabPFN v2'] - median, sign=True)}",
-            ),
-        ]
-    )
-
-    st.subheader("Model hataları")
-    ui.model_error_chart(scores, "MAE", unit, highlight="Global medyan")
-    st.caption(
-        "Girdiler: "
-        + ", ".join(FEATURES[f] for f in task["features"])
-        + ". Turuncu çubuk karşılaştırma ölçütü olan global medyandır."
-    )
-
-    st.subheader("Gerçek ve tahmin")
-    model = st.selectbox(
-        "Model", list(MODELS.values()), index=list(MODELS).index("tabpfn_v2")
-    )
-    column = next(name for name, title in MODELS.items() if title == model)
-    rows = pd.read_csv(EXPERIMENT / f"{key}_validation_predictions.csv")
-    ui.prediction_scatter(
-        pd.DataFrame(
-            {
-                "İş": rows["case"],
-                "Parça": rows["part"],
-                "Gerçek": rows["y"] / per_unit,
-                "Tahmin": rows[column] / per_unit,
-            }
-        ),
-        unit,
-    )
-    st.caption(
-        "Kesikli çizgi kusursuz tahmindir; noktalar çizgiden uzaklaştıkça hata büyür."
-    )
-
-    st.subheader("Bütün metrikler")
-    ui.table(scores.round(2))
-
-    st.subheader("Planlamada süre kaynağı")
-    ui.source_badge("user_input")
-    st.caption(
-        "Varsayılan ve şu anki tek kaynak kullanıcının onayladığı süredir. Bir model "
-        "aynı doğrulamada medyanı açıkça geçmedikçe tahmin seçeneği açılmaz."
     )
 
 

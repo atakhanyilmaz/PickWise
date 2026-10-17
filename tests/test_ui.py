@@ -19,7 +19,7 @@ def render(page):
 
 @pytest.mark.parametrize(
     "page",
-    ["plan_page", "route_page", "benchmark_page", "experiment_page", "about_page"],
+    ["plan_page", "route_page", "benchmark_page", "about_page"],
 )
 def test_page_renders(page):
     assert not render(page).exception

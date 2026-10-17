@@ -40,9 +40,6 @@ navigation = st.navigation(
             st.Page(
                 pages.benchmark_page, title="Benchmark", icon=":material/bar_chart:"
             ),
-            st.Page(
-                pages.experiment_page, title="Süre tahmini", icon=":material/insights:"
-            ),
         ],
         "Proje": [
             st.Page(pages.about_page, title="Hakkında", icon=":material/info:"),

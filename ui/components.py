@@ -333,58 +333,6 @@ def approve(job):
     return job.model_copy(update={"route_source": RouteSource.USER_APPROVED}, deep=True)
 
 
-def model_error_chart(frame, value, unit, highlight):
-    """Horizontal bars of one error metric per model, best first; `highlight` gets the accent color."""
-    chart = (
-        alt.Chart(frame)
-        .mark_bar(cornerRadius=2)
-        .encode(
-            x=alt.X(
-                f"{value}:Q", title=f"Ortalama mutlak hata ({unit}) · düşük daha iyi"
-            ),
-            y=alt.Y("Model:N", sort="x", title=None),
-            color=alt.condition(
-                alt.datum.Model == highlight,
-                alt.value("#EA580C"),
-                alt.value("#94A3B8"),
-            ),
-            tooltip=["Model", alt.Tooltip(f"{value}:Q", format=".2f")],
-        )
-    )
-    st.altair_chart(chart, width="stretch", height=36 * len(frame) + 60)
-
-
-def prediction_scatter(frame, unit):
-    """Actual vs predicted points with the y = x line where a perfect model would sit."""
-    top = float(max(frame["Gerçek"].max(), frame["Tahmin"].max())) * 1.05
-    diagonal = (
-        alt.Chart(pd.DataFrame({"x": [0, top], "y": [0, top]}))
-        .mark_line(strokeDash=[4, 4], color="#94A3B8")
-        .encode(x="x:Q", y="y:Q")
-    )
-    points = (
-        alt.Chart(frame)
-        .mark_circle(size=90, color="#EA580C", opacity=0.85)
-        .encode(
-            x=alt.X(
-                "Gerçek:Q",
-                title=f"Gerçekleşen ({unit})",
-                scale=alt.Scale(domain=[0, top]),
-            ),
-            y=alt.Y(
-                "Tahmin:Q", title=f"Tahmin ({unit})", scale=alt.Scale(domain=[0, top])
-            ),
-            tooltip=[
-                "İş",
-                "Parça",
-                alt.Tooltip("Gerçek:Q", format=".1f"),
-                alt.Tooltip("Tahmin:Q", format=".1f"),
-            ],
-        )
-    )
-    st.altair_chart(diagonal + points, width="stretch", height=380)
-
-
 def clock_input(label, default_minute, key):
     """Date + time picker returning minutes from the sidebar's plan start (t=0)."""
     t0 = datetime.combine(st.session_state["t0_date"], st.session_state["t0_time"])

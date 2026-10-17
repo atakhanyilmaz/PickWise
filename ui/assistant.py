@@ -17,12 +17,22 @@ from core.scenarios import SimulationResult
 from ui import components as ui
 from ui import pages
 
-# The team's evaluated model; any installed Gemma tag can be picked.
-DEFAULT_MODEL = "gemma4:e2b"
+# Preferred order and short notes for known Gemma tags; the picker lists only tags
+# installed on this computer. e4b and e2b results: team Gemma fixtures (ADR 013).
+MODELS = {
+    "gemma4:e4b": "Gemma 4 E4B · ekip testleri 29/30",
+    "gemma4:e2b": "Gemma 4 E2B · ekibin değerlendirdiği model",
+    "gemma4:12b": "Gemma 4 12B",
+    "gemma4:26b": "Gemma 4 26B (MoE)",
+    "gemma3:27b": "Gemma 3 27B",
+    "gemma3:12b": "Gemma 3 12B",
+    "gemma3:4b": "Gemma 3 4B",
+}
+RECOMMENDED = "gemma4:e4b"
 
 CONNECTION_ERRORS = {
     "Local Ollama request failed": "Ollama çalışmıyor. Terminalde `ollama serve` ile başlatın.",
-    "Model is not installed": "Bu model kurulu değil. `ollama pull {model}` ile indirin.",
+    "Model is not installed": "Bu model bu bilgisayarda kurulu değil.",
     "Cloud-backed models": "Bulut üzerinden çalışan modeller desteklenmez.",
     "not identified as Gemma": "Seçilen model Gemma değil.",
 }
@@ -40,16 +50,33 @@ def examples(scenario):
 
 @st.cache_data(ttl=30, show_spinner=False)
 def installed_models():
-    """Gemma chat models on the local Ollama, newest family first; empty when Ollama is not running."""
+    """Gemma chat tags on the local Ollama; None when Ollama is not running."""
     try:
         tags = OllamaClient()._request("/api/tags").get("models", [])
     except ModelUnavailable:
-        return []
-    return sorted(
+        return None
+    return [
         tag["name"]
         for tag in tags
         if "gemma" in tag["name"].lower() and "embed" not in tag["name"].lower()
-    )[::-1]
+    ]
+
+
+def model_options(installed):
+    """Installed Gemma tags, known models first in preference order."""
+    order = list(MODELS)
+    return sorted(
+        installed,
+        key=lambda tag: (
+            tag not in MODELS,
+            order.index(tag) if tag in MODELS else 0,
+            tag,
+        ),
+    )
+
+
+def model_label(tag):
+    return f"{tag} — {MODELS[tag]}" if tag in MODELS else tag
 
 
 @st.cache_resource(ttl=60, show_spinner=False)
@@ -122,11 +149,14 @@ def step(chat, baseline, payload, said):
     chat["done"] = chat["pending"] is None
 
 
-def model_cards(model, metadata, error):
+def model_cards(metadata, error, missing):
     model_card, scope_card, search_card = st.columns(3)
     with model_card.container(border=True, height="stretch"):
         st.markdown("**:material/memory: Yerel model**")
         ui.gemma_status(metadata, error)
+        if missing:
+            st.code(f"ollama pull {RECOMMENDED}", language="bash")
+            st.caption("İndirme bittikten sonra sayfayı yenileyin.")
     with scope_card.container(border=True, height="stretch"):
         st.markdown("**:material/rule: Gemma'nın görevi**")
         st.markdown(
@@ -188,16 +218,23 @@ def assistant_page():
             icon=":material/verified:",
         )
 
-    models = installed_models()
-    options = list(dict.fromkeys([DEFAULT_MODEL, *models]))
-    model = st.selectbox(
-        "Model",
-        options,
-        index=options.index(models[0]) if DEFAULT_MODEL not in models and models else 0,
-        help="Yalnız bu bilgisayardaki Ollama'da kurulu Gemma modelleri listelenir.",
-    )
-    client, metadata, error = connect(model)
-    model_cards(model, metadata, error)
+    installed = installed_models()
+    if installed:
+        model = st.selectbox(
+            "Model",
+            model_options(installed),
+            format_func=model_label,
+            help="Bu bilgisayarda Ollama'ya kurulu Gemma modelleri. Model yerelde çalışır.",
+        )
+        client, metadata, error = connect(model)
+    else:
+        model, client, metadata = None, None, None
+        error = (
+            CONNECTION_ERRORS["Local Ollama request failed"]
+            if installed is None
+            else "Bu bilgisayarda kurulu Gemma modeli yok. Önerilen model:"
+        )
+    model_cards(metadata, error, missing=installed == [])
 
     chat = st.session_state.get("assistant")
     if client is None:
@@ -247,7 +284,7 @@ def assistant_page():
 
     confirming = bool(chat["pending"]) and chat["pending"]["kind"] == "confirmation"
     if text := st.chat_input(
-        "Örn. Yeni sipariş: Torna 1 üzerinde 10 dakika tornalama",
+        f"Örn. Yeni sipariş: {baseline.scenario.machines[0].name} üzerinde 30 dakika işlem",
         disabled=confirming or chat["done"],
     ):
         payload = Command(resume=text) if chat["pending"] else {"text": text}
