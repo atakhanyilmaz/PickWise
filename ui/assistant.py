@@ -126,12 +126,19 @@ def step(chat, baseline, payload, said):
     with st.spinner("Gemma talebi okuyor…"):
         out = chat["graph"].invoke(payload, chat["config"])
     chat["audit"] = (out.get("session") or {}).get("audit", [])
+    if out.get("reply_metadata"):
+        chat["audit"] = [
+            *chat["audit"],
+            {"stage": "reply", "metadata": out["reply_metadata"]},
+        ]
     interrupts = out.get("__interrupt__")
     chat["pending"] = interrupts[0].value if interrupts else None
     if chat["pending"] and chat["pending"]["kind"] == "question":
-        chat["messages"].append(
-            ("assistant", chat["pending"]["questions"][0])
-        )
+        # A conversational reply already asks what to do next; the quick answers stay
+        # below. The graph sends only the question the next answer fills.
+        reply = chat["pending"].get("reply")
+        text = reply or "\n\n".join(chat["pending"]["questions"])
+        chat["messages"].append(("assistant", text))
     elif chat["pending"]:
         from core.domain_rules import JobModel
 

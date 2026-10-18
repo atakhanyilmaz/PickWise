@@ -9,7 +9,7 @@ from benchmarks.workshop_order_demo import DemoInput
 from core.domain_rules import JobModel
 from core.llm.conversation import IntentDecision, OrderFields
 from core.llm.graph import build_order_graph
-from core.llm.ollama_client import ModelUnavailable
+from core.llm.ollama_client import InvalidModelOutput, ModelUnavailable
 from core.scenarios import create_snapshot
 
 
@@ -141,3 +141,80 @@ def test_empty_evidence_is_allowed_only_for_clarification(baseline):
     question = pause(out)
     assert question["kind"] == "question"
     assert "Planı incelemek" in question["questions"][0]
+
+
+class ChattyClient(ScriptedClient):
+    """Router says clarify (small talk); the reply step answers with the given text."""
+
+    def __init__(self, reply):
+        super().__init__(tool="clarify")
+        self.reply = reply
+
+    def structured(self, schema, system, data, prompt_version):
+        from core.llm.reply import Reply
+
+        if schema is IntentDecision:
+            return IntentDecision(tool="clarify", evidence=""), {"test_double": True}
+        if schema is Reply:
+            if self.reply is None:
+                raise ModelUnavailable("reply model offline")
+            return Reply(text=self.reply), {"prompt_version": prompt_version}
+        return super().structured(schema, system, data, prompt_version)
+
+
+def test_small_talk_gets_a_reply_before_the_intent_question(baseline):
+    reply = "İyiyim, teşekkürler! Planı mı inceleyelim, yeni sipariş mi ekleyelim?"
+    graph, config, out = start(baseline, ChattyClient(reply), text="naber")
+    question = pause(out)
+    assert question["kind"] == "question" and question["reply"] == reply
+    assert question["choices"] == ["planı incele", "yeni sipariş ekle"]
+    assert out["reply_metadata"]["prompt_version"] == "conversation-reply-v1"
+
+
+def test_reply_with_numbers_is_dropped_for_the_plain_question(baseline):
+    _, _, out = start(baseline, ChattyClient("Planda 10 iş var."), text="naber")
+    assert pause(out)["reply"] is None
+    assert out["reply_metadata"]["fallback_reason"] == "reply contained a number"
+
+
+def test_without_reply_model_the_plain_question_stays(baseline):
+    _, _, out = start(baseline, ChattyClient(None), text="naber")
+    assert pause(out)["reply"] is None
+    assert pause(out)["questions"] == [
+        "Planı incelemek mi, yeni sipariş eklemek mi istiyorsunuz?"
+    ]
+
+
+def test_only_the_next_question_is_asked(baseline):
+    _, _, out = start(
+        baseline,
+        ScriptedClient(duration=None),
+        text="Yeni sipariş: Torna 1 üzerinde tornalama, yarın teslim.",
+    )
+    questions = pause(out)["questions"]
+    assert len(questions) == 1 and "süresi" in questions[0]
+
+
+class UnsureClient(ScriptedClient):
+    """Fields without a duration; every follow-up interpretation is invalid."""
+
+    def structured(self, schema, system, data, prompt_version):
+        from core.llm.conversation import FieldAnswer
+
+        if schema is FieldAnswer:
+            raise InvalidModelOutput("not grounded")
+        return super().structured(schema, system, data, prompt_version)
+
+
+def test_unvalidated_answer_repeats_the_question_and_keeps_the_draft(baseline):
+    graph, config, out = start(
+        baseline,
+        UnsureClient(duration=None),
+        text="Yeni sipariş: Torna 1 üzerinde tornalama.",
+    )
+    out = graph.invoke(Command(resume="bunu ekle"), config)
+    question = pause(out)
+    assert question["kind"] == "question"
+    assert question["questions"][0].startswith("Bu cevabı anlayamadım.")
+    out = graph.invoke(Command(resume="10 dakika"), config)
+    assert pause(out)["kind"] == "confirmation"

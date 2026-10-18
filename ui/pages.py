@@ -448,7 +448,12 @@ def simulation_result(baseline, outcome, parent_version_id, state_key="simulatio
         return
     st.success(simulation.message, icon=":material/check_circle:")
     comparison = simulation.comparison
+    jobs_before, jobs_after = len(baseline.scenario.jobs), len(simulation.scenario.jobs)
     ui.comparison_metrics(comparison)
+    st.caption(
+        f":material/work: Plandaki iş sayısı: {jobs_before} → {jobs_after} "
+        "(kaydedene kadar etkin plan değişmez)"
+    )
     for job in comparison.after.jobs:
         if job.job_id in comparison.new_job_ids:
             late = f", {job.tardiness} dk gecikme" if job.tardiness else ""
@@ -482,8 +487,8 @@ def simulation_result(baseline, outcome, parent_version_id, state_key="simulatio
     with st.container(border=True):
         st.markdown("**:material/save: Planı kaydet**")
         st.caption(
-            "Kaydedilen plan yeni sürüm olur ve Plan sayfasında etkin plan olarak görünür. "
-            "Önceki sürümler silinmez."
+            f"Kaydedince etkin plan {jobs_after} iş olur: yeni sürüm Plan sayfasında ve "
+            "Gemma asistanında kullanılır. Önceki sürümler silinmez."
         )
         approver = st.text_input("Onaylayan", placeholder="Ad Soyad")
         confirmed = st.checkbox("Bu planı yeni sürüm olarak kaydetmeyi onaylıyorum")

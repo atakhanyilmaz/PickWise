@@ -443,6 +443,7 @@ LOG_STAGES = {
     "tool_execution": "Plan inceleme",
     "error": "Hata",
     "explanation": "Açıklama",
+    "reply": "Sohbet cevabı",
 }
 
 

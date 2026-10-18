@@ -99,6 +99,7 @@ def test_complete_order_waits_for_approval_then_explains_computed_facts():
     assert not app.exception
     assert any("başlangıç planı değiştirilmedi" in m.value for m in app.markdown)
     assert any("Hesaplanan metin" in m.value for m in app.markdown)
+    assert any("Plandaki iş sayısı: 2 → 3" in c.value for c in app.caption)
     assert button(app, "Planı kaydet").disabled
 
 
@@ -153,3 +154,23 @@ def test_without_installed_gemma_the_recommended_pull_command_is_shown(monkeypat
     app = open_page()
     assert not app.selectbox and not app.chat_input
     assert app.code[0].value == "ollama pull gemma4:e4b"
+
+
+def test_small_talk_reply_is_shown_in_the_chat(monkeypatch):
+    from tests.test_graph import ChattyClient
+
+    client = ChattyClient("İyiyim! Planı mı inceleyelim, sipariş mi ekleyelim?")
+    monkeypatch.setattr(assistant, "connect", lambda model: (client, METADATA, None))
+    app = ask(open_page(), "naber")
+    assert app.chat_message[-1].markdown[0].value.startswith("İyiyim!")
+    assert [b.label for b in app.button][:2] == ["planı incele", "yeni sipariş ekle"]
+
+
+def test_conversation_continues_after_a_finished_request():
+    app = ask(open_page(), ORDER)
+    button(app, "Vazgeç").click().run()
+    assert not app.chat_input[0].disabled
+    app = ask(app, ORDER)
+    said = [m.markdown[0].value for m in app.chat_message if m.name == "user"]
+    assert said == [ORDER, "Vazgeçtim.", ORDER]
+    assert button(app, "Onayla ve simüle et")
