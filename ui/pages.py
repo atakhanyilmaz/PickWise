@@ -874,12 +874,7 @@ def about_page():
         )
     with right.container(border=True):
         st.markdown("**:material/gavel: Model lisansları**")
-        st.markdown(
-            "- **Gemma:** Google Gemma kullanım şartları; ağırlıklar Ollama ile yerelde\n"
-            "- **TabPFN v2:** Prior Labs ağırlık lisansı, `experiments/tabpfn/docs/licenses`\n"
-            "- Deponun MIT lisansı dış veri ve modelleri kapsamaz."
-        )
-
+     
     st.subheader("Ekip")
     for column, (name, handle, work) in zip(st.columns(len(TEAM)), TEAM):
         with column.container(border=True, height="stretch"):

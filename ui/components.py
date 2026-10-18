@@ -118,7 +118,8 @@ def short_clock(minutes):
 
 def metric_row(items):
     """items: list of (label, value, caption or None)."""
-    for column, (label, value, caption) in zip(st.columns(len(items)), items):
+    widths = [1.35, *([1] * (len(items) - 1))] if len(items) > 1 else 1
+    for column, (label, value, caption) in zip(st.columns(widths), items):
         column.metric(label, value)
         if caption:
             column.caption(caption)
@@ -345,33 +346,49 @@ def clock_input(label, default_minute, key):
     return int((datetime.combine(picked_day, picked_time) - t0).total_seconds() // 60)
 
 
+def _inverse_delta(diff, suffix=""):
+    text = f"{diff:+d}{suffix}" if diff else f"0{suffix}"
+    return text, ("inverse" if diff else "off")
+
+
 def comparison_metrics(comparison):
     """Before → after plan figures; a rise in finish time or delays is shown as worse."""
     before, after = comparison.before, comparison.after
-    columns = st.columns(4)
+    columns = st.columns([1.45, 1, 1, 1])
+    makespan_delta, makespan_color = _inverse_delta(
+        after.makespan - before.makespan, " dk"
+    )
+    late_delta, late_color = _inverse_delta(
+        after.late_job_count - before.late_job_count
+    )
+    tardiness_delta, tardiness_color = _inverse_delta(
+        after.total_tardiness - before.total_tardiness, " dk"
+    )
     columns[0].metric(
         "Tüm işler biter",
         short_clock(after.makespan),
-        f"{after.makespan - before.makespan:+d} dk",
-        delta_color="inverse",
-        help=f"Önce {clock(before.makespan)}",
+        makespan_delta,
+        delta_color=makespan_color,
+        help=f"Önce {clock(before.makespan)} ({before.makespan} dk → {after.makespan} dk)",
     )
     columns[1].metric(
         "Geç biten mevcut iş",
         comparison.delayed_existing_job_count,
+        f"{comparison.affected_existing_job_count} işin sırası değişti",
+        delta_color="off",
         help="Önceki plana göre daha geç biten mevcut iş sayısı",
     )
     columns[2].metric(
         "Termini aşan iş",
         after.late_job_count,
-        f"{after.late_job_count - before.late_job_count:+d}",
-        delta_color="inverse",
+        late_delta,
+        delta_color=late_color,
     )
     columns[3].metric(
         "Toplam termin gecikmesi",
         f"{after.total_tardiness} dk",
-        f"{after.total_tardiness - before.total_tardiness:+d} dk",
-        delta_color="inverse",
+        tardiness_delta,
+        delta_color=tardiness_color,
     )
 
 
