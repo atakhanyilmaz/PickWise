@@ -100,6 +100,8 @@ def new_chat(baseline, client, model):
         ),
         "config": {"configurable": {"thread_id": uuid4().hex}},
         "plan": baseline.version_id,
+        "active_baseline": baseline,
+        "client": client,
         "model": model,
         "messages": [],
         "pending": None,
@@ -112,6 +114,14 @@ def new_chat(baseline, client, model):
 
 def step(chat, baseline, payload, said):
     """Send one user turn (a request, an answer or a decision) and record what came back."""
+    if chat["done"] and isinstance(payload, dict) and "text" in payload:
+        chat["graph"] = build_order_graph(
+            chat["active_baseline"],
+            chat["client"],
+            time_limit=st.session_state["time_limit"],
+        )
+        chat["config"] = {"configurable": {"thread_id": uuid4().hex}}
+        chat["done"] = False
     chat["messages"].append(("user", said))
     with st.spinner("Gemma talebi okuyor…"):
         out = chat["graph"].invoke(payload, chat["config"])
@@ -120,9 +130,16 @@ def step(chat, baseline, payload, said):
     chat["pending"] = interrupts[0].value if interrupts else None
     if chat["pending"] and chat["pending"]["kind"] == "question":
         chat["messages"].append(
-            ("assistant", "\n\n".join(chat["pending"]["questions"]))
+            ("assistant", chat["pending"]["questions"][0])
         )
     elif chat["pending"]:
+        from core.domain_rules import JobModel
+
+        draft_job = JobModel.model_validate(chat["pending"]["order"])
+        st.session_state["gemma_order_draft"] = draft_job
+        drafts = list(st.session_state.get("gemma_order_drafts", []))
+        drafts = [d for d in drafts if d.job_id != draft_job.job_id] + [draft_job]
+        st.session_state["gemma_order_drafts"] = drafts
         chat["messages"].append(
             (
                 "assistant",
@@ -130,7 +147,24 @@ def step(chat, baseline, payload, said):
             )
         )
     elif "explanation" in out:
+        from core.scenarios import PlanSnapshot, compare_scenarios
+
         simulation = SimulationResult.model_validate(out["simulation"])
+        if simulation.comparison is not None:
+            chat["active_baseline"] = PlanSnapshot(
+                version_id=baseline.version_id,
+                scenario=simulation.scenario,
+                result=simulation.result,
+            )
+            cumulative = compare_scenarios(
+                baseline, simulation.scenario, simulation.result
+            )
+            simulation = simulation.model_copy(
+                update={
+                    "baseline_version_id": baseline.version_id,
+                    "comparison": cumulative,
+                }
+            )
         chat["explanation"] = out["explanation"]
         chat["outcome"] = PipelineResult(
             baseline=baseline,
@@ -199,6 +233,16 @@ def pending_actions(chat, baseline):
             icon=":material/play_arrow:",
             width="stretch",
         ):
+            from core.domain_rules import JobModel
+
+            approved_job = ui.approve(JobModel.model_validate(pending["order"]))
+            st.session_state["approved_order"] = approved_job
+            st.session_state["gemma_order_draft"] = approved_job
+            drafts = list(st.session_state.get("gemma_order_drafts", []))
+            drafts = [d for d in drafts if d.job_id != approved_job.job_id] + [
+                approved_job
+            ]
+            st.session_state["gemma_order_drafts"] = drafts
             step(chat, baseline, Command(resume=True), "Onaylıyorum.")
             st.rerun()
         if decline.button("Vazgeç", icon=":material/close:", width="stretch"):
@@ -267,9 +311,6 @@ def assistant_page():
 
     if chat["explanation"]:
         ui.explanation_card(chat["explanation"])
-    if chat["audit"] or chat["explanation"]:
-        with st.expander("Model kaydı: hangi adımda hangi model ve istem sürümü"):
-            ui.model_log(chat["audit"], chat["explanation"])
     if chat["outcome"]:
         st.divider()
         pages.simulation_result(
@@ -279,13 +320,21 @@ def assistant_page():
             state_key="assistant",
         )
     if chat["done"] and st.button("Yeni talep", icon=":material/refresh:"):
-        st.session_state.pop("assistant")
+        chat["messages"] = []
+        chat["pending"] = None
+        chat["done"] = False
+        chat["graph"] = build_order_graph(
+            chat["active_baseline"],
+            chat["client"],
+            time_limit=st.session_state["time_limit"],
+        )
+        chat["config"] = {"configurable": {"thread_id": uuid4().hex}}
         st.rerun()
 
     confirming = bool(chat["pending"]) and chat["pending"]["kind"] == "confirmation"
     if text := st.chat_input(
         f"Örn. Yeni sipariş: {baseline.scenario.machines[0].name} üzerinde 30 dakika işlem",
-        disabled=confirming or chat["done"],
+        disabled=confirming,
     ):
         payload = Command(resume=text) if chat["pending"] else {"text": text}
         step(chat, baseline, payload, text)

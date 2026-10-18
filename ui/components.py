@@ -376,20 +376,34 @@ def comparison_metrics(comparison):
 
 
 def impact_table(comparison):
-    """Every existing job: completion before and after, the shift and soft due-date lateness."""
+    """Every existing job and new order: completion before and after, the shift and soft due-date lateness."""
+    new_rows = [
+        {
+            "İş": f"{job.name} (#{job.job_id} · Yeni)",
+            "Önce bitiş": "— (Yeni)",
+            "Sonra bitiş": clock(job.completion),
+            "Fark (dk)": 0,
+            "Önce gecikme (dk)": 0,
+            "Sonra gecikme (dk)": job.tardiness or 0,
+            "Yeri değişen operasyon": 0,
+        }
+        for job in comparison.after.jobs
+        if job.job_id in comparison.new_job_ids
+    ]
+    existing_rows = [
+        {
+            "İş": impact.name,
+            "Önce bitiş": clock(impact.before_completion),
+            "Sonra bitiş": clock(impact.after_completion),
+            "Fark (dk)": impact.completion_delta,
+            "Önce gecikme (dk)": impact.before_tardiness,
+            "Sonra gecikme (dk)": impact.after_tardiness,
+            "Yeri değişen operasyon": impact.changed_operations,
+        }
+        for impact in comparison.impacts
+    ]
     table(
-        [
-            {
-                "İş": impact.name,
-                "Önce bitiş": clock(impact.before_completion),
-                "Sonra bitiş": clock(impact.after_completion),
-                "Fark (dk)": impact.completion_delta,
-                "Önce gecikme (dk)": impact.before_tardiness,
-                "Sonra gecikme (dk)": impact.after_tardiness,
-                "Yeri değişen operasyon": impact.changed_operations,
-            }
-            for impact in comparison.impacts
-        ],
+        new_rows + existing_rows,
         column_config={
             "Fark (dk)": st.column_config.NumberColumn(format="%+d"),
         },

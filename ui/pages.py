@@ -117,14 +117,30 @@ def plan_page():
 
     st.subheader("Siparişler")
     by_job = {m.job_id: m for m in metrics.jobs}
+    machine_names = {m.machine_id: m.name for m in scenario.machines}
+    assigned = {
+        (r["source_job_id"], r["source_operation_id"]): machine_names.get(
+            r["source_machine_id"], f"M{r['source_machine_id']}"
+        )
+        for r in rows
+    }
     starts = defaultdict(list)
     for r in rows:
         starts[r["job"]].append(r["start"])
     ui.table(
         [
             {
-                "Sipariş": job.name,
-                "Rota": " → ".join(op.name for op in job.operations),
+                "Sipariş": (
+                    f"{job.name} (#{job.job_id})"
+                    if job.name == "Yeni sipariş"
+                    else job.name
+                ),
+                "Rota": " → ".join(
+                    f"{op.name} ({assigned.get((job.job_id, op.operation_id), '')})"
+                    if assigned.get((job.job_id, op.operation_id))
+                    else op.name
+                    for op in job.operations
+                ),
                 "Başlangıç": ui.clock(min(starts[j])),
                 "Bitiş": ui.clock(by_job[job.job_id].completion),
                 "Termin": ui.clock(job.due_date),
@@ -167,11 +183,24 @@ def production_drafts(version_id, _scenario):
 
 
 def order_drafts(snapshot):
-    """Order drafts that fit the active plan's machines; the first is the quick demo order."""
-    if snapshot.scenario.scenario_id.startswith(production.SCENARIO_ID):
-        drafts = production_drafts(snapshot.version_id, snapshot.scenario)
+    """Order drafts that fit the active plan's machines; includes any Gemma draft first."""
+    machine_ids = {m.machine_id for m in snapshot.scenario.machines}
+    if (
+        snapshot.scenario.scenario_id.startswith(production.SCENARIO_ID)
+        or machine_ids != {100, 200}
+    ):
+        drafts = dict(production_drafts(snapshot.version_id, snapshot.scenario))
     else:
-        drafts = demo_drafts()
+        drafts = dict(demo_drafts())
+    gemma_items = {}
+    for d in reversed(st.session_state.get("gemma_order_drafts", [])):
+        gemma_machines = {
+            mid for op in d.operations for mid in op.processing_times
+        }
+        if gemma_machines <= machine_ids:
+            gemma_items[f"Gemma #{d.job_id} ({d.name})"] = d
+    if gemma_items:
+        drafts = gemma_items | drafts
     return drafts | {"Boş rota": None}
 
 

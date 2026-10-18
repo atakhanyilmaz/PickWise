@@ -152,31 +152,62 @@ def _normalize(text):
     return " ".join(text.replace("İ", "i").replace("I", "ı").lower().split())
 
 
+_SUFFIX_RE = (
+    r"(?:['’.]?(?:da|de|ta|te|dan|den|tan|ten|lık|lik|luk|lük|"
+    r"a|e|ya|ye|na|ne|ı|i|u|ü|sı|si|su|sü|yi|yı|yu|yü|"
+    r"nda|nde|ndan|nden|sında|sinde|sından|sinden))?"
+)
+
+_DURATION_SPAN_RE = re.compile(
+    r"(?:\b\d+(?:[.,]\d+)?|\b(?:sıfır|bir|iki|üç|dört|beş|altı|yedi|sekiz|dokuz|"
+    r"on|yirmi|otuz|kırk|elli|altmış|yetmiş|seksen|doksan|yarım|buçuk)"
+    r"(?:\s+(?:bir|iki|üç|dört|beş|altı|yedi|sekiz|dokuz|buçuk)){0,2})"
+    r"\s*(?:dakika|dk|saat)"
+    + _SUFFIX_RE,
+    re.IGNORECASE,
+)
+
+
 def _in_text(value, text):
     if value is None or not value.strip():
         return False
-    return (
-        re.search(
-            r"(?<!\w)"
-            + re.escape(_normalize(value))
-            + r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten))?(?!\w)",
-            _normalize(text),
-        )
-        is not None
-    )
+    norm_val = _normalize(value)
+    norm_txt = _normalize(text)
+    pattern = re.escape(norm_val).replace(r"\ ", r"\s*")
+    if re.search(r"(?<!\w)" + pattern + _SUFFIX_RE + r"(?!\w)", norm_txt):
+        return True
+    try:
+        target_minutes = _minutes(value)
+    except ValueError:
+        target_minutes = None
+    if target_minutes is not None:
+        for match in _DURATION_SPAN_RE.finditer(norm_txt):
+            try:
+                if _minutes(match.group(0)) == target_minutes:
+                    return True
+            except ValueError:
+                continue
+    return False
 
 
 def _machine(text, scenario):
+    key = _normalize(text)
     key = re.sub(
-        r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten)|\s+üzerinde)$",
+        r"(?:\s+(?:üzerinde|makinesi(?:ne|nde|nden|dir)?|makinede|tezgahı(?:na|nda|ndan)?|tezgâhı(?:na|nda|ndan)?|tezgahında|tezgâhında))+$",
         "",
-        _normalize(text),
+        key,
     )
+    key = re.sub(_SUFFIX_RE + r"$", "", key).strip()
     found = [
         m
         for m in scenario.machines
         if key in (_normalize(m.name), str(m.machine_id), f"m{m.machine_id}")
     ]
+    if not found:
+        for m in scenario.machines:
+            prefix = _normalize(m.name).split()[0]
+            if prefix.startswith("m") and prefix[1:].isdigit() and key == prefix:
+                found.append(m)
     if not found:
         match = re.fullmatch(r"(?:torna|makine|tezgah|tezgâh|m)\s*(\d+)", key)
         if match and 1 <= int(match[1]) <= len(scenario.machines):
@@ -184,6 +215,7 @@ def _machine(text, scenario):
     if len(found) != 1:
         raise ValueError(f"Makineyi benzersiz ad veya kimlikle belirtin: {text}")
     return found[0].machine_id
+
 
 
 def interpret_draft(
@@ -429,11 +461,16 @@ def confirm_and_simulate(
         )
     order = intake.proposed_order.model_copy(deep=True)
     order.route_source = RouteSource.USER_APPROVED
+    target_scenario_id = (
+        f"{baseline.scenario.scenario_id}_siparis"
+        if scenario_id == baseline.scenario.scenario_id
+        else scenario_id
+    )
     return simulate_order(
         baseline,
         OrderRequest(
             baseline_version_id=intake.baseline_version_id,
-            scenario_id=scenario_id,
+            scenario_id=target_scenario_id,
             order=order,
             preserve_existing_completions=intake.preserve_existing_completions,
             time_limit_seconds=time_limit,

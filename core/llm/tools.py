@@ -23,6 +23,16 @@ class WorkloadJob(Contract):
     status: Literal["completed", "in_progress", "not_started"]
 
 
+class MachineWorkload(Contract):
+    machine_id: Nonnegative
+    name: str
+    operation_count: Nonnegative
+    busy_minutes: Nonnegative
+    last_end: Nonnegative
+    scheduled_jobs: list[str] = Field(default_factory=list)
+    free_summary: str = ""
+
+
 class Workload(Contract):
     current_time: Nonnegative
     total_job_count: Nonnegative
@@ -30,6 +40,7 @@ class Workload(Contract):
     not_started_job_count: Nonnegative
     operation_counts: dict[str, Nonnegative]
     jobs: list[WorkloadJob]
+    machines: list[MachineWorkload] = Field(default_factory=list)
 
 
 class InspectionResult(PlanMetrics):
@@ -40,7 +51,7 @@ def tool_catalog():
     return [
         {
             "name": "inspect_plan",
-            "description": "Mevcut iş/sipariş sayısını, bekleyen işleri, bitişleri ve gecikmeleri hesaplayarak gösterir. Yeni sipariş vermeden önce mevcut durumu soran bilgi talepleri de bu araçtır. Planı değiştirmez.",
+            "description": "Mevcut iş/sipariş sayısını, bekleyen işleri, tezgâh (makine) doluluk/müsaitlik durumunu, bitişleri ve gecikmeleri hesaplayarak gösterir. Yeni sipariş vermeden önce mevcut durumu veya makine müsaitliğini soran bilgi talepleri de bu araçtır. Planı değiştirmez.",
             "input_schema": InspectPlanInput.model_json_schema(),
             "output_schema": InspectionResult.model_json_schema(),
             "requires_confirmation": False,
@@ -84,13 +95,55 @@ def execute_tool(name, arguments, baseline, *, user_confirmed=False, time_limit=
                 else "not_started"
             )
             jobs.append({"job_id": job.job_id, "name": job.name, "status": status})
+        current_time = baseline.scenario.current_time
+        machines = []
+        for machine in baseline.scenario.machines:
+            rows = sorted(
+                (
+                    r
+                    for r in baseline.result.schedule
+                    if r.source_machine_id == machine.machine_id
+                ),
+                key=lambda r: r.start,
+            )
+            busy = sum(r.end - r.start for r in rows)
+            last_end = rows[-1].end if rows else 0
+            scheduled = [
+                f"İş {r.source_job_id} (t={r.start}..{r.end} dk)" for r in rows
+            ]
+            if not rows:
+                free_summary = f"t={current_time} dk itibarıyla tamamen müsait (atanmış iş yok)"
+            else:
+                gaps = []
+                cursor = current_time
+                for r in rows:
+                    if r.start > cursor:
+                        gaps.append(f"t={cursor}..{r.start} dk")
+                    cursor = max(cursor, r.end)
+                parts = []
+                if gaps:
+                    parts.append("boş aralıklar: " + ", ".join(gaps))
+                parts.append(f"t={last_end} dk sonrası tamamen müsait")
+                free_summary = "; ".join(parts)
+            machines.append(
+                {
+                    "machine_id": machine.machine_id,
+                    "name": machine.name,
+                    "operation_count": len(rows),
+                    "busy_minutes": busy,
+                    "last_end": last_end,
+                    "scheduled_jobs": scheduled,
+                    "free_summary": free_summary,
+                }
+            )
         workload = {
-            "current_time": baseline.scenario.current_time,
+            "current_time": current_time,
             "total_job_count": len(jobs),
             "unfinished_job_count": sum(j["status"] != "completed" for j in jobs),
             "not_started_job_count": sum(j["status"] == "not_started" for j in jobs),
             "operation_counts": counts,
             "jobs": jobs,
+            "machines": machines,
         }
         return InspectionResult.model_validate(
             {**metrics, "workload": workload}

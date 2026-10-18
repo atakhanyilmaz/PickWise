@@ -303,3 +303,15 @@ def test_operations_followup_preserves_existing_deadline(baseline):
     session = answer_intake(session, "Torna 1 üzerinde 10 dakika.", baseline, client)
     assert session.result.state == "confirmation_required"
     assert session.result.proposed_order.deadline == 40
+
+
+def test_suffixed_attached_duration_and_machine_phrase_are_accepted(baseline):
+    text = "peki Torna 1 makinesine iş verebilirmisin 30dklık"
+    client = ScriptedClient(
+        fields(machine="Torna 1", duration="30dk"),
+        evidence="iş verebilirmisin",
+    )
+    session = begin_intake(text, baseline, client)
+    assert session.result.state == "confirmation_required"
+    assert session.result.proposed_order.operations[0].processing_times == {100: 30}
+

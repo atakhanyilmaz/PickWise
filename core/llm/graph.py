@@ -100,11 +100,16 @@ def build_order_graph(
         return {"approved": decision is True}
 
     def simulate(state):
+        target_scenario_id = (
+            f"{baseline.scenario.scenario_id}_siparis"
+            if scenario_id == baseline.scenario.scenario_id
+            else scenario_id
+        )
         simulation = execute_tool(
             "simulate_order",
             {
                 "intake": _session(state).result.model_dump(),
-                "scenario_id": scenario_id,
+                "scenario_id": target_scenario_id,
             },
             baseline,
             user_confirmed=True,

@@ -229,3 +229,19 @@ def test_inspection_answer_always_states_counts_and_finish(baseline):
     assert result.origin == "gemma_selected_facts"
     assert result.text.startswith("Yüklü planda 2 iş var")
     assert "Planın son bitişi" in result.text
+
+
+def test_inspection_answer_includes_queried_machine_availability(baseline):
+    from tests.test_gemma_service import FakeClient
+
+    inspection = execute_tool(
+        "inspect_plan", {"query": "Torna 1 makinesinde hangileri müsait"}, baseline
+    )
+    result = explain_inspection(
+        "Torna 1 makinesinde hangileri müsait",
+        inspection,
+        FakeClient(FactSelection(fact_ids=["workload"])),
+    )
+    assert "Torna 1 tezgâhında" in result.text
+    assert "Müsaitlik:" in result.text
+

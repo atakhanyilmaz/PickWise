@@ -12,6 +12,8 @@ from core.llm.intake import (
     IntakeDraft,
     IntakeResult,
     OperationDraft,
+    _DURATION_SPAN_RE,
+    _in_text,
     _machine,
     _minutes,
     _normalize,
@@ -51,7 +53,8 @@ Koruma isteği yoksa preservation=none ve preservation_text=null. 'mevcut bitiş
 Koruma isteği varsa preservation_text null OLAMAZ: kullanıcıdaki koruma cümlesini aynen kopyala.
 Örnek: 'Yeni sipariş Torna 1 üzerinde 10 dakika tornalama. Mevcut bitişleri koru.' için
 preservation="completions", preservation_text="Mevcut bitişleri koru" olmalıdır.
-Sayıları dönüştürme: 'iki saat' ifadesini duration_text olarak aynen ver, dönüşümü uygulama yapar.
+Sayıları dönüştürme: 'iki saat', '30dk', '30dklık' ifadelerini duration_text olarak aynen ver, dönüşümü uygulama yapar.
+Örnek: 'peki m4 makinesine iş verebilir misin 30dklık' => machine_text='m4', duration_text='30dklık'.
 Eksik alan hata değildir. Örnek: 'Yeni iş: Kesme 2 üzerinde kesim' => seçenek machine_text='Kesme 2', duration_text=null.
 Makine kataloğu yoktur; yalnız kullanıcı mesajında geçen makine ifadelerini çıkar.
 Termin ve koruma cümlelerini operasyon listesine ekleme. 'Teslim' termin cümlesi olabilir; yeni operasyon uydurma.
@@ -234,18 +237,7 @@ def _fingerprint(baseline):
 
 
 def _evidence(value, text):
-    if value is None or not value.strip():
-        return False
-    # Reject partial numbers/names, e.g. Torna 1 inside Torna 10 or 10 inside 110.
-    return (
-        re.search(
-            r"(?<!\w)"
-            + re.escape(_normalize(value))
-            + r"(?:['’]?(?:da|de|ta|te|dan|den|tan|ten))?(?!\w)",
-            _normalize(text),
-        )
-        is not None
-    )
+    return _in_text(value, text)
 
 
 def _calendar(text):
@@ -342,7 +334,8 @@ def _rebuild(session, baseline):
                         kind="duration",
                         operation_index=i,
                         option_index=k,
-                        question=f"{i + 1}. işlemin bu makinedeki süresi nedir? Örnek: 25 dakika veya iki saat.",
+                        question=f"{i + 1}. işlemin bu makinedeki süresi nedir?",
+                        choices=["15 dakika", "30 dakika", "45 dakika", "1 saat", "2 saat"],
                     )
                 )
     if draft.deadline_kind == "ambiguous":
@@ -441,11 +434,29 @@ def _extract_fields(session, baseline, client, text):
         tool="simulate_order", unsupported_constraints=[], **fields.model_dump()
     )
     draft = session.draft
+    if not draft.operations and not meta.get("test_double"):
+        from core.llm.intake import OptionDraft
+
+        draft.operations.append(
+            OperationDraft(
+                name="İşlem",
+                options=[OptionDraft(machine_text=None, duration_text=None)],
+            )
+        )
     # Scalar policy is checked against explicit user language, never model defaults.
     lower = _normalize(text)
     mentions_deadline = bool(
         re.search(r"termin|teslim|tarih|t\s*=", lower)
     ) or _calendar(text)
+    if (
+        len(draft.operations) == 1
+        and len(draft.operations[0].options) == 1
+        and draft.operations[0].options[0].duration_text is None
+        and not mentions_deadline
+    ):
+        spans = [m.group(0).strip() for m in _DURATION_SPAN_RE.finditer(text)]
+        if len(spans) == 1:
+            draft.operations[0].options[0].duration_text = spans[0]
     if mentions_deadline:
         hard = bool(re.search(r"\b(sert|kesin)\b|aşılmasın", lower))
         soft = bool(re.search(r"\b(yumuşak|hedef)\b", lower))

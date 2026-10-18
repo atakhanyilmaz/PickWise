@@ -94,6 +94,8 @@ def explain_simulation(simulation: SimulationResult, client=None):
 
 def explain_inspection(query, inspection, client=None):
     """Observe the tool result, then select an answer grounded in its computed facts."""
+    import re
+    from core.llm.intake import _normalize
     from core.llm.tools import InspectionResult
 
     inspection = InspectionResult.model_validate(inspection).model_dump()
@@ -105,7 +107,52 @@ def explain_inspection(query, inspection, client=None):
         "lateness": f"Müşteri terminini aşan iş sayısı {inspection['late_job_count']}; toplam termin gecikmesi {inspection['total_tardiness']} dakika.",
         "scope": "Bunlar yüklü planın değerleri; başka sipariş kayıtlarına erişilmedi. Plan değiştirilmedi.",
     }
-    selected = ["workload", "waiting", "completion", "lateness"]
+    machines = w.get("machines") or []
+    matched_machine_keys = []
+    q_norm = _normalize(query or "")
+    if machines:
+        for m in machines:
+            m_norm = _normalize(m["name"])
+            prefix = m_norm.split()[0]
+            if (
+                m_norm in q_norm
+                or re.search(rf"(?<!\w)m\s*{m['machine_id']}(?!\d)", q_norm)
+                or (
+                    prefix.startswith("m")
+                    and prefix[1:].isdigit()
+                    and re.search(rf"(?<!\w){re.escape(prefix)}(?!\d)", q_norm)
+                )
+            ):
+                key = f"machine_{m['machine_id']}"
+                if m["operation_count"] == 0:
+                    facts[key] = (
+                        f"{m['name']} tezgâhında atanmış operasyon yok; {m['free_summary']}."
+                    )
+                else:
+                    facts[key] = (
+                        f"{m['name']} tezgâhında {m['operation_count']} operasyon "
+                        f"({m['busy_minutes']} dk yük) var: {', '.join(m['scheduled_jobs'])}. "
+                        f"Müsaitlik: {m['free_summary']}."
+                    )
+                matched_machine_keys.append(key)
+        if not matched_machine_keys:
+            idle = [m["name"] for m in machines if m["operation_count"] == 0]
+            busy = [
+                f"{m['name']} (t={m['last_end']} dk sonrası müsait)"
+                for m in machines
+                if m["operation_count"] > 0
+            ]
+            summary_parts = []
+            if idle:
+                summary_parts.append("Tamamen müsait tezgâhlar: " + ", ".join(idle))
+            if busy:
+                summary_parts.append(
+                    "Yüklü tezgâhların boşa çıkış zamanı: " + ", ".join(busy)
+                )
+            facts["machines"] = ". ".join(summary_parts) + "."
+            if re.search(r"makine|tezgah|tezgâh|müsait|boş", q_norm):
+                matched_machine_keys.append("machines")
+    selected = ["workload", "waiting", "completion", "lateness"] + matched_machine_keys
     origin, metadata = "computed_fallback", {}
     if client is not None:
         try:
@@ -127,11 +174,16 @@ def explain_inspection(query, inspection, client=None):
             metadata["fallback_reason"] = (
                 "Model unavailable or inspection fact selection invalid"
             )
-    # The counts and the finish time always answer the question; the model only adds.
-    selected = list(dict.fromkeys(["workload", "completion"] + selected + ["scope"]))
+    # The counts, finish time, and any explicitly queried machine always answer the question.
+    selected = list(
+        dict.fromkeys(
+            ["workload", "completion"] + matched_machine_keys + selected + ["scope"]
+        )
+    )
     return Explanation(
-        text="\n".join(facts[k] for k in selected),
+        text="\n\n".join(facts[k] for k in selected),
         origin=origin,
         selected_fact_ids=selected,
         model_metadata=metadata,
     )
+
